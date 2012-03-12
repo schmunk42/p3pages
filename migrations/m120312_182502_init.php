@@ -1,7 +1,7 @@
 
 <?php
 
-class m120312_182502_dump extends CDbMigration {
+class m120312_182502_init extends CDbMigration {
 
 	public function up() {
 		if (Yii::app()->db->schema instanceof CMysqlSchema)
