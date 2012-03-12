@@ -10,7 +10,9 @@
 
 return array(
 	'modules' => array(
-		'p3pages'
+		'p3pages' => array(
+			'class' => 'application.modules.p3pages.P3PagesModule',
+		)
 	)
 )
 ?>

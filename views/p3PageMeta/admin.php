@@ -1,5 +1,5 @@
 <?php
-$this->breadcrumbs['P3 Pages'] = array('index');
+$this->breadcrumbs['P3 Page Metas'] = array('index');
 $this->breadcrumbs[] = Yii::t('app', 'Admin');
 
 if(!isset($this->menu) || $this->menu === array())
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('p3-page-grid', {
+$.fn.yiiGridView.update('p3-page-meta-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,10 +23,10 @@ return false;
 ");
 ?>
 
-<h1> <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'P3 Pages'); ?> </h1>
+<h1> <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'P3 Page Metas'); ?> </h1>
 
 
-<ul><li>HasOne <a href="/?r=p3pages/p3PageMeta/admin&amp;lang=en">P3PageMeta</a> </li><li>HasMany <a href="/?r=p3pages/p3PageTranslation/admin&amp;lang=en">P3PageTranslation</a> </li></ul>
+<ul><li>BelongsTo <a href="/?r=p3pages/p3Page/admin&amp;lang=en">P3Page</a> </li></ul>
 
 <?php echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?><div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
@@ -36,23 +36,39 @@ return false;
 
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
-'id'=>'p3-page-grid',
+'id'=>'p3-page-meta-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
 
-		'id',
-		'title',
-#		'description',
-#		'keywords',
-		'moduleId',
-		'controllerId',
+		array(
+					'name'=>'id',
+					'value'=>'CHtml::value($data,\'id0._label\')',
+							'filter'=>CHtml::listData(P3Page::model()->findAll(), 'id', '_label'),
+							),
+		'status',
+		'type',
+		'language',
+		'treeParent_id',
+		'treePosition',
 		/*
-		'actionName',
-		'requestParam',
-		'layout',
-		'view',
-		'url',
+		'begin',
+		'end',
+#		'keywords',
+#		'customData',
+		'label',
+		'owner',
+		'checkAccessCreate',
+		'checkAccessRead',
+		'checkAccessUpdate',
+		'checkAccessDelete',
+		'createdAt',
+		'createdBy',
+		'modifiedAt',
+		'modifiedBy',
+		'guid',
+		'ancestor_guid',
+		'model',
 		*/
 
 array(

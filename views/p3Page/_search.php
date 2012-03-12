@@ -17,22 +17,47 @@
     
         <div class="row">
                 <?php echo $form->label($model,'description'); ?>
-                <?php echo $form->textField($model,'description',array('size'=>45,'maxlength'=>45)); ?>
+                <?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
         </div>
     
         <div class="row">
                 <?php echo $form->label($model,'keywords'); ?>
-                <?php echo $form->textField($model,'keywords',array('size'=>45,'maxlength'=>45)); ?>
+                <?php echo $form->textArea($model,'keywords',array('rows'=>6, 'cols'=>50)); ?>
         </div>
     
         <div class="row">
-                <?php echo $form->label($model,'controller'); ?>
-                <?php echo $form->textField($model,'controller',array('size'=>45,'maxlength'=>45)); ?>
+                <?php echo $form->label($model,'moduleId'); ?>
+                <?php echo $form->textField($model,'moduleId',array('size'=>45,'maxlength'=>45)); ?>
         </div>
     
         <div class="row">
-                <?php echo $form->label($model,'params'); ?>
-                <?php echo $form->textField($model,'params',array('size'=>45,'maxlength'=>45)); ?>
+                <?php echo $form->label($model,'controllerId'); ?>
+                <?php echo $form->textField($model,'controllerId',array('size'=>45,'maxlength'=>45)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'actionName'); ?>
+                <?php echo $form->textField($model,'actionName',array('size'=>45,'maxlength'=>45)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'requestParam'); ?>
+                <?php echo $form->textField($model,'requestParam',array('size'=>45,'maxlength'=>45)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'layout'); ?>
+                <?php echo $form->textField($model,'layout',array('size'=>60,'maxlength'=>128)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'view'); ?>
+                <?php echo $form->textField($model,'view',array('size'=>60,'maxlength'=>128)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'url'); ?>
+                <?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>255)); ?>
         </div>
     
         <div class="row buttons">

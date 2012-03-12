@@ -16,13 +16,35 @@
 	<?php echo CHtml::encode($data->keywords); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('controller')); ?>:</b>
-	<?php echo CHtml::encode($data->controller); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('moduleId')); ?>:</b>
+	<?php echo CHtml::encode($data->moduleId); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('params')); ?>:</b>
-	<?php echo CHtml::encode($data->params); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('controllerId')); ?>:</b>
+	<?php echo CHtml::encode($data->controllerId); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('actionName')); ?>:</b>
+	<?php echo CHtml::encode($data->actionName); ?>
+	<br />
+
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('requestParam')); ?>:</b>
+	<?php echo CHtml::encode($data->requestParam); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('layout')); ?>:</b>
+	<?php echo CHtml::encode($data->layout); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('view')); ?>:</b>
+	<?php echo CHtml::encode($data->view); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('url')); ?>:</b>
+	<?php echo CHtml::encode($data->url); ?>
+	<br />
+
+	*/ ?>
 
 </div>

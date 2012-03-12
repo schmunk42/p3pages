@@ -1,5 +1,5 @@
 <?php
-$this->breadcrumbs['P3 Pages'] = array('index');
+$this->breadcrumbs['P3 Page Translations'] = array('index');
 $this->breadcrumbs[$model->id] = array('view','id'=>$model->id);
 $this->breadcrumbs[] = Yii::t('app', 'Update');
 
@@ -11,7 +11,7 @@ $this->menu=array(
 );
 ?>
 
-<h1> <?php echo Yii::t('app', 'Update');?> <?php echo Yii::t('app', 'P3Page');?> #<?php echo $model->id; ?> </h1>
+<h1> <?php echo Yii::t('app', 'Update');?> <?php echo Yii::t('app', 'P3PageTranslation');?> #<?php echo $model->id; ?> </h1>
 <?php
 $this->renderPartial('_form', array(
 			'model'=>$model));

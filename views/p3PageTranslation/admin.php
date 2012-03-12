@@ -1,5 +1,5 @@
 <?php
-$this->breadcrumbs['P3 Pages'] = array('index');
+$this->breadcrumbs['P3 Page Translations'] = array('index');
 $this->breadcrumbs[] = Yii::t('app', 'Admin');
 
 if(!isset($this->menu) || $this->menu === array())
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('p3-page-grid', {
+$.fn.yiiGridView.update('p3-page-translation-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,10 +23,10 @@ return false;
 ");
 ?>
 
-<h1> <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'P3 Pages'); ?> </h1>
+<h1> <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'P3 Page Translations'); ?> </h1>
 
 
-<ul><li>HasOne <a href="/?r=p3pages/p3PageMeta/admin&amp;lang=en">P3PageMeta</a> </li><li>HasMany <a href="/?r=p3pages/p3PageTranslation/admin&amp;lang=en">P3PageTranslation</a> </li></ul>
+<ul><li>BelongsTo <a href="/?r=p3pages/p3Page/admin&amp;lang=en">P3Page</a> </li></ul>
 
 <?php echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?><div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
@@ -36,24 +36,20 @@ return false;
 
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
-'id'=>'p3-page-grid',
+'id'=>'p3-page-translation-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
 
 		'id',
-		'title',
-#		'description',
-#		'keywords',
-		'moduleId',
-		'controllerId',
-		/*
-		'actionName',
-		'requestParam',
-		'layout',
-		'view',
-		'url',
-		*/
+		array(
+					'name'=>'p3_widget_id',
+					'value'=>'CHtml::value($data,\'p3Widget._label\')',
+							'filter'=>CHtml::listData(P3Page::model()->findAll(), 'id', '_label'),
+							),
+		'language',
+#		'properties',
+#		'content',
 
 array(
 'class'=>'CButtonColumn',

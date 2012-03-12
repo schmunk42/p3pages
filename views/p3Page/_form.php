@@ -22,30 +22,70 @@ echo $form->errorSummary($model);
 
 <div class="row">
 <?php echo $form->labelEx($model,'description'); ?>
-<?php echo $form->textField($model,'description',array('size'=>45,'maxlength'=>45)); ?>
+<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
 <?php echo $form->error($model,'description'); ?>
 <div class='hint'><?php if('hint.P3Page.description' != $hint = Yii::t('app', 'description')) echo $hint; ?></div>
 </div>
 
 <div class="row">
 <?php echo $form->labelEx($model,'keywords'); ?>
-<?php echo $form->textField($model,'keywords',array('size'=>45,'maxlength'=>45)); ?>
+<?php echo $form->textArea($model,'keywords',array('rows'=>6, 'cols'=>50)); ?>
 <?php echo $form->error($model,'keywords'); ?>
 <div class='hint'><?php if('hint.P3Page.keywords' != $hint = Yii::t('app', 'keywords')) echo $hint; ?></div>
 </div>
 
 <div class="row">
-<?php echo $form->labelEx($model,'controller'); ?>
-<?php echo $form->textField($model,'controller',array('size'=>45,'maxlength'=>45)); ?>
-<?php echo $form->error($model,'controller'); ?>
-<div class='hint'><?php if('hint.P3Page.controller' != $hint = Yii::t('app', 'controller')) echo $hint; ?></div>
+<?php echo $form->labelEx($model,'moduleId'); ?>
+<?php echo $form->textField($model,'moduleId',array('size'=>45,'maxlength'=>45)); ?>
+<?php echo $form->error($model,'moduleId'); ?>
+<div class='hint'><?php if('hint.P3Page.moduleId' != $hint = Yii::t('app', 'moduleId')) echo $hint; ?></div>
 </div>
 
 <div class="row">
-<?php echo $form->labelEx($model,'params'); ?>
-<?php echo $form->textField($model,'params',array('size'=>45,'maxlength'=>45)); ?>
-<?php echo $form->error($model,'params'); ?>
-<div class='hint'><?php if('hint.P3Page.params' != $hint = Yii::t('app', 'params')) echo $hint; ?></div>
+<?php echo $form->labelEx($model,'controllerId'); ?>
+<?php echo $form->textField($model,'controllerId',array('size'=>45,'maxlength'=>45)); ?>
+<?php echo $form->error($model,'controllerId'); ?>
+<div class='hint'><?php if('hint.P3Page.controllerId' != $hint = Yii::t('app', 'controllerId')) echo $hint; ?></div>
+</div>
+
+<div class="row">
+<?php echo $form->labelEx($model,'actionName'); ?>
+<?php echo $form->textField($model,'actionName',array('size'=>45,'maxlength'=>45)); ?>
+<?php echo $form->error($model,'actionName'); ?>
+<div class='hint'><?php if('hint.P3Page.actionName' != $hint = Yii::t('app', 'actionName')) echo $hint; ?></div>
+</div>
+
+<div class="row">
+<?php echo $form->labelEx($model,'requestParam'); ?>
+<?php echo $form->textField($model,'requestParam',array('size'=>45,'maxlength'=>45)); ?>
+<?php echo $form->error($model,'requestParam'); ?>
+<div class='hint'><?php if('hint.P3Page.requestParam' != $hint = Yii::t('app', 'requestParam')) echo $hint; ?></div>
+</div>
+
+<div class="row">
+<?php echo $form->labelEx($model,'layout'); ?>
+<?php echo $form->textField($model,'layout',array('size'=>60,'maxlength'=>128)); ?>
+<?php echo $form->error($model,'layout'); ?>
+<div class='hint'><?php if('hint.P3Page.layout' != $hint = Yii::t('app', 'layout')) echo $hint; ?></div>
+</div>
+
+<div class="row">
+<?php echo $form->labelEx($model,'view'); ?>
+<?php echo $form->textField($model,'view',array('size'=>60,'maxlength'=>128)); ?>
+<?php echo $form->error($model,'view'); ?>
+<div class='hint'><?php if('hint.P3Page.view' != $hint = Yii::t('app', 'view')) echo $hint; ?></div>
+</div>
+
+<div class="row">
+<?php echo $form->labelEx($model,'url'); ?>
+<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>255)); ?>
+<?php echo $form->error($model,'url'); ?>
+<div class='hint'><?php if('hint.P3Page.url' != $hint = Yii::t('app', 'url')) echo $hint; ?></div>
+</div>
+
+<div class="row">
+<label for="p3PageMeta"><?php echo Yii::t('app', 'P3PageMeta'); ?></label>
+<?php if ($model->p3PageMeta !== null) echo $model->p3PageMeta->_label;; ?><br />
 </div>
 
 

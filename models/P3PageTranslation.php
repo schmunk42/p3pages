@@ -1,10 +1,10 @@
 <?php
 
 // auto-loading fix
-Yii::setPathOfAlias('P3Page', dirname(__FILE__));
-Yii::import('P3Page.*');
+Yii::setPathOfAlias('P3PageTranslation', dirname(__FILE__));
+Yii::import('P3PageTranslation.*');
 
-class P3Page extends BaseP3Page
+class P3PageTranslation extends BaseP3PageTranslation
 {
 	// Add your model-specific methods here. This file will not be overriden by gtc except you force it.
 	public static function model($className=__CLASS__)
@@ -18,7 +18,7 @@ class P3Page extends BaseP3Page
 	}
 
 	public function __toString() {
-		return (string) $this->title;
+		return (string) $this->language;
 
 	}
 
