@@ -26,7 +26,7 @@ class P3Page extends BaseP3Page {
 		return array_merge(
 				array(
 				#'JSON' => array(
-					#'class' => 'ext.p3extensions.behaviors.P3JSONBehavior',
+				#'class' => 'ext.p3extensions.behaviors.P3JSONBehavior',
 				#),
 				'MetaData' => array(
 					'class' => 'ext.p3extensions.behaviors.P3MetaDataBehavior',
@@ -48,6 +48,30 @@ class P3Page extends BaseP3Page {
 				/* array('column1, column2', 'rule'), */
 				parent::rules()
 		);
+	}
+
+	public function createUrl($additionalParams = array(), $absolute = false) {
+
+		if ($this->id == 1) {
+			return Yii::app()->homeUrl;
+		} elseif (is_array(CJSON::decode($this->route))) {
+			$link = CJSON::decode($this->route);
+		} elseif ($this->route) {
+			return $this->route;
+		} else {
+			$link['route'] = '/p3pages/default/page';
+			$link['params'] = CMap::mergeArray($additionalParams, array(P3Page::PAGE_ID_KEY => $this->id, P3Page::PAGE_NAME_KEY => $this->t('seoUrl')));
+		}
+
+		if (isset($link['route'])) {
+			$params = (isset($link['params'])) ? $link['params'] : array();
+			if ($absolute === true)
+				return Yii::app()->controller->createAbsoluteUrl($link['route'], $params);
+			else
+				return Yii::app()->controller->createUrl($link['route'], $params);
+		} else {
+			throw new Exception('Could not determine URL string.');
+		}
 	}
 
 }
