@@ -11,21 +11,15 @@ else
 
 
 
+
 // Schema for table 'p3_page'
 
 $this->createTable("p3_page", 
   array(
     "id"=>"pk",
-    "title"=>"varchar(45)",
-    "description"=>"text",
-    "keywords"=>"text",
-    "moduleId"=>"varchar(45)",
-    "controllerId"=>"varchar(45)",
-    "actionName"=>"varchar(45)",
-    "requestParam"=>"varchar(45)",
     "layout"=>"varchar(128)",
     "view"=>"varchar(128)",
-    "url"=>"varchar(255)",
+    "route"=>"varchar(255)",
 
   ), 
   $options);
@@ -36,25 +30,6 @@ $this->createTable("p3_page",
 if ((Yii::app()->db->schema instanceof CSqliteSchema) == false):
 
 endif;
-
-
-
-// Data for table 'p3_page'
-
-$this->insert("p3_page", array(
-    "id"=>"1",
-    "title"=>"ffgh",
-    "description"=>"hfghg",
-    "keywords"=>"fghhfgfg",
-    "moduleId"=>null,
-    "controllerId"=>"hfg",
-    "actionName"=>null,
-    "requestParam"=>null,
-    "layout"=>"",
-    "view"=>"",
-    "url"=>null,
-) );
-
 
 
 
@@ -103,8 +78,6 @@ endif;
 // Data for table 'p3_page_meta'
 
 
-
-
 // Schema for table 'p3_page_translation'
 
 $this->createTable("p3_page_translation", 
@@ -112,8 +85,11 @@ $this->createTable("p3_page_translation",
     "id"=>"pk",
     "p3_page_id"=>"int(11) NOT NULL",
     "language"=>"varchar(8)",
-    "properties"=>"text",
-    "content"=>"text",
+    "seoUrl"=>"varchar(255)",
+    "pageTitle"=>"varchar(255)",
+    "menuName"=>"varchar(128) NOT NULL",
+    "keywords"=>"text",
+    "description"=>"text",
 
   ), 
   $options);
@@ -126,7 +102,6 @@ if ((Yii::app()->db->schema instanceof CSqliteSchema) == false):
 $this->addForeignKey('fk_p3_page_p3_page_id', 'p3_page_translation', 'p3_page_id', 'p3_page', 'id', null, null); // update 'null' for ON DELTE and ON UPDATE
 
 endif;
-
 
 
 // Data for table 'p3_page_translation'
