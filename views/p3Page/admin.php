@@ -42,18 +42,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 'columns'=>array(
 
 		'id',
-		'title',
-#		'description',
-#		'keywords',
-		'moduleId',
-		'controllerId',
-		/*
-		'actionName',
-		'requestParam',
 		'layout',
 		'view',
-		'url',
-		*/
+		'route',
 
 array(
 'class'=>'CButtonColumn',

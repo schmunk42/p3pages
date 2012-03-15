@@ -11,8 +11,8 @@
         </div>
     
         <div class="row">
-                <?php echo $form->label($model,'p3_widget_id'); ?>
-                <?php echo $form->dropDownList($model,'p3_widget_id',CHtml::listData(P3Page::model()->findAll(), 'id', '_label'),array('prompt'=>Yii::t('app', 'All'))); ?>
+                <?php echo $form->label($model,'p3_page_id'); ?>
+                <?php echo $form->dropDownList($model,'p3_page_id',CHtml::listData(P3Page::model()->findAll(), 'id', '_label'),array('prompt'=>Yii::t('app', 'All'))); ?>
         </div>
     
         <div class="row">
@@ -21,13 +21,28 @@
         </div>
     
         <div class="row">
-                <?php echo $form->label($model,'properties'); ?>
-                <?php echo $form->textArea($model,'properties',array('rows'=>6, 'cols'=>50)); ?>
+                <?php echo $form->label($model,'seoUrl'); ?>
+                <?php echo $form->textField($model,'seoUrl',array('size'=>60,'maxlength'=>255)); ?>
         </div>
     
         <div class="row">
-                <?php echo $form->label($model,'content'); ?>
-                <?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50)); ?>
+                <?php echo $form->label($model,'pageTitle'); ?>
+                <?php echo $form->textField($model,'pageTitle',array('size'=>60,'maxlength'=>255)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'menuName'); ?>
+                <?php echo $form->textField($model,'menuName',array('size'=>60,'maxlength'=>128)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'keywords'); ?>
+                <?php echo $form->textArea($model,'keywords',array('rows'=>6, 'cols'=>50)); ?>
+        </div>
+    
+        <div class="row">
+                <?php echo $form->label($model,'description'); ?>
+                <?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
         </div>
     
         <div class="row buttons">

@@ -17,18 +17,9 @@ $this->menu=array(
 'data'=>$model,
 	'attributes'=>array(
 					'id',
-		'title',
-		'description',
-		'keywords',
-		'moduleId',
-		'controllerId',
-		'actionName',
-		'requestParam',
 		'layout',
 		'view',
-array(			'name'=>'url',
-			'type'=>'link',
-),
+		'route',
 ),
 	)); ?>
 
@@ -61,5 +52,5 @@ array(			'name'=>'url',
 					}
 						?></ul><p><?php echo CHtml::link(
 				Yii::t('app','Create'),
-				array('/p3pages/p3PageTranslation/create', 'P3PageTranslation' => array('p3_widget_id'=>$model->{$model->tableSchema->primaryKey}))
+				array('/p3pages/p3PageTranslation/create', 'P3PageTranslation' => array('p3_page_id'=>$model->{$model->tableSchema->primaryKey}))
 				);  ?></p>

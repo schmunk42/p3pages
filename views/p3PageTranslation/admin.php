@@ -43,13 +43,18 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 		'id',
 		array(
-					'name'=>'p3_widget_id',
-					'value'=>'CHtml::value($data,\'p3Widget._label\')',
+					'name'=>'p3_page_id',
+					'value'=>'CHtml::value($data,\'p3Page._label\')',
 							'filter'=>CHtml::listData(P3Page::model()->findAll(), 'id', '_label'),
 							),
 		'language',
-#		'properties',
-#		'content',
+		'seoUrl',
+		'pageTitle',
+		'menuName',
+		/*
+#		'keywords',
+#		'description',
+		*/
 
 array(
 'class'=>'CButtonColumn',

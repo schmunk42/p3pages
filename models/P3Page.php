@@ -6,6 +6,9 @@ Yii::import('P3Page.*');
 
 class P3Page extends BaseP3Page
 {
+    const PAGE_ID_KEY = 'pageId';
+    const PAGE_NAME_KEY = 'pageName';
+
 	// Add your model-specific methods here. This file will not be overriden by gtc except you force it.
 	public static function model($className=__CLASS__)
 	{
@@ -18,15 +21,28 @@ class P3Page extends BaseP3Page
 	}
 
 	public function __toString() {
-		return (string) $this->title;
+		return (string) $this->layout;
 
 	}
 
-	public function behaviors() 
-	{
-		return array_merge(parent::behaviors(),array(
-));
+	public function behaviors() {
+		return array_merge(
+				array(
+				'MetaData' => array(
+					'class' => 'ext.p3extensions.behaviors.P3MetaDataBehavior',
+					'metaDataRelation' => 'p3PageMeta',
+				),
+				'Translation' => array(
+					'class' => 'ext.p3extensions.behaviors.P3TranslationBehavior',
+					'relation' => 'p3PageTranslations',
+					'fallbackLanguage' => 'en',
+					'fallbackValue' => null,
+				//'attributesBlacklist' => array('loadfrom'),
+				)
+				), parent::behaviors()
+		);
 	}
+
 
 
 

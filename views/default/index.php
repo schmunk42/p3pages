@@ -10,4 +10,7 @@ $this->breadcrumbs=array(
 </div>
 
 <p>
+<ul>	
+	<li><?php echo CHtml::link('Manage Pages',array('/p3pages/p3Page/admin')) ?></li>
+</ul>
 </p>

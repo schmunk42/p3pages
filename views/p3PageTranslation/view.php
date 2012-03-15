@@ -18,13 +18,18 @@ $this->menu=array(
 	'attributes'=>array(
 					'id',
 		array(
-			'name'=>'p3_widget_id',
-			'value'=>($model->p3Widget !== null)?CHtml::link($model->p3Widget->_label, array('/p3pages/p3Page/view','id'=>$model->p3Widget->id)).' '.CHtml::link(Yii::t('app','Update'), array('/p3pages/p3Page/update','id'=>$model->p3Widget->id), array('class'=>'edit')):'n/a',
+			'name'=>'p3_page_id',
+			'value'=>($model->p3Page !== null)?CHtml::link($model->p3Page->_label, array('/p3pages/p3Page/view','id'=>$model->p3Page->id)).' '.CHtml::link(Yii::t('app','Update'), array('/p3pages/p3Page/update','id'=>$model->p3Page->id), array('class'=>'edit')):'n/a',
 			'type'=>'html',
 		),
 		'language',
-		'properties',
-		'content',
+array(			'name'=>'seoUrl',
+			'type'=>'url',
+),
+		'pageTitle',
+		'menuName',
+		'keywords',
+		'description',
 ),
 	)); ?>
 
