@@ -36,7 +36,7 @@ class P3Page extends BaseP3Page {
 					'class' => 'ext.p3extensions.behaviors.P3TranslationBehavior',
 					'relation' => 'p3PageTranslations',
 					'fallbackLanguage' => 'en',
-					'fallbackValue' => null,
+					'fallbackValue' => 'Page*',
 				//'attributesBlacklist' => array('loadfrom'),
 				)
 				), parent::behaviors()
