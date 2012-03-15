@@ -43,9 +43,12 @@ class DefaultController extends Controller {
 			}
 		} elseif ($model instanceof P3Page) {
 			// record found in db
-			#if (!is_array($model->route)) {
-			#	Yii::app()->controller->redirect($model->getUrlString());
-			#}
+			
+			if ($route = CJSON::decode($model->route)) {
+				$url = $this->createUrl($route['r'],$route);
+				//var_dump($url);exit;
+				$this->redirect($url);
+			}
 			if (!$model->view || !$model->layout) {
 				throw new CHttpException(500, 'No view file in database!');
 			}
