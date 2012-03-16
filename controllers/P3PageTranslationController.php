@@ -14,17 +14,9 @@ class P3PageTranslationController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', 
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', 
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('admin','delete','index','view','create','update'),
+				'expression' => 'Yii::app()->user->checkAccess("P3pages.P3PageTranslation.*")||YII_DEBUG',
 			),
 			array('deny',  
 				'users'=>array('*'),

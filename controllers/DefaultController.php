@@ -2,6 +2,24 @@
 
 class DefaultController extends Controller {
 
+	public function filters() {
+		return array(
+			'accessControl',
+		);
+	}
+
+	public function accessRules() {
+		return array(
+			array('allow',
+				'actions' => array('admin', 'delete', 'index', 'view', 'create', 'update'),
+				'expression' => 'Yii::app()->user->checkAccess("P3pages.Default.*")||YII_DEBUG',
+			),
+			array('deny',
+				'users' => array('*'),
+			),
+		);
+	}
+
 	public function actionIndex() {
 		$this->render('index');
 	}
@@ -43,16 +61,16 @@ class DefaultController extends Controller {
 			}
 		} elseif ($model instanceof P3Page) {
 			// record found in db
-			
+
 			if ($route = CJSON::decode($model->route)) {
-				$url = $this->createUrl($route['r'],$route);
+				$url = $this->createUrl($route['r'], $route);
 				//var_dump($url);exit;
 				$this->redirect($url);
 			}
 			if (!$model->view || !$model->layout) {
 				throw new CHttpException(500, 'No view file in database!');
 			}
-			$this->pageTitle = $model->t('pageTitle');			
+			$this->pageTitle = $model->t('pageTitle');
 			$this->layout = $model->layout;
 			$this->render($model->view, array('model' => $model));
 			return;
