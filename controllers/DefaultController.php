@@ -11,7 +11,10 @@ class DefaultController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array('admin', 'delete', 'index', 'view', 'create', 'update'),
+				'actions' => array('page'),
+				'users' => array('*'),
+			), array('allow',
+				'actions' => array('index'),
 				'expression' => 'Yii::app()->user->checkAccess("P3pages.Default.*")||YII_DEBUG',
 			),
 			array('deny',
