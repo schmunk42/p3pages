@@ -16,3 +16,8 @@ $this->breadcrumbs=array(
 	<li><?php echo CHtml::link('Manage Pages',array('/p3pages/p3Page/admin')) ?></li>
 </ul>
 </p>
+
+<h2>Sitemap</h2>
+<p>
+	<?php $this->widget('p3pages.components.pageTree.P3PagesTreeWidget'); ?>
+</p>

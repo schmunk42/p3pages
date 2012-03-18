@@ -77,4 +77,8 @@ class P3Page extends BaseP3Page {
 		}
 	}
 
+	public function get_label() {
+		return "*".$this->t('menuName');
+	}
+
 }
