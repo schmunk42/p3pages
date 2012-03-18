@@ -31,6 +31,9 @@ class P3Page extends BaseP3Page {
 				'MetaData' => array(
 					'class' => 'ext.p3extensions.behaviors.P3MetaDataBehavior',
 					'metaDataRelation' => 'p3PageMeta',
+					'parentRelation' => 'treeParent',
+					'childrenRelation' => 'p3PageMetas',
+					'contentRelation' => 'id0',
 				),
 				'Translation' => array(
 					'class' => 'ext.p3extensions.behaviors.P3TranslationBehavior',

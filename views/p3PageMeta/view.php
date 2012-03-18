@@ -24,7 +24,11 @@ $this->menu=array(
 		'status',
 		'type',
 		'language',
-		'treeParent_id',
+		array(
+			'name'=>'treeParent_id',
+			'value'=>($model->treeParent !== null)?CHtml::link($model->treeParent->_label, array('/p3pages/p3PageMeta/view','id'=>$model->treeParent->id)).' '.CHtml::link(Yii::t('app','Update'), array('/p3pages/p3PageMeta/update','id'=>$model->treeParent->id), array('class'=>'edit')):'n/a',
+			'type'=>'html',
+		),
 		'treePosition',
 		'begin',
 		'end',
@@ -47,4 +51,17 @@ $this->menu=array(
 	)); ?>
 
 
-	
+	<h2><?php echo CHtml::link(Yii::t('app','P3PageMetas'), array('/p3pages/p3PageMeta/admin'));?></h2>
+<ul>
+			<?php if (is_array($model->p3PageMetas)) foreach($model->p3PageMetas as $foreignobj) { 
+
+					echo '<li>';
+					echo CHtml::link($foreignobj->_label, array('/p3pages/p3PageMeta/view','id'=>$foreignobj->id));
+							
+					echo ' '.CHtml::link(Yii::t('app','Update'), array('/p3pages/p3PageMeta/update','id'=>$foreignobj->id), array('class'=>'edit'));
+
+					}
+						?></ul><p><?php echo CHtml::link(
+				Yii::t('app','Create'),
+				array('/p3pages/p3PageMeta/create', 'P3PageMeta' => array('treeParent_id'=>$model->{$model->tableSchema->primaryKey}))
+				);  ?></p>

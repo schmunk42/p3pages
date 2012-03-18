@@ -29,43 +29,45 @@
  * @property string $model
  *
  * Relations of table "p3_page_meta" available as properties of the model:
+ * @property P3PageMeta $treeParent
+ * @property P3PageMeta[] $p3PageMetas
  * @property P3Page $id0
  */
-abstract class BaseP3PageMeta extends CActiveRecord{
-	public static function model($className=__CLASS__)
-	{
+abstract class BaseP3PageMeta extends CActiveRecord {
+
+	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
 
-	public function tableName()
-	{
+	public function tableName() {
 		return 'p3_page_meta';
 	}
 
-	public function rules()
-	{
+	public function rules() {
 		return array(
+			array('type', 'unique'),
+			array('type', 'identificationColumnValidator'),
 			array('id, createdAt', 'required'),
 			array('status, type, language, treeParent_id, treePosition, begin, end, keywords, customData, label, owner, checkAccessCreate, checkAccessRead, checkAccessUpdate, checkAccessDelete, createdBy, modifiedAt, modifiedBy, guid, ancestor_guid, model', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, status, treeParent_id, treePosition, label', 'numerical', 'integerOnly'=>true),
-			array('type, owner, createdBy, modifiedBy, guid, ancestor_guid', 'length', 'max'=>64),
-			array('language', 'length', 'max'=>8),
-			array('checkAccessCreate, checkAccessRead, checkAccessUpdate, checkAccessDelete', 'length', 'max'=>256),
-			array('model', 'length', 'max'=>128),
+			array('id, status, treeParent_id, treePosition, label', 'numerical', 'integerOnly' => true),
+			array('type, owner, createdBy, modifiedBy, guid, ancestor_guid', 'length', 'max' => 64),
+			array('language', 'length', 'max' => 8),
+			array('checkAccessCreate, checkAccessRead, checkAccessUpdate, checkAccessDelete', 'length', 'max' => 256),
+			array('model', 'length', 'max' => 128),
 			array('begin, end, keywords, customData, modifiedAt', 'safe'),
-			array('id, status, type, language, treeParent_id, treePosition, begin, end, keywords, customData, label, owner, checkAccessCreate, checkAccessRead, checkAccessUpdate, checkAccessDelete, createdAt, createdBy, modifiedAt, modifiedBy, guid, ancestor_guid, model', 'safe', 'on'=>'search'),
+			array('id, status, type, language, treeParent_id, treePosition, begin, end, keywords, customData, label, owner, checkAccessCreate, checkAccessRead, checkAccessUpdate, checkAccessDelete, createdAt, createdBy, modifiedAt, modifiedBy, guid, ancestor_guid, model', 'safe', 'on' => 'search'),
 		);
 	}
 
-	public function relations()
-	{
+	public function relations() {
 		return array(
+			'treeParent' => array(self::BELONGS_TO, 'P3PageMeta', 'treeParent_id'),
+			'p3PageMetas' => array(self::HAS_MANY, 'P3PageMeta', 'treeParent_id'),
 			'id0' => array(self::BELONGS_TO, 'P3Page', 'id'),
 		);
 	}
 
-	public function attributeLabels()
-	{
+	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
 			'status' => Yii::t('app', 'Status'),
@@ -93,10 +95,8 @@ abstract class BaseP3PageMeta extends CActiveRecord{
 		);
 	}
 
-
-	public function search()
-	{
-		$criteria=new CDbCriteria;
+	public function search() {
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
 		$criteria->compare('status', $this->status);
@@ -123,14 +123,12 @@ abstract class BaseP3PageMeta extends CActiveRecord{
 		$criteria->compare('model', $this->model, true);
 
 		return new CActiveDataProvider(get_class($this), array(
-			'criteria'=>$criteria,
-		));
+				'criteria' => $criteria,
+			));
 	}
-	
-	public function get_label()
-	{
-		return '#'.$this->id;		
-		
-			}
-	
+
+	public function get_label() {
+		return '#' . $this->id;
+	}
+
 }

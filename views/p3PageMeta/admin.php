@@ -26,7 +26,7 @@ return false;
 <h1> <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'P3 Page Metas'); ?> </h1>
 
 
-<ul><li>BelongsTo <a href="/?r=p3pages/p3Page/admin&amp;lang=en">P3Page</a> </li></ul>
+<ul><li>BelongsTo <a href="/en/p3pages/p3PageMeta/admin">P3PageMeta</a> </li><li>HasMany <a href="/en/p3pages/p3PageMeta/admin">P3PageMeta</a> </li><li>BelongsTo <a href="/en/p3pages/p3Page/admin">P3Page</a> </li></ul>
 
 <?php echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?><div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
@@ -49,7 +49,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		'status',
 		'type',
 		'language',
-		'treeParent_id',
+		array(
+					'name'=>'treeParent_id',
+					'value'=>'CHtml::value($data,\'p3PageMetas._label\')',
+							'filter'=>CHtml::listData(P3PageMeta::model()->findAll(), 'id', '_label'),
+							),
 		'treePosition',
 		/*
 		'begin',
