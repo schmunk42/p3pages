@@ -76,9 +76,23 @@ class P3Page extends BaseP3Page {
 			throw new Exception('Could not determine URL string.');
 		}
 	}
-
+	
 	public function get_label() {
 		return "*".$this->t('menuName');
 	}
 
+	static public function getMenuItems($rootNode) {				
+		#$models = P3Page::model()->findAll();
+		#$rootNode = P3Page::model()->findByAttributes(array('layout'=>'_BootMenu'));
+		if (!$rootNode instanceof P3Page) {
+			Yii::log('Invalid root node', CLogger::LEVEL_WARNING);
+			return array();
+		}
+		$models = $rootNode->getChildren();		
+		$items = array();
+		foreach($models AS $model) {
+			$items[] = array('label' => $model->t('menuName',null,true), 'url' => $model->createUrl());
+		}
+		return $items;
+	}
 }

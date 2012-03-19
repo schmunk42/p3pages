@@ -62,7 +62,7 @@ abstract class BaseP3PageMeta extends CActiveRecord {
 	public function relations() {
 		return array(
 			'treeParent' => array(self::BELONGS_TO, 'P3PageMeta', 'treeParent_id'),
-			'p3PageMetas' => array(self::HAS_MANY, 'P3PageMeta', 'treeParent_id'),
+			'p3PageMetas' => array(self::HAS_MANY, 'P3PageMeta', 'treeParent_id', 'order' => 'treePosition'),
 			'id0' => array(self::BELONGS_TO, 'P3Page', 'id'),
 		);
 	}
