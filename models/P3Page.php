@@ -26,17 +26,17 @@ class P3Page extends BaseP3Page {
 		return array_merge(
 				array(
 				#'JSON' => array(
-				#'class' => 'ext.p3extensions.behaviors.P3JSONBehavior',
+				#'class' => 'ext.phundament.p3extensions.behaviors.P3JSONBehavior',
 				#),
 				'MetaData' => array(
-					'class' => 'ext.p3extensions.behaviors.P3MetaDataBehavior',
+					'class' => 'ext.phundament.p3extensions.behaviors.P3MetaDataBehavior',
 					'metaDataRelation' => 'p3PageMeta',
 					'parentRelation' => 'treeParent',
 					'childrenRelation' => 'p3PageMetas',
 					'contentRelation' => 'id0',
 				),
 				'Translation' => array(
-					'class' => 'ext.p3extensions.behaviors.P3TranslationBehavior',
+					'class' => 'ext.phundament.p3extensions.behaviors.P3TranslationBehavior',
 					'relation' => 'p3PageTranslations',
 					'fallbackLanguage' => 'en',
 					'fallbackValue' => 'Page*',

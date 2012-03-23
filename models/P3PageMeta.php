@@ -23,7 +23,7 @@ class P3PageMeta extends BaseP3PageMeta {
 		return array_merge(
 				array(
 				'MetaData' => array(
-					'class' => 'ext.p3extensions.behaviors.P3MetaDataBehavior',
+					'class' => 'ext.phundament.p3extensions.behaviors.P3MetaDataBehavior',
 					'metaDataRelation' => '_self_',
 				),
 				), parent::behaviors()

@@ -11,7 +11,7 @@
 return array(
 	'modules' => array(
 		'p3pages' => array(
-			'class' => 'ext.p3pages.P3PagesModule',
+			'class' => 'ext.phundament.p3pages.P3PagesModule',
 		)
 	),
 	'components' => array(
