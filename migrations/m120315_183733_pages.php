@@ -13,16 +13,16 @@ class m120315_183733_pages extends CDbMigration {
 
 		$this->insert("p3_page", array(
 			"id" => "1",
-			"layout" => null,
+			"layout" => "_BootMenu",
 			"view" => null,
-			"route" => "{route:'/site/index'}",
+			"route" => null,
 		));
 
 		$this->insert("p3_page", array(
 			"id" => "3",
-			"layout" => "//layouts/main",
-			"view" => "//p3pages/default",
-			"route" => null,
+			"layout" => null,
+			"view" => null,
+			"route" => "{route:'/site/index'}",
 		));
 
 		$this->insert("p3_page", array(
@@ -75,7 +75,7 @@ class m120315_183733_pages extends CDbMigration {
 			"status" => "30",
 			"type" => null,
 			"language" => "_ALL",
-			"treeParent_id" => null,
+			"treeParent_id" => 1,
 			"treePosition" => null,
 			"begin" => null,
 			"end" => null,
@@ -101,7 +101,7 @@ class m120315_183733_pages extends CDbMigration {
 			"status" => "30",
 			"type" => null,
 			"language" => "_ALL",
-			"treeParent_id" => null,
+			"treeParent_id" => 1,
 			"treePosition" => null,
 			"begin" => null,
 			"end" => null,
@@ -127,7 +127,7 @@ class m120315_183733_pages extends CDbMigration {
 			"status" => "30",
 			"type" => null,
 			"language" => "_ALL",
-			"treeParent_id" => null,
+			"treeParent_id" => 1,
 			"treePosition" => null,
 			"begin" => null,
 			"end" => null,
@@ -156,18 +156,18 @@ class m120315_183733_pages extends CDbMigration {
 
 		$this->insert("p3_page_translation", array(
 			"id" => "1",
-			"p3_page_id" => "5",
+			"p3_page_id" => "1",
 			"language" => "en",
-			"seoUrl" => "contact",
-			"pageTitle" => "Contact Us",
-			"menuName" => "Contact",
+			"seoUrl" => null,
+			"pageTitle" => null,
+			"menuName" => "_BootMenu",
 			"keywords" => null,
 			"description" => null,
 		));
 
 		$this->insert("p3_page_translation", array(
-			"id" => "4",
-			"p3_page_id" => "1",
+			"id" => "3",
+			"p3_page_id" => "3",
 			"language" => "en",
 			"seoUrl" => "home",
 			"pageTitle" => "Home Page",
@@ -178,11 +178,11 @@ class m120315_183733_pages extends CDbMigration {
 
 		$this->insert("p3_page_translation", array(
 			"id" => "5",
-			"p3_page_id" => "3",
+			"p3_page_id" => "5",
 			"language" => "en",
-			"seoUrl" => "About",
-			"pageTitle" => "About Us",
-			"menuName" => "About",
+			"seoUrl" => "contact",
+			"pageTitle" => "Contact Us",
+			"menuName" => "Contact",
 			"keywords" => null,
 			"description" => null,
 		));
