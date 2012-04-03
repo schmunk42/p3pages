@@ -22,7 +22,7 @@ class m120315_183733_pages extends CDbMigration {
 			"id" => "3",
 			"layout" => null,
 			"view" => null,
-			"route" => "{route:'/site/index'}",
+			"route" => "{\"route\":\"/site/index\"}",
 		));
 
 		$this->insert("p3_page", array(
@@ -36,7 +36,7 @@ class m120315_183733_pages extends CDbMigration {
 			"id" => "5",
 			"layout" => null,
 			"view" => null,
-			"route" => "{route:'/site/contact'}",
+			"route" => "{\"route\":\"/site/contact\"}",
 		));
 
 

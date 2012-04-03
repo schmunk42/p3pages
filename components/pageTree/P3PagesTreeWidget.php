@@ -9,7 +9,12 @@ class P3PagesTreeWidget extends CWidget {
 	
 	function run(){
 		$criteria = new CDbCriteria;
-		$criteria->condition = "p3PageMeta.treeParent_id <=> :id";
+		// SQLite workaround for <=>
+		if ($this->rootNode === null) {
+			$criteria->condition = "p3PageMeta.treeParent_id IS :id";
+		} else {
+			$criteria->condition = "p3PageMeta.treeParent_id = :id";
+		}
 		$criteria->params = array(':id'=>$this->rootNode);
 		$criteria->with = array('p3PageMeta');
 		$firstLevelNodes = P3Page::model()->findAll($criteria);

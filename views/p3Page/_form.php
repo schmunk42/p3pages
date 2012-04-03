@@ -29,7 +29,12 @@ echo $form->errorSummary($model);
 
 <div class="row">
 <?php echo $form->labelEx($model,'route'); ?>
-<?php echo $form->textField($model,'route',array('size'=>60,'maxlength'=>255)); ?>
+		<?php
+		$this->widget('ext.phundament.p3extensions.widgets.jsonEditorView.JuiJSONEditorInput', array(
+			'model' => $model, // ActiveRecord, or any CModel child class
+			'attribute' => 'route' // Model attribute holding initial JSON data string
+		));
+		?><div class="notice">Do not use double quotes (") for keys and/or values!</div>
 <?php echo $form->error($model,'route'); ?>
 <div class='hint'><?php if('hint.P3Page.route' != $hint = Yii::t('app', 'route')) echo $hint; ?></div>
 </div>
