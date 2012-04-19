@@ -57,9 +57,9 @@ class P3Page extends BaseP3Page {
 
 		if ($this->id == 1) {
 			return Yii::app()->homeUrl;
-		} elseif (is_array(CJSON::decode($this->route))) {
+		} elseif (is_array(CJSON::decode($this->route)) && count(CJSON::decode($this->route)) !== 0) {
 			$link = CJSON::decode($this->route);
-		} elseif ($this->route) {
+		} elseif ($this->route && $this->route !== "{}") { // omit JSON ediotr defaults
 			return $this->route;
 		} else {
 			$link['route'] = '/p3pages/default/page';
@@ -73,7 +73,8 @@ class P3Page extends BaseP3Page {
 			else
 				return Yii::app()->controller->createUrl($link['route'], $params);
 		} else {
-			throw new Exception('Could not determine URL string.');
+			#echo $this->id."---";
+            throw new Exception('Could not determine URL string.');
 		}
 	}
 	

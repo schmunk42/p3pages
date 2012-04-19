@@ -18,7 +18,7 @@ return array(
 		'urlManager' => array(
 			'rules' => array(
 				// p3media
-				'<lang:[a-z]{2}>/<pageName:[a-zA-Z0-9-._]*>-<pageId:\d+>.p3' => 'p3pages/default/page', // p3media images, TESTING: disable in case of problems
+				'<lang:[a-z]{2}>/<pageName:[a-zA-Z0-9-._]*>-<pageId:\d+>.p3' => 'p3pages/default/page',
 			),
 		),
 	)
