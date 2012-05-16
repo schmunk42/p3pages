@@ -8,7 +8,7 @@
 </p>
 <p>
 	<b>Position: <?php echo $model->p3PageMeta->treePosition ?></b>
-	Layout: <?php echo $model->layout ?> Vew: <?php echo $model->view ?> Route: <?php echo $model->route ?>
+	Layout: <?php echo $model->layout ?> View: <?php echo $model->view ?> Route: <?php echo $model->route ?>
 
 	<?php echo CHtml::link(Yii::t('app', 'Update'), array('/p3pages/p3Page/update', 'id' => $model->id), array('class' => 'btn')) ?> 
 	<?php echo CHtml::link(Yii::t('app', 'Details '), array('/p3pages/p3Page/view', 'id' => $model->id), array('class' => 'btn')) ?></p>
