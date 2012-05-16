@@ -197,7 +197,7 @@
 
 	<?php
 	echo CHtml::Button(Yii::t('app', 'Cancel'), array(
-		'submit' => array('p3pagemeta/admin')));
+		'submit' => array('p3PageMeta/admin')));
 	echo CHtml::submitButton(Yii::t('app', 'Save'));
 	$this->endWidget();
 	?>
