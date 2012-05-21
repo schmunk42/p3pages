@@ -26,8 +26,11 @@ return false;
 <h1> <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'P3 Page Metas'); ?> </h1>
 
 
-<ul><li>BelongsTo <a href="/en/p3pages/p3PageMeta/admin">P3PageMeta</a> </li><li>HasMany <a href="/en/p3pages/p3PageMeta/admin">P3PageMeta</a> </li><li>BelongsTo <a href="/en/p3pages/p3Page/admin">P3Page</a> </li></ul>
-
+<ul>
+    <li>BelongsTo <?php echo CHtml::link('p3PageMeta',array('/p3pages/p3PageMeta/admin')) ?> </li>
+    <li>HasMany <?php echo CHtml::link('p3PageMeta',array('/p3pages/p3PageMeta/admin')) ?> </li>
+    <li>BelongsTo <?php echo CHtml::link('p3Page',array('/p3pages/p3Page/admin')) ?> </li>
+</ul>
 <?php echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?><div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
 	'model'=>$model,
