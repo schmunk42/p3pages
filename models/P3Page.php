@@ -82,8 +82,22 @@ class P3Page extends BaseP3Page {
         return "*" . $this->t('menuName');
     }
 
-    public function isActive(){
+    public function isActive() {
         return false; // TODO
+    }
+
+    public static function getActivePage() {
+        static $page;
+
+        if (isset($page)) {
+            return $page;
+        } elseif (isset($_GET[P3Page::PAGE_ID_KEY])) {
+            return $page = P3Page::model()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
+        } elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
+            return $page = P3Page::model()->findByAttributes(array('name' => $_GET[P2Page::PAGE_NAME_KEY]));
+        } else {
+            return new P3Page;
+        }
     }
 
     static public function getMenuItems($rootNode) {

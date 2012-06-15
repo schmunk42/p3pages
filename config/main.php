@@ -9,6 +9,9 @@
  * @license http://www.phundament.com/license/
  */
 return array(
+    'import' => array(
+        'ext.phundament.p3pages.models.*'
+    ),
 	'modules' => array(
 		'p3pages' => array(
 			'class' => 'ext.phundament.p3pages.P3PagesModule',
