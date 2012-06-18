@@ -21,7 +21,7 @@ return array(
 		'urlManager' => array(
 			'rules' => array(
 				// p3media
-				'<lang:[a-z]{2}>/<pageName:[a-zA-Z0-9-._]*>-<pageId:\d+>.p3' => 'p3pages/default/page',
+				'<lang:[a-z]{2}>/<pageName:[a-zA-Z0-9-._]*>-<pageId:\d+>.html' => 'p3pages/default/page',
 			),
 		),
 	)
