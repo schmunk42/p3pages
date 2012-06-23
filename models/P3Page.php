@@ -83,7 +83,7 @@ class P3Page extends BaseP3Page {
     }
 
     public function isActive() {
-        return false; // TODO
+        return (self::getActivePage()->id == $this->id);
     }
 
     public static function getActivePage() {
@@ -96,7 +96,17 @@ class P3Page extends BaseP3Page {
         } elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
             return $page = P3Page::model()->findByAttributes(array('name' => $_GET[P2Page::PAGE_NAME_KEY]));
         } else {
-            return new P3Page;
+            // try to find page via route 
+            $criteria = new CDbCriteria;
+            $criteria->condition = "route LIKE :route";
+            $criteria->params = array(':route'=>"%".Yii::app()->controller->route."%");
+            $model = P3Page::model()->find($criteria);
+
+            if ($model !== null) {
+                return $model;
+            } else {
+                return new P3Page;
+            }
         }
     }
 
