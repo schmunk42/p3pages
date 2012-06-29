@@ -38,7 +38,7 @@ class P3Page extends BaseP3Page {
                 'Translation' => array(
                     'class' => 'ext.phundament.p3extensions.behaviors.P3TranslationBehavior',
                     'relation' => 'p3PageTranslations',
-                    'fallbackLanguage' => 'en',
+                    'fallbackLanguage' => (isset(Yii::app()->params['p3.fallbackLanguage'])) ? Yii::app()->params['p3.fallbackLanguage'] : 'en',
                     'fallbackValue' => 'Page*',
                 //'attributesBlacklist' => array('loadfrom'),
                 )
