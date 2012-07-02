@@ -38,7 +38,7 @@ class P3PageMeta extends BaseP3PageMeta {
 	}
 
 	public function get_label() {
-		return $this->id0->t('pageTitle');
+		return '#'.$this->id0->id.' '.$this->id0->t('menuName', Yii::app()->language, Yii::app()->params['p3.fallbackLanguage']);
 	}
 
 }
