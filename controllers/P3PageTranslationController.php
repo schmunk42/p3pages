@@ -65,9 +65,9 @@ class P3PageTranslationController extends Controller {
         } elseif (isset($_GET['P3PageTranslation'])) {
             $model->attributes = $_GET['P3PageTranslation'];
         }
-        
+
         if (!$model->language) {
-            $model->language = Yii::app()->languge;
+            $model->language = Yii::app()->language;
         }
 
         $this->render('create', array('model' => $model));
