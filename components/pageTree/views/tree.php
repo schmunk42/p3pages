@@ -1,5 +1,5 @@
 <p>
-    <?php echo CHtml::link('<i class="icon-circle-arrow-right icon-white"></i> ' . $model->t('menuName'), $model->createUrl(), array('class' => 'btn btn-primary')) ?>
+    <?php echo CHtml::link('<i class="icon-circle-arrow-right icon-white"></i> ' . $model->t('menuName').' #'.$model->id, $model->createUrl(), array('class' => 'btn btn-primary')) ?>
 
 
 
