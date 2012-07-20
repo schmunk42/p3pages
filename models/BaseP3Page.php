@@ -67,11 +67,11 @@ abstract class BaseP3Page extends P3ActiveRecord{
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public function get_label()
 	{
-		return '#'.$this->id;		
-		
+		return '#'.$this->id;
+
 			}
-	
+
 }
