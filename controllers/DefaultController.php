@@ -42,7 +42,7 @@ class DefaultController extends Controller {
 			$model = P3Page::model()->default()->findByAttributes(array('name' => $name));
 			// redirect for consistency reasons
 			if ($model !== null) {
-				Yii::app()->request->redirect($this->createUrl('/p2/p2Page/view', array_merge($_GET, array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name))));
+				Yii::app()->request->redirect($this->createUrl('/p3/p3Page/view', array_merge($_GET, array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name))));
 			}
 		} else {
 			throw new CHttpException(404, 'Id/name not found!');
@@ -66,7 +66,9 @@ class DefaultController extends Controller {
 			// record found in db
 
 			if ($route = CJSON::decode($model->route)) {
-				$url = $this->createUrl($route['r'], $route);
+                $params = $route;
+                unset($params['route']);
+				$url = $this->createUrl($route['route'], $params);
 				//var_dump($url);exit;
 				$this->redirect($url);
 			}

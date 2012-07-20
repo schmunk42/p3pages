@@ -8,7 +8,7 @@ $form=$this->beginWidget('CActiveForm', array(
 'id'=>'p3-page-form',
 	'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	)); 
+	));
 
 echo $form->errorSummary($model);
 ?>
@@ -17,14 +17,14 @@ echo $form->errorSummary($model);
 <?php echo $form->labelEx($model,'layout'); ?>
 <?php echo $form->textField($model,'layout',array('size'=>60,'maxlength'=>128)); ?>
 <?php echo $form->error($model,'layout'); ?>
-<div class='hint'><?php if('hint.P3Page.layout' != $hint = Yii::t('app', 'layout')) echo $hint; ?></div>
+<div class='hint'><?php if('hint.P3Page.layout' != $hint = Yii::t('p3pagesModule.app', 'layout')) echo $hint; ?></div>
 </div>
 
 <div class="row">
 <?php echo $form->labelEx($model,'view'); ?>
 <?php echo $form->textField($model,'view',array('size'=>60,'maxlength'=>128)); ?>
 <?php echo $form->error($model,'view'); ?>
-<div class='hint'><?php if('hint.P3Page.view' != $hint = Yii::t('app', 'view')) echo $hint; ?></div>
+<div class='hint'><?php if('view' != $hint = Yii::t('p3pagesModule.app', 'view')) echo $hint; ?></div>
 </div>
 
 <div class="row">
@@ -36,7 +36,7 @@ echo $form->errorSummary($model);
 		));
 		?><div class="notice">Do not use double quotes (") for keys and/or values!</div>
 <?php echo $form->error($model,'route'); ?>
-<div class='hint'><?php if('hint.P3Page.route' != $hint = Yii::t('app', 'route')) echo $hint; ?></div>
+<div class='hint'><?php if('hint.P3Page.route' != $hint = Yii::t('p3pagesModule.app', 'route')) echo $hint; ?></div>
 </div>
 
 <div class="row">
@@ -47,7 +47,7 @@ echo $form->errorSummary($model);
 
 <?php
 echo CHtml::Button(Yii::t('app', 'Cancel'), array(
-			'submit' => array('p3Page/admin'))); 
-echo CHtml::submitButton(Yii::t('app', 'Save')); 
+			'submit' => array('p3Page/admin')));
+echo CHtml::submitButton(Yii::t('app', 'Save'));
 $this->endWidget(); ?>
 </div> <!-- form -->

@@ -12,7 +12,8 @@ $this->breadcrumbs=array(
 <?php } ?>
 
 <p>
-<ul>	
+<ul>
+	<li><?php echo CHtml::link('Create Page',array('/p3pages/p3Page/create')) ?></li>
 	<li><?php echo CHtml::link('Manage Pages',array('/p3pages/p3Page/admin')) ?></li>
 </ul>
 </p>

@@ -48,8 +48,9 @@ class P3Page extends BaseP3Page {
 
     public function rules() {
         return array_merge(
-                /* array('column1, column2', 'rule'), */
-                parent::rules()
+                array(
+                array('route', 'match', 'pattern' => '/"route":"/', 'message' => 'Route JSON must contain a \'route\' element'),
+                ), parent::rules()
         );
     }
 
@@ -73,8 +74,7 @@ class P3Page extends BaseP3Page {
             else
                 return Yii::app()->controller->createUrl($link['route'], $params);
         } else {
-            #echo $this->id."---";
-            throw new Exception('Could not determine URL string.');
+            Yii::log('Could not determine URL string for P3Page #'.$this->id , CLogger::LEVEL_WARNING);
         }
     }
 
