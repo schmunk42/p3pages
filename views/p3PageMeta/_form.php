@@ -58,13 +58,6 @@
         <div class="span3">
             <div class="form">
                 <div class="row">
-                    <?php echo $form->labelEx($model, 'checkAccessCreate'); ?>
-                    <?php echo $form->textField($model, 'checkAccessCreate', array('size' => 60, 'maxlength' => 256)); ?>
-                    <?php echo $form->error($model, 'checkAccessCreate'); ?>
-                    <div class='hint'><?php if ('hint.P3PageMeta.checkAccessCreate' != $hint = Yii::t('app', 'checkAccessCreate')) echo $hint; ?></div>
-                </div>
-
-                <div class="row">
                     <?php echo $form->labelEx($model, 'checkAccessRead'); ?>
                     <?php echo $form->textField($model, 'checkAccessRead', array('size' => 60, 'maxlength' => 256)); ?>
                     <?php echo $form->error($model, 'checkAccessRead'); ?>
@@ -84,6 +77,14 @@
                     <?php echo $form->error($model, 'checkAccessDelete'); ?>
                     <div class='hint'><?php if ('hint.P3PageMeta.checkAccessDelete' != $hint = Yii::t('app', 'checkAccessDelete')) echo $hint; ?></div>
                 </div>
+                <!--
+                <div class="row">
+                    <?php echo $form->labelEx($model, 'checkAccessCreate'); ?>
+                    <?php echo $form->textField($model, 'checkAccessCreate', array('size' => 60, 'maxlength' => 256)); ?>
+                    <?php echo $form->error($model, 'checkAccessCreate'); ?>
+                    <div class='hint'><?php if ('hint.P3PageMeta.checkAccessCreate' != $hint = Yii::t('app', 'checkAccessCreate')) echo $hint; ?></div>
+                </div>-->
+
             </div>
         </div>
         <div class="span3">
