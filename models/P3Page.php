@@ -38,8 +38,10 @@ class P3Page extends BaseP3Page {
                 'Translation' => array(
                     'class' => 'ext.phundament.p3extensions.behaviors.P3TranslationBehavior',
                     'relation' => 'p3PageTranslations',
-                    'fallbackLanguage' => 'en',
+                    'fallbackLanguage' => (isset(Yii::app()->params['p3.fallbackLanguage'])) ? Yii::app()->params['p3.fallbackLanguage'] : 'en',
+                    'fallbackIndicator' => array('menuName'=>' *'),
                     'fallbackValue' => 'Page*',
+
                 //'attributesBlacklist' => array('loadfrom'),
                 )
                 ), parent::behaviors()
@@ -79,7 +81,7 @@ class P3Page extends BaseP3Page {
     }
 
     public function get_label() {
-        return "*" . $this->t('menuName');
+        return "#". $this->id . ' ' . $this->t('menuName', null, true);
     }
 
     public function isActive() {
@@ -96,7 +98,7 @@ class P3Page extends BaseP3Page {
         } elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
             return $page = P3Page::model()->findByAttributes(array('name' => $_GET[P2Page::PAGE_NAME_KEY]));
         } else {
-            // try to find page via route 
+            // try to find page via route
             $criteria = new CDbCriteria;
             $criteria->condition = "route LIKE :route";
             $criteria->params = array(':route'=>"%".Yii::app()->controller->route."%");
