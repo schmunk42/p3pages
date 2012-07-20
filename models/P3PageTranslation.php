@@ -27,7 +27,7 @@ class P3PageTranslation extends BaseP3PageTranslation {
     public function rules() {
         return array_merge(
                 array(
-                array('seoUrl', 'match', 'pattern' => '/^[a-z0-9\-]+$/', 'message' => 'SEO URL must only conatin lowercase characters, numbers and dashes'),
+                array('seoUrl', 'match', 'pattern' => '/^[a-z0-9_\-]+$/', 'message' => 'SEO URL must only conatin lowercase characters, numbers, underscores and dashes'),
                 ), parent::rules()
         );
     }
