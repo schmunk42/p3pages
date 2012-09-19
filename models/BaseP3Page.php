@@ -13,7 +13,9 @@
  * @property P3PageMeta $p3PageMeta
  * @property P3PageTranslation[] $p3PageTranslations
  */
-Yii::import('ext.phundament.p3extensions.components.*');
+
+#Yii::import('ext.phundament.p3extensions.components.*');
+
 abstract class BaseP3Page extends P3ActiveRecord{
 	public static function model($className=__CLASS__)
 	{

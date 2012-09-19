@@ -30,7 +30,7 @@ echo $form->errorSummary($model);
 <div class="row">
 <?php echo $form->labelEx($model,'route'); ?>
 		<?php
-		$this->widget('ext.phundament.p3extensions.widgets.jsonEditorView.JuiJSONEditorInput', array(
+		$this->widget('jsonEditorView.JuiJSONEditorInput', array(
 			'model' => $model, // ActiveRecord, or any CModel child class
 			'attribute' => 'route' // Model attribute holding initial JSON data string
 		));

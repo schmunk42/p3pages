@@ -26,17 +26,17 @@ class P3Page extends BaseP3Page {
         return array_merge(
                 array(
                 #'JSON' => array(
-                #'class' => 'ext.phundament.p3extensions.behaviors.P3JSONBehavior',
+                #'class' => 'P3JSONBehavior',
                 #),
                 'MetaData' => array(
-                    'class' => 'ext.phundament.p3extensions.behaviors.P3MetaDataBehavior',
+                    'class' => 'P3MetaDataBehavior',
                     'metaDataRelation' => 'p3PageMeta',
                     'parentRelation' => 'treeParent',
                     'childrenRelation' => 'p3PageMetas',
                     'contentRelation' => 'id0',
                 ),
                 'Translation' => array(
-                    'class' => 'ext.phundament.p3extensions.behaviors.P3TranslationBehavior',
+                    'class' => 'P3TranslationBehavior',
                     'relation' => 'p3PageTranslations',
                     'fallbackLanguage' => (isset(Yii::app()->params['p3.fallbackLanguage'])) ? Yii::app()->params['p3.fallbackLanguage'] : 'en',
                     'fallbackIndicator' => array('menuName'=>' *'),
