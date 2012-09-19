@@ -51,7 +51,7 @@ class P3Page extends BaseP3Page {
     public function rules() {
         return array_merge(
                 array(
-                array('route', 'match', 'pattern' => '/"route":"/', 'message' => 'Route JSON must contain a \'route\' element'),
+                array('route', 'match', 'pattern' => '/"route":"|{}/', 'message' => 'If not empty, route JSON must contain a \'route\' element'),
                 ), parent::rules()
         );
     }
