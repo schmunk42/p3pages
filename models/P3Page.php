@@ -125,7 +125,7 @@ class P3Page extends BaseP3Page {
             if ($model->getMenuItems($model) === array( )){
                 $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'active' => $model->isActive());
             } else {
-                $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'items' => $model->getMenuItems($model));
+                $items[] = array('label' => $model->t('menuName', null, true), 'url' => '#', 'items' => $model->getMenuItems($model));
             }
         }
         return $items;
