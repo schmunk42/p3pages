@@ -122,7 +122,11 @@ class P3Page extends BaseP3Page {
         $models = $rootNode->getChildren();
         $items = array();
         foreach ($models AS $model) {
-            $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'active' => $model->isActive());
+            if ($model->getMenuItems($model) === array( )){
+                $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'active' => $model->isActive());
+            } else {
+                $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'items' => $model->getMenuItems($model));
+            }
         }
         return $items;
     }
