@@ -22,7 +22,7 @@
     ?>
 
     <?php
-    echo CHtml::link(Yii::t('app', '<i class="icon-minus-sign icon-white"></i> Delete'), '#', array('class' => 'btn btn-danger', 'submit' => array($this->controller->createUrl('p3Page/delete'), 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?'))
+    echo CHtml::link(Yii::t('app', '<i class="icon-minus-sign icon-white"></i> Delete'), '#', array('class' => 'btn btn-danger', 'submit' => array('p3Page/delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?'))
     ?>
 
 </p>
