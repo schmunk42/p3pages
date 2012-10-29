@@ -16,7 +16,7 @@ class P3PageController extends Controller
 		return array(
 			array('allow', 
 				'actions'=>array('admin','delete','index','view','create','update'),
-				'expression' => 'Yii::app()->user->checkAccess("P3pages.P3Page.*")||YII_DEBUG',
+				'expression' => 'Yii::app()->user->checkAccess("P3pages.P3Page.*")',
 			),
 			array('deny',  
 				'users'=>array('*'),

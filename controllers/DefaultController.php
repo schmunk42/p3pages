@@ -15,7 +15,7 @@ class DefaultController extends Controller {
 				'users' => array('*'),
 			), array('allow',
 				'actions' => array('index'),
-				'expression' => 'Yii::app()->user->checkAccess("P3pages.Default.*")||YII_DEBUG',
+				'expression' => 'Yii::app()->user->checkAccess("P3pages.Default.*")',
 			),
 			array('deny',
 				'users' => array('*'),

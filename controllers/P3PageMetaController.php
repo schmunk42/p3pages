@@ -16,7 +16,7 @@ class P3PageMetaController extends Controller
 		return array(
 			array('allow', 
 				'actions'=>array('admin','delete','index','view','create','update'),
-				'expression' => 'Yii::app()->user->checkAccess("P3pages.P3PageMeta.*")||YII_DEBUG',
+				'expression' => 'Yii::app()->user->checkAccess("P3pages.P3PageMeta.*")',
 			),
 			array('deny',  
 				'users'=>array('*'),
