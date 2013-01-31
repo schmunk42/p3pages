@@ -1,6 +1,6 @@
 <?php
 
-class m130119_000000_rename_bootmenu extends EDbMigration
+class m130130_000000_rename_bootmenu extends EDbMigration
 {
 	public function up()
 	{
