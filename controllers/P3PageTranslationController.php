@@ -15,7 +15,7 @@ public function filters() {
 public function accessRules() {
 	return array(
 			array('allow',
-				'actions'=>array('create','update','delete','admin','view'),
+				'actions'=>array('create','ajaxUpdate','update','delete','admin','view'),
 				'roles'=>array('P3pages.P3PageTranslation.*'),
 				),
 			array('deny',
@@ -45,9 +45,7 @@ public function accessRules() {
     public function actionView($id)
     {
         $model = $this->loadModel($id);
-        $this->render('view',array(
-            'model' => $model,
-        ));
+        $this->render('view',array('model' => $model,));
     }
 
     public function actionCreate()
@@ -72,7 +70,7 @@ public function accessRules() {
                 $model->addError('id', $e->getMessage());
             }
         } elseif(isset($_GET['P3PageTranslation'])) {
-                $model->attributes = $_GET['P3PageTranslation'];
+            $model->attributes = $_GET['P3PageTranslation'];
         }
 
         $this->render('create',array( 'model'=>$model));
@@ -104,9 +102,14 @@ public function accessRules() {
             }
         }
 
-        $this->render('update',array(
-                    'model'=>$model,
-                    ));
+        $this->render('update',array('model'=>$model,));
+    }
+
+    public function actionEditableSaver()
+    {
+        Yii::import('EditableSaver'); //or you can add import 'ext.editable.*' to config
+        $es = new EditableSaver('P3PageTranslation');  // classname of model to be updated
+        $es->update();
     }
 
     public function actionDelete($id)
@@ -121,20 +124,21 @@ public function accessRules() {
 
             if(!isset($_GET['ajax']))
             {
+                if (isset($_GET['returnUrl'])) {
+                    $this->redirect($_GET['returnUrl']);
+                } else {
                     $this->redirect(array('admin'));
+                }
             }
         }
         else
-            throw new CHttpException(400,
-                    Yii::t('app', 'Invalid request. Please do not repeat this request again.'));
+            throw new CHttpException(400,Yii::t('P3PagesModule.crud', 'Invalid request. Please do not repeat this request again.'));
     }
 
     public function actionIndex()
     {
         $dataProvider=new CActiveDataProvider('P3PageTranslation');
-        $this->render('index',array(
-            'dataProvider'=>$dataProvider,
-        ));
+        $this->render('index',array('dataProvider'=>$dataProvider,));
     }
 
     public function actionAdmin()
@@ -142,19 +146,18 @@ public function accessRules() {
         $model=new P3PageTranslation('search');
         $model->unsetAttributes();
 
-        if(isset($_GET['P3PageTranslation']))
+        if(isset($_GET['P3PageTranslation'])) {
             $model->attributes = $_GET['P3PageTranslation'];
+        }
 
-        $this->render('admin',array(
-            'model'=>$model,
-        ));
+        $this->render('admin',array('model'=>$model,));
     }
 
     public function loadModel($id)
     {
         $model=P3PageTranslation::model()->findByPk($id);
         if($model===null)
-            throw new CHttpException(404,Yii::t('app', 'The requested page does not exist.'));
+            throw new CHttpException(404,Yii::t('P3PagesModule.crud', 'The requested page does not exist.'));
         return $model;
     }
 

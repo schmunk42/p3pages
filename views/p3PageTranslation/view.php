@@ -1,9 +1,11 @@
 <?php
-$this->breadcrumbs['P3 Page Translations'] = array('index');
+$this->breadcrumbs['P3 Page Translations'] = array('admin');
 $this->breadcrumbs[] = $model->id;
 ?>
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
 <h1>
-    View P3 Page Translation #<?php echo $model->id ?></h1>
+    P3 Page Translation <small>View #<?php echo $model->id ?></small></h1>
+
 
 
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>

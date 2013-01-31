@@ -12,7 +12,7 @@
 
                     <div class="row">
             <?php echo $form->label($model,'p3_page_id'); ?>
-                            <?php echo $form->dropDownList($model,'p3_page_id',CHtml::listData(P3Page::model()->findAll(), 'id', 'layout'),array('prompt'=>Yii::t('app', 'All'))); ?>
+                            <?php echo $form->dropDownList($model,'p3_page_id',CHtml::listData(P3Page::model()->findAll(), 'id', 'layout'),array('prompt'=>'all')); ?>
                     </div>
 
                     <div class="row">
@@ -46,7 +46,7 @@
                     </div>
 
         <div class="row buttons">
-        <?php echo CHtml::submitButton(Yii::t('app', 'Search')); ?>
+        <?php echo CHtml::submitButton(Yii::t('P3PagesModule.crud', 'Search')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

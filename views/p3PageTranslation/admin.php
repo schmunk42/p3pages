@@ -1,6 +1,5 @@
 <?php
-$this->breadcrumbs['P3 Page Translations'] = array('admin');
-$this->breadcrumbs[] = Yii::t('app', 'Admin');
+$this->breadcrumbs[] = 'P3 Page Translations';
 
 
 Yii::app()->clientScript->registerScript('search', "
@@ -17,8 +16,9 @@ return false;
 ");
 ?>
 
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
 <h1>
-    <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'P3 Page Translations'); ?> </h1>
+    <?php echo Yii::t('P3PagesModule.crud', 'P3 Page Translations'); ?> <small><?php echo Yii::t('P3PagesModule.crud', 'Manage'); ?></small></h1>
 
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 <?php
@@ -29,8 +29,8 @@ $locale = CLocale::getInstance(Yii::app()->language);
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'pager' => array(
-    'class' => 'TbPager',
-    'displayFirstAndLast' => true,
+'class' => 'TbPager',
+'displayFirstAndLast' => true,
 ),
 'columns'=>array(
 

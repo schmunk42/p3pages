@@ -48,10 +48,10 @@ abstract class BaseP3Page extends P3ActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t('app', 'ID'),
-			'layout' => Yii::t('app', 'Layout'),
-			'view' => Yii::t('app', 'View'),
-			'route' => Yii::t('app', 'Route'),
+			'id' => Yii::t('P3PagesModule.crud', 'ID'),
+			'layout' => Yii::t('P3PagesModule.crud', 'Layout'),
+			'view' => Yii::t('P3PagesModule.crud', 'View'),
+			'route' => Yii::t('P3PagesModule.crud', 'Route'),
 		);
 	}
 

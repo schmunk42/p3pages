@@ -1,10 +1,11 @@
 <?php
-$this->breadcrumbs['P3 Page Translations'] = array('index');
+$this->breadcrumbs['P3 Page Translations'] = array('admin');
 $this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id'=>$model->{$model->tableSchema->primaryKey});
-$this->breadcrumbs[] = Yii::t('app', 'Update');
+$this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'Update');
 ?>
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
 <h1>
-    Update P3 Page Translation #<?php echo $model->id ?></h1>
+    P3 Page Translation <small>Update #<?php echo $model->id ?></small></h1>
 
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 <?php

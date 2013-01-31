@@ -76,7 +76,7 @@
             <div class="btn-group">
             <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
         'buttons'=>array(
-                array('label'=>'Relations', 'icon'=>'icon-search', 'items'=>array(array('label'=>'p3Page - P3Page', 'url' =>array('p3Page/admin')),
+                array('label'=>'Relations', 'icon'=>'icon-search', 'items'=>array(array('label'=>'treeParent - P3PageMeta', 'url' =>array('p3PageMeta/admin')),array('label'=>'p3PageMetas - P3PageMeta', 'url' =>array('p3PageMeta/admin')),array('label'=>'id0 - P3Page', 'url' =>array('p3Page/admin')),
             )
           ),
         ),

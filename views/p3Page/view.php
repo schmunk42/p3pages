@@ -1,56 +1,82 @@
 <?php
-$this->breadcrumbs['P3 Pages'] = array('index');$this->breadcrumbs[] = $model->_label;
-if(!isset($this->menu) || $this->menu === array()) {
-$this->menu=array(
-	array('label'=>Yii::t('app', 'Update') , 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>Yii::t('app', 'Delete') , 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>Yii::t('app', 'Create') , 'url'=>array('create')),
-	array('label'=>Yii::t('app', 'Manage') , 'url'=>array('admin')),
-	/*array('label'=>Yii::t('app', 'List') , 'url'=>array('index')),*/
-);
-}
+$this->breadcrumbs['P3 Pages'] = array('admin');
+$this->breadcrumbs[] = $model->id;
 ?>
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
+<h1>
+    P3 Page <small>View #<?php echo $model->id ?></small></h1>
 
-<h1><?php echo Yii::t('app', 'View');?> P3Page #<?php echo $model->id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-'data'=>$model,
-	'attributes'=>array(
-					'id',
-		'layout',
-		'view',
-		'route',
+
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
+
+<h2>
+    Data
+</h2>
+
+<p>
+    <?php
+    $this->widget('TbDetailView', array(
+    'data'=>$model,
+    'attributes'=>array(
+            'id',
+        'layout',
+        'view',
+        'route',
 ),
-	)); ?>
+        )); ?></p>
 
 
-	<h2><?php echo CHtml::link(Yii::t('app','P3PageMeta'), array('/p3pages/p3PageMeta/admin'));?></h2>
-<ul><?php $foreignobj = $model->p3PageMeta; 
+<h2>
+    Relations
+</h2>
 
-					if ($foreignobj !== null) {
-					echo '<li>';
-					echo '#'.$model->p3PageMeta->id.' ';
-					echo CHtml::link($model->p3PageMeta->_label, array('/p3pages/p3PageMeta/view','id'=>$model->p3PageMeta->id));
-							
-					echo ' '.CHtml::link(Yii::t('app','Update'), array('/p3pages/p3PageMeta/update','id'=>$model->p3PageMeta->id), array('class'=>'edit'));
+<div class='row'>
+<div class='span3'><?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+        'type'=>'', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+        'buttons'=>array(
+            array('label'=>'p3PageMeta', 'icon'=>'icon-list-alt', 'url'=> array('p3PageMeta/admin')),
+                array('icon'=>'icon-plus', 'url'=>array('p3PageMeta/create', 'P3PageMeta' => array('id'=>$model->{$model->tableSchema->primaryKey}))),
+        ),
+    )); ?></div><div class='span8'>
+<?php
+    echo '<span class=label>CHasOneRelation</span>';
+    $relatedModel = $model->p3PageMeta; 
 
-					
-					
-					}
-					?></ul><p><?php if($model->p3PageMeta === null) echo CHtml::link(
-				Yii::t('app','Create'),
-				array('/p3pages/p3PageMeta/create', 'P3PageMeta' => array('id'=>$model->{$model->tableSchema->primaryKey}))
-				);  ?></p><h2><?php echo CHtml::link(Yii::t('app','P3PageTranslations'), array('/p3pages/p3PageTranslation/admin'));?></h2>
-<ul>
-			<?php if (is_array($model->p3PageTranslations)) foreach($model->p3PageTranslations as $foreignobj) { 
+    if ($relatedModel !== null) {
+        echo CHtml::openTag('ul');
+        echo '<li>';
+        echo CHtml::link(
+            '#'.$model->p3PageMeta->id.' '.$model->p3PageMeta->status,
+            array('p3PageMeta/view','id'=>$model->p3PageMeta->id),
+            array('class'=>''));
 
-					echo '<li>';
-					echo CHtml::link($foreignobj->_label, array('/p3pages/p3PageTranslation/view','id'=>$foreignobj->id));
-							
-					echo ' '.CHtml::link(Yii::t('app','Update'), array('/p3pages/p3PageTranslation/update','id'=>$foreignobj->id), array('class'=>'edit'));
+        echo '</li>';
 
-					}
-						?></ul><p><?php echo CHtml::link(
-				Yii::t('app','Create'),
-				array('/p3pages/p3PageTranslation/create', 'P3PageTranslation' => array('p3_page_id'=>$model->{$model->tableSchema->primaryKey}))
-				);  ?></p>
+        echo CHtml::closeTag('ul');
+    }
+?></div></div>
+<div class='row'>
+<div class='span3'><?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+        'type'=>'', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+        'buttons'=>array(
+            array('label'=>'p3PageTranslations', 'icon'=>'icon-list-alt', 'url'=> array('p3PageTranslation/admin')),
+                array('icon'=>'icon-plus', 'url'=>array('p3PageTranslation/create', 'P3PageTranslation' => array('p3_page_id'=>$model->{$model->tableSchema->primaryKey}))),
+        ),
+    )); ?></div><div class='span8'>
+<?php
+    echo '<span class=label>CHasManyRelation</span>';
+    if (is_array($model->p3PageTranslations)) {
+
+        echo CHtml::openTag('ul');
+            foreach($model->p3PageTranslations as $relatedModel) {
+
+                echo '<li>';
+                echo CHtml::link($relatedModel->language, array('p3PageTranslation/view','id'=>$relatedModel->id), array('class'=>''));
+
+                echo '</li>';
+            }
+        echo CHtml::closeTag('ul');
+    }
+?></div>
+</div>

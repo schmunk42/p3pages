@@ -1,19 +1,16 @@
 <?php
-$this->breadcrumbs['P3 Page Metas'] = array('index');
-$this->breadcrumbs[] = Yii::t('app', 'Create');
-
-if(!isset($this->menu) || $this->menu === array())
-$this->menu=array(
-	/*array('label'=>Yii::t('app', 'List'), 'url'=>array('index')),
-	array('label'=>Yii::t('app', 'Manage'), 'url'=>array('admin')),*/
-);
+$this->breadcrumbs['P3 Page Metas'] = array('admin');
+$this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'Create');
 ?>
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
+<h1>
+    <?php echo Yii::t('P3PagesModule.crud', 'P3 Page Meta'); ?> <small><?php echo Yii::t('P3PagesModule.crud', 'Create'); ?></small></h1>
 
-<h1> Create P3PageMeta </h1>
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 <?php
 $this->renderPartial('_form', array(
-			'model' => $model,
-			'buttons' => 'create'));
+'model' => $model,
+'buttons' => 'create'));
 
 ?>
 

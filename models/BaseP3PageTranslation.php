@@ -51,14 +51,14 @@ abstract class BaseP3PageTranslation extends CActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t('app', 'ID'),
-			'p3_page_id' => Yii::t('app', 'P3 Page'),
-			'language' => Yii::t('app', 'Language'),
-			'seoUrl' => Yii::t('app', 'Seo Url'),
-			'pageTitle' => Yii::t('app', 'Page Title'),
-			'menuName' => Yii::t('app', 'Menu Name'),
-			'keywords' => Yii::t('app', 'Keywords'),
-			'description' => Yii::t('app', 'Description'),
+			'id' => Yii::t('P3PagesModule.crud', 'ID'),
+			'p3_page_id' => Yii::t('P3PagesModule.crud', 'P3 Page'),
+			'language' => Yii::t('P3PagesModule.crud', 'Language'),
+			'seoUrl' => Yii::t('P3PagesModule.crud', 'Seo Url'),
+			'pageTitle' => Yii::t('P3PagesModule.crud', 'Page Title'),
+			'menuName' => Yii::t('P3PagesModule.crud', 'Menu Name'),
+			'keywords' => Yii::t('P3PagesModule.crud', 'Keywords'),
+			'description' => Yii::t('P3PagesModule.crud', 'Description'),
 		);
 	}
 
