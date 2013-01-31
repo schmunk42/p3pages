@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row thumbnail">
     <div class="span7">
         <p>
             <?php echo CHtml::link('<i class="icon-circle-arrow-right icon-white"></i> ' . $model->t('menuName') . ' #' . $model->id, $model->createUrl(), array('class' => 'btn btn-primary')) ?>
@@ -49,7 +49,8 @@
     <div class="span3">
         <b>Position</b> <?php echo ($model->p3PageMeta !== null) ? $model->p3PageMeta->treePosition :
         'Meta Data n/a' ?></b><br/>
-        <b>Layout</b> <?php echo $model->layout ?> View: <?php echo $model->view ?> Route: <?php echo $model->route ?>
+        <b>Layout</b> <?php echo $model->layout ?><br/>
+        <b>View</b> <?php echo $model->view ?> Route: <?php echo $model->route ?>
     </div>
 
 </div>
