@@ -46,6 +46,22 @@
     echo "<span class='help-block'>$help</span>";
 } ?></div>
 
+    <div class="row">
+        <label for="treeParent"><?php echo Yii::t('P3PagesModule.crud', 'TreeParent'); ?></label>
+        <?php $this->widget(
+        'Relation',
+        array(
+             'model' => $model,
+             'relation' => 'treeParent',
+             'fields' => array('id0._label'),
+             'allowEmpty' => true,
+             'style' => 'dropdownlist',
+             'htmlOptions' => array(
+                 'checkAll' => 'all'),
+        )
+    ); ?><br />
+    </div>
+
 <div class="row">
 <?php echo $form->labelEx($model,'begin'); ?>
 <?php echo $form->textField($model,'begin'); ?>
@@ -182,21 +198,7 @@
     echo "<span class='help-block'>$help</span>";
 } ?></div>
 
-<div class="row">
-<label for="treeParent"><?php echo Yii::t('P3PagesModule.crud', 'TreeParent'); ?></label>
-<?php $this->widget(
-					'Relation',
-					array(
-							'model' => $model,
-							'relation' => 'treeParent',
-							'fields' => 'status',
-							'allowEmpty' => true,
-							'style' => 'dropdownlist',
-							'htmlOptions' => array(
-								'checkAll' => 'all'),
-							)
-						); ?><br />
-</div>
+
 
 <div class="row">
 <label for="id0"><?php echo Yii::t('P3PagesModule.crud', 'Id0'); ?></label>

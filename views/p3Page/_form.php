@@ -17,7 +17,7 @@
     <div class="row">
         <?php echo $form->labelEx($model, 'layout'); ?>
 
-        <?php echo $form->dropDownList($model, 'layout', $this->module->params['availableLayouts']); ?>
+        <?php echo $form->dropDownList($model, 'layout', $this->module->params['availableLayouts'], array('empty'=>'none')); ?>
         <?php echo $form->error($model, 'layout'); ?>
         <?php if ('help.layout' != $help = Yii::t('P3PagesModule.crud', 'help.layout')) {
         echo "<span class='help-block'>$help</span>";
@@ -25,7 +25,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'view'); ?>
-        <?php echo $form->dropDownList($model, 'view', $this->module->params['availableViews']); ?>
+        <?php echo $form->dropDownList($model, 'view', $this->module->params['availableViews'], array('empty'=>'none')); ?>
         <?php echo $form->error($model, 'view'); ?>
         <?php if ('help.view' != $help = Yii::t('P3PagesModule.crud', 'help.view')) {
         echo "<span class='help-block'>$help</span>";

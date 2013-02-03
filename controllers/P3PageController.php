@@ -15,7 +15,7 @@ public function filters() {
 public function accessRules() {
 	return array(
 			array('allow',
-				'actions'=>array('create','ajaxUpdate','update','delete','admin','view'),
+				'actions'=>array('create', 'createChild','ajaxUpdate','update','delete','admin','view'),
 				'roles'=>array('P3pages.P3Page.*'),
 				),
 			array('deny',
@@ -47,6 +47,17 @@ public function accessRules() {
         $model = $this->loadModel($id);
         $this->render('view',array('model' => $model,));
     }
+
+    public function actionCreateChild() {
+        $model = new P3Page;
+        $model->save();
+        $model->p3PageMeta->treeParent_id = $_GET['P3PageMeta']['treeParent_id'];
+        $model->p3PageMeta->save();
+
+        $this->redirect(array('update','id'=>$model->id,'returnUrl'=>$_GET['returnUrl']));
+        //$this->actionUpdate($model->id);
+    }
+
 
     public function actionCreate()
     {

@@ -10,10 +10,8 @@ $this->breadcrumbs=array(
 <h1>Pages <small>Overview</small></h1>
 
 <p>
-<ul>
-	<li><?php echo CHtml::link('Create Page',array('/p3pages/p3Page/create')) ?></li>
-	<li><?php echo CHtml::link('Manage Pages',array('/p3pages/p3Page/admin')) ?></li>
-</ul>
+<?php echo CHtml::link('Create Root Node',array('/p3pages/p3Page/create'), array('class'=>'btn')) ?></li>
+<?php echo CHtml::link('Manage Pages',array('/p3pages/p3Page/admin'), array('class'=>'btn')) ?></li>
 </p>
 
 <h2>Sitemap</h2>
