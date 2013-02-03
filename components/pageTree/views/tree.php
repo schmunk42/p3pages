@@ -8,7 +8,7 @@
             echo CHtml::link('<i class="icon-pencil icon-white"></i> ' . $translation->language,
                              array('/p3pages/p3PageTranslation/update',
                                    'id' => $translation->id),
-                             array('class' => 'btn btn-primary'))
+                             array('class' => 'btn '.(($translation->language == Yii::app()->language)?'btn-primary':'')))
             ?>
             <?php endforeach; ?>
             <?php

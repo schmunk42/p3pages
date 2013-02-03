@@ -47,7 +47,7 @@ $this->breadcrumbs[] = $model->id;
         echo CHtml::openTag('ul');
         echo '<li>';
         echo CHtml::link(
-            '#'.$model->p3PageMeta->id.' '.$model->p3PageMeta->status,
+            $model->p3PageMeta->id0->_label,
             array('p3PageMeta/view','id'=>$model->p3PageMeta->id),
             array('class'=>''));
 
@@ -72,7 +72,7 @@ $this->breadcrumbs[] = $model->id;
             foreach($model->p3PageTranslations as $relatedModel) {
 
                 echo '<li>';
-                echo CHtml::link($relatedModel->language, array('p3PageTranslation/view','id'=>$relatedModel->id), array('class'=>''));
+                echo CHtml::link($relatedModel->language.": ".$relatedModel->menuName, array('p3PageTranslation/view','id'=>$relatedModel->id), array('class'=>''));
 
                 echo '</li>';
             }
