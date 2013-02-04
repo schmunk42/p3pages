@@ -7,17 +7,29 @@
             <?php
             echo CHtml::link('<i class="icon-pencil icon-white"></i> ' . $translation->language,
                              array('/p3pages/p3PageTranslation/update',
-                                   'id' => $translation->id),
-                             array('class' => 'btn '.(($translation->language == Yii::app()->language)?'btn-primary':'')))
+                                   'id' => $translation->id,
+                                   'returnUrl' => Yii::app()->controller->createUrl(null)),
+                             array('class' => 'btn ' . (($translation->language == Yii::app()->language) ?
+                                 'btn-primary' : '')))
             ?>
             <?php endforeach; ?>
             <?php
             echo CHtml::link('<i class="icon-plus"></i> Add Translation',
                              array('/p3pages/p3PageTranslation/create',
-                                   'P3PageTranslation' => array('p3_page_id' => $model->id)), array('class' => 'btn'))
+                                   'returnUrl' => Yii::app()->controller->createUrl(null),
+                                   'P3PageTranslation' => array('p3_page_id' => $model->id,
+                                                                'language' => Yii::app()->language)),
+                             array('class' => 'btn'))
             ?>
 
-
+            <?php
+            echo CHtml::link('<i class="icon-minus-sign icon-white"></i> ' . Yii::t('P3PagesModule.crud', 'Delete'), '#',
+                             array('class' => 'btn btn-danger',
+                                   'submit' => array('p3Page/delete',
+                                                     'id' => $model->id,
+                                                     'returnUrl' => Yii::app()->controller->createUrl(null)),
+                                   'confirm' => 'Are you sure you want to delete this item?'))
+            ?>
         </p>
 
         <p>
@@ -29,6 +41,12 @@
                                   'returnUrl' => Yii::app()->controller->createUrl(null)),
                              array('class' => 'btn'))
             ?>
+            <b>Layout</b> <?php echo $model->layout ?>
+            <b>View</b> <?php echo $model->view ?>
+            <b>Route</b> <?php echo $model->route ?>
+        </p>
+
+        <p>
             <?php
             echo CHtml::link('<i class="icon-info-sign"></i> ' . Yii::t('P3PagesModule.crud', 'Meta Data'),
                              array(
@@ -38,7 +56,21 @@
                              array(
                                   'class' => 'btn'))
             ?>
+            <b>Position</b> <?php
+        $this->widget('EditableField',
+                      array(
+                           'type' => 'text',
+                           'model' => $model->p3PageMeta,
+                           'attribute' => 'treePosition',
+                           'url' => Yii::app()->controller->createUrl('/p3pages/p3PageMeta/editableSaver'),
+                      ));
 
+        ?></b>
+            <b>Parent</b> <?php echo (isset($model->p3PageMeta->treeParent->id)) ? $model->p3PageMeta->treeParent->id0->_label :
+            'Meta Data n/a' ?></b>
+        </p>
+
+        <p>
             <?php
             echo CHtml::link('<i class="icon-plus"></i> Append Child Page',
                              array('/p3pages/p3Page/createChild',
@@ -46,22 +78,13 @@
                                    'returnUrl' => Yii::app()->controller->createUrl(null)),
                              array('class' => 'btn'))
             ?>
-            <?php
-            echo CHtml::link('<i class="icon-minus-sign icon-white"></i> ' . Yii::t('P3PagesModule.crud', 'Delete'), '#',
-                             array('class' => 'btn btn-danger',
-                                   'submit' => array('p3Page/delete',
-                                                     'id' => $model->id,
-                                                     'returnUrl' => Yii::app()->controller->createUrl(null)),
-                                   'confirm' => 'Are you sure you want to delete this item?'))
-            ?>
+
         </p>
     </div>
 
     <div class="span3">
-        <b>Position</b> <?php echo ($model->p3PageMeta !== null) ? $model->p3PageMeta->treePosition :
-        'Meta Data n/a' ?></b><br/>
-        <b>Layout</b> <?php echo $model->layout ?><br/>
-        <b>View</b> <?php echo $model->view ?> Route: <?php echo $model->route ?>
+
+
     </div>
 
 </div>

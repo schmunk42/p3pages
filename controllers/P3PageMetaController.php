@@ -15,7 +15,7 @@ public function filters() {
 public function accessRules() {
 	return array(
 			array('allow',
-				'actions'=>array('create','ajaxUpdate','update','delete','admin','view'),
+				'actions'=>array('create','editableSaver','update','delete','admin','view'),
 				'roles'=>array('P3pages.P3PageMeta.*'),
 				),
 			array('deny',
