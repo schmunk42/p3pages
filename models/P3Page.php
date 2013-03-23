@@ -88,6 +88,23 @@ class P3Page extends BaseP3Page {
         return (self::getActivePage()->id == $this->id);
     }
 
+    public function isActiveParent($model = null) {
+        if ($model === null) {
+            $model = $this;
+        }
+        if (count($this->p3PageMeta->p3PageMetas)) {
+            foreach($this->p3PageMeta->p3PageMetas AS $metaModel) {
+                if ($metaModel->id0->id === self::getActivePage()->id) {
+                    return true;
+                }
+                if (count($metaModel->p3PageMetas)) {
+                    $this->isActiveParent($metaModel->id0);
+                }
+            }
+        }
+        return false;
+    }
+
     public static function getActivePage() {
         static $page;
 
