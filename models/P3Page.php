@@ -123,9 +123,9 @@ class P3Page extends BaseP3Page {
         $items = array();
         foreach ($models AS $model) {
             if ($model->getMenuItems($model) === array( )){
-                $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'active' => $model->isActive());
+                $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'active' => ($model->isActive() || $model->isActiveParent()));
             } else {
-                $items[] = array('label' => $model->t('menuName', null, true), 'url' => '#', 'items' => $model->getMenuItems($model));
+                $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'items' => $model->getMenuItems($model),  'active' => ($model->isActive() || $model->isActiveParent()));
             }
         }
         return $items;
