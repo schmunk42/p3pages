@@ -2,13 +2,17 @@
 $this->breadcrumbs['P3 Pages'] = array('admin');
 $this->breadcrumbs[] = $model->id;
 ?>
-<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
+<?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
 <h1>
-    P3 Page <small>View #<?php echo $model->id ?></small></h1>
+    P3 Page
+    <small>View #<?php echo $model->id ?></small>
+</h1>
+
+
+<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
 
 
 
-<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 
 <h2>
     Data
@@ -16,67 +20,124 @@ $this->breadcrumbs[] = $model->id;
 
 <p>
     <?php
-    $this->widget('TbDetailView', array(
-    'data'=>$model,
-    'attributes'=>array(
-            'id',
-        'layout',
-        'view',
-        'route',
-),
-        )); ?></p>
+    $this->widget('TbDetailView',
+                  array(
+                       'data'       => $model,
+                       'attributes' => array(
+                           'id',
+                           'layout',
+                           'view',
+                           'route',
+                       ),
+                  )); ?></p>
 
+
+<h2>
+    Properties
+</h2>
+<p>
+    <?php $this->widget('TbDetailView',
+                        array(
+                             'data'       => $model,
+                             'attributes' => array(
+                                 array(
+                                     'label' => 'URL',
+                                     'value' => CHtml::link($model->createUrl(), $model->createUrl()),
+                                     'type'  => 'raw'
+                                 ),
+                                 array(
+                                     'label' => 'Menu Name',
+                                     'value' => $model->t('menuName', null, true),
+                                 ),
+                                 array(
+                                     'label' => 'Page Title',
+                                     'value' => $model->t('pageTitle', null, true)
+                                 ),
+                                 array(
+                                     'label' => 'Parent',
+                                     'value' => ($model->p3PageMeta->treeParent)?$model->p3PageMeta->treeParent->id0->t('menuName', null, true):null
+                                 )
+                             )
+                        )
+    ) ?>
+</p>
 
 <h2>
     Relations
 </h2>
 
 <div class='row'>
-<div class='span3'><?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
-        'type'=>'', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-        'buttons'=>array(
-            array('label'=>'p3PageMeta', 'icon'=>'icon-list-alt', 'url'=> array('p3PageMeta/admin')),
-                array('icon'=>'icon-plus', 'url'=>array('p3PageMeta/create', 'P3PageMeta' => array('id'=>$model->{$model->tableSchema->primaryKey}))),
-        ),
-    )); ?></div><div class='span8'>
-<?php
-    echo '<span class=label>CHasOneRelation</span>';
-    $relatedModel = $model->p3PageMeta; 
+    <div class='span3'>
+        <?php
+        $this->widget('bootstrap.widgets.TbButtonGroup',
+                      array(
+                           'type'    => '',
+                           // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+                           'buttons' => array(
+                               array('label' => 'Meta Data',
+                                     'icon'  => 'icon-list-alt',
+                                     'url'   => array('p3PageMeta/admin')),
+                               array('icon' => 'icon-plus',
+                                     'url'  => array('p3PageMeta/create',
+                                                     'P3PageMeta' => array('id' => $model->{$model->tableSchema->primaryKey}))),
+                           ),
+                      )); ?>
 
-    if ($relatedModel !== null) {
-        echo CHtml::openTag('ul');
-        echo '<li>';
-        echo CHtml::link(
-            $model->p3PageMeta->id0->_label,
-            array('p3PageMeta/view','id'=>$model->p3PageMeta->id),
-            array('class'=>''));
+    </div>
+    <div class='span8'>
+        <?php
+        echo '<span class=label>CHasOneRelation</span>';
+        $relatedModel = $model->p3PageMeta;
 
-        echo '</li>';
+        if ($relatedModel !== null) {
+            echo CHtml::openTag('ul');
+            echo '<li>';
+            echo CHtml::link(
+                $model->p3PageMeta->id0->_label,
+                array('p3PageMeta/view', 'id' => $model->p3PageMeta->id),
+                array('class' => ''));
 
-        echo CHtml::closeTag('ul');
-    }
-?></div></div>
+            echo '</li>';
+
+            echo CHtml::closeTag('ul');
+        }
+        ?></div>
+</div>
+
 <div class='row'>
-<div class='span3'><?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
-        'type'=>'', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-        'buttons'=>array(
-            array('label'=>'p3PageTranslations', 'icon'=>'icon-list-alt', 'url'=> array('p3PageTranslation/admin')),
-                array('icon'=>'icon-plus', 'url'=>array('p3PageTranslation/create', 'P3PageTranslation' => array('p3_page_id'=>$model->{$model->tableSchema->primaryKey}))),
-        ),
-    )); ?></div><div class='span8'>
-<?php
-    echo '<span class=label>CHasManyRelation</span>';
-    if (is_array($model->p3PageTranslations)) {
+    <div class='span3'><?php
+        $this->widget('bootstrap.widgets.TbButtonGroup',
+                      array(
+                           'type'    => '',
+                           // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+                           'buttons' => array(
+                               array('label' => 'Translations',
+                                     'icon'  => 'icon-list-alt',
+                                     'url'   => array('p3PageTranslation/admin')),
+                               array('icon' => 'icon-plus',
+                                     'url'  => array('p3PageTranslation/create',
+                                                     'P3PageTranslation' => array('p3_page_id' => $model->{$model->tableSchema->primaryKey}))),
+                           ),
+                      ));
+        ?>
+    </div>
+    <div class='span8'>
+        <?php
+        echo '<span class=label>CHasManyRelation</span>';
+        if (is_array($model->p3PageTranslations)) {
 
-        echo CHtml::openTag('ul');
-            foreach($model->p3PageTranslations as $relatedModel) {
+            echo CHtml::openTag('ul');
+            foreach ($model->p3PageTranslations as $relatedModel) {
 
                 echo '<li>';
-                echo CHtml::link($relatedModel->language.": ".$relatedModel->menuName, array('p3PageTranslation/view','id'=>$relatedModel->id), array('class'=>''));
+                echo CHtml::link($relatedModel->language . ": " . $relatedModel->menuName,
+                                 array('p3PageTranslation/view',
+                                       'id' => $relatedModel->id), array('class' => ''));
 
                 echo '</li>';
             }
-        echo CHtml::closeTag('ul');
-    }
-?></div>
+            echo CHtml::closeTag('ul');
+        }
+        ?>
+    </div>
 </div>

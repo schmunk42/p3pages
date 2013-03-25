@@ -21,7 +21,7 @@ $this->breadcrumbs[] = $model->id;
     'attributes'=>array(
             array(
             'name'=>'id',
-            'value'=>($model->id0 !== null)?'<span class=label>CBelongsToRelation</span><br/>'.CHtml::link($model->id0->layout, array('p3Page/view','id'=>$model->id0->id), array('class'=>'btn')):'n/a',
+            'value'=>($model->id0 !== null)?'<span class=label>CBelongsToRelation</span><br/>'.CHtml::link($model->id0->_label, array('p3Page/view','id'=>$model->id0->id), array('class'=>'btn')):'n/a',
             'type'=>'html',
         ),
         'status',
@@ -29,7 +29,7 @@ $this->breadcrumbs[] = $model->id;
         'language',
         array(
             'name'=>'treeParent_id',
-            'value'=>($model->treeParent !== null)?'<span class=label>CBelongsToRelation</span><br/>'.CHtml::link($model->treeParent->status, array('p3PageMeta/view','id'=>$model->treeParent->id), array('class'=>'btn')):'n/a',
+            'value'=>($model->treeParent !== null)?'<span class=label>CBelongsToRelation</span><br/>'.CHtml::link($model->treeParent->_label, array('p3PageMeta/view','id'=>$model->treeParent->id), array('class'=>'btn')):'n/a',
             'type'=>'html',
         ),
         'treePosition',
