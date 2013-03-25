@@ -96,13 +96,13 @@ class P3Page extends BaseP3Page {
         if ($model === null) {
             $model = $this;
         }
-        if (count($this->p3PageMeta->p3PageMetas)) {
-            foreach($this->p3PageMeta->p3PageMetas AS $metaModel) {
-                if ($metaModel->id0->id === self::getActivePage()->id) {
+        if (count($model->p3PageMeta->p3PageMetas)) {
+            foreach($model->p3PageMeta->p3PageMetas AS $metaModel) {
+                if ((self::getActivePage()) && $metaModel->id0->id === self::getActivePage()->id) {
                     return true;
                 }
-                if (count($metaModel->p3PageMetas)) {
-                    $this->isActiveParent($metaModel->id0);
+                if (count($metaModel->p3PageMetas) && $metaModel->id0) {
+                    return $this->isActiveParent($metaModel->id0);
                 }
             }
         }
