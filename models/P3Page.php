@@ -123,13 +123,7 @@ class P3Page extends BaseP3Page {
             $criteria = new CDbCriteria;
             $criteria->condition = "route LIKE :route";
             $criteria->params = array(':route'=>"%".Yii::app()->controller->route."%");
-            $model = P3Page::model()->find($criteria);
-
-            if ($model !== null) {
-                return $model;
-            } else {
-                return new P3Page;
-            }
+            return $page = P3Page::model()->find($criteria);
         }
     }
 
