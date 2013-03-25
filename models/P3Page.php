@@ -9,6 +9,10 @@ class P3Page extends BaseP3Page {
     const PAGE_ID_KEY = 'pageId';
     const PAGE_NAME_KEY = 'pageName';
 
+    public function get_label() {
+        return $this->t('menuName', null, true). " #". $this->id ;
+    }
+
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -80,12 +84,12 @@ class P3Page extends BaseP3Page {
         }
     }
 
-    public function get_label() {
-        return "#". $this->id . ' ' . $this->t('menuName', null, true);
-    }
-
     public function isActive() {
+        if (self::getActivePage() !== null) {
         return (self::getActivePage()->id == $this->id);
+        } else {
+            return false;
+        }
     }
 
     public function isActiveParent($model = null) {
