@@ -1,4 +1,11 @@
 <?php
+/**
+ * P3Page is the model class for page node meta data
+ *
+ * @author Tobias Munk <schmunk@usrbin.de>
+ * @package p3pages.models
+ * @category db.ar
+ */
 
 // auto-loading fix
 Yii::setPathOfAlias('P3PageMeta', dirname(__FILE__));

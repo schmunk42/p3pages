@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This is the model base class for the table "p3_page".
  *
@@ -12,10 +11,11 @@
  * Relations of table "p3_page" available as properties of the model:
  * @property P3PageMeta $p3PageMeta
  * @property P3PageTranslation[] $p3PageTranslations
+ *
+ * @package p3pages.models
+ * @category db.ar
  */
-
-#Yii::import('ext.phundament.p3extensions.components.*');
-
+ 
 abstract class BaseP3Page extends P3ActiveRecord{
 	public static function model($className=__CLASS__)
 	{

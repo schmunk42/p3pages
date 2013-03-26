@@ -1,4 +1,11 @@
 <?php
+/**
+ * P3Page is the model class for page nodes
+ *
+ * @author Tobias Munk <schmunk@usrbin.de>
+ * @package p3pages.models
+ * @category db.ar
+ */
 
 // auto-loading fix
 Yii::setPathOfAlias('P3Page', dirname(__FILE__));

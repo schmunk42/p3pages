@@ -15,6 +15,9 @@
  *
  * Relations of table "p3_page_translation" available as properties of the model:
  * @property P3Page $p3Page
+ *
+ * @package p3pages.models
+ * @category db.ar
  */
 abstract class BaseP3PageTranslation extends CActiveRecord{
 	public static function model($className=__CLASS__)

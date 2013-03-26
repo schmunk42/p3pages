@@ -32,6 +32,9 @@
  * @property P3PageMeta $treeParent
  * @property P3PageMeta[] $p3PageMetas
  * @property P3Page $id0
+ *
+ * @package p3pages.models
+ * @category db.ar
  */
 abstract class BaseP3PageMeta extends CActiveRecord {
 
