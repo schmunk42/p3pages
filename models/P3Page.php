@@ -144,6 +144,10 @@ class P3Page extends BaseP3Page {
         $models = $rootNode->getChildren();
         $items = array();
         foreach ($models AS $model) {
+            if ($model->id == $rootNode->id) {
+                //echo "recursion";
+                break;
+            }
             if ($model->getMenuItems($model) === array( )){
                 $items[] = array('label' => $model->t('menuName', null, true), 'url' => $model->createUrl(), 'active' => ($model->isActive() || $model->isActiveParent()));
             } else {
