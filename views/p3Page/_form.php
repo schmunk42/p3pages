@@ -54,17 +54,23 @@
         }; ?><br/>
     </div>
 
+    <div class="form-actions">
 
-</div> <!-- form -->
-<div class="form-actions">
+        <?php
+        echo CHtml::Button(Yii::t('P3PagesModule.crud', 'Cancel'),
+                           array(
+                                'submit' => array('p3page/admin'),
+                                'class'  => 'btn'
+                           ));
+        echo ' ';
 
-    <?php
-    echo CHtml::Button(Yii::t('P3PagesModule.crud', 'Cancel'), array(
-                                                                    'submit' => array('p3page/admin'),
-                                                                    'class'  => 'btn'
-                                                               ));
-    echo ' ' . CHtml::submitButton(Yii::t('P3PagesModule.crud', 'Save'), array(
-                                                                              'class' => 'btn btn-primary'
-                                                                         ));
-    $this->endWidget(); ?>
-</div>
+        echo CHtml::submitButton(Yii::t('P3PagesModule.crud', 'Save'),
+                                 array(
+                                      'class' => 'btn btn-primary'
+                                 )); ?>
+
+    </div>
+
+    <?php  $this->endWidget(); ?>
+
+</div><!-- form -->
