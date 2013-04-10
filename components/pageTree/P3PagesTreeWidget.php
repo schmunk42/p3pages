@@ -1,4 +1,11 @@
 <?php
+/**
+ * P3PagesTreeWidget renders the sitemap tree list
+ *
+ * @author Tobias Munk <schmunk@usrbin.de>
+ * @package p3pages.models
+ * @category db.ar
+ */
 
 class P3PagesTreeWidget extends CWidget {
 	

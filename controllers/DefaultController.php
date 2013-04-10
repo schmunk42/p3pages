@@ -50,7 +50,7 @@ class DefaultController extends Controller {
 
 		if ($model == null && $id) {
 			// look for the reason ...
-			// is active and localized, but access is not granted
+			// is active and localized, but access is not granted --- TODO: Remove P3ActiveRecord or reimplment
 			$model = P3Page::model()->active()->localized()->findByPk($id);
 			if ($model !== null && Yii::app()->user->isGuest) {
 				Yii::app()->user->loginRequired();
