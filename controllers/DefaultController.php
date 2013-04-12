@@ -37,9 +37,9 @@ class DefaultController extends Controller {
 		$name = isset($_GET[P3Page::PAGE_NAME_KEY]) ? $_GET[P3Page::PAGE_NAME_KEY] : null;
 
 		if ($id) {
-			$model = P3Page::model()->default()->findByPk($id);
+			$model = P3Page::model()->findByPk($id);
 		} elseif ($name) {
-			$model = P3Page::model()->default()->findByAttributes(array('name' => $name));
+			$model = P3Page::model()->findByAttributes(array('name' => $name));
 			// redirect for consistency reasons
 			if ($model !== null) {
 				Yii::app()->request->redirect($this->createUrl('/p3/p3Page/view', array_merge($_GET, array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name))));
