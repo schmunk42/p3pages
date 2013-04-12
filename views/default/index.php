@@ -16,6 +16,6 @@ $this->breadcrumbs = array(
     <?php echo CHtml::link('Create', array('/p3pages/p3Page/create'), array('class' => 'btn')) ?></li>
 </p>
 
-<p>
+<div class="sitemap">
     <?php $this->widget('p3pages.components.pageTree.P3PagesTreeWidget'); ?>
-</p>
+</div>
