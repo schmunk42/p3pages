@@ -161,7 +161,7 @@ class P3Page extends BaseP3Page
         return $page;
     }
 
-    static public function getMenuItems($rootNode)
+    static public function getMenuItems($rootNode, $maxDepth = null, $level = 0)
     {
         if (!$rootNode instanceof P3Page) {
             Yii::log('Invalid root node', CLogger::LEVEL_WARNING);
@@ -175,13 +175,13 @@ class P3Page extends BaseP3Page
                 //echo "recursion";
                 break;
             }
-            if ($model->getMenuItems($model) === array()) {
+            if (($maxDepth !== null && $maxDepth <= $level) || $model->getMenuItems($model) === array()) {
                 $items[] = array('label'  => $model->t('menuName', null, true), 'url' => $model->createUrl(),
                                  'active' => ($model->isActive() || $model->isActiveParent()));
             }
             else {
                 $items[] = array('label'  => $model->t('menuName', null, true), 'url' => $model->createUrl(),
-                                 'items'  => $model->getMenuItems($model),
+                                 'items'  => $model->getMenuItems($model, $maxDepth, $level+1),
                                  'active' => ($model->isActive() || $model->isActiveParent()));
             }
         }
