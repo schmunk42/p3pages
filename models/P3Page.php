@@ -136,6 +136,16 @@ class P3Page extends BaseP3Page
         return false;
     }
 
+    public function getBreadcrumbs(){
+        $model = $this;
+        $breadcrumbs = array();
+        while($model->getParent()) {
+            $breadcrumbs[] = $model->t('menuName');//$model->createUrl();
+            $model = $model->getParent();
+        }
+        return array_reverse($breadcrumbs);
+    }
+
     static public function getActivePage()
     {
         static $page;
