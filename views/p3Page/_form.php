@@ -14,6 +14,10 @@
     echo $form->errorSummary($model);
     ?>
     <div class="row">
+        <label>Menu Name</label>
+        <?php echo $model->t('menuName'); ?>
+    </div>
+    <div class="row">
         <?php echo $form->labelEx($model, 'route'); ?>
         <?php
         $this->widget('jsonEditorView.JuiJSONEditorInput', array(
