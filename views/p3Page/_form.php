@@ -17,12 +17,11 @@
 
 
     <div class="row">
-        <div class="span8">
-
+        <div class="span4">
             <h3>Menu Name</h3>
             <?php echo $model->t('menuName'); ?>
         </div>
-        <div class="span4">
+        <div class="span8">
             <h3>Node Identifier</h3>
             <?php echo $form->labelEx($model, 'nameId'); ?>
 
@@ -36,25 +35,6 @@
 
 
     <div class="row">
-        <div class="span8">
-            <h3>Internal Route or Redirect</h3>
-
-            <?php echo $form->labelEx($model, 'route'); ?>
-            <?php
-            $this->widget('jsonEditorView.JuiJSONEditorInput', array(
-                                                                    'model'     => $model,
-                                                                    // ActiveRecord, or any CModel child class
-                                                                    'attribute' => 'route'
-                                                                    // Model attribute holding initial JSON data string
-                                                               ));
-            ?>
-            <div class="notice">Do not use double quotes (") for keys and/or values!</div>
-            <?php echo $form->error($model, 'route'); ?>
-            <?php if ('help.route' != $help = Yii::t('P3PagesModule.crud', 'help.route')) {
-                echo "<span class='help-block'>$help</span>";
-            } ?>
-        </div>
-
         <div class="span4">
             <h3>View and Layout</h3>
 
@@ -76,6 +56,25 @@
             } ?>
 
         </div>
+        <div class="span8">
+            <h3>Internal Route or Redirect</h3>
+
+            <?php echo $form->labelEx($model, 'route'); ?>
+            <?php
+            $this->widget('jsonEditorView.JuiJSONEditorInput', array(
+                                                                    'model'     => $model,
+                                                                    // ActiveRecord, or any CModel child class
+                                                                    'attribute' => 'route'
+                                                                    // Model attribute holding initial JSON data string
+                                                               ));
+            ?>
+            <div class="notice">Do not use double quotes (") for keys and/or values!</div>
+            <?php echo $form->error($model, 'route'); ?>
+            <?php if ('help.route' != $help = Yii::t('P3PagesModule.crud', 'help.route')) {
+                echo "<span class='help-block'>$help</span>";
+            } ?>
+        </div>
+
     </div>
 
 
