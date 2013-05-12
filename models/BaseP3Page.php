@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This is the model base class for the table "p3_page".
  *
@@ -7,16 +8,13 @@
  * @property string $layout
  * @property string $view
  * @property string $route
+ * @property string $nameId
  *
  * Relations of table "p3_page" available as properties of the model:
  * @property P3PageMeta $p3PageMeta
  * @property P3PageTranslation[] $p3PageTranslations
- *
- * @package p3pages.models
- * @category db.ar
  */
- 
-abstract class BaseP3Page extends P3ActiveRecord{
+abstract class BaseP3Page extends CActiveRecord{
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -29,11 +27,25 @@ abstract class BaseP3Page extends P3ActiveRecord{
 
 	public function rules()
 	{
-		return array(
-			array('layout, view, route', 'default', 'setOnEmpty' => true, 'value' => null),
+		return array_merge(
+		    parent::rules(), array(
+			array('layout, view, route, nameId', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('layout, view', 'length', 'max'=>128),
 			array('route', 'length', 'max'=>255),
-			array('id, layout, view, route', 'safe', 'on'=>'search'),
+			array('nameId', 'length', 'max'=>64),
+			array('id, layout, view, route, nameId', 'safe', 'on'=>'search'),
+		    )
+		);
+	}
+
+	public function behaviors()
+	{
+		return array_merge(
+		    parent::behaviors(), array(
+			'savedRelated' => array(
+				'class' => 'gii-template-collection.components.CSaveRelationsBehavior'
+			)
+		    )
 		);
 	}
 
@@ -48,10 +60,11 @@ abstract class BaseP3Page extends P3ActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t('P3PagesModule.crud', 'ID'),
-			'layout' => Yii::t('P3PagesModule.crud', 'Layout'),
-			'view' => Yii::t('P3PagesModule.crud', 'View'),
-			'route' => Yii::t('P3PagesModule.crud', 'Route'),
+			'id' => Yii::t('crud', 'ID'),
+			'layout' => Yii::t('crud', 'Layout'),
+			'view' => Yii::t('crud', 'View'),
+			'route' => Yii::t('crud', 'Route'),
+			'nameId' => Yii::t('crud', 'Name'),
 		);
 	}
 
@@ -60,20 +73,15 @@ abstract class BaseP3Page extends P3ActiveRecord{
 	{
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id', $this->id);
-		$criteria->compare('layout', $this->layout, true);
-		$criteria->compare('view', $this->view, true);
-		$criteria->compare('route', $this->route, true);
+		$criteria->compare('t.id', $this->id);
+		$criteria->compare('t.layout', $this->layout, true);
+		$criteria->compare('t.view', $this->view, true);
+		$criteria->compare('t.route', $this->route, true);
+		$criteria->compare('t.nameId', $this->nameId, true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
 	}
-
-	public function get_label()
-	{
-		return '#'.$this->id;
-
-			}
 
 }

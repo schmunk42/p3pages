@@ -36,6 +36,7 @@ $this->widget('TbGridView', array(
                                  ),
                                  'columns'      => array(
                                      'id',
+                                     'nameId',
                                      '_label:text:Menu Name',
                                      'layout',
                                      'view',

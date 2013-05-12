@@ -6,7 +6,8 @@
         </button>
     <?php endif; ?>
 
-    <?php echo CHtml::link('<i class="icon-circle-arrow-right icon-white"></i> ' . $model->t('menuName') . ' #' . $model->id,
+    <?php echo CHtml::link('<i class="icon-circle-arrow-right icon-white"></i> ' . ' <b>' . $model->nameId . '</b> ' .
+                               $model->t('menuName') . ' #' . $model->id,
                            $model->createUrl(), array('class' => 'btn btn-inverse')) ?>
     <?php foreach ($model->p3PageTranslations AS $translation): ?>
         <?php

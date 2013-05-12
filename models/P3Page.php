@@ -12,7 +12,6 @@ Yii::import('P3Page.*');
 
 class P3Page extends BaseP3Page
 {
-
     const PAGE_ID_KEY   = 'pageId';
     const PAGE_NAME_KEY = 'pageName';
 
@@ -41,9 +40,6 @@ class P3Page extends BaseP3Page
     {
         return array_merge(
             array(
-                 #'JSON' => array(
-                 #'class' => 'P3JSONBehavior',
-                 #),
                  'MetaData'    => array(
                      'class'            => 'P3MetaDataBehavior',
                      'metaDataRelation' => 'p3PageMeta',
@@ -58,8 +54,6 @@ class P3Page extends BaseP3Page
                          Yii::app()->params['p3.fallbackLanguage'] : 'en',
                      'fallbackIndicator' => array('menuName' => ' *'),
                      'fallbackValue'     => 'Page*',
-
-                     //'attributesBlacklist' => array('loadfrom'),
                  )
             ), parent::behaviors()
         );
@@ -69,23 +63,30 @@ class P3Page extends BaseP3Page
     {
         return array_merge(
             array(
-                 array('route', 'match', 'pattern' => '/"route":"|{}/',
-                       'message'                   => 'If not empty, route JSON must contain a \'route\' element'),
-            ), parent::rules()
+                 array(
+                     'route',
+                     'match',
+                     'pattern' => '/"route":"|"url":"|{}/',
+                     'message' => 'If not empty, route JSON must contain a \'route\' or \'url\' element'
+                 ),
+            ),
+            array(
+                 array(
+                     'nameId',
+                     'match',
+                     'pattern' => '/^[a-zA-Z0-9-]*$/',
+                     'message' => 'May only container letters numbers and dashes'
+                 ),
+            ),
+            parent::rules()
         );
     }
 
     public function createUrl($additionalParams = array(), $absolute = false)
     {
 
-        if ($this->id == 1) {
-            return Yii::app()->homeUrl;
-        }
-        elseif (is_array(CJSON::decode($this->route)) && count(CJSON::decode($this->route)) !== 0) {
+        if (is_array(CJSON::decode($this->route)) && count(CJSON::decode($this->route)) !== 0) {
             $link = CJSON::decode($this->route);
-        }
-        elseif ($this->route && $this->route !== "{}") { // omit JSON ediotr defaults
-            return $this->route;
         }
         else {
             $link['route']  = '/p3pages/default/page';
@@ -101,6 +102,9 @@ class P3Page extends BaseP3Page
             else {
                 return Yii::app()->controller->createUrl($link['route'], $params);
             }
+        }
+        elseif (isset($link['url'])) {
+            return $link['url'];
         }
         else {
             Yii::log('Could not determine URL string for P3Page #' . $this->id, CLogger::LEVEL_WARNING);
@@ -136,13 +140,15 @@ class P3Page extends BaseP3Page
         return false;
     }
 
-    public function getBreadcrumbs(){
-        $model = $this;
+    public function getBreadcrumbs()
+    {
+        $model       = $this;
         $breadcrumbs = array();
-        while($model->getParent()) {
-            $breadcrumbs[] = $model->t('menuName');//$model->createUrl();
-            $model = $model->getParent();
+        while ($model->getParent()) {
+            $breadcrumbs[] = $model->t('menuName'); //$model->createUrl();
+            $model         = $model->getParent();
         }
+
         return array_reverse($breadcrumbs);
     }
 
@@ -178,6 +184,7 @@ class P3Page extends BaseP3Page
 
             return array();
         }
+
         $models = $rootNode->getChildren();
         $items  = array();
         foreach ($models AS $model) {
@@ -186,12 +193,14 @@ class P3Page extends BaseP3Page
                 break;
             }
             if (($maxDepth !== null && $maxDepth <= $level) || $model->getMenuItems($model) === array()) {
-                $items[] = array('label'  => $model->t('menuName', null, true), 'url' => $model->createUrl(),
+                $items[] = array('label'  => $model->t('menuName', null, true),
+                                 'url'    => $model->createUrl(),
                                  'active' => ($model->isActive() || $model->isActiveParent()));
             }
             else {
-                $items[] = array('label'  => $model->t('menuName', null, true), 'url' => $model->createUrl(),
-                                 'items'  => $model->getMenuItems($model, $maxDepth, $level+1),
+                $items[] = array('label'  => $model->t('menuName', null, true),
+                                 'url'    => $model->createUrl(),
+                                 'items'  => $model->getMenuItems($model, $maxDepth, $level + 1),
                                  'active' => ($model->isActive() || $model->isActiveParent()));
             }
         }
