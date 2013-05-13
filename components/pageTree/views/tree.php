@@ -64,13 +64,15 @@
 
 
             <span class="label label-info">Position</span> <?php
-            $this->widget('EditableField',
+if (isset($model->p3PageMeta)) {            
+$this->widget('EditableField',
                           array(
                                'type'      => 'text',
                                'model'     => $model->p3PageMeta,
                                'attribute' => 'treePosition',
                                'url'       => Yii::app()->controller->createUrl('/p3pages/p3PageMeta/editableSaver'),
                           ));
+}
 
             ?>
 
