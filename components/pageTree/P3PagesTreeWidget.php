@@ -26,15 +26,15 @@ class P3PagesTreeWidget extends CWidget {
 		$criteria->with = array('p3PageMeta');
 		$firstLevelNodes = P3Page::model()->findAll($criteria);
 		#var_dump($firstLevelNodes);exit;
-		$this->renderTree($firstLevelNodes);
+		$this->renderTree($firstLevelNodes, $this->rootNode);
 	}	
 	
-	private function renderTree($models){
-		echo "<ul>";
+	private function renderTree($models, $model){
+		echo "<ul id='page-".(($model !== null)?$model->id:'_ROOT')."' class='collapse in'>";
 		foreach($models AS $model){
 			echo "<li>";
 			$this->render('tree',array('model'=>$model));
-			$this->renderTree($model->getChildren());
+			$this->renderTree($model->getChildren(), $model);
 			echo "</li>";
 		}
 		echo "</ul>";

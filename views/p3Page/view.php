@@ -25,9 +25,10 @@ $this->breadcrumbs[] = $model->id;
                        'data'       => $model,
                        'attributes' => array(
                            'id',
+                           'nameId',
+                           'route',
                            'layout',
                            'view',
-                           'route',
                        ),
                   )); ?></p>
 

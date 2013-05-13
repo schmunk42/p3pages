@@ -1,4 +1,4 @@
-<div class="form">
+<div class="">
     <p class="note">
         <?php echo Yii::t('P3PagesModule.crud', 'Fields with');?> <span
             class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>        .
@@ -13,46 +13,70 @@
 
     echo $form->errorSummary($model);
     ?>
-    <div class="row">
-        <?php echo $form->labelEx($model, 'route'); ?>
-        <?php
-        $this->widget('jsonEditorView.JuiJSONEditorInput', array(
-                                                                'model'     => $model,
-                                                                // ActiveRecord, or any CModel child class
-                                                                'attribute' => 'route'
-                                                                // Model attribute holding initial JSON data string
-                                                           ));
-        ?>
-        <div class="notice">Do not use double quotes (") for keys and/or values!</div>
-        <?php echo $form->error($model, 'route'); ?>
-        <?php if ('help.route' != $help = Yii::t('P3PagesModule.crud', 'help.route')) {
-            echo "<span class='help-block'>$help</span>";
-        } ?></div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'layout'); ?>
-
-        <?php echo $form->dropDownList($model, 'layout', $this->module->params['availableLayouts'], array('empty' => 'none')); ?>
-        <?php echo $form->error($model, 'layout'); ?>
-        <?php if ('help.layout' != $help = Yii::t('P3PagesModule.crud', 'help.layout')) {
-            echo "<span class='help-block'>$help</span>";
-        } ?></div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'view'); ?>
-        <?php echo $form->dropDownList($model, 'view', $this->module->params['availableViews'], array('empty' => 'none')); ?>
-        <?php echo $form->error($model, 'view'); ?>
-        <?php if ('help.view' != $help = Yii::t('P3PagesModule.crud', 'help.view')) {
-            echo "<span class='help-block'>$help</span>";
-        } ?></div>
 
 
     <div class="row">
-        <label for="p3PageMeta"><?php echo Yii::t('P3PagesModule.crud', 'P3PageMeta'); ?></label>
-        <?php if ($model->p3PageMeta !== null) {
-            echo $model->p3PageMeta->status;
-        }; ?><br/>
+        <div class="span4">
+            <h3>Menu Name</h3>
+            <?php echo $model->t('menuName'); ?>
+        </div>
+        <div class="span8">
+            <h3>Node Identifier</h3>
+            <?php echo $form->labelEx($model, 'nameId'); ?>
+
+            <?php echo $form->textField($model, 'nameId'); ?>
+            <?php echo $form->error($model, 'nameId'); ?>
+            <?php if ('help.nameId' != $help = Yii::t('P3PagesModule.crud', 'help.nameId')) {
+                echo "<span class='help-block'>$help</span>";
+            } ?>
+        </div>
     </div>
+
+
+    <div class="row">
+        <div class="span4">
+            <h3>View and Layout</h3>
+
+
+            <?php echo $form->labelEx($model, 'layout'); ?>
+
+            <?php echo $form->dropDownList($model, 'layout', $this->module->params['availableLayouts'], array('empty' => 'none')); ?>
+            <?php echo $form->error($model, 'layout'); ?>
+            <?php if ('help.layout' != $help = Yii::t('P3PagesModule.crud', 'help.layout')) {
+                echo "<span class='help-block'>$help</span>";
+            } ?>
+
+
+            <?php echo $form->labelEx($model, 'view'); ?>
+            <?php echo $form->dropDownList($model, 'view', $this->module->params['availableViews'], array('empty' => 'none')); ?>
+            <?php echo $form->error($model, 'view'); ?>
+            <?php if ('help.view' != $help = Yii::t('P3PagesModule.crud', 'help.view')) {
+                echo "<span class='help-block'>$help</span>";
+            } ?>
+
+        </div>
+        <div class="span8">
+            <h3>Internal Route or Redirect</h3>
+
+            <?php echo $form->labelEx($model, 'route'); ?>
+            <?php
+            $this->widget('jsonEditorView.JuiJSONEditorInput', array(
+                                                                    'model'     => $model,
+                                                                    // ActiveRecord, or any CModel child class
+                                                                    'attribute' => 'route'
+                                                                    // Model attribute holding initial JSON data string
+                                                               ));
+            ?>
+            <div class="notice">Do not use double quotes (") for keys and/or values!</div>
+            <?php echo $form->error($model, 'route'); ?>
+            <?php if ('help.route' != $help = Yii::t('P3PagesModule.crud', 'help.route')) {
+                echo "<span class='help-block'>$help</span>";
+            } ?>
+        </div>
+
+    </div>
+
 
     <div class="form-actions">
 
@@ -73,4 +97,5 @@
 
     <?php  $this->endWidget(); ?>
 
-</div><!-- form -->
+</div>
+<!-- form -->
