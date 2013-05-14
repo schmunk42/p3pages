@@ -154,16 +154,16 @@ class P3Page extends BaseP3Page
 
     static public function getActivePage()
     {
-        static $page;
+        static $_activePage = false;
 
-        if (isset($page)) {
-            // TODO: No caching yet
+        if ($_activePage !== false) {
+            // do nothing when found, note it may be "null"
         }
         elseif (isset($_GET[P3Page::PAGE_ID_KEY])) {
-            $page = P3Page::model()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
+            $_activePage = P3Page::model()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
         }
         elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
-            $page = P3Page::model()->findByAttributes(array('name' => $_GET[P3Page::PAGE_NAME_KEY]));
+            $_activePage = P3Page::model()->findByAttributes(array('name' => $_GET[P3Page::PAGE_NAME_KEY]));
         }
         else {
             // try to find page via route
@@ -171,10 +171,10 @@ class P3Page extends BaseP3Page
             $criteria->condition = "route LIKE :route";
             $criteria->params    = array(':route' => "%" . Yii::app()->controller->route . "%");
 
-            $page = P3Page::model()->find($criteria);
+            $_activePage = P3Page::model()->find($criteria);
         }
 
-        return $page;
+        return $_activePage;
     }
 
     static public function getMenuItems($rootNode, $maxDepth = null, $level = 0)
