@@ -195,11 +195,13 @@ class P3Page extends BaseP3Page
             if (($maxDepth !== null && $maxDepth <= $level) || $model->getMenuItems($model) === array()) {
                 $items[] = array('label'  => $model->t('menuName', null, true),
                                  'url'    => $model->createUrl(),
+                                 'nameId' => $model->nameId,
                                  'active' => ($model->isActive() || $model->isActiveParent()));
             }
             else {
                 $items[] = array('label'  => $model->t('menuName', null, true),
                                  'url'    => $model->createUrl(),
+                                 'nameId' => $model->nameId,
                                  'items'  => $model->getMenuItems($model, $maxDepth, $level + 1),
                                  'active' => ($model->isActive() || $model->isActiveParent()));
             }
