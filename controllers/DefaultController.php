@@ -49,6 +49,10 @@ class DefaultController extends Controller {
 		}
 
 		if ($model == null && $id) {
+            throw new CHttpException(404, 'Page not available!');
+
+            // TODO: reimplement checkAccess, ....
+            /*
 			// look for the reason ...
 			// is active and localized, but access is not granted --- TODO: Remove P3ActiveRecord or reimplment
 			$model = P3Page::model()->active()->localized()->findByPk($id);
@@ -61,7 +65,7 @@ class DefaultController extends Controller {
 			$model = P3Page::model()->active()->checkAccess()->findByPk($id);
 			if ($model !== null) {
 				throw new CHttpException(404, 'Page not available in this language!');
-			}
+			}*/
 		} elseif ($model instanceof P3Page) {
 			// record found in db
 

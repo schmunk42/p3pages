@@ -140,16 +140,23 @@ class P3Page extends BaseP3Page
         return false;
     }
 
-    public function getBreadcrumbs()
+    public function getBreadcrumbs($withLinks = true)
     {
         $model       = $this;
         $breadcrumbs = array();
+
         while ($model->getParent()) {
-            $breadcrumbs[] = $model->t('menuName'); //$model->createUrl();
+            $breadcrumbs[$model->t('menuName')] = ($withLinks)?$model->createUrl():null;
             $model         = $model->getParent();
         }
+        $breadcrumbs = array_reverse($breadcrumbs);
 
-        return array_reverse($breadcrumbs);
+        end($breadcrumbs);
+        $menuName = key($breadcrumbs);
+        array_pop($breadcrumbs);
+        $breadcrumbs[] = $menuName;
+
+        return $breadcrumbs;
     }
 
     static public function getActivePage()
