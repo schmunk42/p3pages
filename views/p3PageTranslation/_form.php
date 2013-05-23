@@ -1,7 +1,7 @@
 <div class="form">
     <p class="note">
         <?php echo Yii::t('P3PagesModule.crud', 'Fields with');?> <span
-            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>        .
+            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>.
     </p>
 
     <?php

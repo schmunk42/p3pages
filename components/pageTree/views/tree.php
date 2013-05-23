@@ -34,7 +34,7 @@
                            'submit'  => array('p3Page/delete',
                                               'id'        => $model->id,
                                               'returnUrl' => Yii::app()->controller->createUrl(null)),
-                           'confirm' => 'Are you sure you want to delete this item?'))
+                           'confirm' => Yii::t('P3PagesModule.crud', 'Do you want to delete this item?')))
     ?>
     <?php
     echo CHtml::link('<i class="icon-wrench"></i> ', //Yii::t('P3PagesModule.crud', 'Template'),

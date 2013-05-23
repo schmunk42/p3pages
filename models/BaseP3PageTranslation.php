@@ -57,7 +57,7 @@ abstract class BaseP3PageTranslation extends CActiveRecord{
 			'id' => Yii::t('P3PagesModule.crud', 'ID'),
 			'p3_page_id' => Yii::t('P3PagesModule.crud', 'P3 Page'),
 			'language' => Yii::t('P3PagesModule.crud', 'Language'),
-			'seoUrl' => Yii::t('P3PagesModule.crud', 'Seo Url'),
+			'seoUrl' => Yii::t('P3PagesModule.crud', 'SEO URL'),
 			'pageTitle' => Yii::t('P3PagesModule.crud', 'Page Title'),
 			'menuName' => Yii::t('P3PagesModule.crud', 'Menu Name'),
 			'keywords' => Yii::t('P3PagesModule.crud', 'Keywords'),

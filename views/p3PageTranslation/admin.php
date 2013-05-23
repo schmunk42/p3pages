@@ -1,5 +1,5 @@
 <?php
-$this->breadcrumbs[] = 'P3 Page Translations';
+$this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'Translations');
 
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,8 +18,8 @@ return false;
 
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
 <h1>
-    <?php echo Yii::t('P3PagesModule.crud', 'P3 Page Translations'); ?>
-    <small><?php echo Yii::t('P3PagesModule.crud', 'Manage'); ?></small>
+    <?php echo Yii::t('P3PagesModule.crud', 'Pages'); ?>
+    <small><?php echo Yii::t('P3PagesModule.crud', 'Translations'); ?></small>
 </h1>
 
 <?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
