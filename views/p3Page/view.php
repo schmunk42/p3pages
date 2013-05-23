@@ -1,11 +1,10 @@
 <?php
-$this->breadcrumbs['P3 Pages'] = array('admin');
 $this->breadcrumbs[] = $model->id;
 ?>
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
 <h1>
-    P3 Page
-    <small>View #<?php echo $model->id ?></small>
+    <?php echo Yii::t('P3PagesModule.crud', 'Pages'); ?>
+    <small> #<?php echo $model->id ?></small>
 </h1>
 
 
@@ -15,7 +14,7 @@ $this->breadcrumbs[] = $model->id;
 
 
 <h2>
-    Data
+    <?php echo Yii::t('P3PagesModule.crud', 'Data'); ?>
 </h2>
 
 <p>
@@ -34,7 +33,7 @@ $this->breadcrumbs[] = $model->id;
 
 
 <h2>
-    Properties
+    <?php echo Yii::t('P3PagesModule.crud', 'Properties'); ?>
 </h2>
 <p>
     <?php $this->widget('TbDetailView',
@@ -64,7 +63,7 @@ $this->breadcrumbs[] = $model->id;
 </p>
 
 <h2>
-    Relations
+    <?php echo Yii::t('P3PagesModule.crud', 'Relations'); ?>
 </h2>
 
 <div class='row'>
@@ -75,7 +74,7 @@ $this->breadcrumbs[] = $model->id;
                            'type'    => '',
                            // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                            'buttons' => array(
-                               array('label' => 'Meta Data',
+                               array('label' => Yii::t('P3PagesModule.crud', 'Metadata'),
                                      'icon'  => 'icon-list-alt',
                                      'url'   => array('p3PageMeta/admin')),
                                array('icon' => 'icon-plus',
@@ -112,7 +111,7 @@ $this->breadcrumbs[] = $model->id;
                            'type'    => '',
                            // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                            'buttons' => array(
-                               array('label' => 'Translations',
+                               array('label' => Yii::t('P3PagesModule.crud', 'Translations'),
                                      'icon'  => 'icon-list-alt',
                                      'url'   => array('p3PageTranslation/admin')),
                                array('icon' => 'icon-plus',

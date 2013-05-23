@@ -92,8 +92,8 @@ abstract class BaseP3PageMeta extends CActiveRecord {
 			'createdBy' => Yii::t('P3PagesModule.crud', 'Created By'),
 			'modifiedAt' => Yii::t('P3PagesModule.crud', 'Modified At'),
 			'modifiedBy' => Yii::t('P3PagesModule.crud', 'Modified By'),
-			'guid' => Yii::t('P3PagesModule.crud', 'Guid'),
-			'ancestor_guid' => Yii::t('P3PagesModule.crud', 'Ancestor Guid'),
+			'guid' => Yii::t('P3PagesModule.crud', 'GUID'),
+			'ancestor_guid' => Yii::t('P3PagesModule.crud', 'Ancestor GUID'),
 			'model' => Yii::t('P3PagesModule.crud', 'Model'),
 		);
 	}

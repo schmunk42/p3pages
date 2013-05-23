@@ -1,7 +1,7 @@
 <div class="">
     <p class="note">
         <?php echo Yii::t('P3PagesModule.crud', 'Fields with');?> <span
-            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>        .
+            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>.
     </p>
 
     <?php
@@ -18,11 +18,11 @@
 
     <div class="row">
         <div class="span4">
-            <h3>Menu Name</h3>
+            <h3><?php echo Yii::t('P3PagesModule.crud', 'Menu Name'); ?></h3>
             <?php echo $model->t('menuName'); ?>
         </div>
         <div class="span8">
-            <h3>Node Identifier</h3>
+            <h3><?php echo Yii::t('P3PagesModule.crud', 'Node Identifier'); ?></h3>
             <?php echo $form->labelEx($model, 'nameId'); ?>
 
             <?php echo $form->textField($model, 'nameId'); ?>
@@ -36,7 +36,7 @@
 
     <div class="row">
         <div class="span4">
-            <h3>View and Layout</h3>
+            <h3><?php echo Yii::t('P3PagesModule.crud', 'View and Layout'); ?></h3>
 
 
             <?php echo $form->labelEx($model, 'layout'); ?>
@@ -57,7 +57,7 @@
 
         </div>
         <div class="span8">
-            <h3>Internal Route or Redirect</h3>
+            <h3><?php echo Yii::t('P3PagesModule.crud', 'Internal Route or Redirect'); ?></h3>
 
             <?php echo $form->labelEx($model, 'route'); ?>
             <?php
@@ -83,7 +83,7 @@
         <?php
         echo CHtml::Button(Yii::t('P3PagesModule.crud', 'Cancel'),
                            array(
-                                'submit' => array('p3page/admin'),
+                                'submit' => array('p3Page/admin'),
                                 'class'  => 'btn'
                            ));
         echo ' ';

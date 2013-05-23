@@ -1,5 +1,5 @@
 <?php
-$this->breadcrumbs[] = 'P3 Pages';
+$this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'Manage');
 
 
 Yii::app()->clientScript->registerScript('search', "
@@ -17,8 +17,9 @@ return false;
 ?>
 
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
+
 <h1>
-    <?php echo Yii::t('P3PagesModule.crud', 'P3 Pages'); ?>
+    <?php echo Yii::t('P3PagesModule.crud', 'Pages'); ?>
     <small><?php echo Yii::t('P3PagesModule.crud', 'Manage'); ?></small>
 </h1>
 
@@ -37,7 +38,7 @@ $this->widget('TbGridView', array(
                                  'columns'      => array(
                                      'id',
                                      'nameId',
-                                     '_label:text:Menu Name',
+                                     '_label:text:'.Yii::t('P3PagesModule.crud', 'Menu Name').'',
                                      'layout',
                                      'view',
                                      'route',

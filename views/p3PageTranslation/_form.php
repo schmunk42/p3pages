@@ -1,7 +1,7 @@
 <div class="form">
     <p class="note">
         <?php echo Yii::t('P3PagesModule.crud', 'Fields with');?> <span
-            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>        .
+            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>.
     </p>
 
     <?php
@@ -85,7 +85,7 @@
 
     <?php
     echo CHtml::Button(Yii::t('P3PagesModule.crud', 'Cancel'), array(
-                                                                    'submit' => array('p3pagetranslation/admin'),
+                                                                    'submit' => array('p3PageTranslation/admin'),
                                                                     'class'  => 'btn'
                                                                ));
     echo ' ' . CHtml::submitButton(Yii::t('P3PagesModule.crud', 'Save'), array(

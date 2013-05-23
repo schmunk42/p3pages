@@ -34,7 +34,7 @@ class P3PageTranslation extends BaseP3PageTranslation {
     public function rules() {
         return array_merge(
                 array(
-                array('seoUrl', 'match', 'pattern' => '/^[a-z0-9_\-]+$/', 'message' => 'SEO URL must only conatin lowercase characters, numbers, underscores and dashes'),
+                array('seoUrl', 'match', 'pattern' => '/^[a-z0-9_\-]+$/', 'message' => Yii::t('P3PagesModule.crud', 'SEO URL must only contain lowercase characters, numbers, underscores and dashes')),
                 ), parent::rules()
         );
     }
