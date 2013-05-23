@@ -45,11 +45,11 @@ class DefaultController extends Controller {
 				Yii::app()->request->redirect($this->createUrl('/p3/p3Page/view', array_merge($_GET, array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name))));
 			}
 		} else {
-			throw new CHttpException(404, 'Id/name not found!');
+			throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'ID/name not found!'));
 		}
 
 		if ($model == null && $id) {
-            throw new CHttpException(404, 'Page not available!');
+            throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'Page not available!'));
 
             // TODO: reimplement checkAccess, ....
             /*
@@ -77,14 +77,14 @@ class DefaultController extends Controller {
 				$this->redirect($url);
 			}
 			if (!$model->view || !$model->layout) {
-				throw new CHttpException(500, 'No view file in database!');
+				throw new CHttpException(500, Yii::t('P3PagesModule.crud', 'No view file in database!'));
 			}
 			$this->pageTitle = $model->t('pageTitle');
 			$this->layout = $model->layout;
 			$this->render($model->view, array('model' => $model));
 			return;
 		}
-		throw new CHttpException(404, 'Id/name not found in database!');
+		throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'ID/name not found in database!'));
 	}
 
 }

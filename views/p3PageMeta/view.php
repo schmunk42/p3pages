@@ -1,18 +1,18 @@
 <?php
-$this->breadcrumbs['P3 Page Metas'] = array('admin');
+$this->breadcrumbs[Yii::t('P3PagesModule.crud', 'Metadata')] = array('admin');
 $this->breadcrumbs[] = $model->id;
 ?>
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
-<h1>
-    P3 Page Meta
-    <small>View #<?php echo $model->id ?></small>
-</h1>
 
+<h1>
+    <?php echo Yii::t('P3PagesModule.crud', 'Pages'); ?>
+    <small><?php echo Yii::t('P3PagesModule.crud', 'Metadata'); ?> #<?php echo $model->id ?></small>
+</h1>
 
 <?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
 
 <h2>
-    Data
+    <?php echo Yii::t('P3PagesModule.crud', 'Data'); ?>
 </h2>
 
 <p>
@@ -62,7 +62,7 @@ $this->breadcrumbs[] = $model->id;
 
 
 <h2>
-    Relations
+    <?php echo Yii::t('P3PagesModule.crud', 'Relations'); ?>
 </h2>
 
 <div class='row'>
@@ -74,7 +74,7 @@ $this->breadcrumbs[] = $model->id;
                            'type'    => '',
                            // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                            'buttons' => array(
-                               array('label' => 'Children',
+                               array('label' => Yii::t('P3PagesModule.crud', 'Children'),
                                      'icon'  => 'icon-list-alt',
                                      'url'   => array('p3PageMeta/admin')),
                                array('icon' => 'icon-plus',
