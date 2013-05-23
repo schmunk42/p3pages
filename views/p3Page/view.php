@@ -41,20 +41,20 @@ $this->breadcrumbs[] = $model->id;
                              'data'       => $model,
                              'attributes' => array(
                                  array(
-                                     'label' => 'URL',
+                                     'label' => Yii::t('P3PagesModule.crud', 'URL'),
                                      'value' => CHtml::link($model->createUrl(), $model->createUrl()),
                                      'type'  => 'raw'
                                  ),
                                  array(
-                                     'label' => 'Menu Name',
+                                     'label' => Yii::t('P3PagesModule.crud', 'Menu Name'),
                                      'value' => $model->t('menuName', null, true),
                                  ),
                                  array(
-                                     'label' => 'Page Title',
+                                     'label' => Yii::t('P3PagesModule.crud', 'Page Title'),
                                      'value' => $model->t('pageTitle', null, true)
                                  ),
                                  array(
-                                     'label' => 'Parent',
+                                     'label' => Yii::t('P3PagesModule.crud', 'Parent'),
                                      'value' => ($model->p3PageMeta->treeParent)?$model->p3PageMeta->treeParent->id0->t('menuName', null, true):null
                                  )
                              )
