@@ -85,7 +85,7 @@
 
     <?php
     echo CHtml::Button(Yii::t('P3PagesModule.crud', 'Cancel'), array(
-                                                                    'submit' => array('p3pagetranslation/admin'),
+                                                                    'submit' => array('p3PageTranslation/admin'),
                                                                     'class'  => 'btn'
                                                                ));
     echo ' ' . CHtml::submitButton(Yii::t('P3PagesModule.crud', 'Save'), array(
