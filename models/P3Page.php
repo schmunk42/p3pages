@@ -164,21 +164,30 @@ class P3Page extends BaseP3Page
         static $_activePage = false;
 
         if ($_activePage !== false) {
-            // do nothing when found, note it may be "null"
+            // just return the page when already found, note it may be "null"
+            return $_activePage;
         }
         elseif (isset($_GET[P3Page::PAGE_ID_KEY])) {
             $_activePage = P3Page::model()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
+            $_traceMsg = ' found by id';
         }
         elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
-            $_activePage = P3Page::model()->findByAttributes(array('name' => $_GET[P3Page::PAGE_NAME_KEY]));
+            $_activePage = P3Page::model()->findByAttributes(array('nameId' => $_GET[P3Page::PAGE_NAME_KEY]));
+            $_traceMsg = ' found by nameId';
         }
         else {
             // try to find page via route
             $criteria            = new CDbCriteria;
             $criteria->condition = "route LIKE :route";
             $criteria->params    = array(':route' => "%" . Yii::app()->controller->route . "%");
-
             $_activePage = P3Page::model()->find($criteria);
+            $_traceMsg = " found by route '".Yii::app()->controller->route."'";
+        }
+
+        if ($_activePage !== null) {
+            Yii::trace("Active page #{$_activePage->id} ".$_traceMsg, 'p3pages.models');
+        } else {
+            Yii::trace("Active page not found in database", 'p3pages.models');
         }
 
         return $_activePage;
