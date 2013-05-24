@@ -60,11 +60,11 @@ abstract class BaseP3Page extends CActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t('crud', 'ID'),
-			'layout' => Yii::t('crud', 'Layout'),
-			'view' => Yii::t('crud', 'View'),
-			'route' => Yii::t('crud', 'Route'),
-			'nameId' => Yii::t('crud', 'Name'),
+			'id' => Yii::t('P3PagesModule.crud', 'ID'),
+			'layout' => Yii::t('P3PagesModule.crud', 'Layout'),
+			'view' => Yii::t('P3PagesModule.crud', 'View'),
+			'route' => Yii::t('P3PagesModule.crud', 'Route'),
+			'nameId' => Yii::t('P3PagesModule.crud', 'Name'),
 		);
 	}
 

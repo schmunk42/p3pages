@@ -208,19 +208,20 @@ class P3Page extends BaseP3Page
                 //echo "recursion";
                 break;
             }
+            $item = array('label'       => $model->t('menuName', null, true),
+                          'url'         => $model->createUrl(),
+                          'nameId'      => $model->nameId,
+                          'itemOptions' => ($model->nameId) ? array('class' => 'page-' . $model->nameId) : null,
+                          'active'      => ($model->isActive() || $model->isActiveParent()));
+
             if (($maxDepth !== null && $maxDepth <= $level) || $model->getMenuItems($model) === array()) {
-                $items[] = array('label'  => $model->t('menuName', null, true),
-                                 'url'    => $model->createUrl(),
-                                 'nameId' => $model->nameId,
-                                 'active' => ($model->isActive() || $model->isActiveParent()));
+                // do nothing
             }
             else {
-                $items[] = array('label'  => $model->t('menuName', null, true),
-                                 'url'    => $model->createUrl(),
-                                 'nameId' => $model->nameId,
-                                 'items'  => $model->getMenuItems($model, $maxDepth, $level + 1),
-                                 'active' => ($model->isActive() || $model->isActiveParent()));
+                $item['items'] = $model->getMenuItems($model, $maxDepth, $level + 1);
             }
+
+            $items[] = $item;
         }
 
         return $items;
