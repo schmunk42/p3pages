@@ -49,7 +49,7 @@ class DefaultController extends Controller
         if ($id) {
             $model = P3Page::model()->findByPk($id);
         } elseif ($name) {
-            $model = P3Page::model()->findByAttributes(array('name' => $name));
+            $model = P3Page::model()->findByAttributes(array('nameId' => $name));
             // redirect for consistency reasons
             if ($model !== null) {
                 Yii::app()->request->redirect(
