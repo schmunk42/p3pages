@@ -3,70 +3,105 @@
         <?php  ?><?php
         switch ($this->action->id) {
             case "create":
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label" => Yii::t('P3PagesModule.crud', 'Manage'),
-                                                                 "icon"  => "icon-list-alt",
-                                                                 "url"   => array("admin")
-                                                            ));
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label" => Yii::t('P3PagesModule.crud', 'Manage'),
+                         "icon"  => "icon-list-alt",
+                         "url"   => array("admin")
+                    )
+                );
                 break;
             case "admin":
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label" => Yii::t('P3PagesModule.crud', 'Create'),
-                                                                 "icon"  => "icon-plus",
-                                                                 "url"   => array("create")
-                                                            ));
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label" => Yii::t('P3PagesModule.crud', 'Create'),
+                         "icon"  => "icon-plus",
+                         "url"   => array("create")
+                    )
+                );
                 break;
             case "view":
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label" => Yii::t('P3PagesModule.crud', 'Manage'),
-                                                                 "icon"  => "icon-list-alt",
-                                                                 "url"   => array("admin")
-                                                            ));
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label" => Yii::t('P3PagesModule.crud', 'Update'),
-                                                                 "icon"  => "icon-edit",
-                                                                 "url"   => array("update",
-                                                                                  "id" => $model->{$model->tableSchema->primaryKey})
-                                                            ));
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label" => Yii::t('P3PagesModule.crud', 'Create'),
-                                                                 "icon"  => "icon-plus",
-                                                                 "url"   => array("create")
-                                                            ));
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label"       => Yii::t('P3PagesModule.crud', 'Delete'),
-                                                                 "type"        => "danger",
-                                                                 "icon"        => "icon-remove icon-white",
-                                                                 "htmlOptions" => array(
-                                                                     "submit"  => array(Yii::t('P3PagesModule.crud', 'Delete'),
-                                                                                        "id"        => $model->{$model->tableSchema->primaryKey},
-                                                                                        "returnUrl" => Yii::app()->request->getParam("returnUrl")),
-                                                                     "confirm" => Yii::t('P3PagesModule.crud', 'Do you want to delete this item?'))
-                                                            )
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label" => Yii::t('P3PagesModule.crud', 'Manage'),
+                         "icon"  => "icon-list-alt",
+                         "url"   => array("admin")
+                    )
+                );
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label" => Yii::t('P3PagesModule.crud', 'Update'),
+                         "icon"  => "icon-edit",
+                         "url"   => array(
+                             "update",
+                             "id" => $model->{$model->tableSchema->primaryKey}
+                         )
+                    )
+                );
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label" => Yii::t('P3PagesModule.crud', 'Create'),
+                         "icon"  => "icon-plus",
+                         "url"   => array("create")
+                    )
+                );
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label"       => Yii::t('P3PagesModule.crud', 'Delete'),
+                         "type"        => "danger",
+                         "icon"        => "icon-remove icon-white",
+                         "htmlOptions" => array(
+                             "submit"  => array(
+                                 Yii::t('P3PagesModule.crud', 'Delete'),
+                                 "id"        => $model->{$model->tableSchema->primaryKey},
+                                 "returnUrl" => Yii::app()->request->getParam("returnUrl")
+                             ),
+                             "confirm" => Yii::t('P3PagesModule.crud', 'Do you want to delete this item?')
+                         )
+                    )
                 );
                 break;
             case "update":
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label" => Yii::t('P3PagesModule.crud', 'Manage'),
-                                                                 "icon"  => "icon-list-alt",
-                                                                 "url"   => array("admin")
-                                                            ));
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label" => Yii::t('P3PagesModule.crud', 'View'),
-                                                                 "icon"  => "icon-eye-open",
-                                                                 "url"   => array("view",
-                                                                                  "id" => $model->{$model->tableSchema->primaryKey})
-                                                            ));
-                $this->widget("bootstrap.widgets.TbButton", array(
-                                                                 "label"       => Yii::t('P3PagesModule.crud', 'Delete'),
-                                                                 "type"        => "danger",
-                                                                 "icon"        => "icon-remove icon-white",
-                                                                 "htmlOptions" => array(
-                                                                     "submit"  => array(Yii::t('P3PagesModule.crud', 'Delete'),
-                                                                                        "id"        => $model->{$model->tableSchema->primaryKey},
-                                                                                        "returnUrl" => Yii::app()->request->getParam("returnUrl")),
-                                                                     "confirm" => Yii::t('P3PagesModule.crud', 'Do you want to delete this item?'))
-                                                            )
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label" => Yii::t('P3PagesModule.crud', 'Manage'),
+                         "icon"  => "icon-list-alt",
+                         "url"   => array("admin")
+                    )
+                );
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label" => Yii::t('P3PagesModule.crud', 'View'),
+                         "icon"  => "icon-eye-open",
+                         "url"   => array(
+                             "view",
+                             "id" => $model->{$model->tableSchema->primaryKey}
+                         )
+                    )
+                );
+                $this->widget(
+                    "bootstrap.widgets.TbButton",
+                    array(
+                         "label"       => Yii::t('P3PagesModule.crud', 'Delete'),
+                         "type"        => "danger",
+                         "icon"        => "icon-remove icon-white",
+                         "htmlOptions" => array(
+                             "submit"  => array(
+                                 Yii::t('P3PagesModule.crud', 'Delete'),
+                                 "id"        => $model->{$model->tableSchema->primaryKey},
+                                 "returnUrl" => Yii::app()->request->getParam("returnUrl")
+                             ),
+                             "confirm" => Yii::t('P3PagesModule.crud', 'Do you want to delete this item?')
+                         )
+                    )
                 );
                 break;
         }
@@ -74,26 +109,37 @@
     <?php if ($this->action->id == 'admin'): ?>
         <div class="btn-group">
             <?php
-            $this->widget("bootstrap.widgets.TbButton", array(
-                                                             "label"       => Yii::t('P3PagesModule.crud', 'Search'),
-                                                             "icon"        => "icon-search",
-                                                             "htmlOptions" => array("class" => "search-button")
-                                                        ));?>    </div>
+            $this->widget(
+                "bootstrap.widgets.TbButton",
+                array(
+                     "label"       => Yii::t('P3PagesModule.crud', 'Search'),
+                     "icon"        => "icon-search",
+                     "htmlOptions" => array("class" => "search-button")
+                )
+            );?>    </div>
 
         <div class="btn-group">
-            <?php $this->widget('bootstrap.widgets.TbButtonGroup',
-                                array(
-                                     'buttons' => array(
-                                         array('label' => Yii::t('P3PagesModule.crud', 'Relations'),
-                                               'icon'  => 'icon-search',
-                                               'items' => array(array('label' => Yii::t('P3PagesModule.crud', Yii::t('P3PagesModule.crud', 'Metadata')),
-                                                                      'url'   => array('p3PageMeta/admin')),
-                                                                array('label' => Yii::t('P3PagesModule.crud', 'Translations'),
-                                                                      'url'   => array('p3PageTranslation/admin')),
-                                               )
-                                         ),
-                                     ),
-                                ));
+            <?php $this->widget(
+                'bootstrap.widgets.TbButtonGroup',
+                array(
+                     'buttons' => array(
+                         array(
+                             'label' => Yii::t('P3PagesModule.crud', 'Relations'),
+                             'icon'  => 'icon-search',
+                             'items' => array(
+                                 array(
+                                     'label' => Yii::t('P3PagesModule.crud', Yii::t('P3PagesModule.crud', 'Metadata')),
+                                     'url'   => array('p3PageMeta/admin')
+                                 ),
+                                 array(
+                                     'label' => Yii::t('P3PagesModule.crud', 'Translations'),
+                                     'url'   => array('p3PageTranslation/admin')
+                                 ),
+                             )
+                         ),
+                     ),
+                )
+            );
             ?>        </div>
 
 
@@ -101,8 +147,11 @@
 
 <?php if ($this->action->id == 'admin'): ?>
     <div class="search-form" style="display:none">
-        <?php $this->renderPartial('_search', array(
-                                                   'model' => $model,
-                                              )); ?>
+        <?php $this->renderPartial(
+            '_search',
+            array(
+                 'model' => $model,
+            )
+        ); ?>
     </div>
 <?php endif; ?>

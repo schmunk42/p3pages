@@ -1,7 +1,7 @@
 {
     "name": "phundament/p3pages",
     "description": "Page Manager",
-    "keywords": ["page","tree","sitemap","structure"],
+    "keywords": ["page", "tree", "sitemap", "structure"],
     "homepage": "https://github.com/schmunk42/p3pages",
     "type": "yii-extension",
     "license": "BSD-3-Clause",

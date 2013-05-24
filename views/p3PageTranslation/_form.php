@@ -1,15 +1,18 @@
 <div class="form">
     <p class="note">
-        <?php echo Yii::t('P3PagesModule.crud', 'Fields with');?> <span
-            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required');?>.
+        <?php echo Yii::t('P3PagesModule.crud', 'Fields with'); ?> <span
+            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required'); ?>.
     </p>
 
     <?php
-    $form = $this->beginWidget('CActiveForm', array(
-                                                   'id'                     => 'p3-page-translation-form',
-                                                   'enableAjaxValidation'   => true,
-                                                   'enableClientValidation' => true,
-                                              ));
+    $form = $this->beginWidget(
+        'CActiveForm',
+        array(
+             'id'                     => 'p3-page-translation-form',
+             'enableAjaxValidation'   => true,
+             'enableClientValidation' => true,
+        )
+    );
 
     echo $form->errorSummary($model);
     ?>
@@ -74,7 +77,8 @@
                  'allowEmpty'  => false,
                  'style'       => 'dropdownlist',
                  'htmlOptions' => array(
-                     'checkAll' => 'all'),
+                     'checkAll' => 'all'
+                 ),
             )
         ); ?><br/>
     </div>
@@ -84,12 +88,18 @@
 <div class="form-actions">
 
     <?php
-    echo CHtml::Button(Yii::t('P3PagesModule.crud', 'Cancel'), array(
-                                                                    'submit' => array('p3PageTranslation/admin'),
-                                                                    'class'  => 'btn'
-                                                               ));
-    echo ' ' . CHtml::submitButton(Yii::t('P3PagesModule.crud', 'Save'), array(
-                                                                              'class' => 'btn btn-primary'
-                                                                         ));
+    echo CHtml::Button(
+        Yii::t('P3PagesModule.crud', 'Cancel'),
+        array(
+             'submit' => array('p3PageTranslation/admin'),
+             'class'  => 'btn'
+        )
+    );
+    echo ' ' . CHtml::submitButton(
+            Yii::t('P3PagesModule.crud', 'Save'),
+            array(
+                 'class' => 'btn btn-primary'
+            )
+        );
     $this->endWidget(); ?>
 </div>

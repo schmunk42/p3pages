@@ -19,46 +19,50 @@ $this->breadcrumbs[] = $model->id;
 
 <p>
     <?php
-    $this->widget('TbDetailView',
-                  array(
-                       'data'       => $model,
-                       'attributes' => array(
-                           'id',
-                           'nameId',
-                           'route',
-                           'layout',
-                           'view',
-                       ),
-                  )); ?></p>
+    $this->widget(
+        'TbDetailView',
+        array(
+             'data'       => $model,
+             'attributes' => array(
+                 'id',
+                 'nameId',
+                 'route',
+                 'layout',
+                 'view',
+             ),
+        )
+    ); ?></p>
 
 
 <h2>
     <?php echo Yii::t('P3PagesModule.crud', 'Properties'); ?>
 </h2>
 <p>
-    <?php $this->widget('TbDetailView',
-                        array(
-                             'data'       => $model,
-                             'attributes' => array(
-                                 array(
-                                     'label' => Yii::t('P3PagesModule.crud', 'URL'),
-                                     'value' => CHtml::link($model->createUrl(), $model->createUrl()),
-                                     'type'  => 'raw'
-                                 ),
-                                 array(
-                                     'label' => Yii::t('P3PagesModule.crud', 'Menu Name'),
-                                     'value' => $model->t('menuName', null, true),
-                                 ),
-                                 array(
-                                     'label' => Yii::t('P3PagesModule.crud', 'Page Title'),
-                                     'value' => $model->t('pageTitle', null, true)
-                                 ),
-                                 array(
-                                     'label' => Yii::t('P3PagesModule.crud', 'Parent'),
-                                     'value' => ($model->p3PageMeta->treeParent)?$model->p3PageMeta->treeParent->id0->t('menuName', null, true):null
-                                 )
-                             )
-                        )
+    <?php $this->widget(
+        'TbDetailView',
+        array(
+             'data'       => $model,
+             'attributes' => array(
+                 array(
+                     'label' => Yii::t('P3PagesModule.crud', 'URL'),
+                     'value' => CHtml::link($model->createUrl(), $model->createUrl()),
+                     'type'  => 'raw'
+                 ),
+                 array(
+                     'label' => Yii::t('P3PagesModule.crud', 'Menu Name'),
+                     'value' => $model->t('menuName', null, true),
+                 ),
+                 array(
+                     'label' => Yii::t('P3PagesModule.crud', 'Page Title'),
+                     'value' => $model->t('pageTitle', null, true)
+                 ),
+                 array(
+                     'label' => Yii::t('P3PagesModule.crud', 'Parent'),
+                     'value' => ($model->p3PageMeta->treeParent) ?
+                         $model->p3PageMeta->treeParent->id0->t('menuName', null, true) : null
+                 )
+             )
+        )
     ) ?>
 </p>
 
@@ -69,19 +73,27 @@ $this->breadcrumbs[] = $model->id;
 <div class='row'>
     <div class='span3'>
         <?php
-        $this->widget('bootstrap.widgets.TbButtonGroup',
-                      array(
-                           'type'    => '',
-                           // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-                           'buttons' => array(
-                               array('label' => Yii::t('P3PagesModule.crud', 'Metadata'),
-                                     'icon'  => 'icon-list-alt',
-                                     'url'   => array('p3PageMeta/admin')),
-                               array('icon' => 'icon-plus',
-                                     'url'  => array('p3PageMeta/create',
-                                                     'P3PageMeta' => array('id' => $model->{$model->tableSchema->primaryKey}))),
-                           ),
-                      )); ?>
+        $this->widget(
+            'bootstrap.widgets.TbButtonGroup',
+            array(
+                 'type'    => '',
+                 // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+                 'buttons' => array(
+                     array(
+                         'label' => Yii::t('P3PagesModule.crud', 'Metadata'),
+                         'icon'  => 'icon-list-alt',
+                         'url'   => array('p3PageMeta/admin')
+                     ),
+                     array(
+                         'icon' => 'icon-plus',
+                         'url'  => array(
+                             'p3PageMeta/create',
+                             'P3PageMeta' => array('id' => $model->{$model->tableSchema->primaryKey})
+                         )
+                     ),
+                 ),
+            )
+        ); ?>
 
     </div>
     <div class='span8'>
@@ -95,7 +107,8 @@ $this->breadcrumbs[] = $model->id;
             echo CHtml::link(
                 $model->p3PageMeta->id0->_label,
                 array('p3PageMeta/view', 'id' => $model->p3PageMeta->id),
-                array('class' => ''));
+                array('class' => '')
+            );
 
             echo '</li>';
 
@@ -106,19 +119,27 @@ $this->breadcrumbs[] = $model->id;
 
 <div class='row'>
     <div class='span3'><?php
-        $this->widget('bootstrap.widgets.TbButtonGroup',
-                      array(
-                           'type'    => '',
-                           // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-                           'buttons' => array(
-                               array('label' => Yii::t('P3PagesModule.crud', 'Translations'),
-                                     'icon'  => 'icon-list-alt',
-                                     'url'   => array('p3PageTranslation/admin')),
-                               array('icon' => 'icon-plus',
-                                     'url'  => array('p3PageTranslation/create',
-                                                     'P3PageTranslation' => array('p3_page_id' => $model->{$model->tableSchema->primaryKey}))),
-                           ),
-                      ));
+        $this->widget(
+            'bootstrap.widgets.TbButtonGroup',
+            array(
+                 'type'    => '',
+                 // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+                 'buttons' => array(
+                     array(
+                         'label' => Yii::t('P3PagesModule.crud', 'Translations'),
+                         'icon'  => 'icon-list-alt',
+                         'url'   => array('p3PageTranslation/admin')
+                     ),
+                     array(
+                         'icon' => 'icon-plus',
+                         'url'  => array(
+                             'p3PageTranslation/create',
+                             'P3PageTranslation' => array('p3_page_id' => $model->{$model->tableSchema->primaryKey})
+                         )
+                     ),
+                 ),
+            )
+        );
         ?>
     </div>
     <div class='span8'>
@@ -130,9 +151,14 @@ $this->breadcrumbs[] = $model->id;
             foreach ($model->p3PageTranslations as $relatedModel) {
 
                 echo '<li>';
-                echo CHtml::link($relatedModel->language . ": " . $relatedModel->menuName,
-                                 array('p3PageTranslation/view',
-                                       'id' => $relatedModel->id), array('class' => ''));
+                echo CHtml::link(
+                    $relatedModel->language . ": " . $relatedModel->menuName,
+                    array(
+                         'p3PageTranslation/view',
+                         'id' => $relatedModel->id
+                    ),
+                    array('class' => '')
+                );
 
                 echo '</li>';
             }

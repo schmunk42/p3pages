@@ -8,9 +8,25 @@ class m121011_160518_fk_delete_cascade extends EDbMigration
 
             $this->dropForeignKey('fk_p3_page_id', 'p3_page_meta');
             $this->addForeignKey('fk_p3_page_id', 'p3_page_meta', 'id', 'p3_page', 'id', 'CASCADE', 'CASCADE');
-            $this->addForeignKey('fk_p3_page_meta_treeParent_id', 'p3_page_meta', 'treeParent_id', 'p3_page_meta', 'id', 'RESTRICT', 'RESTRICT');
+            $this->addForeignKey(
+                'fk_p3_page_meta_treeParent_id',
+                'p3_page_meta',
+                'treeParent_id',
+                'p3_page_meta',
+                'id',
+                'RESTRICT',
+                'RESTRICT'
+            );
             $this->dropForeignKey('fk_p3_page_p3_page_id', 'p3_page_translation');
-            $this->addForeignKey('fk_p3_page_p3_page_id', 'p3_page_translation', 'p3_page_id', 'p3_page', 'id', 'CASCADE', 'CASCADE');
+            $this->addForeignKey(
+                'fk_p3_page_p3_page_id',
+                'p3_page_translation',
+                'p3_page_id',
+                'p3_page',
+                'id',
+                'CASCADE',
+                'CASCADE'
+            );
 
         endif;
     }

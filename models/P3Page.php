@@ -55,7 +55,8 @@ class P3Page extends BaseP3Page
                      'fallbackIndicator' => array('menuName' => ' *'),
                      'fallbackValue'     => 'Page*',
                  )
-            ), parent::behaviors()
+            ),
+            parent::behaviors()
         );
     }
 
@@ -87,26 +88,27 @@ class P3Page extends BaseP3Page
 
         if (is_array(CJSON::decode($this->route)) && count(CJSON::decode($this->route)) !== 0) {
             $link = CJSON::decode($this->route);
-        }
-        else {
+        } else {
             $link['route']  = '/p3pages/default/page';
-            $link['params'] = CMap::mergeArray($additionalParams, array(P3Page::PAGE_ID_KEY   => $this->id,
-                                                                        P3Page::PAGE_NAME_KEY => $this->t('seoUrl')));
+            $link['params'] = CMap::mergeArray(
+                $additionalParams,
+                array(
+                     P3Page::PAGE_ID_KEY   => $this->id,
+                     P3Page::PAGE_NAME_KEY => $this->t('seoUrl')
+                )
+            );
         }
 
         if (isset($link['route'])) {
             $params = (isset($link['params'])) ? $link['params'] : array();
             if ($absolute === true) {
                 return Yii::app()->controller->createAbsoluteUrl($link['route'], $params);
-            }
-            else {
+            } else {
                 return Yii::app()->controller->createUrl($link['route'], $params);
             }
-        }
-        elseif (isset($link['url'])) {
+        } elseif (isset($link['url'])) {
             return $link['url'];
-        }
-        else {
+        } else {
             Yii::log('Could not determine URL string for P3Page #' . $this->id, CLogger::LEVEL_WARNING);
         }
     }
@@ -115,8 +117,7 @@ class P3Page extends BaseP3Page
     {
         if (self::getActivePage() !== null) {
             return (self::getActivePage()->id == $this->id);
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -146,8 +147,8 @@ class P3Page extends BaseP3Page
         $breadcrumbs = array();
 
         while ($model->getParent()) {
-            $breadcrumbs[$model->t('menuName')] = ($withLinks)?$model->createUrl():null;
-            $model         = $model->getParent();
+            $breadcrumbs[$model->t('menuName')] = ($withLinks) ? $model->createUrl() : null;
+            $model                              = $model->getParent();
         }
         $breadcrumbs = array_reverse($breadcrumbs);
 
@@ -166,26 +167,23 @@ class P3Page extends BaseP3Page
         if ($_activePage !== false) {
             // just return the page when already found, note it may be "null"
             return $_activePage;
-        }
-        elseif (isset($_GET[P3Page::PAGE_ID_KEY])) {
+        } elseif (isset($_GET[P3Page::PAGE_ID_KEY])) {
             $_activePage = P3Page::model()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
-            $_traceMsg = ' found by id';
-        }
-        elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
+            $_traceMsg   = ' found by id';
+        } elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
             $_activePage = P3Page::model()->findByAttributes(array('nameId' => $_GET[P3Page::PAGE_NAME_KEY]));
-            $_traceMsg = ' found by nameId';
-        }
-        else {
+            $_traceMsg   = ' found by nameId';
+        } else {
             // try to find page via route
             $criteria            = new CDbCriteria;
             $criteria->condition = "route LIKE :route";
             $criteria->params    = array(':route' => "%" . Yii::app()->controller->route . "%");
-            $_activePage = P3Page::model()->find($criteria);
-            $_traceMsg = " found by route '".Yii::app()->controller->route."'";
+            $_activePage         = P3Page::model()->find($criteria);
+            $_traceMsg           = " found by route '" . Yii::app()->controller->route . "'";
         }
 
         if ($_activePage !== null) {
-            Yii::trace("Active page #{$_activePage->id} ".$_traceMsg, 'p3pages.models');
+            Yii::trace("Active page #{$_activePage->id} " . $_traceMsg, 'p3pages.models');
         } else {
             Yii::trace("Active page not found in database", 'p3pages.models');
         }
@@ -208,16 +206,17 @@ class P3Page extends BaseP3Page
                 //echo "recursion";
                 break;
             }
-            $item = array('label'       => $model->t('menuName', null, true),
-                          'url'         => $model->createUrl(),
-                          'nameId'      => $model->nameId,
-                          'itemOptions' => ($model->nameId) ? array('class' => 'page-' . $model->nameId) : null,
-                          'active'      => ($model->isActive() || $model->isActiveParent()));
+            $item = array(
+                'label'       => $model->t('menuName', null, true),
+                'url'         => $model->createUrl(),
+                'nameId'      => $model->nameId,
+                'itemOptions' => ($model->nameId) ? array('class' => 'page-' . $model->nameId) : null,
+                'active'      => ($model->isActive() || $model->isActiveParent())
+            );
 
             if (($maxDepth !== null && $maxDepth <= $level) || $model->getMenuItems($model) === array()) {
                 // do nothing
-            }
-            else {
+            } else {
                 $item['items'] = $model->getMenuItems($model, $maxDepth, $level + 1);
             }
 

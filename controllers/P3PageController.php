@@ -16,12 +16,14 @@ class P3PageController extends Controller
     public function accessRules()
     {
         return array(
-            array('allow',
-                  'actions' => array('create', 'createChild', 'editableSaver', 'update', 'delete', 'admin', 'view'),
-                  'roles'   => array('P3pages.P3Page.*'),
+            array(
+                'allow',
+                'actions' => array('create', 'createChild', 'editableSaver', 'update', 'delete', 'admin', 'view'),
+                'roles'   => array('P3pages.P3Page.*'),
             ),
-            array('deny',
-                  'users' => array('*'),
+            array(
+                'deny',
+                'users' => array('*'),
             ),
         );
     }
@@ -31,12 +33,15 @@ class P3PageController extends Controller
         parent::beforeAction($action);
         // map identifcationColumn to id
         if (!isset($_GET['id']) && isset($_GET['id'])) {
-            $model = P3Page::model()->find('id = :id', array(
-                                                            ':id' => $_GET['id']));
+            $model = P3Page::model()->find(
+                'id = :id',
+                array(
+                     ':id' => $_GET['id']
+                )
+            );
             if ($model !== null) {
                 $_GET['id'] = $model->id;
-            }
-            else {
+            } else {
                 throw new CHttpException(400);
             }
         }
@@ -78,16 +83,14 @@ class P3PageController extends Controller
                 if ($model->save()) {
                     if (isset($_GET['returnUrl'])) {
                         $this->redirect($_GET['returnUrl']);
-                    }
-                    else {
+                    } else {
                         $this->redirect(array('view', 'id' => $model->id));
                     }
                 }
             } catch (Exception $e) {
                 $model->addError('id', $e->getMessage());
             }
-        }
-        elseif (isset($_GET['P3Page'])) {
+        } elseif (isset($_GET['P3Page'])) {
             $model->attributes = $_GET['P3Page'];
         }
 
@@ -109,8 +112,7 @@ class P3PageController extends Controller
                 if ($model->save()) {
                     if (isset($_GET['returnUrl'])) {
                         $this->redirect($_GET['returnUrl']);
-                    }
-                    else {
+                    } else {
                         $this->redirect(array('view', 'id' => $model->id));
                     }
                 }
@@ -141,13 +143,11 @@ class P3PageController extends Controller
             if (!isset($_GET['ajax'])) {
                 if (isset($_GET['returnUrl'])) {
                     $this->redirect($_GET['returnUrl']);
-                }
-                else {
+                } else {
                     $this->redirect(array('admin'));
                 }
             }
-        }
-        else {
+        } else {
             throw new CHttpException(400, Yii::t('app', 'Invalid request. Please do not repeat this request again.'));
         }
     }

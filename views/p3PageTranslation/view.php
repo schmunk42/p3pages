@@ -18,28 +18,38 @@ $this->breadcrumbs[] = $model->id;
 
 <p>
     <?php
-    $this->widget('TbDetailView', array(
-                                       'data'       => $model,
-                                       'attributes' => array(
-                                           'id',
-                                           array(
-                                               'name'  => 'p3_page_id',
-                                               'value' => ($model->p3Page !== null) ?
-                                                   '<span class=label>CBelongsToRelation</span><br/>' . CHtml::link($model->p3Page->_label, array('p3Page/view',
-                                                                                                                                                  'id' => $model->p3Page->id), array('class' => 'btn')) :
-                                                   'n/a',
-                                               'type'  => 'html',
-                                           ),
-                                           'language',
-                                           array('name' => 'seoUrl',
-                                                 'type' => 'url',
-                                           ),
-                                           'pageTitle',
-                                           'menuName',
-                                           'keywords',
-                                           'description',
-                                       ),
-                                  )); ?></p>
+    $this->widget(
+        'TbDetailView',
+        array(
+             'data'       => $model,
+             'attributes' => array(
+                 'id',
+                 array(
+                     'name'  => 'p3_page_id',
+                     'value' => ($model->p3Page !== null) ?
+                         '<span class=label>CBelongsToRelation</span><br/>' . CHtml::link(
+                             $model->p3Page->_label,
+                             array(
+                                  'p3Page/view',
+                                  'id' => $model->p3Page->id
+                             ),
+                             array('class' => 'btn')
+                         ) :
+                         'n/a',
+                     'type'  => 'html',
+                 ),
+                 'language',
+                 array(
+                     'name' => 'seoUrl',
+                     'type' => 'url',
+                 ),
+                 'pageTitle',
+                 'menuName',
+                 'keywords',
+                 'description',
+             ),
+        )
+    ); ?></p>
 
 
 <h2>

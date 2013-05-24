@@ -1,54 +1,72 @@
 <?php
 
-class DefaultController extends Controller {
+class DefaultController extends Controller
+{
 
-	public function filters() {
-		return array(
-			'accessControl',
-		);
-	}
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
 
-	public function accessRules() {
-		return array(
-			array('allow',
-				'actions' => array('page'),
-				'users' => array('*'),
-			), array('allow',
-				'actions' => array('index'),
-				'expression' => 'Yii::app()->user->checkAccess("P3pages.Default.*")',
-			),
-			array('deny',
-				'users' => array('*'),
-			),
-		);
-	}
+    public function accessRules()
+    {
+        return array(
+            array(
+                'allow',
+                'actions' => array('page'),
+                'users'   => array('*'),
+            ),
+            array(
+                'allow',
+                'actions' => array('index'),
+                'expression' => 'Yii::app()->user->checkAccess("P3pages.Default.*")',
+            ),
+            array(
+                'deny',
+                'users' => array('*'),
+            ),
+        );
+    }
 
-	public function actionIndex() {
-		$this->render('index');
-	}
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
 
-	/**
-	 * Shows a view from database.
-	 */
-	public function actionPage() {
+    /**
+     * Shows a view from database.
+     */
+    public function actionPage()
+    {
 
-		$model = null;
-		$id = (isset($_GET[P3Page::PAGE_ID_KEY]) && is_numeric($_GET[P3Page::PAGE_ID_KEY])) ? $_GET[P3Page::PAGE_ID_KEY] : null;
-		$name = isset($_GET[P3Page::PAGE_NAME_KEY]) ? $_GET[P3Page::PAGE_NAME_KEY] : null;
+        $model = null;
+        $id    = (isset($_GET[P3Page::PAGE_ID_KEY]) && is_numeric($_GET[P3Page::PAGE_ID_KEY])) ?
+            $_GET[P3Page::PAGE_ID_KEY] : null;
+        $name  = isset($_GET[P3Page::PAGE_NAME_KEY]) ? $_GET[P3Page::PAGE_NAME_KEY] : null;
 
-		if ($id) {
-			$model = P3Page::model()->findByPk($id);
-		} elseif ($name) {
-			$model = P3Page::model()->findByAttributes(array('name' => $name));
-			// redirect for consistency reasons
-			if ($model !== null) {
-				Yii::app()->request->redirect($this->createUrl('/p3/p3Page/view', array_merge($_GET, array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name))));
-			}
-		} else {
-			throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'ID/name not found!'));
-		}
+        if ($id) {
+            $model = P3Page::model()->findByPk($id);
+        } elseif ($name) {
+            $model = P3Page::model()->findByAttributes(array('name' => $name));
+            // redirect for consistency reasons
+            if ($model !== null) {
+                Yii::app()->request->redirect(
+                    $this->createUrl(
+                        '/p3/p3Page/view',
+                        array_merge(
+                            $_GET,
+                            array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name)
+                        )
+                    )
+                );
+            }
+        } else {
+            throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'ID/name not found!'));
+        }
 
-		if ($model == null && $id) {
+        if ($model == null && $id) {
             throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'Page not available!'));
 
             // TODO: reimplement checkAccess, ....
@@ -66,25 +84,25 @@ class DefaultController extends Controller {
 			if ($model !== null) {
 				throw new CHttpException(404, 'Page not available in this language!');
 			}*/
-		} elseif ($model instanceof P3Page) {
-			// record found in db
+        } elseif ($model instanceof P3Page) {
+            // record found in db
 
-			if ($route = CJSON::decode($model->route)) {
+            if ($route = CJSON::decode($model->route)) {
                 $params = $route;
                 unset($params['route']);
-				$url = $this->createUrl($route['route'], $params);
-				//var_dump($url);exit;
-				$this->redirect($url);
-			}
-			if (!$model->view || !$model->layout) {
-				throw new CHttpException(500, Yii::t('P3PagesModule.crud', 'No view file in database!'));
-			}
-			$this->pageTitle = $model->t('pageTitle');
-			$this->layout = $model->layout;
-			$this->render($model->view, array('model' => $model));
-			return;
-		}
-		throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'ID/name not found in database!'));
-	}
+                $url = $this->createUrl($route['route'], $params);
+                //var_dump($url);exit;
+                $this->redirect($url);
+            }
+            if (!$model->view || !$model->layout) {
+                throw new CHttpException(500, Yii::t('P3PagesModule.crud', 'No view file in database!'));
+            }
+            $this->pageTitle = $model->t('pageTitle');
+            $this->layout    = $model->layout;
+            $this->render($model->view, array('model' => $model));
+            return;
+        }
+        throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'ID/name not found in database!'));
+    }
 
 }
