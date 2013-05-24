@@ -25,6 +25,7 @@ class P3PagesTreeWidget extends CWidget
             $criteria->condition = "p3PageMeta.treeParent_id = :id";
         }
         $criteria->params = array(':id' => $this->rootNode);
+        $criteria->order  = 'p3PageMeta.treePosition';
         $criteria->with   = array('p3PageMeta');
         $firstLevelNodes  = P3Page::model()->findAll($criteria);
         #var_dump($firstLevelNodes);exit;
