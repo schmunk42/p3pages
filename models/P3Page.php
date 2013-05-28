@@ -52,7 +52,8 @@ class P3Page extends BaseP3Page
                      'relation'          => 'p3PageTranslations',
                      'fallbackLanguage'  => (isset(Yii::app()->params['p3.fallbackLanguage'])) ?
                          Yii::app()->params['p3.fallbackLanguage'] : 'en',
-                     'fallbackIndicator' => array('menuName' => ' *'),
+                     'fallbackIndicator' => (isset(Yii::app()->params['p3page.fallbackIndicator'])) ?
+                         Yii::app()->params['p3page.fallbackIndicator'] : array('menuName' => ' *'),
                      'fallbackValue'     => 'Page*',
                  )
             ),
