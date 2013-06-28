@@ -89,9 +89,12 @@ class DefaultController extends Controller
             $params = CJSON::decode($model->route);
             if ($params) {
                 if (!empty($params['route'])) {
-                    $params = $route;
+                    $route = $params['route'];
                     unset($params['route']);
-                    $url = $this->createUrl($route['route'], $params);
+                    if (empty($params)) {
+                        $params = array();
+                    }
+                    $url = $this->createUrl($route, $params);
                     $this->redirect($url);
                 } else if (!empty($params['url'])) {
                     // permanent redirect
