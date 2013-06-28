@@ -86,13 +86,17 @@ class DefaultController extends Controller
 			}*/
         } elseif ($model instanceof P3Page) {
             // record found in db
-
-            if ($route = CJSON::decode($model->route)) {
-                $params = $route;
-                unset($params['route']);
-                $url = $this->createUrl($route['route'], $params);
-                //var_dump($url);exit;
-                $this->redirect($url);
+            $params = CJSON::decode($model->route);
+            if ($params) {
+                if (!empty($params['route'])) {
+                    $params = $route;
+                    unset($params['route']);
+                    $url = $this->createUrl($route['route'], $params);
+                    $this->redirect($url);
+                } else if (!empty($params['url'])) {
+                    // permanent redirect
+                    $this->redirect($params['url'], true, 301);
+                }
             }
             if (!$model->view || !$model->layout) {
                 throw new CHttpException(500, Yii::t('P3PagesModule.crud', 'No view file in database!'));
