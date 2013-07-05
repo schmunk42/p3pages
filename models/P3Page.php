@@ -95,7 +95,7 @@ class P3Page extends BaseP3Page
                 $additionalParams,
                 array(
                      P3Page::PAGE_ID_KEY   => $this->id,
-                     P3Page::PAGE_NAME_KEY => $this->t('seoUrl')
+                     P3Page::PAGE_NAME_KEY => $this->t('seoUrl', null, true)
                 )
             );
         }
