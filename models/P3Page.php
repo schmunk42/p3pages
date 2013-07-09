@@ -81,8 +81,8 @@ class P3Page extends BaseP3Page
                  array(
                      'nameId',
                      'match',
-                     'pattern' => '/^[a-zA-Z0-9-]*$/',
-                     'message' => 'May only container letters numbers and dashes'
+                     'pattern' => '/^[a-zA-Z0-9-_]*$/',
+                     'message' => 'May only container letters numbers, underscores and dashes'
                  ),
             ),
             parent::rules()
