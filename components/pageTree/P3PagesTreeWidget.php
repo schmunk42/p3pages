@@ -27,7 +27,7 @@ class P3PagesTreeWidget extends CWidget
         $criteria->params = array(':id' => $this->rootNode);
         $criteria->order  = 'p3PageMeta.treePosition';
         $criteria->with   = array('p3PageMeta');
-        $firstLevelNodes  = P3Page::model()->updateable()->localized()->findAll($criteria);
+        $firstLevelNodes  = P3Page::model()->createable()->localized()->findAll($criteria);
         #var_dump($firstLevelNodes);exit;
         $this->renderTree($firstLevelNodes, $this->rootNode);
     }
