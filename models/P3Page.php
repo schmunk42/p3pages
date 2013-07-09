@@ -174,16 +174,17 @@ class P3Page extends BaseP3Page
             // just return the page when already found, note it may be "null"
             return $_activePage;
         } elseif (isset($_GET[P3Page::PAGE_ID_KEY])) {
-            $_activePage = P3Page::model()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
+            $_activePage = P3Page::model()->localized()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
             $_traceMsg   = ' found by id';
         } elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
-            $_activePage = P3Page::model()->findByAttributes(array('nameId' => $_GET[P3Page::PAGE_NAME_KEY]));
+            $_activePage = P3Page::model()->localized()->findByAttributes(array('nameId' => $_GET[P3Page::PAGE_NAME_KEY]));
             $_traceMsg   = ' found by nameId';
         } else {
             // try to find page via route
             $criteria            = new CDbCriteria;
             $criteria->condition = "route LIKE :route";
             $criteria->params    = array(':route' => "%" . Yii::app()->controller->route . "%");
+            $criteria->mergeWith(P3Page::model()->localized()->getDbCriteria()); // obtain scope from behavior
             $_activePage         = P3Page::model()->find($criteria);
             $_traceMsg           = " found by route '" . Yii::app()->controller->route . "'";
         }
