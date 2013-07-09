@@ -40,21 +40,26 @@ class P3Page extends BaseP3Page
     {
         return array_merge(
             array(
-                 'MetaData'    => array(
+                 'MetaData' => array(
                      'class'            => 'P3MetaDataBehavior',
                      'metaDataRelation' => 'p3PageMeta',
                      'parentRelation'   => 'treeParent',
                      'childrenRelation' => 'p3PageMetas',
                      'contentRelation'  => 'id0',
+                     'defaultLanguage'  => (Yii::app()->params['P3Page.defaultLanguage']) ?
+                         Yii::app()->params['P3Page.defaultLanguage'] : P3MetaDataBehavior::ALL_LANGUAGES,
+                     'defaultStatus'    => (Yii::app()->params['P3Page.defaultStatus']) ?
+                         Yii::app()->params['P3Page.defaultStatus'] : P3MetaDataBehavior::STATUS_ACTIVE,
                  ),
                  'Translation' => array(
                      'class'             => 'P3TranslationBehavior',
                      'relation'          => 'p3PageTranslations',
-                     'fallbackLanguage'  => (isset(Yii::app()->params['p3.fallbackLanguage'])) ?
-                         Yii::app()->params['p3.fallbackLanguage'] : 'en',
-                     'fallbackIndicator' => (isset(Yii::app()->params['p3page.fallbackIndicator'])) ?
-                         Yii::app()->params['p3page.fallbackIndicator'] : array('menuName' => ' *'),
-                     'fallbackValue'     => 'Page*',
+                     'fallbackLanguage'  => (isset(Yii::app()->params['P3Page.fallbackLanguage'])) ?
+                         Yii::app()->params['P3Page.fallbackLanguage'] : Yii::app()->sourceLanguage,
+                     'fallbackIndicator' => (isset(Yii::app()->params['P3Page.fallbackIndicator'])) ?
+                         Yii::app()->params['P3Page.fallbackIndicator'] : array('menuName' => ' *'),
+                     'fallbackValue'     => (isset(Yii::app()->params['P3Page.fallbackValue'])) ?
+                         Yii::app()->params['P3Page.fallbackValue'] : "[Page Name]",
                  )
             ),
             parent::behaviors()
