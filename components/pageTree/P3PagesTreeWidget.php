@@ -34,6 +34,7 @@ class P3PagesTreeWidget extends CWidget
 
     private function renderTree($models, $model)
     {
+        if (empty($models)) return;
         echo "<ul id='page-" . (($model !== null) ? $model->id : '_ROOT') . "' class='collapse in'>";
         foreach ($models AS $model) {
             echo "<li>";

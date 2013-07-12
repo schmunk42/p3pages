@@ -97,12 +97,14 @@
         array('class' => 'btn')
     )
     ?>
-    <span class="label label-important"><?php echo ($model->route != '{}') ? $model->route : '' ?></span>
+
+</p>
+<p>
+
+    <span class="label label-info"><?php echo ($model->route != '{}') ? $model->route : '' ?></span>
     <span class="label"><?php echo $model->layout ?></span>
     <span class="label"><?php echo $model->view ?></span>
-
-
-    <span class="label label-info">Position</span> <?php
+    <span class="label">Position <?php
     if (isset($model->p3PageMeta)) {
         $this->widget(
             'EditableField',
@@ -111,10 +113,12 @@
                  'model'     => $model->p3PageMeta,
                  'attribute' => 'treePosition',
                  'url'       => Yii::app()->controller->createUrl('/p3pages/p3PageMeta/editableSaver'),
+                 'emptytext' => '0'
             )
         );
     }
 
-    ?>
+    ?></span>
+
 
 </p>
