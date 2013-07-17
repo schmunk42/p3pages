@@ -86,16 +86,18 @@ class DefaultController extends Controller
 			}*/
         } elseif ($model instanceof P3Page) {
             // record found in db
-            $params = CJSON::decode($model->route);
-            if ($params) {
-                if (!empty($params['route'])) {
-                    $route = $params['route'];
-                    unset($params['route']);
-                    if (empty($params)) {
+            $data = CJSON::decode($model->route);
+            if ($data) {
+                if (!empty($data['route'])) {
+                    $route = $data['route'];
+                    unset($data['route']);
+                    if (empty($data['params'])) {
                         $params = array();
+                    } else {
+                        $params = $data['params'];
                     }
                     $url = $this->createUrl($route, $params);
-                    $this->redirect($url);
+                    $this->redirect($url, true, 301);
                 } else if (!empty($params['url'])) {
                     // permanent redirect
                     $this->redirect($params['url'], true, 301);
