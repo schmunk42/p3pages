@@ -20,7 +20,6 @@ class P3Page extends BaseP3Page
         return $this->t('menuName', null, true) . " #" . $this->id;
     }
 
-    // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
