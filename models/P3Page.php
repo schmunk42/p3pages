@@ -205,6 +205,12 @@ class P3Page extends BaseP3Page
             return array();
         }
 
+        $cacheId = "p3pages.models.menuItems.".Yii::app()->language.".{$rootNode->id}.{$maxDepth}.{$level}";
+        if ($cachedItems = Yii::app()->cache->get($cacheId)) {
+            Yii::trace("Loading menu items ({$cacheId}) from cache", "p3pages.models.P3Page");
+            return $cachedItems;
+        }
+
         $models = $rootNode->getChildren();
         $items  = array();
         foreach ($models AS $model) {
@@ -228,6 +234,12 @@ class P3Page extends BaseP3Page
 
             $items[] = $item;
         }
+
+        // TODO: should check translation also(!!!)
+        $dependency = new CDbCacheDependency("SELECT MAX(modifiedAt) FROM p3_page_meta");
+
+        Yii::trace("Saving menu items ({$cacheId}) to cache", "p3pages.models.P3Page");
+        Yii::app()->cache->set($cacheId, $items, 0, $dependency);
 
         return $items;
     }
