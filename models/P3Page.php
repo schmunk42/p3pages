@@ -251,12 +251,12 @@ class P3Page extends BaseP3Page
         return $items;
     }
 
-    static public function jsSelectActivePage()
+    static public function registerSelectActivePageScript($selector = '')
     {
         $page = self::getActivePage();
         $pageId = ($page) ? $page->id : null;
-        $script = "$('*[data-pageId=\"{$pageId}\"]').addClass('active');";
-        $script .= "$('*[data-pageId=\"{$pageId}\"]').parent().parent().addClass('active');"; // TODO !!!!!!!
+        $script = "$('{$selector} *[data-pageId=\"{$pageId}\"]').addClass('active');";
+        $script .= "$('{$selector} *[data-pageId=\"{$pageId}\"]').parent().parent().addClass('active');"; // TODO !!!!!!!
         Yii::app()->clientScript->registerScript('p3pages.models.P3Page.jsSelectActivePage', $script, CClientScript::POS_END);
     }
 
