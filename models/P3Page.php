@@ -218,12 +218,19 @@ class P3Page extends BaseP3Page
                 //echo "recursion";
                 break;
             }
+
+            // prepare node identifiers
+            $itemOptions = array();
+            $itemOptions['data-pageId'] = $model->id;
+            $itemOptions['data-pageNameId'] = $itemOptions['class'] = $model->nameId;
+
             $item = array(
                 'label'       => $model->t('menuName', null, true),
                 'url'         => $model->createUrl(),
                 'nameId'      => $model->nameId,
-                'itemOptions' => ($model->nameId) ? array('class' => 'page-' . $model->nameId) : null,
-                'active'      => ($model->isActive() || $model->isActiveParent())
+                'itemOptions' => $itemOptions,
+                // check for active item is disabled since 0.14.0 because of performance issues,
+                // select the active item via JavaScript and pageId data key
             );
 
             if (($maxDepth !== null && $maxDepth <= $level) || $model->getMenuItems($model) === array()) {
@@ -242,6 +249,15 @@ class P3Page extends BaseP3Page
         Yii::app()->cache->set($cacheId, $items, 0, $dependency);
 
         return $items;
+    }
+
+    static public function jsSelectActivePage()
+    {
+        $page = self::getActivePage();
+        $pageId = ($page) ? $page->id : null;
+        $script = "$('*[data-pageId=\"{$pageId}\"]').addClass('active');";
+        $script .= "$('*[data-pageId=\"{$pageId}\"]').parent().parent().addClass('active');"; // TODO !!!!!!!
+        Yii::app()->clientScript->registerScript('p3pages.models.P3Page.jsSelectActivePage', $script, CClientScript::POS_END);
     }
 
 }
