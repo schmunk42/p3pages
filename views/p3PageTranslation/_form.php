@@ -69,7 +69,7 @@
     <div class="row">
         <label for="p3Page"><?php echo Yii::t('P3PagesModule.crud', 'P3Page'); ?></label>
         <?php $this->widget(
-            'Relation',
+            '\GtcRelation',
             array(
                  'model'       => $model,
                  'relation'    => 'p3Page',

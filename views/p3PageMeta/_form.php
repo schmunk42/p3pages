@@ -53,7 +53,7 @@ echo $form->errorSummary($model);
 <div class="row">
     <label for="treeParent"><?php echo Yii::t('P3PagesModule.crud', 'TreeParent'); ?></label>
     <?php $this->widget(
-        'Relation',
+        '\GtcRelation',
         array(
              'model'       => $model,
              'criteria'    => new CDbCriteria(array('order' => 'treeParent_id, treePosition')),
@@ -208,7 +208,7 @@ echo $form->errorSummary($model);
 <div class="row">
     <label for="id0"><?php echo Yii::t('P3PagesModule.crud', 'Id0'); ?></label>
     <?php $this->widget(
-        'Relation',
+        '\GtcRelation',
         array(
              'model'       => $model,
              'relation'    => 'id0',
