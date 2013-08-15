@@ -44,7 +44,7 @@ abstract class BaseP3Page extends CActiveRecord
             parent::behaviors(),
             array(
                  'savedRelated' => array(
-                     'class' => 'GtcSaveRelationsBehavior'
+                     'class' => '\GtcSaveRelationsBehavior'
                  )
             )
         );
