@@ -222,9 +222,10 @@ class P3Page extends BaseP3Page
             // prepare node identifiers
             $itemOptions = array();
             $itemOptions['data-pageId'] = $model->id;
-            $itemOptions['data-pageNameId'] = $model->nameId;
-            $itemOptions['class'] = 'page-'.$model->nameId;
-
+            if(!empty($model->nameId)) {
+                $itemOptions['data-pageNameId'] = $model->nameId;
+                $itemOptions['class'] = 'page-'.$model->nameId;
+            }
             $item = array(
                 'label'       => $model->t('menuName', null, true),
                 'url'         => $model->createUrl(),
