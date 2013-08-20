@@ -247,7 +247,8 @@ class P3Page extends BaseP3Page
         // TODO: should check translation also(!!!)
         $depBase = new CDbCacheDependency("SELECT MAX(p3_page_meta.modifiedAt) FROM p3_page_meta");
         $depTrans = new CDbCacheDependency("SELECT MAX(p3_page_translation.modifiedAt) FROM p3_page_translation");
-        $dependency = new CChainedCacheDependency(array($depBase, $depTrans));
+        $depDelete = New CGlobalStateCacheDependency('p3extensions.behaviors.P3MetaDataBehavior:lastDelete:p3_page');
+        $dependency = new CChainedCacheDependency(array($depBase, $depTrans, $depDelete));
 
         Yii::trace("Saving menu items ({$cacheId}) to cache", "p3pages.models.P3Page");
         Yii::app()->cache->set($cacheId, $items, 0, $dependency);
