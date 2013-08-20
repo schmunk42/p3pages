@@ -33,7 +33,14 @@ class P3PageTranslation extends BaseP3PageTranslation
     {
         return array_merge(
             parent::behaviors(),
-            array()
+            array(
+                 'Timestamp' => array(
+                     'class'             => 'zii.behaviors.CTimestampBehavior',
+                     'createAttribute'   => 'createdAt',
+                     'updateAttribute'   => 'modifiedAt',
+                     'setUpdateOnCreate' => true,
+                 ),
+            )
         );
     }
 
