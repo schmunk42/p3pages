@@ -67,20 +67,17 @@ class DefaultController extends Controller
         }
 
         if ($model == null && $id) {
-            //throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'Page not available!'));
 
             // look for the reason ...
-			// Access is not granted --- TODO: Remove P3ActiveRecord or reimplement, reimplement 'active' and 'localized' (original code commented out below)
-			$model = P3Page::model()->findByPk($id);
-			if ($model !== null && Yii::app()->user->isGuest) {
-				Yii::app()->user->loginRequired();
-			} elseif ($model !== null && !Yii::app()->user->isGuest) {
-				throw new CHttpException(404, 'You are not authorized to view this page!');
-			}
+            // Access is not granted --- TODO: Remove P3ActiveRecord or reimplement, reimplement 'active' and 'localized' (original code commented out below)
+            $model = P3Page::model()->findByPk($id);
+            if ($model !== null && Yii::app()->user->isGuest) {
+                Yii::app()->user->loginRequired();
+            } elseif ($model !== null && !Yii::app()->user->isGuest) {
+                throw new CHttpException(404, 'You are not authorized to view this page!');
+            }
             
-            // TODO: reimplement checkAccess, ....
             /*
-			// look for the reason ...
 			// is active and localized, but access is not granted --- TODO: Remove P3ActiveRecord or reimplment
 			$model = P3Page::model()->active()->localized()->findByPk($id);
 			if ($model !== null && Yii::app()->user->isGuest) {
