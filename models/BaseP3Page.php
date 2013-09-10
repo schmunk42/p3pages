@@ -53,7 +53,7 @@ abstract class BaseP3Page extends CActiveRecord
     public function relations()
     {
         return array(
-            'p3PageMeta'         => array(self::HAS_ONE, 'P3PageMeta', 'id'),
+            'p3PageMeta'         => array(self::HAS_ONE, 'P3PageMeta', 'id', 'joinType' => 'INNER JOIN'),
             'p3PageTranslations' => array(self::HAS_MANY, 'P3PageTranslation', 'p3_page_id'),
         );
     }
