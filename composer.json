@@ -21,6 +21,6 @@
         "schmunk42/adjacency-list-behavior": "@dev",
         "schmunk42/relation": "1.*",
         "sammaye/auditrail2": "1.*",
-        "yiiext/status-behavior": "@dev"
+        "yiiext/status-behavior": "0.6"
     }
 }
