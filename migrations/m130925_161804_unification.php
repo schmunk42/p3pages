@@ -121,7 +121,7 @@ class m130925_161804_unification extends EDbMigration
                      "url_json"            => $row['route'],
                      "custom_data_json"    => $row['customData'],
                      // yiiext/status-behavior
-                     "status"              => $row['status'],
+                     "status"              => ($row['status']) ? $row['status'] : 10,
                      // mikehaertl/translatable (defaults)
                      "default_keywords"    => $row['keywords'],
                      "default_description" => $row['description'],
