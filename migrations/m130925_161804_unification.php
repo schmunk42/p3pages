@@ -154,6 +154,7 @@ class m130925_161804_unification extends EDbMigration
                 "_p3_page_translation_v0_17",
                 array(
                      "id"          => $row['id'],
+                     "status"      => 30,
                      "p3_page_id"  => $row['p3_page_id'],
                      "language"    => $row['language'],
                      "menu_name"   => $row['menuName'],
