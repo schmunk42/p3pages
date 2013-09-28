@@ -1,121 +1,430 @@
-<div class="">
-    <p class="note">
-        <?php echo Yii::t('P3PagesModule.crud', 'Fields with'); ?> <span
-            class="required">*</span> <?php echo Yii::t('P3PagesModule.crud', 'are required'); ?>.
+<div class="crud-form">
+
+    
+    <?php
+        Yii::app()->bootstrap->registerAssetCss('../select2/select2.css');
+        Yii::app()->bootstrap->registerAssetJs('../select2/select2.js');
+        Yii::app()->clientScript->registerScript('crud/variant/update','$(".crud-form select").select2();');
+
+        $form=$this->beginWidget('TbActiveForm', array(
+            'id' => 'p3-page-form',
+            'enableAjaxValidation' => true,
+            'enableClientValidation' => true,
+        ));
+
+        echo $form->errorSummary($model);
+    ?>
+    
+    <div class="row">
+        <div class="span7"> <!-- main inputs -->
+            <h2>
+                <?php echo Yii::t('crud_static','Data')?>                <small>
+                    <?php echo $model->itemLabel ?>
+                </small>
+
+            </h2>
+
+
+            <div class="form-horizontal">
+
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php  ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            ;
+                            echo $form->error($model,'id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.id') != 'P3Page.id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'name_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64));
+                            echo $form->error($model,'name_id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.name_id') != 'P3Page.name_id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'status') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'status');
+                            echo $form->error($model,'status')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.status') != 'P3Page.status')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'default_menu_name') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'default_menu_name', array('size' => 60, 'maxlength' => 128));
+                            echo $form->error($model,'default_menu_name')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_menu_name') != 'P3Page.default_menu_name')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'tree_parent_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            $this->widget(
+                '\GtcRelation',
+                array(
+                    'model' => $model,
+                    'relation' => 'treeParent',
+                    'fields' => 'itemLabel',
+                    'allowEmpty' => true,
+                    'style' => 'dropdownlist',
+                    'htmlOptions' => array(
+                        'checkAll' => 'all'
+                    ),
+                )
+                );
+                            echo $form->error($model,'tree_parent_id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.tree_parent_id') != 'P3Page.tree_parent_id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'tree_position') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'tree_position');
+                            echo $form->error($model,'tree_position')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.tree_position') != 'P3Page.tree_position')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'default_page_title') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'default_page_title', array('size' => 60, 'maxlength' => 255));
+                            echo $form->error($model,'default_page_title')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_page_title') != 'P3Page.default_page_title')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'default_url_param') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'default_url_param', array('size' => 60, 'maxlength' => 255));
+                            echo $form->error($model,'default_url_param')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_url_param') != 'P3Page.default_url_param')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'layout') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'layout', array('size' => 60, 'maxlength' => 128));
+                            echo $form->error($model,'layout')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.layout') != 'P3Page.layout')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'view') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'view', array('size' => 60, 'maxlength' => 128));
+                            echo $form->error($model,'view')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.view') != 'P3Page.view')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'url_json') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'url_json', array('size' => 60, 'maxlength' => 255));
+                            echo $form->error($model,'url_json')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.url_json') != 'P3Page.url_json')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'default_keywords') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textArea($model, 'default_keywords', array('rows' => 6, 'cols' => 50));
+                            echo $form->error($model,'default_keywords')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_keywords') != 'P3Page.default_keywords')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'default_description') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textArea($model, 'default_description', array('rows' => 6, 'cols' => 50));
+                            echo $form->error($model,'default_description')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_description') != 'P3Page.default_description')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'custom_data_json') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textArea($model, 'custom_data_json', array('rows' => 6, 'cols' => 50));
+                            echo $form->error($model,'custom_data_json')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.custom_data_json') != 'P3Page.custom_data_json')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'access_owner') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'access_owner', array('size' => 60, 'maxlength' => 64));
+                            echo $form->error($model,'access_owner')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.access_owner') != 'P3Page.access_owner')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'access_domain') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'access_domain', array('size' => 8, 'maxlength' => 8));
+                            echo $form->error($model,'access_domain')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.access_domain') != 'P3Page.access_domain')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'access_read') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'access_read', array('size' => 60, 'maxlength' => 256));
+                            echo $form->error($model,'access_read')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.access_read') != 'P3Page.access_read')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'access_update') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'access_update', array('size' => 60, 'maxlength' => 256));
+                            echo $form->error($model,'access_update')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.access_update') != 'P3Page.access_update')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'access_delete') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'access_delete', array('size' => 60, 'maxlength' => 256));
+                            echo $form->error($model,'access_delete')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.access_delete') != 'P3Page.access_delete')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'access_append') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'access_append', array('size' => 60, 'maxlength' => 256));
+                            echo $form->error($model,'access_append')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.access_append') != 'P3Page.access_append')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'created_at') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'created_at');
+                            echo $form->error($model,'created_at')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.created_at') != 'P3Page.created_at')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'updated_at') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'updated_at');
+                            echo $form->error($model,'updated_at')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.updated_at') != 'P3Page.updated_at')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'copied_from_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'copied_from_id');
+                            echo $form->error($model,'copied_from_id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.copied_from_id') != 'P3Page.copied_from_id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+        <!-- main inputs -->
+
+        <div class="span5"> <!-- sub inputs -->
+            <h2>
+                <?php echo Yii::t('crud_static','Relations')?>
+            </h2>
+                                                            
+                <h3>
+                    <?php echo Yii::t('P3PagesModule.crud', 'P3Pages'); ?>
+                </h3>
+                <?php echo '<i>Switch to view mode to edit related records.</i>' ?>
+                                                            
+                <h3>
+                    <?php echo Yii::t('P3PagesModule.crud', 'P3PageTranslations'); ?>
+                </h3>
+                <?php echo '<i>Switch to view mode to edit related records.</i>' ?>
+                            
+        </div>
+        <!-- sub inputs -->
+    </div>
+
+    <p class="alert">
+        <?php echo Yii::t('crud_static','Fields with <span class="required">*</span> are required.');?>
     </p>
 
-    <?php
-    $form = $this->beginWidget(
-        'CActiveForm',
-        array(
-             'id'                     => 'p3-page-form',
-             'enableAjaxValidation'   => true,
-             'enableClientValidation' => true,
-        )
-    );
-
-    echo $form->errorSummary($model);
-    ?>
-
-
-
-    <div class="row">
-        <div class="span4">
-            <h3><?php echo Yii::t('P3PagesModule.crud', 'Menu Name'); ?></h3>
-            <?php echo $model->t('menuName'); ?>
-        </div>
-        <div class="span8">
-            <h3><?php echo Yii::t('P3PagesModule.crud', 'Node Identifier'); ?></h3>
-            <?php echo $form->labelEx($model, 'nameId'); ?>
-
-            <?php echo $form->textField($model, 'nameId'); ?>
-            <?php echo $form->error($model, 'nameId'); ?>
-            <?php if ('help.nameId' != $help = Yii::t('P3PagesModule.crud', 'help.nameId')) {
-                echo "<span class='help-block'>$help</span>";
-            } ?>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="span4">
-            <h3><?php echo Yii::t('P3PagesModule.crud', 'View and Layout'); ?></h3>
-
-
-            <?php echo $form->labelEx($model, 'layout'); ?>
-
-            <?php echo $form->dropDownList(
-                $model,
-                'layout',
-                $this->module->params['availableLayouts'],
-                array('empty' => 'none')
-            ); ?>
-            <?php echo $form->error($model, 'layout'); ?>
-            <?php if ('help.layout' != $help = Yii::t('P3PagesModule.crud', 'help.layout')) {
-                echo "<span class='help-block'>$help</span>";
-            } ?>
-
-
-            <?php echo $form->labelEx($model, 'view'); ?>
-            <?php echo $form->dropDownList(
-                $model,
-                'view',
-                $this->module->params['availableViews'],
-                array('empty' => 'none')
-            ); ?>
-            <?php echo $form->error($model, 'view'); ?>
-            <?php if ('help.view' != $help = Yii::t('P3PagesModule.crud', 'help.view')) {
-                echo "<span class='help-block'>$help</span>";
-            } ?>
-
-        </div>
-        <div class="span8">
-            <h3><?php echo Yii::t('P3PagesModule.crud', 'Internal Route or Redirect'); ?></h3>
-
-            <?php echo $form->labelEx($model, 'route'); ?>
-            <?php
-            $this->widget(
-                'jsonEditorView.JuiJSONEditorInput',
-                array(
-                     'model'     => $model,
-                     // ActiveRecord, or any CModel child class
-                     'attribute' => 'route'
-                     // Model attribute holding initial JSON data string
-                )
-            );
-            ?>
-            <div class="notice">Do not use double quotes (") for keys and/or values!</div>
-            <?php echo $form->error($model, 'route'); ?>
-            <?php if ('help.route' != $help = Yii::t('P3PagesModule.crud', 'help.route')) {
-                echo "<span class='help-block'>$help</span>";
-            } ?>
-        </div>
-
-    </div>
-
-
     <div class="form-actions">
-
+        
         <?php
-        echo CHtml::Button(
-            Yii::t('P3PagesModule.crud', 'Cancel'),
-            array(
-                 'submit' => array('p3Page/admin'),
-                 'class'  => 'btn'
-            )
-        );
-        echo ' ';
-
-        echo CHtml::submitButton(
-            Yii::t('P3PagesModule.crud', 'Save'),
-            array(
-                 'class' => 'btn btn-primary'
-            )
-        ); ?>
-
+            echo CHtml::Button(
+            Yii::t('crud_static', 'Cancel'), array(
+                'submit' => (isset($_GET['returnUrl']))?$_GET['returnUrl']:array('p3Page/admin'),
+                'class' => 'btn'
+            ));
+            echo ' '.CHtml::submitButton(Yii::t('crud_static', 'Save'), array(
+                'class' => 'btn btn-primary'
+            ));
+        ?>
     </div>
 
-    <?php $this->endWidget(); ?>
-
-</div>
-<!-- form -->
+    <?php $this->endWidget() ?>
+</div> <!-- form -->

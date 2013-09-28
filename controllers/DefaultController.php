@@ -94,7 +94,7 @@ class DefaultController extends Controller
         
 
         // everything above passed, output the page
-        $data = CJSON::decode($model->route);
+        $data = CJSON::decode($model->url_json);
         if ($data) {
             if (!empty($data['route'])) {
                 $route = $data['route'];
@@ -114,7 +114,7 @@ class DefaultController extends Controller
         if (!$model->view || !$model->layout) {
             throw new CHttpException(500, Yii::t('P3PagesModule.crud', 'No view file in database'));
         }
-        $this->pageTitle = $model->t('pageTitle');
+        $this->pageTitle = $model->page_title;
         $this->layout = $model->layout;
         $this->render($model->view, array('model' => $model));
         #return;

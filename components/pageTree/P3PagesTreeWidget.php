@@ -20,14 +20,13 @@ class P3PagesTreeWidget extends CWidget
         $criteria = new CDbCriteria;
         // SQLite workaround for <=>
         if ($this->rootNode === null) {
-            $criteria->condition = "p3PageMeta.treeParent_id IS :id";
+            $criteria->condition = "tree_parent_id IS :id";
         } else {
-            $criteria->condition = "p3PageMeta.treeParent_id = :id";
+            $criteria->condition = "tree_parent_id = :id";
         }
         $criteria->params = array(':id' => $this->rootNode);
-        $criteria->order  = 'p3PageMeta.treePosition';
-        $criteria->with   = array('p3PageMeta');
-        $firstLevelNodes  = P3Page::model()->createable()->localized()->findAll($criteria);
+        $criteria->order  = 'tree_position';
+        $firstLevelNodes  = P3Page::model()->appendable()->localized()->findAll($criteria);
         #var_dump($firstLevelNodes);exit;
         $this->renderTree($firstLevelNodes, $this->rootNode);
     }

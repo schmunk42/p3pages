@@ -1,54 +1,42 @@
 <?php
 
+
 class P3PageController extends Controller
 {
     #public $layout='//layouts/column2';
+
     public $defaultAction = "admin";
     public $scenario = "crud";
+    public $scope = "crud";
 
-    public function filters()
-    {
-        return array(
-            'accessControl',
-        );
-    }
+public function filters()
+{
+return array(
+'accessControl',
+);
+}
 
-    public function accessRules()
-    {
-        return array(
-            array(
-                'allow',
-                'actions' => array('create', 'createChild', 'editableSaver', 'update', 'delete', 'admin', 'view'),
-                'roles'   => array('P3pages.P3Page.*'),
-            ),
-            array(
-                'deny',
-                'users' => array('*'),
-            ),
-        );
-    }
+public function accessRules()
+{
+return array(
+array(
+'allow',
+'actions' => array('create', 'editableSaver', 'update', 'delete', 'admin', 'view'),
+'roles' => array('P3pages.P3Page.*'),
+),
+array(
+'deny',
+'users' => array('*'),
+),
+);
+}
 
     public function beforeAction($action)
     {
         parent::beforeAction($action);
-        // map identifcationColumn to id
-        if (!isset($_GET['id']) && isset($_GET['id'])) {
-            $model = P3Page::model()->find(
-                'id = :id',
-                array(
-                     ':id' => $_GET['id']
-                )
-            );
-            if ($model !== null) {
-                $_GET['id'] = $model->id;
-            } else {
-                throw new CHttpException(400);
-            }
-        }
         if ($this->module !== null) {
             $this->breadcrumbs[$this->module->Id] = array('/' . $this->module->Id);
         }
-
         return true;
     }
 
@@ -58,20 +46,9 @@ class P3PageController extends Controller
         $this->render('view', array('model' => $model,));
     }
 
-    public function actionCreateChild()
-    {
-        $model = new P3Page;
-        $model->save();
-        $model->p3PageMeta->treeParent_id = $_GET['P3PageMeta']['treeParent_id'];
-        $model->p3PageMeta->save();
-
-        $this->redirect(array('update', 'id' => $model->id, 'returnUrl' => $_GET['returnUrl']));
-    }
-
-
     public function actionCreate()
     {
-        $model           = new P3Page;
+        $model = new P3Page;
         $model->scenario = $this->scenario;
 
         $this->performAjaxValidation($model, 'p3-page-form');
@@ -97,16 +74,16 @@ class P3PageController extends Controller
         $this->render('create', array('model' => $model));
     }
 
-
     public function actionUpdate($id)
     {
-        $model           = $this->loadModel($id);
+        $model = $this->loadModel($id);
         $model->scenario = $this->scenario;
 
         $this->performAjaxValidation($model, 'p3-page-form');
 
         if (isset($_POST['P3Page'])) {
             $model->attributes = $_POST['P3Page'];
+
 
             try {
                 if ($model->save()) {
@@ -148,19 +125,17 @@ class P3PageController extends Controller
                 }
             }
         } else {
-            throw new CHttpException(400, Yii::t('app', 'Invalid request. Please do not repeat this request again.'));
+            throw new CHttpException(400, Yii::t('crud_static', 'Invalid request. Please do not repeat this request again.'));
         }
-    }
-
-    public function actionIndex()
-    {
-        $dataProvider = new CActiveDataProvider('P3Page');
-        $this->render('index', array('dataProvider' => $dataProvider,));
     }
 
     public function actionAdmin()
     {
         $model = new P3Page('search');
+        $scopes = $model->scopes();
+        if (isset($scopes[$this->scope])) {
+            $model->{$this->scope}();
+        }
         $model->unsetAttributes();
 
         if (isset($_GET['P3Page'])) {
@@ -172,11 +147,16 @@ class P3PageController extends Controller
 
     public function loadModel($id)
     {
-        $model = P3Page::model()->findByPk($id);
-        if ($model === null) {
-            throw new CHttpException(404, Yii::t('app', 'The requested page does not exist.'));
+        $m = P3Page::model();
+        // apply scope, if available
+        $scopes = $m->scopes();
+        if (isset($scopes[$this->scope])) {
+            $m->{$this->scope}();
         }
-
+        $model = $m->findByPk($id);
+        if ($model === null) {
+            throw new CHttpException(404, Yii::t('crud_static', 'The requested page does not exist.'));
+        }
         return $model;
     }
 
@@ -187,4 +167,5 @@ class P3PageController extends Controller
             Yii::app()->end();
         }
     }
+
 }

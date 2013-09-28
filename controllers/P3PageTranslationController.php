@@ -1,50 +1,39 @@
 <?php
 
+
 class P3PageTranslationController extends Controller
 {
     #public $layout='//layouts/column2';
+
     public $defaultAction = "admin";
     public $scenario = "crud";
+    public $scope = "crud";
 
-    public function filters()
-    {
-        return array(
-            'accessControl',
-        );
-    }
+public function filters()
+{
+return array(
+'accessControl',
+);
+}
 
-    public function accessRules()
-    {
-        return array(
-            array(
-                'allow',
-                'actions' => array('create', 'editableSaver', 'update', 'delete', 'admin', 'view'),
-                'roles'   => array('P3pages.P3PageTranslation.*'),
-            ),
-            array(
-                'deny',
-                'users' => array('*'),
-            ),
-        );
-    }
+public function accessRules()
+{
+return array(
+array(
+'allow',
+'actions' => array('create', 'editableSaver', 'update', 'delete', 'admin', 'view'),
+'roles' => array('P3pages.P3PageTranslation.*'),
+),
+array(
+'deny',
+'users' => array('*'),
+),
+);
+}
 
     public function beforeAction($action)
     {
         parent::beforeAction($action);
-        // map identifcationColumn to id
-        if (!isset($_GET['id']) && isset($_GET['id'])) {
-            $model = P3PageTranslation::model()->find(
-                'id = :id',
-                array(
-                     ':id' => $_GET['id']
-                )
-            );
-            if ($model !== null) {
-                $_GET['id'] = $model->id;
-            } else {
-                throw new CHttpException(400);
-            }
-        }
         if ($this->module !== null) {
             $this->breadcrumbs[$this->module->Id] = array('/' . $this->module->Id);
         }
@@ -59,7 +48,7 @@ class P3PageTranslationController extends Controller
 
     public function actionCreate()
     {
-        $model           = new P3PageTranslation;
+        $model = new P3PageTranslation;
         $model->scenario = $this->scenario;
 
         $this->performAjaxValidation($model, 'p3-page-translation-form');
@@ -85,10 +74,9 @@ class P3PageTranslationController extends Controller
         $this->render('create', array('model' => $model));
     }
 
-
     public function actionUpdate($id)
     {
-        $model           = $this->loadModel($id);
+        $model = $this->loadModel($id);
         $model->scenario = $this->scenario;
 
         $this->performAjaxValidation($model, 'p3-page-translation-form');
@@ -137,19 +125,17 @@ class P3PageTranslationController extends Controller
                 }
             }
         } else {
-            throw new CHttpException(400, Yii::t('app', 'Invalid request. Please do not repeat this request again.'));
+            throw new CHttpException(400, Yii::t('crud_static', 'Invalid request. Please do not repeat this request again.'));
         }
-    }
-
-    public function actionIndex()
-    {
-        $dataProvider = new CActiveDataProvider('P3PageTranslation');
-        $this->render('index', array('dataProvider' => $dataProvider,));
     }
 
     public function actionAdmin()
     {
         $model = new P3PageTranslation('search');
+        $scopes = $model->scopes();
+        if (isset($scopes[$this->scope])) {
+            $model->{$this->scope}();
+        }
         $model->unsetAttributes();
 
         if (isset($_GET['P3PageTranslation'])) {
@@ -161,9 +147,15 @@ class P3PageTranslationController extends Controller
 
     public function loadModel($id)
     {
-        $model = P3PageTranslation::model()->findByPk($id);
+        $m = P3PageTranslation::model();
+        // apply scope, if available
+        $scopes = $m->scopes();
+        if (isset($scopes[$this->scope])) {
+            $m->{$this->scope}();
+        }
+        $model = $m->findByPk($id);
         if ($model === null) {
-            throw new CHttpException(404, Yii::t('app', 'The requested page does not exist.'));
+            throw new CHttpException(404, Yii::t('crud_static', 'The requested page does not exist.'));
         }
         return $model;
     }
@@ -175,4 +167,5 @@ class P3PageTranslationController extends Controller
             Yii::app()->end();
         }
     }
+
 }

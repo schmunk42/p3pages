@@ -1,12 +1,6 @@
 <?php
-/**
- * P3Page is the model class for page nodes
- * @author   Tobias Munk <schmunk@usrbin.de>
- * @package  p3pages.models
- * @category db.ar
- */
 
-// auto-loading fix
+// auto-loading
 Yii::setPathOfAlias('P3Page', dirname(__FILE__));
 Yii::import('P3Page.*');
 
@@ -15,11 +9,7 @@ class P3Page extends BaseP3Page
     const PAGE_ID_KEY   = 'pageId';
     const PAGE_NAME_KEY = 'pageName';
 
-    public function get_label()
-    {
-        return $this->t('menuName', null, true) . " #" . $this->id;
-    }
-
+    // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
@@ -30,76 +20,76 @@ class P3Page extends BaseP3Page
         return parent::init();
     }
 
-    public function defaultScope()
+    public function getItemLabel()
     {
-        return array('with' => array('p3PageMeta', 'p3PageTranslations'));
+        return parent::getItemLabel();
     }
 
     public function behaviors()
     {
         return array_merge(
+            parent::behaviors(),
             array(
-                 'MetaData' => array(
-                     'class'            => 'P3MetaDataBehavior',
-                     'metaDataRelation' => 'p3PageMeta',
-                     'parentRelation'   => 'treeParent',
-                     'childrenRelation' => 'p3PageMetas',
-                     'contentRelation'  => 'id0',
-                     'defaultLanguage'  => (Yii::app()->params['P3Page.defaultLanguage']) ?
-                         Yii::app()->params['P3Page.defaultLanguage'] : P3MetaDataBehavior::ALL_LANGUAGES,
-                     'defaultStatus'    => (Yii::app()->params['P3Page.defaultStatus']) ?
-                         Yii::app()->params['P3Page.defaultStatus'] : P3MetaDataBehavior::STATUS_ACTIVE,
+                 'Access'        => array(
+                     'class' => '\PhAccessBehavior'
                  ),
-                 'Translation' => array(
-                     'class'             => 'P3TranslationBehavior',
-                     'relation'          => 'p3PageTranslations',
-                     'fallbackLanguage'  => (isset(Yii::app()->params['P3Page.fallbackLanguage'])) ?
-                         Yii::app()->params['P3Page.fallbackLanguage'] : Yii::app()->sourceLanguage,
-                     'fallbackIndicator' => (isset(Yii::app()->params['P3Page.fallbackIndicator'])) ?
-                         Yii::app()->params['P3Page.fallbackIndicator'] : array('menuName' => ' *'),
-                     'fallbackValue'     => (isset(Yii::app()->params['P3Page.fallbackValue'])) ?
-                         Yii::app()->params['P3Page.fallbackValue'] : "[Page Name]",
-                 )
-            ),
-            parent::behaviors()
+                 'AdjacencyList' => array(
+                     'class'            => '\AdjacencyListBehavior',
+                     'parentAttribute'  => 'tree_parent_id',
+                     'parentRelation'   => 'treeParent',
+                     'childrenRelation' => 'p3Pages'
+                 ),
+                 'Translatable'  => array(
+                     'class'                 => 'vendor.mikehaertl.translatable.Translatable',
+                     'translationAttributes' => array(
+                         'menu_name',
+                         'page_title',
+                         'url_param',
+                         'keywords',
+                         'description'
+                     ),
+                     'translationRelation'   => 'p3PageTranslations',
+                     'fallbackColumns'       => array(
+                         'menu_name'   => 'default_menu_name',
+                         'page_title'  => 'default_page_title',
+                         'url_param'   => 'default_url_param',
+                         'keywords'    => 'default_keywords',
+                         'description' => 'default_description',
+                     ),
+                 ),
+                 'Timestamp' => array(
+                     'class'             => 'zii.behaviors.CTimestampBehavior',
+                     'createAttribute'   => 'created_at',
+                     'updateAttribute'   => 'updated_at',
+                     'setUpdateOnCreate' => true,
+                 ),
+            )
         );
     }
 
     public function rules()
     {
         return array_merge(
-            array(
-                 array(
-                     'route',
-                     'match',
-                     'pattern' => '/"route":"|"url":"|{}/',
-                     'message' => 'If not empty, route JSON must contain a \'route\' or \'url\' element'
-                 ),
-            ),
-            array(
-                 array(
-                     'nameId',
-                     'match',
-                     'pattern' => '/^[a-zA-Z0-9-_]*$/',
-                     'message' => 'May only container letters numbers, underscores and dashes'
-                 ),
-            ),
             parent::rules()
+        /* , array(
+          array('column1, column2', 'rule1'),
+          array('column3', 'rule2'),
+          ) */
         );
     }
 
     public function createUrl($additionalParams = array(), $absolute = false)
     {
 
-        if (is_array(CJSON::decode($this->route)) && count(CJSON::decode($this->route)) !== 0) {
-            $link = CJSON::decode($this->route);
+        if (is_array(CJSON::decode($this->url_json)) && count(CJSON::decode($this->url_json)) !== 0) {
+            $link = CJSON::decode($this->url_json);
         } else {
             $link['route']  = '/p3pages/default/page';
             $link['params'] = CMap::mergeArray(
                 $additionalParams,
                 array(
                      P3Page::PAGE_ID_KEY   => $this->id,
-                     P3Page::PAGE_NAME_KEY => $this->t('seoUrl')
+                     P3Page::PAGE_NAME_KEY => $this->url_param
                 )
             );
         }
@@ -118,42 +108,14 @@ class P3Page extends BaseP3Page
         }
     }
 
-    public function isActive()
-    {
-        if (self::getActivePage() !== null) {
-            return (self::getActivePage()->id == $this->id);
-        } else {
-            return false;
-        }
-    }
-
-    public function isActiveParent($model = null)
-    {
-        if ($model === null) {
-            $model = $this;
-        }
-        if (count($model->getChildren())) {
-            foreach ($model->getChildren() AS $childModel) {
-                if ((self::getActivePage()) && $childModel->id === self::getActivePage()->id) {
-                    return true;
-                }
-                if (count($childModel->getChildren()) && $childModel) {
-                    return $this->isActiveParent($childModel);
-                }
-            }
-        }
-
-        return false;
-    }
-
     public function getBreadcrumbs($withLinks = true)
     {
         $model       = $this;
         $breadcrumbs = array();
 
         while ($model->getParent()) {
-            $breadcrumbs[$model->t('menuName')] = ($withLinks) ? $model->createUrl() : null;
-            $model                              = $model->getParent();
+            $breadcrumbs[$model->menu_name] = ($withLinks) ? $model->createUrl() : null;
+            $model                          = $model->getParent();
         }
         $breadcrumbs = array_reverse($breadcrumbs);
 
@@ -176,16 +138,18 @@ class P3Page extends BaseP3Page
             $_activePage = P3Page::model()->localized()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
             $_traceMsg   = ' found by id';
         } elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
-            $_activePage = P3Page::model()->localized()->findByAttributes(array('nameId' => $_GET[P3Page::PAGE_NAME_KEY]));
+            $_activePage = P3Page::model()->localized()->findByAttributes(
+                array('nameId' => $_GET[P3Page::PAGE_NAME_KEY])
+            );
             $_traceMsg   = ' found by nameId';
         } else {
             // try to find page via route
             $criteria            = new CDbCriteria;
-            $criteria->condition = "route LIKE :route";
+            $criteria->condition = "url_json LIKE :route";
             $criteria->params    = array(':route' => "%" . Yii::app()->controller->route . "%");
-            $criteria->mergeWith(P3Page::model()->localized()->getDbCriteria()); // obtain scope from behavior
-            $_activePage         = P3Page::model()->find($criteria);
-            $_traceMsg           = " found by route '" . Yii::app()->controller->route . "'";
+            #TODO: $criteria->mergeWith(P3Page::model()->localized()->getDbCriteria()); // obtain scope from behavior
+            $_activePage = P3Page::model()->find($criteria);
+            $_traceMsg   = " found by route '" . Yii::app()->controller->route . "'";
         }
 
         if ($_activePage !== null) {
@@ -205,7 +169,7 @@ class P3Page extends BaseP3Page
             return array();
         }
 
-        $cacheId = "p3pages.models.menuItems.".Yii::app()->language.".{$rootNode->id}.{$maxDepth}.{$level}";
+        $cacheId = "p3pages.models.menuItems." . Yii::app()->language . ".{$rootNode->id}.{$maxDepth}.{$level}";
         if ($cachedItems = Yii::app()->cache->get($cacheId)) {
             Yii::trace("Loading menu items ({$cacheId}) from cache", "p3pages.models.P3Page");
             return $cachedItems;
@@ -220,16 +184,16 @@ class P3Page extends BaseP3Page
             }
 
             // prepare node identifiers
-            $itemOptions = array();
+            $itemOptions                = array();
             $itemOptions['data-pageId'] = $model->id;
-            if(!empty($model->nameId)) {
+            if (!empty($model->nameId)) {
                 $itemOptions['data-pageNameId'] = $model->nameId;
-                $itemOptions['class'] = 'page-'.$model->nameId;
+                $itemOptions['class']           = 'page-' . $model->nameId;
             }
             $item = array(
-                'label'       => $model->t('menuName', null, true),
+                'label'       => $model->menu_name,
                 'url'         => $model->createUrl(),
-                'nameId'      => $model->nameId,
+                'nameId'      => $model->name_id,
                 'itemOptions' => $itemOptions,
                 // check for active item is disabled since 0.14.0 because of performance issues,
                 // select the active item via JavaScript and pageId data key
@@ -244,10 +208,9 @@ class P3Page extends BaseP3Page
             $items[] = $item;
         }
 
-        // TODO: should check translation also(!!!)
-        $depBase = new CDbCacheDependency("SELECT MAX(p3_page_meta.modifiedAt) FROM p3_page_meta");
-        $depTrans = new CDbCacheDependency("SELECT MAX(p3_page_translation.modifiedAt) FROM p3_page_translation");
-        $depDelete = New CGlobalStateCacheDependency('p3extensions.behaviors.P3MetaDataBehavior:lastDelete:p3_page');
+        $depBase    = new CDbCacheDependency("SELECT MAX(p3_page_meta.modifiedAt) FROM p3_page_meta");
+        $depTrans   = new CDbCacheDependency("SELECT MAX(p3_page_translation.modifiedAt) FROM p3_page_translation");
+        $depDelete  = New CGlobalStateCacheDependency('p3extensions.behaviors.P3MetaDataBehavior:lastDelete:p3_page');
         $dependency = new CChainedCacheDependency(array($depBase, $depTrans, $depDelete));
 
         Yii::trace("Saving menu items ({$cacheId}) to cache", "p3pages.models.P3Page");
@@ -255,14 +218,4 @@ class P3Page extends BaseP3Page
 
         return $items;
     }
-
-    static public function registerSelectActivePageScript($selector = '')
-    {
-        $page = self::getActivePage();
-        $pageId = ($page) ? $page->id : null;
-        $script = "$('{$selector} *[data-pageId=\"{$pageId}\"]').addClass('active');";
-        $script .= "$('{$selector} *[data-pageId=\"{$pageId}\"]').parent().parent().addClass('active');"; // TODO !!!!!!!
-        Yii::app()->clientScript->registerScript('p3pages.models.P3Page.jsSelectActivePage', $script, CClientScript::POS_END);
-    }
-
 }

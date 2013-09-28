@@ -1,12 +1,6 @@
 <?php
-/**
- * P3Page is the model class for page node translations
- * @author   Tobias Munk <schmunk@usrbin.de>
- * @package  p3pages.models
- * @category db.ar
- */
 
-// auto-loading fix
+// auto-loading
 Yii::setPathOfAlias('P3PageTranslation', dirname(__FILE__));
 Yii::import('P3PageTranslation.*');
 
@@ -24,9 +18,9 @@ class P3PageTranslation extends BaseP3PageTranslation
         return parent::init();
     }
 
-    public function __toString()
+    public function getItemLabel()
     {
-        return (string)$this->language;
+        return parent::getItemLabel();
     }
 
     public function behaviors()
@@ -36,8 +30,8 @@ class P3PageTranslation extends BaseP3PageTranslation
             array(
                  'Timestamp' => array(
                      'class'             => 'zii.behaviors.CTimestampBehavior',
-                     'createAttribute'   => 'createdAt',
-                     'updateAttribute'   => 'modifiedAt',
+                     'createAttribute'   => 'created_at',
+                     'updateAttribute'   => 'updated_at',
                      'setUpdateOnCreate' => true,
                  ),
             )
@@ -47,18 +41,11 @@ class P3PageTranslation extends BaseP3PageTranslation
     public function rules()
     {
         return array_merge(
-            array(
-                 array(
-                     'seoUrl',
-                     'match',
-                     'pattern' => '/^[a-z0-9_\-]+$/',
-                     'message' => Yii::t(
-                         'P3PagesModule.crud',
-                         'SEO URL must only contain lowercase characters, numbers, underscores and dashes'
-                     )
-                 ),
-            ),
             parent::rules()
+        /* , array(
+          array('column1, column2', 'rule1'),
+          array('column3', 'rule2'),
+          ) */
         );
     }
 

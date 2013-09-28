@@ -7,8 +7,8 @@
     <?php endif; ?>
 
     <?php echo CHtml::link(
-        '<i class="icon-circle-arrow-right icon-white"></i> ' . ' <b>' . $model->nameId . '</b> ' .
-        $model->t('menuName') . ' #' . $model->id,
+        '<i class="icon-circle-arrow-right icon-white"></i> ' . ' <b>' . $model->name_id . '</b> ' .
+        $model->menu_name . ' #' . $model->id,
         $model->createUrl(),
         array('class' => 'btn btn-inverse')
     ) ?>
@@ -60,7 +60,7 @@
     ?>
     <?php
     echo CHtml::link(
-        '<i class="icon-wrench"></i> ', //Yii::t('P3PagesModule.crud', 'Template'),
+        '<i class="icon-pencil"></i> ', //Yii::t('P3PagesModule.crud', 'Template'),
         array(
              '/p3pages/p3Page/update',
              'id'        => $model->id,
@@ -75,23 +75,10 @@
     ?>
     <?php
     echo CHtml::link(
-        '<i class="icon-info-sign"></i> ', //Yii::t('P3PagesModule.crud', 'Meta Data'),
-        array(
-             '/p3pages/p3PageMeta/update',
-             'id'        => $model->id,
-             'returnUrl' => Yii::app()->controller->createUrl(null)
-        ),
-        array(
-             'class' => 'btn'
-        )
-    )
-    ?>
-    <?php
-    echo CHtml::link(
         '<i class="icon-plus-sign"></i>', // Append Child Page
         array(
-             '/p3pages/p3Page/createChild',
-             'P3PageMeta' => array('treeParent_id' => $model->id,),
+             '/p3pages/p3Page/create',
+             'P3Page' => array('tree_parent_id' => $model->id,),
              'returnUrl'  => Yii::app()->controller->createUrl(null)
         ),
         array('class' => 'btn')
@@ -101,7 +88,7 @@
 </p>
 <p>
 
-    <span class="label label-info"><?php echo ($model->route != '{}') ? $model->route : '' ?></span>
+    <span class="label label-info"><?php echo ($model->url_json != '{}') ? $model->url_json : '' ?></span>
     <span class="label"><?php echo $model->layout ?></span>
     <span class="label"><?php echo $model->view ?></span>
     <span class="label">Position <?php
@@ -122,3 +109,4 @@
 
 
 </p>
+<hr/>
