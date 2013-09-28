@@ -45,15 +45,15 @@
                 
                     <div class="control-group">
                         <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'name_id') ?>
+                            <?php echo $form->labelEx($model, 'default_menu_name') ?>
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64));
-                            echo $form->error($model,'name_id')
+                            echo $form->textField($model, 'default_menu_name', array('size' => 60, 'maxlength' => 128));
+                            echo $form->error($model,'default_menu_name')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.name_id') != 'P3Page.name_id')?$t:'' ?>
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_menu_name') != 'P3Page.default_menu_name')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -69,21 +69,6 @@
                             ?>
                             <span class="help-block">
                                 <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.status') != 'P3Page.status')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'default_menu_name') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'default_menu_name', array('size' => 60, 'maxlength' => 128));
-                            echo $form->error($model,'default_menu_name')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_menu_name') != 'P3Page.default_menu_name')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -132,15 +117,15 @@
                 
                     <div class="control-group">
                         <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'default_page_title') ?>
+                            <?php echo $form->labelEx($model, 'name_id') ?>
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'default_page_title', array('size' => 60, 'maxlength' => 255));
-                            echo $form->error($model,'default_page_title')
+                            echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64));
+                            echo $form->error($model,'name_id')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_page_title') != 'P3Page.default_page_title')?$t:'' ?>
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.name_id') != 'P3Page.name_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -156,6 +141,21 @@
                             ?>
                             <span class="help-block">
                                 <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_url_param') != 'P3Page.default_url_param')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'default_page_title') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'default_page_title', array('size' => 60, 'maxlength' => 255));
+                            echo $form->error($model,'default_page_title')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.default_page_title') != 'P3Page.default_page_title')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -342,6 +342,21 @@
                 
                     <div class="control-group">
                         <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'copied_from_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'copied_from_id');
+                            echo $form->error($model,'copied_from_id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.copied_from_id') != 'P3Page.copied_from_id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
                             <?php echo $form->labelEx($model, 'created_at') ?>
                         </div>
                         <div class='controls'>
@@ -366,21 +381,6 @@
                             ?>
                             <span class="help-block">
                                 <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.updated_at') != 'P3Page.updated_at')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'copied_from_id') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'copied_from_id');
-                            echo $form->error($model,'copied_from_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3Page.copied_from_id') != 'P3Page.copied_from_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>

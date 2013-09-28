@@ -19,10 +19,10 @@ class m130925_161804_unification extends EDbMigration
             "_p3_page_v0_17",
             array(
                  "id"                  => "pk",
-                 // yiiext/status-behavior
-                 "status"              => "int(4) NOT NULL",
                  // mikehaertl/translatable (defaults)
                  "default_menu_name"   => "varchar(128) NOT NULL",
+                 // yiiext/status-behavior
+                 "status"              => "int(4) NOT NULL",
                  // schmunk42/adjacency-list-behavior
                  "tree_parent_id"      => "int(11)",
                  "tree_position"       => "int(11)",

@@ -49,13 +49,13 @@ $this->breadcrumbs[] = Yii::t('crud_static', 'View');
                         )
                     ),
 array(
-                        'name' => 'name_id',
+                        'name' => 'default_menu_name',
                         'type' => 'raw',
                         'value' => $this->widget(
                             'EditableField',
                             array(
                                 'model' => $model,
-                                'attribute' => 'name_id',
+                                'attribute' => 'default_menu_name',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true
@@ -69,19 +69,6 @@ array(
                             array(
                                 'model' => $model,
                                 'attribute' => 'status',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'default_menu_name',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'default_menu_name',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true
@@ -112,13 +99,13 @@ array(
                         )
                     ),
 array(
-                        'name' => 'default_page_title',
+                        'name' => 'name_id',
                         'type' => 'raw',
                         'value' => $this->widget(
                             'EditableField',
                             array(
                                 'model' => $model,
-                                'attribute' => 'default_page_title',
+                                'attribute' => 'name_id',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true
@@ -132,6 +119,19 @@ array(
                             array(
                                 'model' => $model,
                                 'attribute' => 'default_url_param',
+                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                            ),
+                            true
+                        )
+                    ),
+array(
+                        'name' => 'default_page_title',
+                        'type' => 'raw',
+                        'value' => $this->widget(
+                            'EditableField',
+                            array(
+                                'model' => $model,
+                                'attribute' => 'default_page_title',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true
@@ -294,6 +294,19 @@ array(
                         )
                     ),
 array(
+                        'name' => 'copied_from_id',
+                        'type' => 'raw',
+                        'value' => $this->widget(
+                            'EditableField',
+                            array(
+                                'model' => $model,
+                                'attribute' => 'copied_from_id',
+                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                            ),
+                            true
+                        )
+                    ),
+array(
                         'name' => 'created_at',
                         'type' => 'raw',
                         'value' => $this->widget(
@@ -314,19 +327,6 @@ array(
                             array(
                                 'model' => $model,
                                 'attribute' => 'updated_at',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'copied_from_id',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'copied_from_id',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true

@@ -5,13 +5,13 @@
  *
  * Columns in table "p3_page" available as properties of the model:
  * @property integer $id
- * @property string $name_id
- * @property integer $status
  * @property string $default_menu_name
+ * @property integer $status
  * @property integer $tree_parent_id
  * @property integer $tree_position
- * @property string $default_page_title
+ * @property string $name_id
  * @property string $default_url_param
+ * @property string $default_page_title
  * @property string $layout
  * @property string $view
  * @property string $url_json
@@ -24,9 +24,9 @@
  * @property string $access_update
  * @property string $access_delete
  * @property string $access_append
+ * @property integer $copied_from_id
  * @property string $created_at
  * @property string $updated_at
- * @property integer $copied_from_id
  *
  * Relations of table "p3_page" available as properties of the model:
  * @property P3Page $treeParent
@@ -50,23 +50,23 @@ abstract class BaseP3Page extends CActiveRecord
     {
         return array_merge(
             parent::rules(), array(
-                array('status, default_menu_name, created_at', 'required'),
-                array('name_id, tree_parent_id, tree_position, default_page_title, default_url_param, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, updated_at, copied_from_id', 'default', 'setOnEmpty' => true, 'value' => null),
+                array('default_menu_name, status, created_at', 'required'),
+                array('tree_parent_id, tree_position, name_id, default_url_param, default_page_title, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, copied_from_id, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
                 array('status, tree_parent_id, tree_position, copied_from_id', 'numerical', 'integerOnly' => true),
-                array('name_id, access_owner', 'length', 'max' => 64),
                 array('default_menu_name, layout, view', 'length', 'max' => 128),
-                array('default_page_title, default_url_param, url_json', 'length', 'max' => 255),
+                array('name_id, access_owner', 'length', 'max' => 64),
+                array('default_url_param, default_page_title, url_json', 'length', 'max' => 255),
                 array('access_domain', 'length', 'max' => 8),
                 array('access_read, access_update, access_delete, access_append', 'length', 'max' => 256),
                 array('default_keywords, default_description, custom_data_json, updated_at', 'safe'),
-                array('id, name_id, status, default_menu_name, tree_parent_id, tree_position, default_page_title, default_url_param, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, created_at, updated_at, copied_from_id', 'safe', 'on' => 'search'),
+                array('id, default_menu_name, status, tree_parent_id, tree_position, name_id, default_url_param, default_page_title, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, copied_from_id, created_at, updated_at', 'safe', 'on' => 'search'),
             )
         );
     }
 
     public function getItemLabel()
     {
-        return (string) $this->name_id;
+        return (string) $this->default_menu_name;
     }
 
     public function behaviors()
@@ -93,13 +93,13 @@ abstract class BaseP3Page extends CActiveRecord
     {
         return array(
             'id' => Yii::t('P3PagesModule.crud', 'ID'),
-            'name_id' => Yii::t('P3PagesModule.crud', 'Name'),
-            'status' => Yii::t('P3PagesModule.crud', 'Status'),
             'default_menu_name' => Yii::t('P3PagesModule.crud', 'Default Menu Name'),
+            'status' => Yii::t('P3PagesModule.crud', 'Status'),
             'tree_parent_id' => Yii::t('P3PagesModule.crud', 'Tree Parent'),
             'tree_position' => Yii::t('P3PagesModule.crud', 'Tree Position'),
-            'default_page_title' => Yii::t('P3PagesModule.crud', 'Default Page Title'),
+            'name_id' => Yii::t('P3PagesModule.crud', 'Name'),
             'default_url_param' => Yii::t('P3PagesModule.crud', 'Default Url Param'),
+            'default_page_title' => Yii::t('P3PagesModule.crud', 'Default Page Title'),
             'layout' => Yii::t('P3PagesModule.crud', 'Layout'),
             'view' => Yii::t('P3PagesModule.crud', 'View'),
             'url_json' => Yii::t('P3PagesModule.crud', 'Url Json'),
@@ -112,9 +112,9 @@ abstract class BaseP3Page extends CActiveRecord
             'access_update' => Yii::t('P3PagesModule.crud', 'Access Update'),
             'access_delete' => Yii::t('P3PagesModule.crud', 'Access Delete'),
             'access_append' => Yii::t('P3PagesModule.crud', 'Access Append'),
+            'copied_from_id' => Yii::t('P3PagesModule.crud', 'Copied From'),
             'created_at' => Yii::t('P3PagesModule.crud', 'Created At'),
             'updated_at' => Yii::t('P3PagesModule.crud', 'Updated At'),
-            'copied_from_id' => Yii::t('P3PagesModule.crud', 'Copied From'),
         );
     }
 
@@ -125,13 +125,13 @@ abstract class BaseP3Page extends CActiveRecord
         }
 
         $criteria->compare('t.id', $this->id);
-        $criteria->compare('t.name_id', $this->name_id, true);
-        $criteria->compare('t.status', $this->status);
         $criteria->compare('t.default_menu_name', $this->default_menu_name, true);
+        $criteria->compare('t.status', $this->status);
         $criteria->compare('t.tree_parent_id', $this->tree_parent_id);
         $criteria->compare('t.tree_position', $this->tree_position);
-        $criteria->compare('t.default_page_title', $this->default_page_title, true);
+        $criteria->compare('t.name_id', $this->name_id, true);
         $criteria->compare('t.default_url_param', $this->default_url_param, true);
+        $criteria->compare('t.default_page_title', $this->default_page_title, true);
         $criteria->compare('t.layout', $this->layout, true);
         $criteria->compare('t.view', $this->view, true);
         $criteria->compare('t.url_json', $this->url_json, true);
@@ -144,9 +144,9 @@ abstract class BaseP3Page extends CActiveRecord
         $criteria->compare('t.access_update', $this->access_update, true);
         $criteria->compare('t.access_delete', $this->access_delete, true);
         $criteria->compare('t.access_append', $this->access_append, true);
+        $criteria->compare('t.copied_from_id', $this->copied_from_id);
         $criteria->compare('t.created_at', $this->created_at, true);
         $criteria->compare('t.updated_at', $this->updated_at, true);
-        $criteria->compare('t.copied_from_id', $this->copied_from_id);
 
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $criteria,

@@ -11,18 +11,13 @@
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, 'name_id'); ?>
-        <?php echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64)); ?>
+        <?php echo $form->label($model, 'default_menu_name'); ?>
+        <?php echo $form->textField($model, 'default_menu_name', array('size' => 60, 'maxlength' => 128)); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'status'); ?>
         <?php echo $form->textField($model, 'status'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->label($model, 'default_menu_name'); ?>
-        <?php echo $form->textField($model, 'default_menu_name', array('size' => 60, 'maxlength' => 128)); ?>
     </div>
 
     <div class="row">
@@ -36,13 +31,18 @@
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, 'default_page_title'); ?>
-        <?php echo $form->textField($model, 'default_page_title', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->label($model, 'name_id'); ?>
+        <?php echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64)); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'default_url_param'); ?>
         <?php echo $form->textField($model, 'default_url_param', array('size' => 60, 'maxlength' => 255)); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->label($model, 'default_page_title'); ?>
+        <?php echo $form->textField($model, 'default_page_title', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
 
     <div class="row">
@@ -106,6 +106,11 @@
     </div>
 
     <div class="row">
+        <?php echo $form->label($model, 'copied_from_id'); ?>
+        <?php echo $form->textField($model, 'copied_from_id'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->label($model, 'created_at'); ?>
         <?php echo $form->textField($model, 'created_at'); ?>
     </div>
@@ -113,11 +118,6 @@
     <div class="row">
         <?php echo $form->label($model, 'updated_at'); ?>
         <?php echo $form->textField($model, 'updated_at'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->label($model, 'copied_from_id'); ?>
-        <?php echo $form->textField($model, 'copied_from_id'); ?>
     </div>
 
 
