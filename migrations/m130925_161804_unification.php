@@ -4,13 +4,13 @@ class m130925_161804_unification extends EDbMigration
 {
     public function up()
     {
-        if (Yii::app()->db->schema instanceof CMysqlSchema) {
+        if ($this->dbConnection->schema instanceof CMysqlSchema) {
             $options = 'ENGINE=InnoDB DEFAULT CHARSET=utf8';
         } else {
             $options = '';
         }
 
-        if (Yii::app()->db->schema instanceof CMysqlSchema) {
+        if ($this->dbConnection->schema instanceof CMysqlSchema) {
             $this->execute('SET FOREIGN_KEY_CHECKS = 0;');
         }
 
@@ -174,7 +174,7 @@ class m130925_161804_unification extends EDbMigration
         $this->renameTable('_p3_page_translation_v0_17', 'p3_page_translation');
         $this->renameTable('_p3_page_v0_17', 'p3_page');
 
-        if (Yii::app()->db->schema instanceof CMysqlSchema) {
+        if ($this->dbConnection->schema instanceof CMysqlSchema) {
             $this->execute('SET FOREIGN_KEY_CHECKS = 1;');
         }
 
@@ -184,7 +184,7 @@ class m130925_161804_unification extends EDbMigration
 
     public function down()
     {
-        if (Yii::app()->db->schema instanceof CMysqlSchema) {
+        if ($this->dbConnection->schema instanceof CMysqlSchema) {
             $this->execute('SET FOREIGN_KEY_CHECKS = 0;');
         }
 
@@ -195,7 +195,7 @@ class m130925_161804_unification extends EDbMigration
         $this->renameTable('_p3_page_meta_v0_16', 'p3_page_meta');
         $this->renameTable('_p3_page_translation_v0_16', 'p3_page_translation');
 
-        if (Yii::app()->db->schema instanceof CMysqlSchema) {
+        if ($this->dbConnection->schema instanceof CMysqlSchema) {
             #$this->execute('SET FOREIGN_KEY_CHECKS = 1;');
         }
     }

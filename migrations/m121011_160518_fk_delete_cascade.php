@@ -4,7 +4,7 @@ class m121011_160518_fk_delete_cascade extends EDbMigration
 {
     public function up()
     {
-        if ((Yii::app()->db->schema instanceof CSqliteSchema) == false):
+        if (($this->dbConnection->schema instanceof CSqliteSchema) == false):
 
             $this->dropForeignKey('fk_p3_page_id', 'p3_page_meta');
             $this->addForeignKey('fk_p3_page_id', 'p3_page_meta', 'id', 'p3_page', 'id', 'CASCADE', 'CASCADE');

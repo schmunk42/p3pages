@@ -5,7 +5,7 @@ class m120312_182502_init extends CDbMigration
 
     public function up()
     {
-        if (Yii::app()->db->schema instanceof CMysqlSchema)
+        if ($this->dbConnection->schema instanceof CMysqlSchema)
             $options = 'ENGINE=InnoDB DEFAULT CHARSET=utf8';
         else {
             $options = '';
@@ -29,7 +29,7 @@ class m120312_182502_init extends CDbMigration
 
         // Foreign Keys for table 'p3_page'
 
-        if ((Yii::app()->db->schema instanceof CSqliteSchema) == false):
+        if (($this->dbConnection->schema instanceof CSqliteSchema) == false):
 
         endif;
 
@@ -70,7 +70,7 @@ class m120312_182502_init extends CDbMigration
 
         // Foreign Keys for table 'p3_page_meta'
 
-        if ((Yii::app()->db->schema instanceof CSqliteSchema) == false):
+        if (($this->dbConnection->schema instanceof CSqliteSchema) == false):
 
             $this->addForeignKey(
                 'fk_p3_page_id',
@@ -109,7 +109,7 @@ class m120312_182502_init extends CDbMigration
 
         // Foreign Keys for table 'p3_page_translation'
 
-        if ((Yii::app()->db->schema instanceof CSqliteSchema) == false):
+        if (($this->dbConnection->schema instanceof CSqliteSchema) == false):
 
             $this->addForeignKey(
                 'fk_p3_page_p3_page_id',
