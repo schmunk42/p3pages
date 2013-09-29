@@ -33,6 +33,7 @@ class P3PageTranslation extends BaseP3PageTranslation
                      'createAttribute'   => 'created_at',
                      'updateAttribute'   => 'updated_at',
                      'setUpdateOnCreate' => true,
+                     'timestampExpression' => "date_format(date_create(),'Y-m-d H:i:s');",
                  ),
             )
         );

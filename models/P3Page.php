@@ -39,8 +39,20 @@ class P3Page extends BaseP3Page
                      'parentRelation'   => 'treeParent',
                      'childrenRelation' => 'p3Pages'
                  ),
+                 'Status'        => array(
+                     'class' => 'vendor.yiiext.status-behavior.EStatusBehavior',
+                     'statusField' => 'status'
+                 ),
+                 'Timestamp'     => array(
+                     'class'               => 'zii.behaviors.CTimestampBehavior',
+                     'createAttribute'     => 'created_at',
+                     'updateAttribute'     => 'updated_at',
+                     'setUpdateOnCreate'   => true,
+                     'timestampExpression' => "date_format(date_create(),'Y-m-d H:i:s');",
+                 ),
                  'Translatable'  => array(
                      'class'                 => 'vendor.mikehaertl.translatable.Translatable',
+                     'translationRelation'   => 'p3PageTranslations',
                      'translationAttributes' => array(
                          'menu_name',
                          'page_title',
@@ -48,7 +60,6 @@ class P3Page extends BaseP3Page
                          'keywords',
                          'description'
                      ),
-                     'translationRelation'   => 'p3PageTranslations',
                      'fallbackColumns'       => array(
                          'menu_name'   => 'default_menu_name',
                          'page_title'  => 'default_page_title',
@@ -56,12 +67,6 @@ class P3Page extends BaseP3Page
                          'keywords'    => 'default_keywords',
                          'description' => 'default_description',
                      ),
-                 ),
-                 'Timestamp' => array(
-                     'class'             => 'zii.behaviors.CTimestampBehavior',
-                     'createAttribute'   => 'created_at',
-                     'updateAttribute'   => 'updated_at',
-                     'setUpdateOnCreate' => true,
                  ),
             )
         );
