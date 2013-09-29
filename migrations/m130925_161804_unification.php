@@ -50,8 +50,8 @@ class m130925_161804_unification extends EDbMigration
                  // copy behavior
                  "copied_from_id"      => "int(11)",
                  // time
-                 "created_at"          => "timestamp",
-                 "updated_at"          => "timestamp",
+                 "created_at"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+                 "updated_at"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
                  "FOREIGN KEY(tree_parent_id) REFERENCES _p3_page_v0_17(id) ON DELETE RESTRICT ON UPDATE CASCADE",
             ),
             $options
@@ -82,8 +82,8 @@ class m130925_161804_unification extends EDbMigration
                  // copy behavior
                  "copied_from_id" => "int(11)",
                  // time
-                 "created_at"     => "timestamp",
-                 "updated_at"     => "timestamp",
+                 "created_at"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+                 "updated_at"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
                  "FOREIGN KEY(p3_page_id) REFERENCES _p3_page_v0_17(id) ON DELETE CASCADE ON UPDATE CASCADE"
             ),
             $options
@@ -162,11 +162,9 @@ class m130925_161804_unification extends EDbMigration
                      "url_param"   => $row['seoUrl'],
                      "keywords"    => $row['keywords'],
                      "description" => $row['description'],
-
                 )
             );
         }
-
 
         $this->renameTable('p3_page_translation', '_p3_page_translation_v0_16');
         $this->renameTable('p3_page_meta', '_p3_page_meta_v0_16');

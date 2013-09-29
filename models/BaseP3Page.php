@@ -50,15 +50,15 @@ abstract class BaseP3Page extends CActiveRecord
     {
         return array_merge(
             parent::rules(), array(
-                array('default_menu_name, status, created_at', 'required'),
-                array('tree_parent_id, tree_position, name_id, default_url_param, default_page_title, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, copied_from_id, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
+                array('default_menu_name, status', 'required'),
+                array('tree_parent_id, tree_position, name_id, default_url_param, default_page_title, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, copied_from_id, created_at, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
                 array('status, tree_parent_id, tree_position, copied_from_id', 'numerical', 'integerOnly' => true),
                 array('default_menu_name, layout, view', 'length', 'max' => 128),
                 array('name_id, access_owner', 'length', 'max' => 64),
                 array('default_url_param, default_page_title, url_json', 'length', 'max' => 255),
                 array('access_domain', 'length', 'max' => 8),
                 array('access_read, access_update, access_delete, access_append', 'length', 'max' => 256),
-                array('default_keywords, default_description, custom_data_json, updated_at', 'safe'),
+                array('default_keywords, default_description, custom_data_json, created_at, updated_at', 'safe'),
                 array('id, default_menu_name, status, tree_parent_id, tree_position, name_id, default_url_param, default_page_title, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, copied_from_id, created_at, updated_at', 'safe', 'on' => 'search'),
             )
         );
