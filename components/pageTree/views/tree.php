@@ -45,7 +45,7 @@
 
     <?php
     echo CHtml::link(
-        '<i class="icon-minus-sign icon-white"></i> ' . Yii::t('P3PagesModule.crud', 'Delete'),
+        '<i class="icon-minus-sign icon-white"></i> ' . Yii::t('crud', 'Delete'),
         '#',
         array(
              'class'   => 'btn btn-danger pull-right',
@@ -54,13 +54,13 @@
                  'id'        => $model->id,
                  'returnUrl' => Yii::app()->controller->createUrl(null)
              ),
-             'confirm' => Yii::t('P3PagesModule.crud', 'Do you want to delete this item?')
+             'confirm' => Yii::t('crud', 'Do you want to delete this item?')
         )
     )
     ?>
     <?php
     echo CHtml::link(
-        '<i class="icon-pencil"></i> ', //Yii::t('P3PagesModule.crud', 'Template'),
+        '<i class="icon-pencil"></i> ', // Yii::t('P3PagesModule.module', 'Template'),
         array(
              '/p3pages/p3Page/update',
              'id'        => $model->id,

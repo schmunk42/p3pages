@@ -17,7 +17,7 @@
 
     <div class="row">
         <?php echo $form->label($model, 'status'); ?>
-        <?php echo $form->textField($model, 'status'); ?>
+        <?php echo $form->dropDownList($model,'status',P3PageTranslation::optsstatus(),array('empty'=>'undefined'));; ?>
     </div>
 
     <div class="row">
@@ -87,7 +87,7 @@
 
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton(Yii::t('crud_static', 'Search')); ?>
+        <?php echo CHtml::submitButton(Yii::t('crud', 'Search')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

@@ -18,7 +18,7 @@
     <div class="row">
         <div class="span7"> <!-- main inputs -->
             <h2>
-                <?php echo Yii::t('crud_static','Data')?>                <small>
+                <?php echo Yii::t('crud','Data')?>                <small>
                     <?php echo $model->itemLabel ?>
                 </small>
 
@@ -38,7 +38,7 @@
                             echo $form->error($model,'id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.id')) != 'P3Page.id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.id')) != 'help.P3Page.id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             echo $form->error($model,'default_menu_name')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.default_menu_name')) != 'P3Page.default_menu_name')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_menu_name')) != 'help.P3Page.default_menu_name')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -64,11 +64,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'status');
+                            echo $form->dropDownList($model,'status',P3Page::optsstatus(),array('empty'=>'undefined'));;
                             echo $form->error($model,'status')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.status')) != 'P3Page.status')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.status')) != 'help.P3Page.status')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             echo $form->error($model,'tree_parent_id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.tree_parent_id')) != 'P3Page.tree_parent_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.tree_parent_id')) != 'help.P3Page.tree_parent_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                             echo $form->error($model,'tree_position')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.tree_position')) != 'P3Page.tree_position')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.tree_position')) != 'help.P3Page.tree_position')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                             echo $form->error($model,'name_id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.name_id')) != 'P3Page.name_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.name_id')) != 'help.P3Page.name_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                             echo $form->error($model,'default_url_param')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.default_url_param')) != 'P3Page.default_url_param')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_url_param')) != 'help.P3Page.default_url_param')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                             echo $form->error($model,'default_page_title')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.default_page_title')) != 'P3Page.default_page_title')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_page_title')) != 'help.P3Page.default_page_title')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -166,11 +166,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'layout', array('size' => 60, 'maxlength' => 128));
+                            echo $form->dropDownList($model,'layout',P3Page::optslayout(),array('empty'=>'undefined'));;
                             echo $form->error($model,'layout')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.layout')) != 'P3Page.layout')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.layout')) != 'help.P3Page.layout')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -181,11 +181,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'view', array('size' => 60, 'maxlength' => 128));
+                            echo $form->dropDownList($model,'view',P3Page::optsview(),array('empty'=>'undefined'));;
                             echo $form->error($model,'view')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.view')) != 'P3Page.view')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.view')) != 'help.P3Page.view')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                             echo $form->error($model,'url_json')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.url_json')) != 'P3Page.url_json')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.url_json')) != 'help.P3Page.url_json')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                             echo $form->error($model,'default_keywords')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.default_keywords')) != 'P3Page.default_keywords')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_keywords')) != 'help.P3Page.default_keywords')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -230,7 +230,7 @@
                             echo $form->error($model,'default_description')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.default_description')) != 'P3Page.default_description')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_description')) != 'help.P3Page.default_description')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -245,7 +245,7 @@
                             echo $form->error($model,'custom_data_json')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.custom_data_json')) != 'P3Page.custom_data_json')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.custom_data_json')) != 'help.P3Page.custom_data_json')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -260,7 +260,7 @@
                             echo $form->error($model,'access_owner')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.access_owner')) != 'P3Page.access_owner')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_owner')) != 'help.P3Page.access_owner')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -275,7 +275,7 @@
                             echo $form->error($model,'access_domain')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.access_domain')) != 'P3Page.access_domain')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_domain')) != 'help.P3Page.access_domain')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -290,7 +290,7 @@
                             echo $form->error($model,'access_read')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.access_read')) != 'P3Page.access_read')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_read')) != 'help.P3Page.access_read')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -305,7 +305,7 @@
                             echo $form->error($model,'access_update')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.access_update')) != 'P3Page.access_update')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_update')) != 'help.P3Page.access_update')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -320,7 +320,7 @@
                             echo $form->error($model,'access_delete')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.access_delete')) != 'P3Page.access_delete')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_delete')) != 'help.P3Page.access_delete')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -335,7 +335,7 @@
                             echo $form->error($model,'access_append')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.access_append')) != 'P3Page.access_append')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_append')) != 'help.P3Page.access_append')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -350,7 +350,7 @@
                             echo $form->error($model,'copied_from_id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.copied_from_id')) != 'P3Page.copied_from_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.copied_from_id')) != 'help.P3Page.copied_from_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -365,7 +365,7 @@
                             echo $form->error($model,'created_at')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.created_at')) != 'P3Page.created_at')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.created_at')) != 'help.P3Page.created_at')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -380,7 +380,7 @@
                             echo $form->error($model,'updated_at')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3Page.updated_at')) != 'P3Page.updated_at')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.updated_at')) != 'help.P3Page.updated_at')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -391,16 +391,16 @@
 
         <div class="span5"> <!-- sub inputs -->
             <h2>
-                <?php echo Yii::t('crud_static','Relations')?>
+                <?php echo Yii::t('crud','Relations')?>
             </h2>
                                                             
                 <h3>
-                    <?php echo Yii::t('P3PagesModule.crud', 'P3Pages'); ?>
+                    <?php echo Yii::t('P3PagesModule.model', 'P3Pages'); ?>
                 </h3>
                 <?php echo '<i>Switch to view mode to edit related records.</i>' ?>
                                                             
                 <h3>
-                    <?php echo Yii::t('P3PagesModule.crud', 'P3PageTranslations'); ?>
+                    <?php echo Yii::t('P3PagesModule.model', 'P3PageTranslations'); ?>
                 </h3>
                 <?php echo '<i>Switch to view mode to edit related records.</i>' ?>
                             
@@ -409,18 +409,18 @@
     </div>
 
     <p class="alert">
-        <?php echo Yii::t('crud_static','Fields with <span class="required">*</span> are required.');?>
+        <?php echo Yii::t('crud','Fields with <span class="required">*</span> are required.');?>
     </p>
 
     <div class="form-actions">
         
         <?php
             echo CHtml::Button(
-            Yii::t('crud_static', 'Cancel'), array(
+            Yii::t('crud', 'Cancel'), array(
                 'submit' => (isset($_GET['returnUrl']))?$_GET['returnUrl']:array('p3Page/admin'),
                 'class' => 'btn'
             ));
-            echo ' '.CHtml::submitButton(Yii::t('crud_static', 'Save'), array(
+            echo ' '.CHtml::submitButton(Yii::t('crud', 'Save'), array(
                 'class' => 'btn btn-primary'
             ));
         ?>

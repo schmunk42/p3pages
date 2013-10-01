@@ -50,4 +50,13 @@ class P3PageTranslation extends BaseP3PageTranslation
         );
     }
 
+    /**
+     * @return array list of options
+     */
+    public static function optsStatus()
+    {
+        $model = P3Page::model();
+        return $model->Status->statuses;
+    }
+
 }

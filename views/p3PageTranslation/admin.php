@@ -1,11 +1,11 @@
 <?php
 $this->setPageTitle(
-    Yii::t('P3PagesModule.crud', 'P3 Page Translations')
+    Yii::t('P3PagesModule.model', 'P3 Page Translations')
     . ' - '
-    . Yii::t('crud_static', 'Manage')
+    . Yii::t('crud', 'Manage')
 );
 
-$this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'P3 Page Translations');
+$this->breadcrumbs[] = Yii::t('P3PagesModule.model', 'P3 Page Translations');
 Yii::app()->clientScript->registerScript('search', "
     $('.search-button').click(function(){
         $('.search-form').toggle();
@@ -24,8 +24,8 @@ Yii::app()->clientScript->registerScript('search', "
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
     <h1>
 
-        <?php echo Yii::t('P3PagesModule.crud', 'P3 Page Translations'); ?>
-        <small><?php echo Yii::t('crud_static', 'Manage'); ?></small>
+        <?php echo Yii::t('P3PagesModule.model', 'P3 Page Translations'); ?>
+        <small><?php echo Yii::t('crud', 'Manage'); ?></small>
 
     </h1>
 

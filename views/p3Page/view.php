@@ -1,20 +1,20 @@
 <?php
     $this->setPageTitle(
-        Yii::t('P3PagesModule.crud', 'P3 Page')
+        Yii::t('P3PagesModule.model', 'P3 Page')
         . ' - '
-        . Yii::t('crud_static', 'View')
+        . Yii::t('crud', 'View')
         . ': '   
         . $model->getItemLabel()            
 );    
-$this->breadcrumbs[Yii::t('P3PagesModule.crud','P3 Pages')] = array('admin');
+$this->breadcrumbs[Yii::t('P3PagesModule.model','P3 Pages')] = array('admin');
 $this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id' => $model->{$model->tableSchema->primaryKey});
-$this->breadcrumbs[] = Yii::t('crud_static', 'View');
+$this->breadcrumbs[] = Yii::t('crud', 'View');
 ?>
 
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
 <h1>
-    <?php echo Yii::t('P3PagesModule.crud','P3 Page')?>
-    <small><?php echo Yii::t('crud_static','View')?> #<?php echo $model->id ?></small>
+    <?php echo Yii::t('P3PagesModule.model','P3 Page')?>
+    <small><?php echo Yii::t('crud','View')?> #<?php echo $model->id ?></small>
     </h1>
 
 
@@ -25,7 +25,7 @@ $this->breadcrumbs[] = Yii::t('crud_static', 'View');
 <div class="row">
     <div class="span7">
         <h2>
-            <?php echo Yii::t('crud_static','Data')?>            <small>
+            <?php echo Yii::t('crud','Data')?>            <small>
                 <?php echo $model->itemLabel?>            </small>
         </h2>
 

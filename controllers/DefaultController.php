@@ -65,13 +65,13 @@ class DefaultController extends Controller
             }
         } else {
             // no params given
-            throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'Invalid identifier'));
+            throw new CHttpException(404, Yii::t('P3PagesModule.module', 'Invalid identifier'));
         }
         
         // Step 2 - checks
         if ($model == null) {
             // no page found
-            throw new CHttpException(404, Yii::t('P3PagesModule.crud', 'Page not found'));
+            throw new CHttpException(404, Yii::t('P3PagesModule.module', 'Page not found'));
         } else {
             // additional access checks
             Yii::trace('Performing addtional page checks...', 'p3pages.controllers.default');
@@ -112,7 +112,7 @@ class DefaultController extends Controller
             }
         }
         if (!$model->view || !$model->layout) {
-            throw new CHttpException(500, Yii::t('P3PagesModule.crud', 'No view file in database'));
+            throw new CHttpException(500, Yii::t('P3PagesModule.module', 'No view file in database'));
         }
         $this->pageTitle = $model->page_title;
         $this->layout = $model->layout;

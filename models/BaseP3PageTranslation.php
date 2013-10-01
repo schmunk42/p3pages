@@ -6,7 +6,7 @@
  * Columns in table "p3_page_translation" available as properties of the model:
  * @property integer $id
  * @property integer $p3_page_id
- * @property integer $status
+ * @property string $status
  * @property string $language
  * @property string $menu_name
  * @property string $page_title
@@ -43,7 +43,8 @@ abstract class BaseP3PageTranslation extends CActiveRecord
             parent::rules(), array(
                 array('p3_page_id, status, language, menu_name', 'required'),
                 array('page_title, url_param, keywords, description, access_owner, access_read, access_update, access_delete, copied_from_id, created_at, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
-                array('p3_page_id, status, copied_from_id', 'numerical', 'integerOnly' => true),
+                array('p3_page_id, copied_from_id', 'numerical', 'integerOnly' => true),
+                array('status', 'length', 'max' => 32),
                 array('language', 'length', 'max' => 8),
                 array('menu_name', 'length', 'max' => 128),
                 array('page_title, url_param', 'length', 'max' => 255),
@@ -57,7 +58,7 @@ abstract class BaseP3PageTranslation extends CActiveRecord
 
     public function getItemLabel()
     {
-        return (string) $this->language;
+        return (string) $this->status;
     }
 
     public function behaviors()
@@ -81,22 +82,22 @@ abstract class BaseP3PageTranslation extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => Yii::t('P3PagesModule.crud', 'ID'),
-            'p3_page_id' => Yii::t('P3PagesModule.crud', 'P3 Page'),
-            'status' => Yii::t('P3PagesModule.crud', 'Status'),
-            'language' => Yii::t('P3PagesModule.crud', 'Language'),
-            'menu_name' => Yii::t('P3PagesModule.crud', 'Menu Name'),
-            'page_title' => Yii::t('P3PagesModule.crud', 'Page Title'),
-            'url_param' => Yii::t('P3PagesModule.crud', 'Url Param'),
-            'keywords' => Yii::t('P3PagesModule.crud', 'Keywords'),
-            'description' => Yii::t('P3PagesModule.crud', 'Description'),
-            'access_owner' => Yii::t('P3PagesModule.crud', 'Access Owner'),
-            'access_read' => Yii::t('P3PagesModule.crud', 'Access Read'),
-            'access_update' => Yii::t('P3PagesModule.crud', 'Access Update'),
-            'access_delete' => Yii::t('P3PagesModule.crud', 'Access Delete'),
-            'copied_from_id' => Yii::t('P3PagesModule.crud', 'Copied From'),
-            'created_at' => Yii::t('P3PagesModule.crud', 'Created At'),
-            'updated_at' => Yii::t('P3PagesModule.crud', 'Updated At'),
+            'id' => Yii::t('P3PagesModule.model', 'ID'),
+            'p3_page_id' => Yii::t('P3PagesModule.model', 'P3 Page'),
+            'status' => Yii::t('P3PagesModule.model', 'Status'),
+            'language' => Yii::t('P3PagesModule.model', 'Language'),
+            'menu_name' => Yii::t('P3PagesModule.model', 'Menu Name'),
+            'page_title' => Yii::t('P3PagesModule.model', 'Page Title'),
+            'url_param' => Yii::t('P3PagesModule.model', 'Url Param'),
+            'keywords' => Yii::t('P3PagesModule.model', 'Keywords'),
+            'description' => Yii::t('P3PagesModule.model', 'Description'),
+            'access_owner' => Yii::t('P3PagesModule.model', 'Access Owner'),
+            'access_read' => Yii::t('P3PagesModule.model', 'Access Read'),
+            'access_update' => Yii::t('P3PagesModule.model', 'Access Update'),
+            'access_delete' => Yii::t('P3PagesModule.model', 'Access Delete'),
+            'copied_from_id' => Yii::t('P3PagesModule.model', 'Copied From'),
+            'created_at' => Yii::t('P3PagesModule.model', 'Created At'),
+            'updated_at' => Yii::t('P3PagesModule.model', 'Updated At'),
         );
     }
 
@@ -108,7 +109,7 @@ abstract class BaseP3PageTranslation extends CActiveRecord
 
         $criteria->compare('t.id', $this->id);
         $criteria->compare('t.p3_page_id', $this->p3_page_id);
-        $criteria->compare('t.status', $this->status);
+        $criteria->compare('t.status', $this->status, true);
         $criteria->compare('t.language', $this->language, true);
         $criteria->compare('t.menu_name', $this->menu_name, true);
         $criteria->compare('t.page_title', $this->page_title, true);

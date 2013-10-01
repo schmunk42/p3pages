@@ -6,7 +6,7 @@
  * Columns in table "p3_page" available as properties of the model:
  * @property integer $id
  * @property string $default_menu_name
- * @property integer $status
+ * @property string $status
  * @property integer $tree_parent_id
  * @property integer $tree_position
  * @property string $name_id
@@ -52,8 +52,9 @@ abstract class BaseP3Page extends CActiveRecord
             parent::rules(), array(
                 array('default_menu_name, status', 'required'),
                 array('tree_parent_id, tree_position, name_id, default_url_param, default_page_title, layout, view, url_json, default_keywords, default_description, custom_data_json, access_owner, access_domain, access_read, access_update, access_delete, access_append, copied_from_id, created_at, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
-                array('status, tree_parent_id, tree_position, copied_from_id', 'numerical', 'integerOnly' => true),
+                array('tree_parent_id, tree_position, copied_from_id', 'numerical', 'integerOnly' => true),
                 array('default_menu_name, layout, view', 'length', 'max' => 128),
+                array('status', 'length', 'max' => 32),
                 array('name_id, access_owner', 'length', 'max' => 64),
                 array('default_url_param, default_page_title, url_json', 'length', 'max' => 255),
                 array('access_domain', 'length', 'max' => 8),
@@ -92,29 +93,29 @@ abstract class BaseP3Page extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => Yii::t('P3PagesModule.crud', 'ID'),
-            'default_menu_name' => Yii::t('P3PagesModule.crud', 'Default Menu Name'),
-            'status' => Yii::t('P3PagesModule.crud', 'Status'),
-            'tree_parent_id' => Yii::t('P3PagesModule.crud', 'Tree Parent'),
-            'tree_position' => Yii::t('P3PagesModule.crud', 'Tree Position'),
-            'name_id' => Yii::t('P3PagesModule.crud', 'Name'),
-            'default_url_param' => Yii::t('P3PagesModule.crud', 'Default Url Param'),
-            'default_page_title' => Yii::t('P3PagesModule.crud', 'Default Page Title'),
-            'layout' => Yii::t('P3PagesModule.crud', 'Layout'),
-            'view' => Yii::t('P3PagesModule.crud', 'View'),
-            'url_json' => Yii::t('P3PagesModule.crud', 'Url Json'),
-            'default_keywords' => Yii::t('P3PagesModule.crud', 'Default Keywords'),
-            'default_description' => Yii::t('P3PagesModule.crud', 'Default Description'),
-            'custom_data_json' => Yii::t('P3PagesModule.crud', 'Custom Data Json'),
-            'access_owner' => Yii::t('P3PagesModule.crud', 'Access Owner'),
-            'access_domain' => Yii::t('P3PagesModule.crud', 'Access Domain'),
-            'access_read' => Yii::t('P3PagesModule.crud', 'Access Read'),
-            'access_update' => Yii::t('P3PagesModule.crud', 'Access Update'),
-            'access_delete' => Yii::t('P3PagesModule.crud', 'Access Delete'),
-            'access_append' => Yii::t('P3PagesModule.crud', 'Access Append'),
-            'copied_from_id' => Yii::t('P3PagesModule.crud', 'Copied From'),
-            'created_at' => Yii::t('P3PagesModule.crud', 'Created At'),
-            'updated_at' => Yii::t('P3PagesModule.crud', 'Updated At'),
+            'id' => Yii::t('P3PagesModule.model', 'ID'),
+            'default_menu_name' => Yii::t('P3PagesModule.model', 'Default Menu Name'),
+            'status' => Yii::t('P3PagesModule.model', 'Status'),
+            'tree_parent_id' => Yii::t('P3PagesModule.model', 'Tree Parent'),
+            'tree_position' => Yii::t('P3PagesModule.model', 'Tree Position'),
+            'name_id' => Yii::t('P3PagesModule.model', 'Name'),
+            'default_url_param' => Yii::t('P3PagesModule.model', 'Default Url Param'),
+            'default_page_title' => Yii::t('P3PagesModule.model', 'Default Page Title'),
+            'layout' => Yii::t('P3PagesModule.model', 'Layout'),
+            'view' => Yii::t('P3PagesModule.model', 'View'),
+            'url_json' => Yii::t('P3PagesModule.model', 'Url Json'),
+            'default_keywords' => Yii::t('P3PagesModule.model', 'Default Keywords'),
+            'default_description' => Yii::t('P3PagesModule.model', 'Default Description'),
+            'custom_data_json' => Yii::t('P3PagesModule.model', 'Custom Data Json'),
+            'access_owner' => Yii::t('P3PagesModule.model', 'Access Owner'),
+            'access_domain' => Yii::t('P3PagesModule.model', 'Access Domain'),
+            'access_read' => Yii::t('P3PagesModule.model', 'Access Read'),
+            'access_update' => Yii::t('P3PagesModule.model', 'Access Update'),
+            'access_delete' => Yii::t('P3PagesModule.model', 'Access Delete'),
+            'access_append' => Yii::t('P3PagesModule.model', 'Access Append'),
+            'copied_from_id' => Yii::t('P3PagesModule.model', 'Copied From'),
+            'created_at' => Yii::t('P3PagesModule.model', 'Created At'),
+            'updated_at' => Yii::t('P3PagesModule.model', 'Updated At'),
         );
     }
 
@@ -126,7 +127,7 @@ abstract class BaseP3Page extends CActiveRecord
 
         $criteria->compare('t.id', $this->id);
         $criteria->compare('t.default_menu_name', $this->default_menu_name, true);
-        $criteria->compare('t.status', $this->status);
+        $criteria->compare('t.status', $this->status, true);
         $criteria->compare('t.tree_parent_id', $this->tree_parent_id);
         $criteria->compare('t.tree_position', $this->tree_position);
         $criteria->compare('t.name_id', $this->name_id, true);
