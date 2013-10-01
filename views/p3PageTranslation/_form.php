@@ -45,6 +45,33 @@
                 
                     <div class="control-group">
                         <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'p3_page_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            $this->widget(
+                '\GtcRelation',
+                array(
+                    'model' => $model,
+                    'relation' => 'p3Page',
+                    'fields' => 'itemLabel',
+                    'allowEmpty' => true,
+                    'style' => 'dropdownlist',
+                    'htmlOptions' => array(
+                        'checkAll' => 'all'
+                    ),
+                )
+                );
+                            echo $form->error($model,'p3_page_id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.p3_page_id')) != 'help.p3_page_id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
                             <?php echo $form->labelEx($model, 'language') ?>
                         </div>
                         <div class='controls'>
@@ -204,33 +231,6 @@
                             ?>
                             <span class="help-block">
                                 <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_delete')) != 'help.access_delete')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'p3_page_id') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            $this->widget(
-                '\GtcRelation',
-                array(
-                    'model' => $model,
-                    'relation' => 'p3Page',
-                    'fields' => 'itemLabel',
-                    'allowEmpty' => true,
-                    'style' => 'dropdownlist',
-                    'htmlOptions' => array(
-                        'checkAll' => 'all'
-                    ),
-                )
-                );
-                            echo $form->error($model,'p3_page_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.p3_page_id')) != 'help.p3_page_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>

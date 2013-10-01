@@ -11,6 +11,11 @@
     </div>
 
     <div class="row">
+        <?php echo $form->label($model, 'p3_page_id'); ?>
+        <?php echo $form->textField($model, 'p3_page_id'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->label($model, 'language'); ?>
         <?php echo $form->dropDownList($model,'language',P3PageTranslation::optslanguage(),array('empty'=>'undefined'));; ?>
     </div>
@@ -63,11 +68,6 @@
     <div class="row">
         <?php echo $form->label($model, 'access_delete'); ?>
         <?php echo $form->dropDownList($model,'access_delete',P3PageTranslation::optsaccessdelete(),array('empty'=>'undefined'));; ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->label($model, 'p3_page_id'); ?>
-        <?php echo $form->textField($model, 'p3_page_id'); ?>
     </div>
 
     <div class="row">

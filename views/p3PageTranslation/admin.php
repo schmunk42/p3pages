@@ -60,6 +60,11 @@ $this->widget('TbGridView',
                 )
             ),
             array(
+                'name' => 'p3_page_id',
+                'value' => 'CHtml::value($data, \'p3Page.itemLabel\')',
+                'filter' => CHtml::listData(P3Page::model()->findAll(array('limit' => 1000)), 'id', 'itemLabel'),
+            ),
+            array(
                 'class' => 'editable.EditableColumn',
                 'name' => 'language',
                 'editable' => array(
@@ -109,6 +114,7 @@ $this->widget('TbGridView',
                     //'placement' => 'right',
                 )
             ),
+            /*
             array(
                 'class' => 'editable.EditableColumn',
                 'name' => 'access_read',
@@ -117,7 +123,6 @@ $this->widget('TbGridView',
                     //'placement' => 'right',
                 )
             ),
-            /*
             array(
                 'class' => 'editable.EditableColumn',
                 'name' => 'access_update',
@@ -133,11 +138,6 @@ $this->widget('TbGridView',
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
                     //'placement' => 'right',
                 )
-            ),
-            array(
-                'name' => 'p3_page_id',
-                'value' => 'CHtml::value($data, \'p3Page.itemLabel\')',
-                'filter' => CHtml::listData(P3Page::model()->findAll(array('limit' => 1000)), 'id', 'itemLabel'),
             ),
             array(
                 'class' => 'editable.EditableColumn',

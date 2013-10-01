@@ -48,6 +48,17 @@ $this->breadcrumbs[] = Yii::t('crud', 'View');
                             true
                         )
                     ),
+        array(
+            'name' => 'p3_page_id',
+            'value' => ($model->p3Page !== null)?CHtml::link(
+                            '<i class="icon icon-circle-arrow-left"></i> '.$model->p3Page->itemLabel,
+                            array('/p3pages/p3Page/view','id' => $model->p3Page->id),
+                            array('class' => '')).' '.CHtml::link(
+                            '<i class="icon icon-pencil"></i> ',
+                            array('/p3pages/p3Page/update','id' => $model->p3Page->id),
+                            array('class' => '')):'n/a',
+            'type' => 'html',
+        ),
 array(
                         'name'=>'language',
                         'type' => 'raw',
@@ -226,17 +237,6 @@ array(
                             true
                         )
                     ),
-        array(
-            'name' => 'p3_page_id',
-            'value' => ($model->p3Page !== null)?CHtml::link(
-                            '<i class="icon icon-circle-arrow-left"></i> '.$model->p3Page->itemLabel,
-                            array('/p3pages/p3Page/view','id' => $model->p3Page->id),
-                            array('class' => '')).' '.CHtml::link(
-                            '<i class="icon icon-pencil"></i> ',
-                            array('/p3pages/p3Page/update','id' => $model->p3Page->id),
-                            array('class' => '')):'n/a',
-            'type' => 'html',
-        ),
 array(
                         'name' => 'copied_from_id',
                         'type' => 'raw',
