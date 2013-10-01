@@ -201,6 +201,7 @@ class P3Page extends BaseP3Page
         $breadcrumbs = array();
 
         while ($model->getParent()) {
+            $model->setLanguage(Yii::app()->language);
             $breadcrumbs[$model->menu_name] = ($withLinks) ? $model->createUrl() : null;
             $model                          = $model->getParent();
         }
@@ -240,11 +241,11 @@ class P3Page extends BaseP3Page
         }
 
         if ($_activePage !== null) {
+            $_activePage->setLanguage(Yii::app()->language);
             Yii::trace("Active page #{$_activePage->id} " . $_traceMsg, 'p3pages.models');
         } else {
             Yii::trace("Active page not found in database", 'p3pages.models');
         }
-
         return $_activePage;
     }
 
@@ -265,6 +266,7 @@ class P3Page extends BaseP3Page
         $models = $rootNode->getChildren();
         $items  = array();
         foreach ($models AS $model) {
+            $model->setLanguage(Yii::app()->language);
             if ($model->id == $rootNode->id) {
                 //echo "recursion";
                 break;
