@@ -33,14 +33,14 @@ class m130925_161804_unification extends EDbMigration
                  "default_menu_name"   => "varchar(128) NOT NULL",
                  // yiiext/status-behavior
                  "status"              => "varchar(32) NOT NULL",
+                 //
+                 "name_id"             => "VARCHAR(64)",
                  // schmunk42/adjacency-list-behavior
                  "tree_parent_id"      => "int(11)",
                  "tree_position"       => "int(11)",
-                 //
-                 "name_id"             => "VARCHAR(64)",
                  // mikehaertl/translatable (defaults)
-                 "default_url_param"   => "varchar(255)",
                  "default_page_title"  => "varchar(255)",
+                 "default_url_param"   => "varchar(255)",
                  // p3page
                  "layout"              => "varchar(128)",
                  "view"                => "varchar(128)",
@@ -51,8 +51,8 @@ class m130925_161804_unification extends EDbMigration
                  // p3page
                  "custom_data_json"    => "text",
                  // schmunk42/yii-access
-                 "access_owner"        => "varchar(64)",
-                 "access_domain"       => "varchar(8)",
+                 "access_owner"        => "varchar(64) NOT NULL",
+                 "access_domain"       => "varchar(8) NOT NULL",
                  "access_read"         => "varchar(256)",
                  "access_update"       => "varchar(256)",
                  "access_delete"       => "varchar(256)",
@@ -72,24 +72,24 @@ class m130925_161804_unification extends EDbMigration
             "_p3_page_translation_v0_17",
             array(
                  "id"             => "pk",
-                 "p3_page_id"     => "int(11) NOT NULL",
+                 "language"       => "varchar(8) NOT NULL",
+                 "menu_name"      => "varchar(128) NOT NULL",
                  // yiiext/status-behavior
                  "status"         => "varchar(32) NOT NULL",
                  // mikehaertl/translatable (defaults)
-                 "language"       => "varchar(8) NOT NULL",
-                 "menu_name"      => "varchar(128) NOT NULL",
                  "page_title"     => "varchar(255)",
                  "url_param"      => "varchar(255)",
                  "keywords"       => "text",
                  "description"    => "text",
                  // schmunk42/yii-access
-                 "access_owner"   => "varchar(64)",
+                 "access_owner"   => "varchar(64) NOT NULL",
                  #"access_domain"       => "varchar(8)", // * DOMAIN ????
                  "access_read"    => "varchar(256)",
                  "access_update"  => "varchar(256)",
                  "access_delete"  => "varchar(256)",
                  #"access_append"       => "varchar(256)",
                  // copy behavior
+                 "p3_page_id"     => "int(11) NOT NULL",
                  "copied_from_id" => "int(11)",
                  // time
                  "created_at"     => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
@@ -114,8 +114,13 @@ class m130925_161804_unification extends EDbMigration
         $command      = $this->dbConnection->createCommand($sqlStatement);
         $command->execute();
         $reader = $command->query();
+        $owner = array();
         foreach ($reader as $row) {
             #var_dump($row);
+
+            $owner[$row['id']] = ($row['owner'])?$row['owner']:1;
+            $status[$row['id']] = ($row['status']) ? $statusMap[$row['status']] : 'draft';
+
             $this->insert(
                 "_p3_page_v0_17",
                 array(
@@ -131,7 +136,7 @@ class m130925_161804_unification extends EDbMigration
                      "url_json"            => $row['route'],
                      "custom_data_json"    => $row['customData'],
                      // yiiext/status-behavior
-                     "status"              => ($row['status']) ? $statusMap[$row['status']] : 'draft',
+                     "status"              => $status[$row['id']],
                      // mikehaertl/translatable (defaults)
                      "default_keywords"    => $row['keywords'],
                      "default_description" => $row['description'],
@@ -139,7 +144,7 @@ class m130925_161804_unification extends EDbMigration
                      "tree_parent_id"      => $row['treeParent_id'],
                      "tree_position"       => $row['treePosition'],
                      // schmunk42/yii-access
-                     "access_owner"        => $row['owner'],
+                     "access_owner"        => $owner[$row['id']],
                      "access_domain"       => $row['language'],
                      "access_read"         => $row['checkAccessRead'],
                      "access_update"       => $row['checkAccessUpdate'],
@@ -152,6 +157,7 @@ class m130925_161804_unification extends EDbMigration
                      "updated_at"          => $row['modifiedAt'],
                 )
             );
+
         }
 
         $sqlStatement = "SELECT * FROM p3_page_translation";
@@ -164,7 +170,7 @@ class m130925_161804_unification extends EDbMigration
                 "_p3_page_translation_v0_17",
                 array(
                      "id"          => $row['id'],
-                     "status"      => 'published',
+                     "status"      => $status[$row['id']],
                      "p3_page_id"  => $row['p3_page_id'],
                      "language"    => $row['language'],
                      "menu_name"   => $row['menuName'],
@@ -172,6 +178,7 @@ class m130925_161804_unification extends EDbMigration
                      "url_param"   => $row['seoUrl'],
                      "keywords"    => $row['keywords'],
                      "description" => $row['description'],
+                     "access_owner"=> $owner[$row['id']],
                 )
             );
         }

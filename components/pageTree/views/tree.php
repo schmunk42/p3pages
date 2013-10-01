@@ -60,7 +60,7 @@
     ?>
     <?php
     echo CHtml::link(
-        '<i class="icon-pencil"></i> ', // Yii::t('P3PagesModule.module', 'Template'),
+        '<i class="icon-pencil"></i> ',
         array(
              '/p3pages/p3Page/update',
              'id'        => $model->id,

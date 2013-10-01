@@ -62,13 +62,33 @@ array(
                         )
                     ),
 array(
-                        'name' => 'status',
+                        'name'=>'status',
+                        'type' => 'raw',
+                        'value' =>$this->widget(
+                            'EditableField',
+                            array(
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optsstatus(),
+                                'attribute'=>'status',
+                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
+                            ),
+                            true
+                        )
+                    ),
+array(
+                        'name' => 'name_id',
                         'type' => 'raw',
                         'value' => $this->widget(
                             'EditableField',
                             array(
                                 'model' => $model,
-                                'attribute' => 'status',
+                                'attribute' => 'name_id',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true
@@ -99,13 +119,13 @@ array(
                         )
                     ),
 array(
-                        'name' => 'name_id',
+                        'name' => 'default_page_title',
                         'type' => 'raw',
                         'value' => $this->widget(
                             'EditableField',
                             array(
                                 'model' => $model,
-                                'attribute' => 'name_id',
+                                'attribute' => 'default_page_title',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true
@@ -125,40 +145,41 @@ array(
                         )
                     ),
 array(
-                        'name' => 'default_page_title',
+                        'name'=>'layout',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'default_page_title',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optslayout(),
+                                'attribute'=>'layout',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
 array(
-                        'name' => 'layout',
+                        'name'=>'view',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'layout',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optsview(),
+                                'attribute'=>'view',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'view',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'view',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
@@ -229,66 +250,101 @@ array(
                         )
                     ),
 array(
-                        'name' => 'access_domain',
+                        'name'=>'access_domain',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_domain',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optsaccessdomain(),
+                                'attribute'=>'access_domain',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
 array(
-                        'name' => 'access_read',
+                        'name'=>'access_read',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_read',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optsaccessread(),
+                                'attribute'=>'access_read',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
 array(
-                        'name' => 'access_update',
+                        'name'=>'access_update',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_update',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optsaccessupdate(),
+                                'attribute'=>'access_update',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
 array(
-                        'name' => 'access_delete',
+                        'name'=>'access_delete',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_delete',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optsaccessdelete(),
+                                'attribute'=>'access_delete',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
 array(
-                        'name' => 'access_append',
+                        'name'=>'access_append',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_append',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3Page::optsaccessappend(),
+                                'attribute'=>'access_append',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )

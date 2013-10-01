@@ -94,7 +94,7 @@
     <?php if($this->action->id == 'admin' || $this->action->id == 'view'): ?>            <div class="btn-group">
             <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
                    'buttons' => array(
-                           array('label'=>Yii::t('crud','Relations'), 'icon'=>'icon-random', 'items'=>array(array('icon' => 'circle-arrow-left','label' => 'TreeParent', 'url' =>array('/p3pages/p3Page/admin')),array('icon' => 'arrow-right','label' => 'P3Pages', 'url' =>array('/p3pages/p3Page/admin')),array('icon' => 'arrow-right','label' => 'P3PageTranslations', 'url' =>array('/p3pages/p3PageTranslation/admin')),
+                           array('label'=>Yii::t('crud','Relations'), 'icon'=>'icon-random', 'items'=>array(array('icon' => 'circle-arrow-left','label' => Yii::t('P3PagesModule.model','TreeParent'), 'url' =>array('/p3pages/p3Page/admin')),array('icon' => 'arrow-right','label' => Yii::t('P3PagesModule.model','P3Pages'), 'url' =>array('/p3pages/p3Page/admin')),array('icon' => 'arrow-right','label' => Yii::t('P3PagesModule.model','P3PageTranslations'), 'url' =>array('/p3pages/p3PageTranslation/admin')),
             )
           ),
         ),

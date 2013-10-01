@@ -3,7 +3,8 @@
 
 
 <?php 
-        echo '<h3>P3Pages ';
+        echo '<h3>';
+            echo Yii::t('P3PagesModule.model','P3Pages');
             $this->widget(
                 'bootstrap.widgets.TbButtonGroup',
                 array(
@@ -49,7 +50,8 @@
 
 
 <?php 
-        echo '<h3>P3PageTranslations ';
+        echo '<h3>';
+            echo Yii::t('P3PagesModule.model','P3PageTranslations');
             $this->widget(
                 'bootstrap.widgets.TbButtonGroup',
                 array(

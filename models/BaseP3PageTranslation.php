@@ -41,8 +41,8 @@ abstract class BaseP3PageTranslation extends CActiveRecord
     {
         return array_merge(
             parent::rules(), array(
-                array('p3_page_id, status, language, menu_name', 'required'),
-                array('page_title, url_param, keywords, description, access_owner, access_read, access_update, access_delete, copied_from_id, created_at, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
+                array('p3_page_id, status, language, menu_name, access_owner', 'required'),
+                array('page_title, url_param, keywords, description, access_read, access_update, access_delete, copied_from_id, created_at, updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
                 array('p3_page_id, copied_from_id', 'numerical', 'integerOnly' => true),
                 array('status', 'length', 'max' => 32),
                 array('language', 'length', 'max' => 8),

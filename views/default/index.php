@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 
 
 <h1>
-    <?php echo Yii::t('P3PagesModule.module', 'P3 Pages'); ?>
+    <?php echo Yii::t('P3PagesModule.module', 'Pages'); ?>
     <small><?php echo Yii::t('P3PagesModule.module', 'Sitemap'); ?></small>
 </h1>
 

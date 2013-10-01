@@ -32,34 +32,34 @@ class P3Page extends BaseP3Page
         return array_merge(
             parent::behaviors(),
             array(
-                 'Access'        => array(
+                 'Access'           => array(
                      'class' => '\PhAccessBehavior'
                  ),
-                 'AdjacencyList' => array(
+                 'AdjacencyList'    => array(
                      'class'            => '\AdjacencyListBehavior',
                      'parentAttribute'  => 'tree_parent_id',
                      'parentRelation'   => 'treeParent',
                      'childrenRelation' => 'p3Pages'
                  ),
-                 'LoggableBehavior'=> array(
-                     'class' => 'vendor.sammaye.auditrail2.behaviors.LoggableBehavior',
+                 'LoggableBehavior' => array(
+                     'class'   => 'vendor.sammaye.auditrail2.behaviors.LoggableBehavior',
                      'ignored' => array(
                          'created_at',
                          'updated_at',
                      )
                  ),
-                 'Status'        => array(
-                     'class' => 'vendor.yiiext.status-behavior.EStatusBehavior',
+                 'Status'           => array(
+                     'class'       => 'vendor.yiiext.status-behavior.EStatusBehavior',
                      'statusField' => 'status'
                  ),
-                 'Timestamp'     => array(
+                 'Timestamp'        => array(
                      'class'               => 'zii.behaviors.CTimestampBehavior',
                      'createAttribute'     => 'created_at',
                      'updateAttribute'     => 'updated_at',
                      'setUpdateOnCreate'   => true,
                      'timestampExpression' => "date_format(date_create(),'Y-m-d H:i:s');",
                  ),
-                 'Translatable'  => array(
+                 'Translatable'     => array(
                      'class'                 => 'vendor.mikehaertl.translatable.Translatable',
                      'translationRelation'   => 'p3PageTranslations',
                      'translationAttributes' => array(
@@ -92,14 +92,6 @@ class P3Page extends BaseP3Page
         );
     }
 
-    /**
-     * @return array list of options
-     */
-    public static function optsStatus()
-    {
-        $model = P3Page::model();
-        return array_combine($model->Status->statuses, $model->Status->statuses);
-    }
 
     /**
      * @return array list of options
@@ -115,6 +107,62 @@ class P3Page extends BaseP3Page
     public static function optsView()
     {
         return Yii::app()->getModule('p3pages')->params['availableViews'];
+    }
+
+    /**
+     * @return array list of options
+     */
+    public static function optsStatus()
+    {
+        $model = P3Page::model();
+        return array_combine($model->Status->statuses, $model->Status->statuses);
+    }
+    /**
+     * @return array list of options
+
+    public static function optsAccessOwner()
+    {
+        return self::model()->Access->getAccessOwner();
+    }*/
+
+    /**
+     * @return array list of options
+     */
+    public static function optsAccessDomain()
+    {
+        return self::model()->Access->getAccessDomains();
+    }
+
+    /**
+     * @return array list of options
+     */
+    public static function optsAccessRead()
+    {
+        return self::model()->Access->getAccessRoles();
+    }
+
+    /**
+     * @return array list of options
+     */
+    public static function optsAccessUpdate()
+    {
+        return self::model()->Access->getAccessRoles();
+    }
+
+    /**
+     * @return array list of options
+     */
+    public static function optsAccessDelete()
+    {
+        return self::model()->Access->getAccessRoles();
+    }
+
+    /**
+     * @return array list of options
+     */
+    public static function optsAccessAppend()
+    {
+        return self::model()->Access->getAccessRoles();
     }
 
     public function createUrl($additionalParams = array(), $absolute = false)

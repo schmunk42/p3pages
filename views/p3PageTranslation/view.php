@@ -48,39 +48,22 @@ $this->breadcrumbs[] = Yii::t('crud', 'View');
                             true
                         )
                     ),
-        array(
-            'name' => 'p3_page_id',
-            'value' => ($model->p3Page !== null)?CHtml::link(
-                            '<i class="icon icon-circle-arrow-left"></i> '.$model->p3Page->itemLabel,
-                            array('/p3pages/p3Page/view','id' => $model->p3Page->id),
-                            array('class' => '')).' '.CHtml::link(
-                            '<i class="icon icon-pencil"></i> ',
-                            array('/p3pages/p3Page/update','id' => $model->p3Page->id),
-                            array('class' => '')):'n/a',
-            'type' => 'html',
-        ),
 array(
-                        'name' => 'status',
+                        'name'=>'language',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'status',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3PageTranslation::optslanguage(),
+                                'attribute'=>'language',
                                 'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'language',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'language',
-                                'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
@@ -94,6 +77,26 @@ array(
                                 'model' => $model,
                                 'attribute' => 'menu_name',
                                 'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                            ),
+                            true
+                        )
+                    ),
+array(
+                        'name'=>'status',
+                        'type' => 'raw',
+                        'value' =>$this->widget(
+                            'EditableField',
+                            array(
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3PageTranslation::optsstatus(),
+                                'attribute'=>'status',
+                                'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
@@ -164,44 +167,76 @@ array(
                         )
                     ),
 array(
-                        'name' => 'access_read',
+                        'name'=>'access_read',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_read',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3PageTranslation::optsaccessread(),
+                                'attribute'=>'access_read',
                                 'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
 array(
-                        'name' => 'access_update',
+                        'name'=>'access_update',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_update',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3PageTranslation::optsaccessupdate(),
+                                'attribute'=>'access_update',
                                 'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
 array(
-                        'name' => 'access_delete',
+                        'name'=>'access_delete',
                         'type' => 'raw',
-                        'value' => $this->widget(
+                        'value' =>$this->widget(
                             'EditableField',
                             array(
-                                'model' => $model,
-                                'attribute' => 'access_delete',
+                                'model'=>$model,
+                                'emptytext' => 'Click to select',
+                                'type' => 'select',
+                                'source' => P3PageTranslation::optsaccessdelete(),
+                                'attribute'=>'access_delete',
                                 'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                                'select2' => array(
+                                    'placeholder' => 'Select...',
+                                    'allowClear' => true
+                                )
                             ),
                             true
                         )
                     ),
+        array(
+            'name' => 'p3_page_id',
+            'value' => ($model->p3Page !== null)?CHtml::link(
+                            '<i class="icon icon-circle-arrow-left"></i> '.$model->p3Page->itemLabel,
+                            array('/p3pages/p3Page/view','id' => $model->p3Page->id),
+                            array('class' => '')).' '.CHtml::link(
+                            '<i class="icon icon-pencil"></i> ',
+                            array('/p3pages/p3Page/update','id' => $model->p3Page->id),
+                            array('class' => '')):'n/a',
+            'type' => 'html',
+        ),
 array(
                         'name' => 'copied_from_id',
                         'type' => 'raw',

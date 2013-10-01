@@ -21,6 +21,11 @@
     </div>
 
     <div class="row">
+        <?php echo $form->label($model, 'name_id'); ?>
+        <?php echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64)); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->label($model, 'tree_parent_id'); ?>
         <?php echo $form->textField($model, 'tree_parent_id'); ?>
     </div>
@@ -31,18 +36,13 @@
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, 'name_id'); ?>
-        <?php echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64)); ?>
+        <?php echo $form->label($model, 'default_page_title'); ?>
+        <?php echo $form->textField($model, 'default_page_title', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'default_url_param'); ?>
         <?php echo $form->textField($model, 'default_url_param', array('size' => 60, 'maxlength' => 255)); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->label($model, 'default_page_title'); ?>
-        <?php echo $form->textField($model, 'default_page_title', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
 
     <div class="row">
@@ -57,7 +57,13 @@
 
     <div class="row">
         <?php echo $form->label($model, 'url_json'); ?>
-        <?php echo $form->textField($model, 'url_json', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php $this->widget(
+                'jsonEditorView.JuiJSONEditorInput',
+                array(
+                     'model'     => $model,
+                     'attribute' => 'url_json'
+                )
+            );; ?>
     </div>
 
     <div class="row">
@@ -72,52 +78,58 @@
 
     <div class="row">
         <?php echo $form->label($model, 'custom_data_json'); ?>
-        <?php echo $form->textArea($model, 'custom_data_json', array('rows' => 6, 'cols' => 50)); ?>
+        <?php $this->widget(
+                'jsonEditorView.JuiJSONEditorInput',
+                array(
+                     'model'     => $model,
+                     'attribute' => 'custom_data_json'
+                )
+            );; ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'access_owner'); ?>
-        <?php echo $form->textField($model, 'access_owner', array('size' => 60, 'maxlength' => 64)); ?>
+        <?php echo $form->textField($model,'access_owner',array('disabled'=>'disabled')); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'access_domain'); ?>
-        <?php echo $form->textField($model, 'access_domain', array('size' => 8, 'maxlength' => 8)); ?>
+        <?php echo $form->dropDownList($model,'access_domain',P3Page::optsaccessdomain(),array('empty'=>'undefined'));; ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'access_read'); ?>
-        <?php echo $form->textField($model, 'access_read', array('size' => 60, 'maxlength' => 256)); ?>
+        <?php echo $form->dropDownList($model,'access_read',P3Page::optsaccessread(),array('empty'=>'undefined'));; ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'access_update'); ?>
-        <?php echo $form->textField($model, 'access_update', array('size' => 60, 'maxlength' => 256)); ?>
+        <?php echo $form->dropDownList($model,'access_update',P3Page::optsaccessupdate(),array('empty'=>'undefined'));; ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'access_delete'); ?>
-        <?php echo $form->textField($model, 'access_delete', array('size' => 60, 'maxlength' => 256)); ?>
+        <?php echo $form->dropDownList($model,'access_delete',P3Page::optsaccessdelete(),array('empty'=>'undefined'));; ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'access_append'); ?>
-        <?php echo $form->textField($model, 'access_append', array('size' => 60, 'maxlength' => 256)); ?>
+        <?php echo $form->dropDownList($model,'access_append',P3Page::optsaccessappend(),array('empty'=>'undefined'));; ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'copied_from_id'); ?>
-        <?php echo $form->textField($model, 'copied_from_id'); ?>
+        <?php echo $form->textField($model,'copied_from_id',array('disabled'=>'disabled')); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'created_at'); ?>
-        <?php echo $form->textField($model, 'created_at'); ?>
+        <?php echo $form->textField($model,'created_at',array('disabled'=>'disabled')); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'updated_at'); ?>
-        <?php echo $form->textField($model, 'updated_at'); ?>
+        <?php echo $form->textField($model,'updated_at',array('disabled'=>'disabled')); ?>
     </div>
 
 

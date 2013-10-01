@@ -38,7 +38,7 @@
                             echo $form->error($model,'id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.id')) != 'help.P3Page.id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.id')) != 'help.id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             echo $form->error($model,'default_menu_name')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_menu_name')) != 'help.P3Page.default_menu_name')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.default_menu_name')) != 'help.default_menu_name')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -68,7 +68,22 @@
                             echo $form->error($model,'status')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.status')) != 'help.P3Page.status')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.status')) != 'help.status')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'name_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64));
+                            echo $form->error($model,'name_id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.name_id')) != 'help.name_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -95,7 +110,7 @@
                             echo $form->error($model,'tree_parent_id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.tree_parent_id')) != 'help.P3Page.tree_parent_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.tree_parent_id')) != 'help.tree_parent_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -110,37 +125,7 @@
                             echo $form->error($model,'tree_position')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.tree_position')) != 'help.P3Page.tree_position')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'name_id') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'name_id', array('size' => 60, 'maxlength' => 64));
-                            echo $form->error($model,'name_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.name_id')) != 'help.P3Page.name_id')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'default_url_param') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'default_url_param', array('size' => 60, 'maxlength' => 255));
-                            echo $form->error($model,'default_url_param')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_url_param')) != 'help.P3Page.default_url_param')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.tree_position')) != 'help.tree_position')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -155,7 +140,22 @@
                             echo $form->error($model,'default_page_title')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_page_title')) != 'help.P3Page.default_page_title')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.default_page_title')) != 'help.default_page_title')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'default_url_param') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'default_url_param', array('size' => 60, 'maxlength' => 255));
+                            echo $form->error($model,'default_url_param')
+                            ?>
+                            <span class="help-block">
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.default_url_param')) != 'help.default_url_param')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                             echo $form->error($model,'layout')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.layout')) != 'help.P3Page.layout')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.layout')) != 'help.layout')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                             echo $form->error($model,'view')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.view')) != 'help.P3Page.view')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.view')) != 'help.view')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -196,11 +196,17 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'url_json', array('size' => 60, 'maxlength' => 255));
+                            $this->widget(
+                'jsonEditorView.JuiJSONEditorInput',
+                array(
+                     'model'     => $model,
+                     'attribute' => 'url_json'
+                )
+            );;
                             echo $form->error($model,'url_json')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.url_json')) != 'help.P3Page.url_json')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.url_json')) != 'help.url_json')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -215,7 +221,7 @@
                             echo $form->error($model,'default_keywords')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_keywords')) != 'help.P3Page.default_keywords')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.default_keywords')) != 'help.default_keywords')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -230,7 +236,7 @@
                             echo $form->error($model,'default_description')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.default_description')) != 'help.P3Page.default_description')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.default_description')) != 'help.default_description')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -241,11 +247,17 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textArea($model, 'custom_data_json', array('rows' => 6, 'cols' => 50));
+                            $this->widget(
+                'jsonEditorView.JuiJSONEditorInput',
+                array(
+                     'model'     => $model,
+                     'attribute' => 'custom_data_json'
+                )
+            );;
                             echo $form->error($model,'custom_data_json')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.custom_data_json')) != 'help.P3Page.custom_data_json')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.custom_data_json')) != 'help.custom_data_json')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -256,11 +268,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'access_owner', array('size' => 60, 'maxlength' => 64));
+                            echo $form->textField($model,'access_owner',array('disabled'=>'disabled'));
                             echo $form->error($model,'access_owner')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_owner')) != 'help.P3Page.access_owner')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_owner')) != 'help.access_owner')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -271,11 +283,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'access_domain', array('size' => 8, 'maxlength' => 8));
+                            echo $form->dropDownList($model,'access_domain',P3Page::optsaccessdomain(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_domain')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_domain')) != 'help.P3Page.access_domain')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_domain')) != 'help.access_domain')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -286,11 +298,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'access_read', array('size' => 60, 'maxlength' => 256));
+                            echo $form->dropDownList($model,'access_read',P3Page::optsaccessread(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_read')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_read')) != 'help.P3Page.access_read')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_read')) != 'help.access_read')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -301,11 +313,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'access_update', array('size' => 60, 'maxlength' => 256));
+                            echo $form->dropDownList($model,'access_update',P3Page::optsaccessupdate(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_update')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_update')) != 'help.P3Page.access_update')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_update')) != 'help.access_update')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -316,11 +328,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'access_delete', array('size' => 60, 'maxlength' => 256));
+                            echo $form->dropDownList($model,'access_delete',P3Page::optsaccessdelete(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_delete')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_delete')) != 'help.P3Page.access_delete')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_delete')) != 'help.access_delete')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -331,11 +343,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'access_append', array('size' => 60, 'maxlength' => 256));
+                            echo $form->dropDownList($model,'access_append',P3Page::optsaccessappend(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_append')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.access_append')) != 'help.P3Page.access_append')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_append')) != 'help.access_append')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -346,11 +358,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'copied_from_id');
+                            echo $form->textField($model,'copied_from_id',array('disabled'=>'disabled'));
                             echo $form->error($model,'copied_from_id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.copied_from_id')) != 'help.P3Page.copied_from_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.copied_from_id')) != 'help.copied_from_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -361,11 +373,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'created_at');
+                            echo $form->textField($model,'created_at',array('disabled'=>'disabled'));
                             echo $form->error($model,'created_at')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.created_at')) != 'help.P3Page.created_at')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.created_at')) != 'help.created_at')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -376,11 +388,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model, 'updated_at');
+                            echo $form->textField($model,'updated_at',array('disabled'=>'disabled'));
                             echo $form->error($model,'updated_at')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.P3Page.updated_at')) != 'help.P3Page.updated_at')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.updated_at')) != 'help.updated_at')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -397,12 +409,12 @@
                 <h3>
                     <?php echo Yii::t('P3PagesModule.model', 'P3Pages'); ?>
                 </h3>
-                <?php echo '<i>Switch to view mode to edit related records.</i>' ?>
+                <?php echo '<i>'.Yii::t('crud','Switch to view mode to edit related records.').'</i>' ?>
                                                             
                 <h3>
                     <?php echo Yii::t('P3PagesModule.model', 'P3PageTranslations'); ?>
                 </h3>
-                <?php echo '<i>Switch to view mode to edit related records.</i>' ?>
+                <?php echo '<i>'.Yii::t('crud','Switch to view mode to edit related records.').'</i>' ?>
                             
         </div>
         <!-- sub inputs -->
