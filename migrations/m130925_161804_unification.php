@@ -14,6 +14,16 @@ class m130925_161804_unification extends EDbMigration
             $this->execute('SET FOREIGN_KEY_CHECKS = 0;');
         }
 
+        // new statuses: 'draft', 'published', 'archived'
+        $statusMap = array(
+            0  => 'archived',
+            10 => 'draft',
+            20 => 'draft',
+            30 => 'published',
+            40 => 'published',
+            50 => 'archived',
+            60 => 'archived'
+        );
 
         $this->createTable(
             "_p3_page_v0_17",
@@ -22,7 +32,7 @@ class m130925_161804_unification extends EDbMigration
                  // mikehaertl/translatable (defaults)
                  "default_menu_name"   => "varchar(128) NOT NULL",
                  // yiiext/status-behavior
-                 "status"              => "int(4) NOT NULL",
+                 "status"              => "varchar(32) NOT NULL",
                  // schmunk42/adjacency-list-behavior
                  "tree_parent_id"      => "int(11)",
                  "tree_position"       => "int(11)",
@@ -34,7 +44,7 @@ class m130925_161804_unification extends EDbMigration
                  // p3page
                  "layout"              => "varchar(128)",
                  "view"                => "varchar(128)",
-                 "url_json"            => "varchar(255)",
+                 "url_json"            => "text",
                  //
                  "default_keywords"    => "text",
                  "default_description" => "text",
@@ -64,7 +74,7 @@ class m130925_161804_unification extends EDbMigration
                  "id"             => "pk",
                  "p3_page_id"     => "int(11) NOT NULL",
                  // yiiext/status-behavior
-                 "status"         => "int(4) NOT NULL",
+                 "status"         => "varchar(32) NOT NULL",
                  // mikehaertl/translatable (defaults)
                  "language"       => "varchar(8) NOT NULL",
                  "menu_name"      => "varchar(128) NOT NULL",
@@ -82,8 +92,8 @@ class m130925_161804_unification extends EDbMigration
                  // copy behavior
                  "copied_from_id" => "int(11)",
                  // time
-                 "created_at"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-                 "updated_at"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+                 "created_at"     => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+                 "updated_at"     => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
                  "FOREIGN KEY(p3_page_id) REFERENCES _p3_page_v0_17(id) ON DELETE CASCADE ON UPDATE CASCADE"
             ),
             $options
@@ -121,7 +131,7 @@ class m130925_161804_unification extends EDbMigration
                      "url_json"            => $row['route'],
                      "custom_data_json"    => $row['customData'],
                      // yiiext/status-behavior
-                     "status"              => ($row['status']) ? $row['status'] : 10,
+                     "status"              => ($row['status']) ? $statusMap[$row['status']] : 'draft',
                      // mikehaertl/translatable (defaults)
                      "default_keywords"    => $row['keywords'],
                      "default_description" => $row['description'],
@@ -154,7 +164,7 @@ class m130925_161804_unification extends EDbMigration
                 "_p3_page_translation_v0_17",
                 array(
                      "id"          => $row['id'],
-                     "status"      => 30,
+                     "status"      => 'published',
                      "p3_page_id"  => $row['p3_page_id'],
                      "language"    => $row['language'],
                      "menu_name"   => $row['menuName'],
