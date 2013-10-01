@@ -22,7 +22,7 @@ class P3PageTranslation extends BaseP3PageTranslation
 
     public function getItemLabel()
     {
-        return parent::getItemLabel();
+        return '['.$this->language.'] '.$this->menu_name;
     }
 
     public function behaviors()
