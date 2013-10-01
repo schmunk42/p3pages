@@ -72,6 +72,7 @@ class m130925_161804_unification extends EDbMigration
             "_p3_page_translation_v0_17",
             array(
                  "id"             => "pk",
+                 "p3_page_id"     => "int(11) NOT NULL",
                  "language"       => "varchar(8) NOT NULL",
                  "menu_name"      => "varchar(128) NOT NULL",
                  // yiiext/status-behavior
@@ -89,7 +90,6 @@ class m130925_161804_unification extends EDbMigration
                  "access_delete"  => "varchar(256)",
                  #"access_append"       => "varchar(256)",
                  // copy behavior
-                 "p3_page_id"     => "int(11) NOT NULL",
                  "copied_from_id" => "int(11)",
                  // time
                  "created_at"     => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
@@ -100,6 +100,7 @@ class m130925_161804_unification extends EDbMigration
         );
 
         $this->createIndex('p3_page_name_id_unique', '_p3_page_v0_17', 'name_id', true);
+        $this->createIndex('p3_page_translation_id_language_unique', '_p3_page_translation_v0_17', 'p3_page_id, language', true);
 
         // JOIN all three existing tables, use the first translation as default values
         $sqlStatement = "SELECT p3_page.*, p3_page_meta.*,
