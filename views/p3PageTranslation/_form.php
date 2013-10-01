@@ -38,7 +38,7 @@
                             echo $form->error($model,'id')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.id') != 'P3PageTranslation.id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.id')) != 'P3PageTranslation.id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             echo $form->error($model,'p3_page_id')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.p3_page_id') != 'P3PageTranslation.p3_page_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.p3_page_id')) != 'P3PageTranslation.p3_page_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                             echo $form->error($model,'status')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.status') != 'P3PageTranslation.status')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.status')) != 'P3PageTranslation.status')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             echo $form->error($model,'language')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.language') != 'P3PageTranslation.language')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.language')) != 'P3PageTranslation.language')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                             echo $form->error($model,'menu_name')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.menu_name') != 'P3PageTranslation.menu_name')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.menu_name')) != 'P3PageTranslation.menu_name')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                             echo $form->error($model,'page_title')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.page_title') != 'P3PageTranslation.page_title')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.page_title')) != 'P3PageTranslation.page_title')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                             echo $form->error($model,'url_param')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.url_param') != 'P3PageTranslation.url_param')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.url_param')) != 'P3PageTranslation.url_param')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                             echo $form->error($model,'keywords')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.keywords') != 'P3PageTranslation.keywords')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.keywords')) != 'P3PageTranslation.keywords')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                             echo $form->error($model,'description')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.description') != 'P3PageTranslation.description')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.description')) != 'P3PageTranslation.description')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                             echo $form->error($model,'access_owner')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_owner') != 'P3PageTranslation.access_owner')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_owner')) != 'P3PageTranslation.access_owner')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                             echo $form->error($model,'access_read')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_read') != 'P3PageTranslation.access_read')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_read')) != 'P3PageTranslation.access_read')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                             echo $form->error($model,'access_update')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_update') != 'P3PageTranslation.access_update')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_update')) != 'P3PageTranslation.access_update')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -230,37 +230,7 @@
                             echo $form->error($model,'access_delete')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_delete') != 'P3PageTranslation.access_delete')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'created_at') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'created_at');
-                            echo $form->error($model,'created_at')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.created_at') != 'P3PageTranslation.created_at')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'updated_at') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'updated_at');
-                            echo $form->error($model,'updated_at')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.updated_at') != 'P3PageTranslation.updated_at')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.access_delete')) != 'P3PageTranslation.access_delete')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -275,7 +245,37 @@
                             echo $form->error($model,'copied_from_id')
                             ?>
                             <span class="help-block">
-                                <?php echo ($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.copied_from_id') != 'P3PageTranslation.copied_from_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.copied_from_id')) != 'P3PageTranslation.copied_from_id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'created_at') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'created_at');
+                            echo $form->error($model,'created_at')
+                            ?>
+                            <span class="help-block">
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.created_at')) != 'P3PageTranslation.created_at')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'updated_at') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            echo $form->textField($model, 'updated_at');
+                            echo $form->error($model,'updated_at')
+                            ?>
+                            <span class="help-block">
+                                <?php echo (($t = Yii::t('P3PagesModule.crud', 'P3PageTranslation.updated_at')) != 'P3PageTranslation.updated_at')?$t:'' ?>
                             </span>
                         </div>
                     </div>

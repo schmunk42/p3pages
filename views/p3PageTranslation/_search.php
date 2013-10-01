@@ -71,6 +71,11 @@
     </div>
 
     <div class="row">
+        <?php echo $form->label($model, 'copied_from_id'); ?>
+        <?php echo $form->textField($model, 'copied_from_id'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->label($model, 'created_at'); ?>
         <?php echo $form->textField($model, 'created_at'); ?>
     </div>
@@ -78,11 +83,6 @@
     <div class="row">
         <?php echo $form->label($model, 'updated_at'); ?>
         <?php echo $form->textField($model, 'updated_at'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->label($model, 'copied_from_id'); ?>
-        <?php echo $form->textField($model, 'copied_from_id'); ?>
     </div>
 
 

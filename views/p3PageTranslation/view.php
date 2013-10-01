@@ -203,6 +203,19 @@ array(
                         )
                     ),
 array(
+                        'name' => 'copied_from_id',
+                        'type' => 'raw',
+                        'value' => $this->widget(
+                            'EditableField',
+                            array(
+                                'model' => $model,
+                                'attribute' => 'copied_from_id',
+                                'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                            ),
+                            true
+                        )
+                    ),
+array(
                         'name' => 'created_at',
                         'type' => 'raw',
                         'value' => $this->widget(
@@ -223,19 +236,6 @@ array(
                             array(
                                 'model' => $model,
                                 'attribute' => 'updated_at',
-                                'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'copied_from_id',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'copied_from_id',
                                 'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
                             ),
                             true

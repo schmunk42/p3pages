@@ -141,6 +141,14 @@ $this->widget('TbGridView',
             ),
             array(
                 'class' => 'editable.EditableColumn',
+                'name' => 'copied_from_id',
+                'editable' => array(
+                    'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                    //'placement' => 'right',
+                )
+            ),
+            array(
+                'class' => 'editable.EditableColumn',
                 'name' => 'created_at',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -150,14 +158,6 @@ $this->widget('TbGridView',
             array(
                 'class' => 'editable.EditableColumn',
                 'name' => 'updated_at',
-                'editable' => array(
-                    'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
-            array(
-                'class' => 'editable.EditableColumn',
-                'name' => 'copied_from_id',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
                     //'placement' => 'right',
