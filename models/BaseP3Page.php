@@ -86,7 +86,7 @@ abstract class BaseP3Page extends CActiveRecord
         return array(
             'treeParent' => array(self::BELONGS_TO, 'P3Page', 'tree_parent_id'),
             'p3Pages' => array(self::HAS_MANY, 'P3Page', 'tree_parent_id'),
-            'p3PageTranslations' => array(self::HAS_MANY, 'P3PageTranslation', 'p3_page_id'),
+            'p3PageTranslations' => array(self::HAS_MANY, 'P3PageTranslation', 'p3_page_id', 'index' => 'language'),
         );
     }
 
