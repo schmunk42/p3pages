@@ -111,7 +111,9 @@
                            "label"=>Yii::t("crud","Save"),
                        "icon"=>"save",
                        "type"=>"primary",
-                       "url"=>"javascript:$('.crud-form form').submit();",
+                       "htmlOptions"=> array(
+                            "onclick"=>"$('.crud-form form').submit();",
+                       ),
                        "visible"=>$showSaveButton && Yii::app()->user->checkAccess("P3pages.P3Page.View")
                     ));
              ?>        </div>
