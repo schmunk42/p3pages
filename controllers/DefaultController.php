@@ -76,12 +76,12 @@ class DefaultController extends Controller
             // additional access checks
             Yii::trace('Performing addtional page checks...', 'p3pages.controllers.default');
             // has page checkAccess restrictiions
-            if (!$model->isReadable()) {
+            if (!$model->isReadable) {
                 if (Yii::app()->user->isGuest) {
                     Yii::app()->user->loginRequired();
                     return;
                 }
-                throw new CHttpException(404, 'You are not authorized to view this page');
+                throw new CHttpException(403, 'You are not authorized to view this page');
             }
 
             // is page localized

@@ -9,6 +9,9 @@ class P3Page extends BaseP3Page
     const PAGE_ID_KEY   = 'pageId';
     const PAGE_NAME_KEY = 'pageName';
 
+    /**
+     * @var string default status
+     */
     public $status = 'draft';
 
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
