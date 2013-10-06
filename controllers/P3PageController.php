@@ -103,8 +103,8 @@ array(
 
     public function actionEditableSaver()
     {
-        Yii::import('EditableSaver'); //or you can add import 'ext.editable.*' to config
-        $es = new EditableSaver('P3Page'); // classname of model to be updated
+        Yii::import('TbEditableSaver');
+        $es = new TbEditableSaver('P3Page'); // classname of model to be updated
         $es->update();
     }
 

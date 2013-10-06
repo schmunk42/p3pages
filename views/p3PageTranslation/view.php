@@ -20,8 +20,6 @@ $this->breadcrumbs[] = Yii::t('crud', 'View');
 
 
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
-
-
 <div class="row">
     <div class="span7">
         <h2>
@@ -39,7 +37,7 @@ $this->breadcrumbs[] = Yii::t('crud', 'View');
                         'name' => 'id',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'id',
@@ -63,7 +61,7 @@ array(
                         'name'=>'language',
                         'type' => 'raw',
                         'value' =>$this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model'=>$model,
                                 'emptytext' => 'Click to select',
@@ -83,7 +81,7 @@ array(
                         'name' => 'menu_name',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'menu_name',
@@ -96,7 +94,7 @@ array(
                         'name'=>'status',
                         'type' => 'raw',
                         'value' =>$this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model'=>$model,
                                 'emptytext' => 'Click to select',
@@ -116,7 +114,7 @@ array(
                         'name' => 'page_title',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'page_title',
@@ -129,7 +127,7 @@ array(
                         'name' => 'url_param',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'url_param',
@@ -142,7 +140,7 @@ array(
                         'name' => 'keywords',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'keywords',
@@ -155,7 +153,7 @@ array(
                         'name' => 'description',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'description',
@@ -168,7 +166,7 @@ array(
                         'name' => 'access_owner',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'access_owner',
@@ -181,7 +179,7 @@ array(
                         'name'=>'access_read',
                         'type' => 'raw',
                         'value' =>$this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model'=>$model,
                                 'emptytext' => 'Click to select',
@@ -201,7 +199,7 @@ array(
                         'name'=>'access_update',
                         'type' => 'raw',
                         'value' =>$this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model'=>$model,
                                 'emptytext' => 'Click to select',
@@ -221,7 +219,7 @@ array(
                         'name'=>'access_delete',
                         'type' => 'raw',
                         'value' =>$this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model'=>$model,
                                 'emptytext' => 'Click to select',
@@ -241,7 +239,7 @@ array(
                         'name' => 'copied_from_id',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'copied_from_id',
@@ -254,7 +252,7 @@ array(
                         'name' => 'created_at',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'created_at',
@@ -267,7 +265,7 @@ array(
                         'name' => 'updated_at',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'EditableField',
+                            'TbEditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'updated_at',
@@ -283,3 +281,5 @@ array(
     <div class="span5">
         <?php $this->renderPartial('_view-relations',array('model' => $model)); ?>    </div>
 </div>
+
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>

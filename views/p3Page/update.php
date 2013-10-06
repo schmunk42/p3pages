@@ -26,3 +26,5 @@ $this->breadcrumbs[] = Yii::t('crud', 'Update');
 <?php
     $this->renderPartial('_form', array('model' => $model));
 ?>
+
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>

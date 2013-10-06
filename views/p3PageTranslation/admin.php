@@ -52,7 +52,7 @@ $this->widget('TbGridView',
                 'urlExpression' => 'Yii::app()->controller->createUrl("view", array("id" => $data["id"]))'
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'id',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -65,7 +65,7 @@ $this->widget('TbGridView',
                 'filter' => CHtml::listData(P3Page::model()->findAll(array('limit' => 1000)), 'id', 'itemLabel'),
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'language',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -73,7 +73,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'menu_name',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -81,7 +81,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'status',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -89,7 +89,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'page_title',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -97,7 +97,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'url_param',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -107,7 +107,7 @@ $this->widget('TbGridView',
             #'keywords',
             #'description',
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_owner',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -116,7 +116,7 @@ $this->widget('TbGridView',
             ),
             /*
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_read',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -124,7 +124,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_update',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -132,7 +132,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_delete',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
@@ -140,7 +140,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'copied_from_id',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),

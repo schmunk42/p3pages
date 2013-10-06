@@ -52,7 +52,7 @@ $this->widget('TbGridView',
                 'urlExpression' => 'Yii::app()->controller->createUrl("view", array("id" => $data["id"]))'
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'id',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -60,7 +60,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'default_menu_name',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -68,7 +68,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'status',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -76,7 +76,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'name_id',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -89,7 +89,7 @@ $this->widget('TbGridView',
                 'filter' => CHtml::listData(P3Page::model()->findAll(array('limit' => 1000)), 'id', 'itemLabel'),
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'tree_position',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -97,7 +97,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'default_page_title',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -105,7 +105,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'default_url_param',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -114,7 +114,7 @@ $this->widget('TbGridView',
             ),
             /*
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'layout',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -122,7 +122,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'view',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -134,7 +134,7 @@ $this->widget('TbGridView',
             #'default_description',
             #'custom_data_json',
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_owner',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -142,7 +142,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_domain',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -150,7 +150,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_read',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -158,7 +158,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_update',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -166,7 +166,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_delete',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -174,7 +174,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'access_append',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
@@ -182,7 +182,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
+                'class' => 'TbEditableColumn',
                 'name' => 'copied_from_id',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
