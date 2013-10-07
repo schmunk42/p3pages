@@ -41,11 +41,6 @@
     </div>
 
     <div class="row">
-        <?php echo $form->label($model, 'default_url_param'); ?>
-        <?php echo $form->textField($model, 'default_url_param', array('size' => 60, 'maxlength' => 255)); ?>
-    </div>
-
-    <div class="row">
         <?php echo $form->label($model, 'layout'); ?>
         <?php echo $form->dropDownList($model,'layout',P3Page::optslayout(),array('empty'=>'undefined'));; ?>
     </div>
@@ -64,6 +59,11 @@
                      'attribute' => 'url_json'
                 )
             );; ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->label($model, 'default_url_param'); ?>
+        <?php echo $form->textField($model, 'default_url_param', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
 
     <div class="row">

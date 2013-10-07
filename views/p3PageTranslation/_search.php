@@ -52,7 +52,7 @@
 
     <div class="row">
         <?php echo $form->label($model, 'access_owner'); ?>
-        <?php echo $form->textField($model, 'access_owner', array('size' => 60, 'maxlength' => 64)); ?>
+        <?php echo $form->textField($model,'access_owner',array('disabled'=>'disabled')); ?>
     </div>
 
     <div class="row">
@@ -72,17 +72,17 @@
 
     <div class="row">
         <?php echo $form->label($model, 'copied_from_id'); ?>
-        <?php echo $form->textField($model, 'copied_from_id'); ?>
+        <?php echo $form->textField($model,'copied_from_id',array('disabled'=>'disabled')); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'created_at'); ?>
-        <?php echo $form->textField($model, 'created_at'); ?>
+        <?php echo $form->textField($model,'created_at',array('disabled'=>'disabled')); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'updated_at'); ?>
-        <?php echo $form->textField($model, 'updated_at'); ?>
+        <?php echo $form->textField($model,'updated_at',array('disabled'=>'disabled')); ?>
     </div>
 
 

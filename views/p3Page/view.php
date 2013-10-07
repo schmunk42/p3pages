@@ -12,10 +12,10 @@ $this->breadcrumbs[] = Yii::t('crud', 'View');
 ?>
 
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
-<h1>
-    <?php echo Yii::t('P3PagesModule.model','P3 Page')?>
+    <h1>
+        <?php echo Yii::t('P3PagesModule.model','P3 Page')?>
     <small><?php echo Yii::t('crud','View')?> #<?php echo $model->id ?></small>
-    </h1>
+        </h1>
 
 
 
@@ -132,19 +132,6 @@ array(
                         )
                     ),
 array(
-                        'name' => 'default_url_param',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'default_url_param',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
                         'name'=>'layout',
                         'type' => 'raw',
                         'value' =>$this->widget(
@@ -187,11 +174,16 @@ array(
 array(
                         'name' => 'url_json',
                         'type' => 'raw',
+                        'value' => $model->url_json
+                    ),
+array(
+                        'name' => 'default_url_param',
+                        'type' => 'raw',
                         'value' => $this->widget(
                             'TbEditableField',
                             array(
                                 'model' => $model,
-                                'attribute' => 'url_json',
+                                'attribute' => 'default_url_param',
                                 'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                             ),
                             true
@@ -200,54 +192,22 @@ array(
 array(
                         'name' => 'default_keywords',
                         'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'default_keywords',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
+                        'value' => $model->default_keywords
                     ),
 array(
                         'name' => 'default_description',
                         'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'default_description',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
+                        'value' => $model->default_description
                     ),
 array(
                         'name' => 'custom_data_json',
                         'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'custom_data_json',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
+                        'value' => $model->custom_data_json
                     ),
 array(
                         'name' => 'access_owner',
                         'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'access_owner',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
+                        'value' => $model->access_owner
                     ),
 array(
                         'name'=>'access_domain',
@@ -352,45 +312,22 @@ array(
 array(
                         'name' => 'copied_from_id',
                         'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'copied_from_id',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
+                        'value' => $model->copied_from_id
                     ),
 array(
                         'name' => 'created_at',
                         'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'created_at',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
+                        'value' => $model->created_at
                     ),
 array(
                         'name' => 'updated_at',
                         'type' => 'raw',
-                        'value' => $this->widget(
-                            'TbEditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'updated_at',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                            ),
-                            true
-                        )
+                        'value' => $model->updated_at
                     ),
            ),
         )); ?>
     </div>
+
 
     <div class="span5">
         <?php $this->renderPartial('_view-relations',array('model' => $model)); ?>    </div>

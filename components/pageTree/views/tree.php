@@ -1,17 +1,28 @@
 <p>
     <?php if ($model->getChildren()): ?>
-        <button type="button" class="btn btn-inverse" data-toggle="collapse"
+        <button type="button" class="btn" data-toggle="collapse"
                 data-target="#page-<?php echo $model->id ?>">
             <i class="icon-folder-close icon-white"></i>
         </button>
     <?php endif; ?>
 
-    <?php echo CHtml::link(
-        '<i class="icon-circle-arrow-right icon-white"></i> ' . ' <b>' . $model->name_id . '</b> ' .
+    <?php
+    echo CHtml::link(
+        '<i class="icon-pencil icon-white"></i> ' . ' <b>' . $model->name_id . '</b> ' .
         $model->menu_name . ' #' . $model->id,
-        $model->createUrl(),
-        array('class' => 'btn btn-inverse')
+        array(
+             '/p3pages/p3Page/update',
+             'id'        => $model->id,
+             'returnUrl' => Yii::app()->controller->createUrl(null)
+        ),
+        array(
+             'class'       => 'btn',
+             'data-toggle' => 'tooltip',
+             'title'       => 'Update Page'
+        )
     ) ?>
+
+
     <?php foreach ($model->p3PageTranslations AS $translation): ?>
         <?php
         echo CHtml::link(
@@ -22,8 +33,10 @@
                  'returnUrl' => Yii::app()->controller->createUrl(null)
             ),
             array(
-                 'class' => 'btn ' . (($translation->language == Yii::app()->language) ?
-                     'btn-primary' : 'btn-info')
+                 'class'       => 'btn ' . (($translation->language == Yii::app()->language) ?
+                     'btn-primary' : 'btn-info'),
+                 'data-toggle' => 'tooltip',
+                 'title'       => 'Update Translation'
             )
         )
         ?>
@@ -39,10 +52,40 @@
                  'language'   => Yii::app()->language
              )
         ),
-        array('class' => 'btn btn-primary')
+        array(
+             'class'       => 'btn btn-primary',
+             'data-toggle' => 'tooltip',
+             'title'       => 'Create Translation'
+        )
+    )
+    ?>
+    <?php
+    echo CHtml::link(
+        '<i class="icon-circle-arrow-right"></i> ',
+        $model->createUrl(),
+        array(
+             'class'       => 'btn btn-inverse',
+             'data-toggle' => 'tooltip',
+             'title'       => 'Go to Frontend-Page'
+        )
     )
     ?>
 
+    <?php
+    echo CHtml::link(
+        '<i class="icon-plus-sign"></i>', // Append Child Page
+        array(
+             '/p3pages/p3Page/create',
+             'P3Page'    => array('tree_parent_id' => $model->id,),
+             'returnUrl' => Yii::app()->controller->createUrl(null)
+        ),
+        array(
+             'class'       => 'btn btn-success',
+             'data-toggle' => 'tooltip',
+             'title'       => 'Append Child Page'
+        )
+    )
+    ?>
     <?php
     echo CHtml::link(
         '<i class="icon-minus-sign icon-white"></i> ' . Yii::t('crud', 'Delete'),
@@ -58,33 +101,6 @@
         )
     )
     ?>
-    <?php
-    echo CHtml::link(
-        '<i class="icon-pencil"></i> ',
-        array(
-             '/p3pages/p3Page/update',
-             'id'        => $model->id,
-             'returnUrl' => Yii::app()->controller->createUrl(null)
-        ),
-        array(
-             'class' => 'btn',
-             'rel'   => 'tooltip',
-             'title' => 'first tooltip'
-        )
-    )
-    ?>
-    <?php
-    echo CHtml::link(
-        '<i class="icon-plus-sign"></i>', // Append Child Page
-        array(
-             '/p3pages/p3Page/create',
-             'P3Page' => array('tree_parent_id' => $model->id,),
-             'returnUrl'  => Yii::app()->controller->createUrl(null)
-        ),
-        array('class' => 'btn')
-    )
-    ?>
-
 </p>
 <p>
 
@@ -92,20 +108,20 @@
     <span class="label"><?php echo $model->layout ?></span>
     <span class="label"><?php echo $model->view ?></span>
     <span class="label">Position <?php
-    if (isset($model->p3PageMeta)) {
+
         $this->widget(
-            'EditableField',
+            'TbEditableField',
             array(
                  'type'      => 'text',
-                 'model'     => $model->p3PageMeta,
-                 'attribute' => 'treePosition',
+                 'model'     => $model,
+                 'attribute' => 'tree_position',
                  'url'       => Yii::app()->controller->createUrl('/p3pages/p3PageMeta/editableSaver'),
                  'emptytext' => '0'
             )
         );
-    }
 
-    ?></span>
+
+        ?></span>
 
 
 </p>

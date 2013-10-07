@@ -10,13 +10,16 @@
             'id' => 'p3-page-translation-form',
             'enableAjaxValidation' => true,
             'enableClientValidation' => true,
+            'htmlOptions' => array(
+                'enctype' => ''
+            )
         ));
 
         echo $form->errorSummary($model);
     ?>
     
     <div class="row">
-        <div class="span7"> <!-- main inputs -->
+        <div class="span7">
             <h2>
                 <?php echo Yii::t('crud','Data')?>                <small>
                     <?php echo $model->itemLabel ?>
@@ -27,28 +30,27 @@
 
             <div class="form-horizontal">
 
-                
-                    <div class="control-group">
+                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php  ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.id')) != 'tooltip.id')?$t:'' ?>'>
+                                <?php
                             ;
                             echo $form->error($model,'id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.id')) != 'help.id')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'p3_page_id') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.p3_page_id')) != 'tooltip.p3_page_id')?$t:'' ?>'>
+                                <?php
                             $this->widget(
                 '\GtcRelation',
                 array(
@@ -63,228 +65,198 @@
                 )
                 );
                             echo $form->error($model,'p3_page_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.p3_page_id')) != 'help.p3_page_id')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'language') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.language')) != 'tooltip.language')?$t:'' ?>'>
+                                <?php
                             echo $form->dropDownList($model,'language',P3PageTranslation::optslanguage(),array('empty'=>'undefined'));;
                             echo $form->error($model,'language')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.language')) != 'help.language')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'menu_name') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.menu_name')) != 'tooltip.menu_name')?$t:'' ?>'>
+                                <?php
                             echo $form->textField($model, 'menu_name', array('size' => 60, 'maxlength' => 128));
                             echo $form->error($model,'menu_name')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.menu_name')) != 'help.menu_name')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'status') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.status')) != 'tooltip.status')?$t:'' ?>'>
+                                <?php
                             echo $form->dropDownList($model,'status',P3PageTranslation::optsstatus(),array('empty'=>'undefined'));;
                             echo $form->error($model,'status')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.status')) != 'help.status')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'page_title') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.page_title')) != 'tooltip.page_title')?$t:'' ?>'>
+                                <?php
                             echo $form->textField($model, 'page_title', array('size' => 60, 'maxlength' => 255));
                             echo $form->error($model,'page_title')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.page_title')) != 'help.page_title')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'url_param') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.url_param')) != 'tooltip.url_param')?$t:'' ?>'>
+                                <?php
                             echo $form->textField($model, 'url_param', array('size' => 60, 'maxlength' => 255));
                             echo $form->error($model,'url_param')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.url_param')) != 'help.url_param')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'keywords') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.keywords')) != 'tooltip.keywords')?$t:'' ?>'>
+                                <?php
                             echo $form->textArea($model, 'keywords', array('rows' => 6, 'cols' => 50));
                             echo $form->error($model,'keywords')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.keywords')) != 'help.keywords')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'description') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.description')) != 'tooltip.description')?$t:'' ?>'>
+                                <?php
                             echo $form->textArea($model, 'description', array('rows' => 6, 'cols' => 50));
                             echo $form->error($model,'description')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.description')) != 'help.description')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php echo '<h3>Access</h3>' ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_owner') ?>
                         </div>
                         <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'access_owner', array('size' => 60, 'maxlength' => 64));
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.access_owner')) != 'tooltip.access_owner')?$t:'' ?>'>
+                                <?php
+                            echo $form->textField($model,'access_owner',array('disabled'=>'disabled'));
                             echo $form->error($model,'access_owner')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_owner')) != 'help.access_owner')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_read') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.access_read')) != 'tooltip.access_read')?$t:'' ?>'>
+                                <?php
                             echo $form->dropDownList($model,'access_read',P3PageTranslation::optsaccessread(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_read')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_read')) != 'help.access_read')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_update') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.access_update')) != 'tooltip.access_update')?$t:'' ?>'>
+                                <?php
                             echo $form->dropDownList($model,'access_update',P3PageTranslation::optsaccessupdate(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_update')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_update')) != 'help.access_update')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_delete') ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.access_delete')) != 'tooltip.access_delete')?$t:'' ?>'>
+                                <?php
                             echo $form->dropDownList($model,'access_delete',P3PageTranslation::optsaccessdelete(),array('empty'=>'undefined'));;
                             echo $form->error($model,'access_delete')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_delete')) != 'help.access_delete')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'copied_from_id') ?>
                         </div>
                         <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'copied_from_id');
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.copied_from_id')) != 'tooltip.copied_from_id')?$t:'' ?>'>
+                                <?php
+                            echo $form->textField($model,'copied_from_id',array('disabled'=>'disabled'));
                             echo $form->error($model,'copied_from_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.copied_from_id')) != 'help.copied_from_id')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'created_at') ?>
                         </div>
                         <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'created_at');
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.created_at')) != 'tooltip.created_at')?$t:'' ?>'>
+                                <?php
+                            echo $form->textField($model,'created_at',array('disabled'=>'disabled'));
                             echo $form->error($model,'created_at')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.created_at')) != 'help.created_at')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
-                    <div class="control-group">
+                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'updated_at') ?>
                         </div>
                         <div class='controls'>
-                            <?php
-                            echo $form->textField($model, 'updated_at');
+                            <div style="display: inline-block" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.updated_at')) != 'tooltip.updated_at')?$t:'' ?>'>
+                                <?php
+                            echo $form->textField($model,'updated_at',array('disabled'=>'disabled'));
                             echo $form->error($model,'updated_at')
-                            ?>
-                            <span class="help-block">
-                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.updated_at')) != 'help.updated_at')?$t:'' ?>
-                            </span>
+                            ?>                            </div>
                         </div>
                     </div>
-                
+                    <?php  ?>                
             </div>
         </div>
         <!-- main inputs -->
 
-        <div class="span5"> <!-- sub inputs -->
+        
+        <div class="span5"><!-- sub inputs -->
             <h2>
                 <?php echo Yii::t('crud','Relations')?>
             </h2>
@@ -297,7 +269,8 @@
         <?php echo Yii::t('crud','Fields with <span class="required">*</span> are required.');?>
     </p>
 
-    <div class="form-actions" style="display: none">
+    <!-- TODO: We need the buttons inside the form, when a user hits <enter> -->
+    <div class="form-actions" style="visibility: hidden; height: 1px">
         
         <?php
             echo CHtml::Button(

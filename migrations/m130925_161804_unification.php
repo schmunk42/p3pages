@@ -40,12 +40,12 @@ class m130925_161804_unification extends EDbMigration
                  "tree_position"       => "int(11)",
                  // mikehaertl/translatable (defaults)
                  "default_page_title"  => "varchar(255)",
-                 "default_url_param"   => "varchar(255)",
                  // p3page
                  "layout"              => "varchar(128)",
                  "view"                => "varchar(128)",
                  "url_json"            => "text",
                  //
+                 "default_url_param"   => "varchar(255)",
                  "default_keywords"    => "text",
                  "default_description" => "text",
                  // p3page

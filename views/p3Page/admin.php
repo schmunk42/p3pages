@@ -106,21 +106,13 @@ $this->widget('TbGridView',
             ),
             array(
                 'class' => 'TbEditableColumn',
-                'name' => 'default_url_param',
-                'editable' => array(
-                    'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
-            /*
-            array(
-                'class' => 'TbEditableColumn',
                 'name' => 'layout',
                 'editable' => array(
                     'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
                     //'placement' => 'right',
                 )
             ),
+            /*
             array(
                 'class' => 'TbEditableColumn',
                 'name' => 'view',
@@ -130,6 +122,14 @@ $this->widget('TbGridView',
                 )
             ),
             #'url_json',
+            array(
+                'class' => 'TbEditableColumn',
+                'name' => 'default_url_param',
+                'editable' => array(
+                    'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                    //'placement' => 'right',
+                )
+            ),
             #'default_keywords',
             #'default_description',
             #'custom_data_json',
