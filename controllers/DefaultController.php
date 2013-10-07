@@ -52,7 +52,7 @@ class DefaultController extends Controller
             Yii::trace('Loading page model', 'p3pages.controllers.default');
             $model = P3Page::model()->findByPk($id);
         } elseif ($name) {
-            $model = P3Page::model()->findByAttributes(array('nameId' => $name));
+            $model = P3Page::model()->findByAttributes(array('name_id' => $name));
             // redirect for consistency reasons
             if ($model !== null) {
                 Yii::app()->request->redirect(

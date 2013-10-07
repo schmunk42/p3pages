@@ -229,7 +229,7 @@ class P3Page extends BaseP3Page
             $_traceMsg   = ' found by id';
         } elseif (isset($_GET[P3Page::PAGE_NAME_KEY])) {
             $_activePage = P3Page::model()->localized()->findByAttributes(
-                array('nameId' => $_GET[P3Page::PAGE_NAME_KEY])
+                array('name_id' => $_GET[P3Page::PAGE_NAME_KEY])
             );
             $_traceMsg   = ' found by nameId';
         } else {
