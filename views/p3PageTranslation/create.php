@@ -1,16 +1,16 @@
 <?php
 $this->setPageTitle(
-    Yii::t('P3PagesModule.model', 'P3 Page Translation')
+    Yii::t('P3MediaModule.model', 'P3 Page Translation')
     . ' - '
     . Yii::t('crud', 'Create')
 );
 
-$this->breadcrumbs[Yii::t('P3PagesModule.model', 'P3 Page Translations')] = array('admin');
+$this->breadcrumbs[Yii::t('P3MediaModule.model', 'P3 Page Translations')] = array('admin');
 $this->breadcrumbs[] = Yii::t('crud', 'Create');
 ?>
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
     <h1>
-        <?php echo Yii::t('P3PagesModule.model', 'P3 Page Translation'); ?>
+        <?php echo Yii::t('P3MediaModule.model', 'P3 Page Translation'); ?>
         <small><?php echo Yii::t('crud', 'Create'); ?></small>
 
     </h1>

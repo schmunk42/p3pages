@@ -38,7 +38,7 @@
                             echo $form->error($model,'id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.id')) != 'help.id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.id')) != 'help.id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             echo $form->error($model,'p3_page_id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.p3_page_id')) != 'help.p3_page_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.p3_page_id')) != 'help.p3_page_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                             echo $form->error($model,'language')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.language')) != 'help.language')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.language')) != 'help.language')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             echo $form->error($model,'menu_name')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.menu_name')) != 'help.menu_name')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.menu_name')) != 'help.menu_name')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                             echo $form->error($model,'status')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.status')) != 'help.status')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.status')) != 'help.status')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                             echo $form->error($model,'page_title')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.page_title')) != 'help.page_title')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.page_title')) != 'help.page_title')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                             echo $form->error($model,'url_param')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.url_param')) != 'help.url_param')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.url_param')) != 'help.url_param')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                             echo $form->error($model,'keywords')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.keywords')) != 'help.keywords')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.keywords')) != 'help.keywords')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                             echo $form->error($model,'description')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.description')) != 'help.description')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.description')) != 'help.description')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -181,11 +181,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model,'access_owner',array('disabled'=>'disabled'));
+                            echo $form->textField($model, 'access_owner', array('size' => 60, 'maxlength' => 64));
                             echo $form->error($model,'access_owner')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_owner')) != 'help.access_owner')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_owner')) != 'help.access_owner')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                             echo $form->error($model,'access_read')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_read')) != 'help.access_read')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_read')) != 'help.access_read')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                             echo $form->error($model,'access_update')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_update')) != 'help.access_update')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_update')) != 'help.access_update')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -230,7 +230,7 @@
                             echo $form->error($model,'access_delete')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.access_delete')) != 'help.access_delete')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.access_delete')) != 'help.access_delete')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -241,11 +241,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model,'copied_from_id',array('disabled'=>'disabled'));
+                            echo $form->textField($model, 'copied_from_id');
                             echo $form->error($model,'copied_from_id')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.copied_from_id')) != 'help.copied_from_id')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.copied_from_id')) != 'help.copied_from_id')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -256,11 +256,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model,'created_at',array('disabled'=>'disabled'));
+                            echo $form->textField($model, 'created_at');
                             echo $form->error($model,'created_at')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.created_at')) != 'help.created_at')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.created_at')) != 'help.created_at')?$t:'' ?>
                             </span>
                         </div>
                     </div>
@@ -271,11 +271,11 @@
                         </div>
                         <div class='controls'>
                             <?php
-                            echo $form->textField($model,'updated_at',array('disabled'=>'disabled'));
+                            echo $form->textField($model, 'updated_at');
                             echo $form->error($model,'updated_at')
                             ?>
                             <span class="help-block">
-                                <?php echo (($t = Yii::t('P3PagesModule.model', 'help.updated_at')) != 'help.updated_at')?$t:'' ?>
+                                <?php echo (($t = Yii::t('P3MediaModule.model', 'help.updated_at')) != 'help.updated_at')?$t:'' ?>
                             </span>
                         </div>
                     </div>
