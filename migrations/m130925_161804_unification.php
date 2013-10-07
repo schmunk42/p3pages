@@ -103,7 +103,7 @@ class m130925_161804_unification extends EDbMigration
         $this->createIndex('p3_page_translation_id_language_unique', '_p3_page_translation_v0_17', 'p3_page_id, language', true);
 
         // JOIN all three existing tables, use the first translation as default values
-        $sqlStatement = "SELECT p3_page.*, p3_page_meta.*,
+        $sqlStatement = "SELECT p3_page_meta.*, p3_page.*,
           p3_page_translation.seoUrl, p3_page_translation.pageTitle, p3_page_translation.menuName, p3_page_translation.keywords, p3_page_translation.description
             FROM p3_page
             LEFT JOIN p3_page_meta ON p3_page_meta.id = p3_page.id
@@ -111,7 +111,8 @@ class m130925_161804_unification extends EDbMigration
               (SELECT
                 MIN(p3_page_translation.p3_page_id)
                 FROM p3_page_translation
-                WHERE p3_page_translation.p3_page_id = p3_page.id)";
+                WHERE p3_page_translation.p3_page_id = p3_page.id)
+            GROUP BY p3_page.id;";
         $command      = $this->dbConnection->createCommand($sqlStatement);
         $command->execute();
         $reader = $command->query();
@@ -146,7 +147,7 @@ class m130925_161804_unification extends EDbMigration
                      "tree_position"       => $row['treePosition'],
                      // schmunk42/yii-access
                      "access_owner"        => $owner[$row['id']],
-                     "access_domain"       => $row['language'],
+                     "access_domain"       => ($row['language'])?$row['language']:'*',
                      "access_read"         => $row['checkAccessRead'],
                      "access_update"       => $row['checkAccessUpdate'],
                      "access_delete"       => $row['checkAccessDelete'],
@@ -171,7 +172,7 @@ class m130925_161804_unification extends EDbMigration
                 "_p3_page_translation_v0_17",
                 array(
                      "id"          => $row['id'],
-                     "status"      => $status[$row['id']],
+                     "status"      => $status[$row['p3_page_id']],
                      "p3_page_id"  => $row['p3_page_id'],
                      "language"    => $row['language'],
                      "menu_name"   => $row['menuName'],
@@ -179,7 +180,7 @@ class m130925_161804_unification extends EDbMigration
                      "url_param"   => $row['seoUrl'],
                      "keywords"    => $row['keywords'],
                      "description" => $row['description'],
-                     "access_owner"=> $owner[$row['id']],
+                     "access_owner"=> $owner[$row['p3_page_id']],
                 )
             );
         }
@@ -196,7 +197,7 @@ class m130925_161804_unification extends EDbMigration
         }
 
         echo "\n\n*** IMPORTANT NOTICE ***";
-        echo "\nThe existing p3_page... tables were renamed to p3_page...v0_16.\n\n";
+        echo "\nThe existing p3_page... tables were renamed to _p3_page...v0_16.\n\n";
     }
 
     public function down()
