@@ -40,10 +40,10 @@
                        'size'=>'large',
                        'buttons' => array(
                                array(
-                                #'label'=>Yii::t('crud','Relations'),
+                                #'label'=>Yii::t('P3PagesModule.crud','Relations'),
                                 'icon'=>'icon-random',
                                 'items'=>array(array(
-                    'icon' => 'circle-arrow-left','label' => Yii::t('P3PagesModule.model','P3Page'), 'url' =>array('/p3pages/p3Page/admin')),
+                    'icon' => 'circle-arrow-left','label' => Yii::t('P3PagesModule.model','relation.P3Page'), 'url' =>array('/p3pages/p3Page/admin')),
             )
           ),
         ),
@@ -54,7 +54,7 @@
         <div class="btn-group">
             <?php
              $this->widget("bootstrap.widgets.TbButton", array(
-                           "label"=>Yii::t("crud","Manage"),
+                           "label"=>Yii::t("P3PagesModule.crud","Manage"),
                            "icon"=>"icon-list-alt",
                            "size"=>"large",
                            "url"=>array("admin"),
@@ -67,14 +67,19 @@
         <div class="btn-group">
             <?php
                    $this->widget("bootstrap.widgets.TbButton", array(
-                       #"label"=>Yii::t("crud","Cancel"),
+                       #"label"=>Yii::t("P3PagesModule.crud","Cancel"),
                        "icon"=>"chevron-left",
                        "size"=>"large",
                        "url"=>(isset($_GET["returnUrl"]))?$_GET["returnUrl"]:array("{$this->id}/admin"),
-                       "visible"=>$showCancelButton && Yii::app()->user->checkAccess("P3pages.P3PageTranslation.View")
+                       "visible"=>$showCancelButton && Yii::app()->user->checkAccess("P3pages.P3PageTranslation.View"),
+                       "htmlOptions"=>array(
+                                       "class"=>"search-button",
+                                       "data-toggle"=>"tooltip",
+                                       "title"=>Yii::t("P3PagesModule.crud","Cancel"),
+                                   )
                     ));
                    $this->widget("bootstrap.widgets.TbButton", array(
-                        "label"=>Yii::t("crud","Create"),
+                        "label"=>Yii::t("P3PagesModule.crud","Create"),
                         "icon"=>"icon-plus",
                         "size"=>"large",
                         "type"=>"success",
@@ -82,32 +87,37 @@
                         "visible"=>$showCreateButton && Yii::app()->user->checkAccess("P3pages.P3PageTranslation.Create")
                    ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                        "label"=>Yii::t("crud","Delete"),
+                        "label"=>Yii::t("P3PagesModule.crud","Delete"),
                         "type"=>"danger",
-                        "icon"=>"icon-remove icon-white",
+                        "icon"=>"icon-trash icon-white",
                         "size"=>"large",
                         "htmlOptions"=> array(
                             "submit"=>array("delete","id"=>$model->{$model->tableSchema->primaryKey}, "returnUrl"=>(Yii::app()->request->getParam("returnUrl"))?Yii::app()->request->getParam("returnUrl"):$this->createUrl("admin")),
-                            "confirm"=>Yii::t("crud","Do you want to delete this item?")
+                            "confirm"=>Yii::t("P3PagesModule.crud","Do you want to delete this item?")
                         ),
                         "visible"=> $showDeleteButton && Yii::app()->user->checkAccess("P3pages.P3PageTranslation.Delete")
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                        #"label"=>Yii::t("crud","Update"),
+                        #"label"=>Yii::t("P3PagesModule.crud","Update"),
                         "icon"=>"icon-edit",
+                        "type"=>"primary",
                         "size"=>"large",
                         "url"=>array("update","id"=>$model->{$model->tableSchema->primaryKey}),
                         "visible"=> $showUpdateButton && Yii::app()->user->checkAccess("P3pages.P3PageTranslation.Update")
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                        #"label"=>Yii::t("crud","View"),
+                        #"label"=>Yii::t("P3PagesModule.crud","View"),
                         "icon"=>"icon-eye-open",
                         "size"=>"large",
                         "url"=>array("view","id"=>$model->{$model->tableSchema->primaryKey}),
-                        "visible"=>$showViewButton && Yii::app()->user->checkAccess("P3pages.P3PageTranslation.View")
+                        "visible"=>$showViewButton && Yii::app()->user->checkAccess("P3pages.P3PageTranslation.View"),
+                        "htmlOptions"=>array(
+                                      "data-toggle"=>"tooltip",
+                                      "title"=>Yii::t("P3PagesModule.crud","View Mode"),
+                        )
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                       "label"=>Yii::t("crud","Save"),
+                       "label"=>Yii::t("P3PagesModule.crud","Save"),
                        "icon"=>"save",
                        "size"=>"large",
                        "type"=>"primary",
@@ -123,10 +133,29 @@
                 $this->widget(
                        "bootstrap.widgets.TbButton",
                        array(
-                           #"label"=>Yii::t("crud","Search"),
+                           #"label"=>Yii::t("P3PagesModule.crud","Search"),
                                    "icon"=>"icon-search",
                                    "size"=>"large",
-                                   "htmlOptions"=>array("class"=>"search-button")
+                                   "htmlOptions"=>array(
+                                       "class"=>"search-button",
+                                       "data-toggle"=>"tooltip",
+                                       "title"=>Yii::t("P3PagesModule.crud","Advanced Search"),
+                                   )
+                           )
+                       );
+                    ?>
+                    <?php
+                $this->widget(
+                       "bootstrap.widgets.TbButton",
+                       array(
+                           #"label"=>Yii::t("P3PagesModule.crud","Clear"),
+                                   "icon"=>"icon-remove-sign",
+                                   "size"=>"large",
+                                   "url"=>Yii::app()->baseURL."/".Yii::app()->request->getPathInfo(),
+                                   "htmlOptions"=>array(
+                                      "data-toggle"=>"tooltip",
+                                      "title"=>Yii::t("P3PagesModule.crud","Clear Search"),
+                                   )
                            )
                        );
                     ?>

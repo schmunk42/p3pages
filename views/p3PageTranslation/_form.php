@@ -21,7 +21,7 @@
     <div class="row">
         <div class="span7">
             <h2>
-                <?php echo Yii::t('crud','Data')?>                <small>
+                <?php echo Yii::t('P3PagesModule.crud','Data')?>                <small>
                     <?php echo $model->itemLabel ?>
                 </small>
 
@@ -30,7 +30,8 @@
 
             <div class="form-horizontal">
 
-                                    <?php  ?>                    <div class="control-group">
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php  ?>
                         </div>
@@ -43,7 +44,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'p3_page_id') ?>
                         </div>
@@ -68,7 +71,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'language') ?>
                         </div>
@@ -81,7 +86,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'menu_name') ?>
                         </div>
@@ -94,7 +101,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'status') ?>
                         </div>
@@ -107,7 +116,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'page_title') ?>
                         </div>
@@ -120,7 +131,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'url_param') ?>
                         </div>
@@ -133,7 +146,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'keywords') ?>
                         </div>
@@ -146,7 +161,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'description') ?>
                         </div>
@@ -159,7 +176,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php echo '<h3>Access</h3>' ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php echo '<h3>Access</h3>' ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_owner') ?>
                         </div>
@@ -172,7 +191,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_read') ?>
                         </div>
@@ -185,7 +206,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_update') ?>
                         </div>
@@ -198,7 +221,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'access_delete') ?>
                         </div>
@@ -211,7 +236,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'copied_from_id') ?>
                         </div>
@@ -224,7 +251,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'created_at') ?>
                         </div>
@@ -237,7 +266,9 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                                    <?php  ?>                    <div class="control-group">
+                    <?php  ?>
+                                    <?php  ?>
+                    <div class="control-group">
                         <div class='control-label'>
                             <?php echo $form->labelEx($model, 'updated_at') ?>
                         </div>
@@ -250,23 +281,24 @@
                             ?>                            </div>
                         </div>
                     </div>
-                    <?php  ?>                
+                    <?php  ?>
+                
             </div>
         </div>
         <!-- main inputs -->
 
         
         <div class="span5"><!-- sub inputs -->
+            <div class="well">
             <h2>
-                <?php echo Yii::t('crud','Relations')?>
-            </h2>
-                            
+                <?php echo Yii::t('P3PagesModule.crud','Relations')?>            </h2>
+                                        </div>
         </div>
         <!-- sub inputs -->
     </div>
 
     <p class="alert">
-        <?php echo Yii::t('crud','Fields with <span class="required">*</span> are required.');?>
+        <?php echo Yii::t('P3PagesModule.crud','Fields with <span class="required">*</span> are required.');?>
     </p>
 
     <!-- TODO: We need the buttons inside the form, when a user hits <enter> -->
@@ -274,11 +306,11 @@
         
         <?php
             echo CHtml::Button(
-            Yii::t('crud', 'Cancel'), array(
+            Yii::t('P3PagesModule.crud', 'Cancel'), array(
                 'submit' => (isset($_GET['returnUrl']))?$_GET['returnUrl']:array('p3PageTranslation/admin'),
                 'class' => 'btn'
             ));
-            echo ' '.CHtml::submitButton(Yii::t('crud', 'Save'), array(
+            echo ' '.CHtml::submitButton(Yii::t('P3PagesModule.crud', 'Save'), array(
                 'class' => 'btn btn-primary'
             ));
         ?>

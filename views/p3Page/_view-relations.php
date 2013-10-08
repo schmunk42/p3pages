@@ -1,10 +1,10 @@
 <h2>
-    <?php echo Yii::t('crud', 'Relations') ?></h2>
+    <?php echo Yii::t('P3PagesModule.crud', 'Relations') ?></h2>
 
 
 <?php 
         echo '<h3>';
-            echo Yii::t('P3PagesModule.model','P3Pages').' ';
+            echo Yii::t('P3PagesModule.model','relation.P3Pages').' ';
             $this->widget(
                 'bootstrap.widgets.TbButtonGroup',
                 array(
@@ -13,7 +13,7 @@
                     'buttons' => array(
                         array(
                             'icon' => 'icon-list-alt',
-                            'url' =>  array('//p3pages/p3Page/admin')
+                            'url' =>  array('//p3pages/p3Page/admin','P3Page' => array('tree_parent_id' => $model->{$model->tableSchema->primaryKey}))
                         ),
                         array(
                 'icon' => 'icon-plus',
@@ -51,7 +51,7 @@
 
 <?php 
         echo '<h3>';
-            echo Yii::t('P3PagesModule.model','P3PageTranslations').' ';
+            echo Yii::t('P3PagesModule.model','relation.P3PageTranslations').' ';
             $this->widget(
                 'bootstrap.widgets.TbButtonGroup',
                 array(
@@ -60,7 +60,7 @@
                     'buttons' => array(
                         array(
                             'icon' => 'icon-list-alt',
-                            'url' =>  array('//p3pages/p3PageTranslation/admin')
+                            'url' =>  array('//p3pages/p3PageTranslation/admin','P3PageTranslation' => array('p3_page_id' => $model->{$model->tableSchema->primaryKey}))
                         ),
                         array(
                 'icon' => 'icon-plus',

@@ -17,7 +17,6 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  'P3Page' => '',
   'Url Param' => '',
   'tooltip.created_at' => '',
   'tooltip.description' => '',
@@ -56,16 +55,17 @@ return array (
   'P3 Page Translation' => 'Seitenübersetzung',
   'P3 Page Translations' => 'Seitenübersetzungen',
   'P3 Pages' => 'Seiten',
-  'P3PageTranslations' => 'Übersetzungen',
-  'P3Pages' => 'Unterseiten',
   'Page Title' => 'Seitentitel',
   'Status' => 'Status',
   'Tree Parent' => 'Übergeordnete Seite',
   'Tree Position' => 'Position',
-  'TreeParent' => 'Elternseiten',
   'Updated At' => 'Aktualisiert am',
   'Url Json' => 'Weiterleitung',
   'View' => 'Ansicht',
+  'relation.P3Page' => 'Basisdatensatz',
+  'relation.P3PageTranslations' => 'Übersetzungen',
+  'relation.P3Pages' => 'Unterseiten',
+  'relation.TreeParent' => 'Elternseite',
   'tooltip.access_append' => 'Rolle, welche das Recht besitzt Unterseiten unter dieser Seite anzulegen.',
   'tooltip.access_delete' => 'Rolle, welche das Recht besitzt diese Seite zu löschen.',
   'tooltip.access_domain' => 'Zugriffseinschränkung über die Anwendungssprache.',

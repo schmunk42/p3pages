@@ -1,3 +1,3 @@
 <h2>
-    <?php echo Yii::t('crud', 'Relations') ?></h2>
+    <?php echo Yii::t('P3PagesModule.crud', 'Relations') ?></h2>
 

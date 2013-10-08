@@ -2,7 +2,7 @@
 $this->setPageTitle(
     Yii::t('P3PagesModule.model', 'P3 Page Translations')
     . ' - '
-    . Yii::t('crud', 'Manage')
+    . Yii::t('P3PagesModule.crud', 'Manage')
 );
 
 $this->breadcrumbs[] = Yii::t('P3PagesModule.model', 'P3 Page Translations');
@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerScript('search', "
     <h1>
 
         <?php echo Yii::t('P3PagesModule.model', 'P3 Page Translations'); ?>
-        <small><?php echo Yii::t('crud', 'Manage'); ?></small>
+        <small><?php echo Yii::t('P3PagesModule.crud', 'Manage'); ?></small>
 
     </h1>
 
@@ -39,7 +39,8 @@ $this->widget('TbGridView',
         'id' => 'p3-page-translation-grid',
         'dataProvider' => $model->search(),
         'filter' => $model,
-        'template' => '{pager}{summary}{items}{pager}',
+        'responsiveTable' => true,
+        'template' => '{summary}{pager}{items}{pager}',
         'pager' => array(
             'class' => 'TbPager',
             'displayFirstAndLast' => true,
