@@ -275,14 +275,14 @@ class P3Page extends BaseP3Page
             // prepare node identifiers
             $itemOptions                = array();
             $itemOptions['data-pageId'] = $model->id;
-            if (!empty($model->nameId)) {
-                $itemOptions['data-pageNameId'] = $model->nameId;
-                $itemOptions['class']           = 'page-' . $model->nameId;
+            if ($model->name_id) {
+                $itemOptions['data-pageNameId'] = $model->name_id;
+                $itemOptions['class']           = 'page-' . $model->name_id;
             }
             $item = array(
                 'label'       => $model->menu_name,
                 'url'         => $model->createUrl(),
-                'nameId'      => $model->name_id,
+                'name_id'      => $model->name_id,
                 'itemOptions' => $itemOptions,
                 // check for active item is disabled since 0.14.0 because of performance issues,
                 // select the active item via JavaScript and pageId data key
@@ -297,8 +297,8 @@ class P3Page extends BaseP3Page
             $items[] = $item;
         }
 
-        $depBase    = new CDbCacheDependency("SELECT MAX(p3_page_meta.modifiedAt) FROM p3_page_meta");
-        $depTrans   = new CDbCacheDependency("SELECT MAX(p3_page_translation.modifiedAt) FROM p3_page_translation");
+        $depBase    = new CDbCacheDependency("SELECT MAX(p3_page.updated_at) FROM p3_page");
+        $depTrans   = new CDbCacheDependency("SELECT MAX(p3_page_translation.updated_at) FROM p3_page_translation");
         $depDelete  = New CGlobalStateCacheDependency('p3extensions.behaviors.P3MetaDataBehavior:lastDelete:p3_page');
         $dependency = new CChainedCacheDependency(array($depBase, $depTrans, $depDelete));
 
