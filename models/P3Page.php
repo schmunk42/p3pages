@@ -219,10 +219,12 @@ class P3Page extends BaseP3Page
 
     static public function getActivePage()
     {
+        #Yii::beginProfile('getActivePage','p3pages.models.P3Page');
         static $_activePage = false;
 
         if ($_activePage !== false) {
             // just return the page when already found, note it may be "null"
+            #Yii::endProfile('getActivePage','p3pages.models.P3Page');
             return $_activePage;
         } elseif (isset($_GET[P3Page::PAGE_ID_KEY])) {
             $_activePage = P3Page::model()->localized()->findByPk($_GET[P3Page::PAGE_ID_KEY]);
@@ -247,6 +249,7 @@ class P3Page extends BaseP3Page
         } else {
             Yii::trace("Active page not found in database", 'p3pages.models');
         }
+        #Yii::endProfile('getActivePage','p3pages.models.P3Page');
         return $_activePage;
     }
 
