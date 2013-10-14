@@ -44,6 +44,9 @@ class P3Page extends BaseP3Page
                      'parentRelation'   => 'treeParent',
                      'childrenRelation' => 'p3Pages'
                  ),
+                 'EventBridge' => array(
+                     'class'  => 'EventBridgeBehavior',
+                 ),
                  'LoggableBehavior' => array(
                      'class'   => 'vendor.sammaye.auditrail2.behaviors.LoggableBehavior',
                      'ignored' => array(
