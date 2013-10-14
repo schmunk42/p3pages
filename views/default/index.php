@@ -16,12 +16,12 @@ $this->breadcrumbs = array(
 <div class="clearfix">
     <div class="btn-toolbar">
         <?php echo CHtml::link(
-            Yii::t('crud', 'Create'),
+            Yii::t('P3PagesModule.crud', 'Create'),
             array('/p3pages/p3Page/create'),
             array('class' => 'btn btn-large btn-success')
         ) ?>
         <?php echo CHtml::link(
-            Yii::t('crud', 'Manage'),
+            Yii::t('P3PagesModule.crud', 'Manage'),
             array('/p3pages/p3Page/admin'),
             array('class' => 'btn btn-large')
         ) ?>
