@@ -282,6 +282,10 @@ class P3Page extends BaseP3Page
                 continue;
             }
 
+            if (!$model->translationModel->hasStatus('published') && !Yii::app()->user->checkAccess('Editor')) {
+                $model->translationModel->disableTranslationModel = true;
+            }
+
             // prepare node identifiers
             $itemOptions                = array();
             $itemOptions['data-pageId'] = $model->id;
