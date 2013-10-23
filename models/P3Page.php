@@ -14,6 +14,13 @@ class P3Page extends BaseP3Page
      */
     public $status = 'draft';
 
+    private $_statusCssClassMap = array(
+        'draft'      => 'default',
+        'published'  => 'success',
+        'overridden' => 'info',
+        'archived'   => 'inverse'
+    );
+
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
@@ -123,6 +130,17 @@ class P3Page extends BaseP3Page
         $model = P3Page::model();
         return array_combine($model->Status->statuses, $model->Status->statuses);
     }
+
+    public function getStatusCssClass()
+    {
+        if ($this->translationModel->hasStatus('published')) {
+            $status = 'overridden';
+        } else {
+            $status = $this->status;
+        }
+        return $this->_statusCssClassMap[$status];
+    }
+
     /**
      * @return array list of options
 

@@ -9,6 +9,13 @@ class P3PageTranslation extends BaseP3PageTranslation
 
     public $status = 'draft';
 
+    private $_statusCssClassMap = array(
+        'draft'      => 'default',
+        'published'  => 'success',
+        'overridden' => 'info',
+        'archived'   => 'inverse'
+    );
+
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
@@ -66,6 +73,17 @@ class P3PageTranslation extends BaseP3PageTranslation
         );
     }
 
+    public function getStatusCssClass()
+    {
+
+        if ($this->hasStatus('published') && !$this->p3Page->hasStatus('published')) {//!$this->p3Widget->hasStatus('published') && $this->hasStatus('published')) {
+            $status = 'unpublished';
+        } else {
+            $status = ($this->isNewRecord) ? 'new' : $this->getAttribute('status');
+        }
+        return $this->_statusCssClassMap[$status];
+    }
+
     /**
      * @return array list of options
      */
@@ -88,7 +106,11 @@ class P3PageTranslation extends BaseP3PageTranslation
      */
     public static function optsLanguage()
     {
-        return Yii::app()->params['languages'];
+        $langs = Yii::app()->params['languages'];
+        if (!is_array($langs)) {
+            $langs = array(Yii::app()->language => Yii::app()->language);
+        }
+        return $langs;
     }
 
     /**
