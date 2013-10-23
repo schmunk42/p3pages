@@ -278,6 +278,10 @@ class P3Page extends BaseP3Page
                 break;
             }
 
+            if (!$model->hasStatus('published') && !Yii::app()->user->checkAccess('Editor')) {
+                continue;
+            }
+
             // prepare node identifiers
             $itemOptions                = array();
             $itemOptions['data-pageId'] = $model->id;
