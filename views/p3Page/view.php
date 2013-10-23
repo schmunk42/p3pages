@@ -14,7 +14,11 @@ $this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'View');
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
     <h1>
         <?php echo Yii::t('P3PagesModule.model','P3 Page')?>
-    <small><?php echo Yii::t('P3PagesModule.crud','View')?> #<?php echo $model->id ?></small>
+        <small>
+            <?php echo $model->itemLabel ?>
+
+        </small>
+
         </h1>
 
 
@@ -26,7 +30,7 @@ $this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'View');
     <div class="span7">
         <h2>
             <?php echo Yii::t('P3PagesModule.crud','Data')?>            <small>
-                <?php echo $model->itemLabel?>            </small>
+                #<?php echo $model->id ?>            </small>
         </h2>
 
         <?php
@@ -230,84 +234,24 @@ array(
                         )
                     ),
 array(
-                        'name'=>'access_read',
+                        'name' => 'access_read',
                         'type' => 'raw',
-                        'value' =>$this->widget(
-                            'TbEditableField',
-                            array(
-                                'model'=>$model,
-                                'emptytext' => 'Click to select',
-                                'type' => 'select',
-                                'source' => P3Page::optsaccessread(),
-                                'attribute'=>'access_read',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                                'select2' => array(
-                                    'placeholder' => 'Select...',
-                                    'allowClear' => true
-                                )
-                            ),
-                            true
-                        )
+                        'value' => $model->access_read
                     ),
 array(
-                        'name'=>'access_update',
+                        'name' => 'access_update',
                         'type' => 'raw',
-                        'value' =>$this->widget(
-                            'TbEditableField',
-                            array(
-                                'model'=>$model,
-                                'emptytext' => 'Click to select',
-                                'type' => 'select',
-                                'source' => P3Page::optsaccessupdate(),
-                                'attribute'=>'access_update',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                                'select2' => array(
-                                    'placeholder' => 'Select...',
-                                    'allowClear' => true
-                                )
-                            ),
-                            true
-                        )
+                        'value' => $model->access_update
                     ),
 array(
-                        'name'=>'access_delete',
+                        'name' => 'access_delete',
                         'type' => 'raw',
-                        'value' =>$this->widget(
-                            'TbEditableField',
-                            array(
-                                'model'=>$model,
-                                'emptytext' => 'Click to select',
-                                'type' => 'select',
-                                'source' => P3Page::optsaccessdelete(),
-                                'attribute'=>'access_delete',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                                'select2' => array(
-                                    'placeholder' => 'Select...',
-                                    'allowClear' => true
-                                )
-                            ),
-                            true
-                        )
+                        'value' => $model->access_delete
                     ),
 array(
-                        'name'=>'access_append',
+                        'name' => 'access_append',
                         'type' => 'raw',
-                        'value' =>$this->widget(
-                            'TbEditableField',
-                            array(
-                                'model'=>$model,
-                                'emptytext' => 'Click to select',
-                                'type' => 'select',
-                                'source' => P3Page::optsaccessappend(),
-                                'attribute'=>'access_append',
-                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
-                                'select2' => array(
-                                    'placeholder' => 'Select...',
-                                    'allowClear' => true
-                                )
-                            ),
-                            true
-                        )
+                        'value' => $model->access_append
                     ),
 array(
                         'name' => 'copied_from_id',

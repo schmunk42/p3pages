@@ -30,7 +30,7 @@ foreach ($cruds AS $crud) {
             'messageCatalog'         => 'P3PagesModule.model',
             'messageCatalogStandard' => 'P3PagesModule.crud',
             'providers'              => array(
-                'application.components.PhFieldProvider'
+                'vendor.schmunk42.giic.examples.PhFieldProvider'
             ),
             "template"               => "slim"
         )
