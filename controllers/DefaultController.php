@@ -84,6 +84,11 @@ class DefaultController extends Controller
                 throw new CHttpException(403, 'You are not authorized to view this page');
             }
 
+            // Show unpublished pages only to 'Editor'
+            if (!$model->hasStatus(array('published')) && !Yii::app()->user->checkAccess('Editor')) {
+                throw new CHttpException(404, 'Page not available');
+            }
+
             // is page localized
             $model = P3Page::model()->localized()->findByPk($id);
             if ($model === null) {
