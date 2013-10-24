@@ -10,10 +10,11 @@ class P3PageTranslation extends BaseP3PageTranslation
     public $status = 'draft';
 
     private $_statusCssClassMap = array(
-        'draft'      => 'default',
-        'published'  => 'success',
-        'overridden' => 'info',
-        'archived'   => 'inverse'
+        'new'         => 'default',
+        'draft'       => 'default',
+        'unpublished' => 'warning',
+        'published'   => 'success',
+        'archived'    => 'inverse'
     );
 
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
