@@ -301,7 +301,7 @@ class P3Page extends BaseP3Page
             }
 
             if (!$model->translationModel->hasStatus('published') && !Yii::app()->user->checkAccess('Editor')) {
-                $model->translationModel->disableTranslationModel = true;
+                $model->disableTranslationModel = true;
             }
 
             // prepare node identifiers
