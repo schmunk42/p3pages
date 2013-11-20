@@ -94,7 +94,6 @@ class DefaultController extends Controller
             if ($model === null) {
                 throw new CHttpException(404, 'Page not available in this language');
             }
-                        
         }
         
 
@@ -121,7 +120,39 @@ class DefaultController extends Controller
         }
         $this->pageTitle = $model->page_title;
         $this->layout = $model->layout;
-        $this->render($model->view, array('model' => $model));
+       
+	   	// if the application is in ajax mode then render partial and
+	   	// filter scripts that is already been loaded by the main app
+		if (Yii::app()->request->isAjaxRequest) {
+		    Yii::app()->clientScript->scriptMap = array(
+			    'jquery.js' => false,
+			    'jquery-ui.min.js' => false,
+			    'jquery.cookie.js' => false,
+		    );
+
+			$this->renderPartial($model->view, array('model' => $model), false, true);	
+		} 
+		// if the request comes from an wget user agent then render partial and filter 
+		// scripts that is already been loaded by the main app
+		else if($_SERVER['HTTP_USER_AGENT'] == Yii::app()->params['wgetUserAgent']) {
+			Yii::app()->clientScript->scriptMap = array(
+			    'jquery.js' => false,
+			    'jquery-ui.min.js' => false,
+			    'jquery.cookie.js' => false,
+			    'jqui-tb-noconflict.js' => false,
+			    'bootstrap.min.js' => false,
+			    'bootbox.min.js' => false,
+			    'notify.min.js' => false,
+			    'font-awesome.min.css' => false,
+			    'bootstrap-yii.css' => false,
+			    'jquery-ui-bootstrap.css' => false
+		    );
+			$this->renderPartial($model->view, array('model' => $model), false, true);
+		} 
+		// render as usual if the application is running the http mode
+		else {
+			$this->render($model->view, array('model' => $model));	
+		} 
         #return;
     }
 
