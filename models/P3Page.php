@@ -277,7 +277,7 @@ class P3Page extends BaseP3Page
     static public function getMenuItems($rootNode, $maxDepth = null, $level = 0)
     {
         if (!$rootNode instanceof P3Page) {
-            Yii::log('Invalid root node', CLogger::LEVEL_WARNING);
+            Yii::trace('Invalid root node');
 
             return array();
         }
