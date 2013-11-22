@@ -16,10 +16,10 @@
  *
  * NOTE, this file must be saved in UTF-8 encoding.
  */
-return array (
-  'Invalid identifier' => 'Ungültiger Bezeichner',
-  'No view file in database' => 'Keine View-Datei in der Datenbank!',
-  'Page not found' => 'Seite wurde nicht gefunden',
-  'Sitemap' => '',
-  'Pages' => 'Seiten',
+return array(
+    'Invalid identifier'       => 'Ungültiger Bezeichner',
+    'No view file in database' => 'Keine View-Datei in der Datenbank!',
+    'Page not found'           => 'Seite wurde nicht gefunden',
+    'Sitemap'                  => '',
+    'Pages'                    => 'Seiten',
 );
