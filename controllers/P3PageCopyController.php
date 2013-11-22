@@ -127,7 +127,6 @@ class P3PageCopyController extends Controller
      */
     private function newRecord()
     {
-        $this->sourceLanguage        = Yii::app()->language;
         $this->sourcePageId          = false;
         $this->targetParentPageId    = false;
         $this->sourceLanguageChecked = false;

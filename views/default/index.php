@@ -36,7 +36,7 @@ $this->breadcrumbs = array(
     <div class="btn-toolbar pull-right">
         <?php
         $this->widget("bootstrap.widgets.TbButton", array(
-            "label" => Yii::t("CrudModule.crud", "Manage"),
+            "label" => Yii::t("P3PagesModule.crud", "Manage"),
             "icon"  => "icon-list-alt",
             "size"  => "large",
             "url"   => array('/p3pages/p3Page/admin'),

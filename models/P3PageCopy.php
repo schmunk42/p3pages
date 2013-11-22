@@ -108,8 +108,9 @@ class P3PageCopy extends CFormModel
 
         $criteria            = new CDbCriteria;
         $criteria->order     = 'default_menu_name';
-        $conditions[]        = "tree_parent_id > 0";
-        $conditions[]        = "access_domain = '{$lang}'";
+        $conditions[]        = "tree_parent_id IS NOT NULL";
+        $conditions[]        = "access_domain = :lang OR access_domain = '*'";
+        $criteria->params[':lang'] = $lang;
         $criteria->condition = implode(' AND ', $conditions);
 
         // Check if any assigned roles of this user allows him to append a record
@@ -117,7 +118,7 @@ class P3PageCopy extends CFormModel
         {
             $conditionsRoles[] = "access_append = '{$role}'";
         }
-        $conditionsRoles[] = "access_append = NULL OR access_append = '*'";
+        $conditionsRoles[] = "access_append IS NULL OR access_append = '*'";
         $criteria->condition .= ' AND (' . implode(' OR ', $conditionsRoles) . ')';
 
         $p3PagesParent = P3Page::model()->findAll($criteria);
