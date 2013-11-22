@@ -27,7 +27,7 @@ class P3PageCopyController extends Controller
     private $newPage;
     private $newPageTranslation;
     private $newWidget;
-    //private $newWidgetTranslation;
+    private $newWidgetTranslation;
 
     /**
      * Global @vars for user inputs
@@ -198,17 +198,16 @@ class P3PageCopyController extends Controller
                                 $this->newWidget = $this->makeNewWidget($sourceWidget);
 
                                 if ($this->newWidget->save()) {
-                                    continue;
-//                                    $sourceWidgetTranslation    = P3WidgetTranslation::model()->findByAttributes(array('p3_widget_id' => $sourceWidget->id, 'language' => $this->sourceLanguage));
-//                                    
-//                                    if($sourceWidgetTranslation !== NULL) {
-//                                        // Make new widget translation from source widget translation
-//                                        $this->newWidgetTranslation = $this->makeNewWidgetTranslation($sourceWidgetTranslation, $sourceWidget);
-//                                        
-//                                        if (!$this->newWidgetTranslation->save()) {
-//                                            $this->errorHandler($this->newWidgetTranslation);
-//                                        }
-//                                    }
+                                    $sourceWidgetTranslation    = P3WidgetTranslation::model()->findByAttributes(array('p3_widget_id' => $sourceWidget->id, 'language' => $this->sourceLanguage));
+                                    
+                                    if($sourceWidgetTranslation !== NULL) {
+                                        // Make new widget translation from source widget translation
+                                        $this->newWidgetTranslation = $this->makeNewWidgetTranslation($sourceWidgetTranslation);
+                                        
+                                        if (!$this->newWidgetTranslation->save()) {
+                                            $this->errorHandler($this->newWidgetTranslation);
+                                        }
+                                    }
                                 } else {
                                     $this->errorHandler($this->newWidget);
                                 }
@@ -253,6 +252,8 @@ class P3PageCopyController extends Controller
     private function makeNewPage($sourcePage)
     {
         $newPage                      = new P3Page;
+        $newPage->detachBehavior('Translatable');
+        
         $newPage->default_menu_name   = $sourcePage->default_menu_name;
         $newPage->status              = 'draft';
         $newPage->name_id             = NULL;
@@ -300,6 +301,8 @@ class P3PageCopyController extends Controller
     private function makeNewWidget($sourceWidget)
     {
         $newWidget                          = new P3Widget;
+        $newWidget->detachBehavior('Translatable');
+        
         $newWidget->status                  = 'draft';
         $newWidget->alias                   = $sourceWidget->alias;
         $newWidget->default_properties_json = $sourceWidget->default_properties_json;
@@ -321,17 +324,17 @@ class P3PageCopyController extends Controller
      * @param type $sourceWidgetTranslation
      * @return \P3WidgetTranslation
      */
-//    private function makeNewWidgetTranslation($sourceWidgetTranslation) {
-//        $newWidgetTranslation                   = new P3WidgetTranslation;
-//        $newWidgetTranslation->p3_widget_id     = $this->newWidget->id;
-//        $newWidgetTranslation->status           = 'draft';
-//        $newWidgetTranslation->language         = $this->targetLanguage;
-//        $newWidgetTranslation->properties_json  = $sourceWidgetTranslation->properties_json;
-//        $newWidgetTranslation->content_html     = $sourceWidgetTranslation->content_html;
-//        $newWidgetTranslation->copied_from_id   = $sourceWidgetTranslation->id;
-//                
-//        return $newWidgetTranslation;
-//    }
+    private function makeNewWidgetTranslation($sourceWidgetTranslation) {
+        $newWidgetTranslation                   = new P3WidgetTranslation;
+        $newWidgetTranslation->p3_widget_id     = $this->newWidget->id;
+        $newWidgetTranslation->status           = 'draft';
+        $newWidgetTranslation->language         = $this->targetLanguage;
+        $newWidgetTranslation->properties_json  = $sourceWidgetTranslation->properties_json;
+        $newWidgetTranslation->content_html     = $sourceWidgetTranslation->content_html;
+        $newWidgetTranslation->copied_from_id   = $sourceWidgetTranslation->id;
+                
+        return $newWidgetTranslation;
+    }
 
     /**
      * 
@@ -372,7 +375,7 @@ class P3PageCopyController extends Controller
      */
     private static function checkPageParents()
     {
-
+        
         $model = new P3PageCopy();
 
         if (sizeof($model->getAllP3PageParents(Yii::app()->language)) == NULL) {

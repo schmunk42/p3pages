@@ -199,7 +199,7 @@ if (isset($newPage)) {
                         ?>
                     </span>
                     <?php
-                    echo $newPage->menu_name;
+                    echo $newPage->default_menu_name;
                     echo '&nbsp;&nbsp;';
                     echo CHtml::link(
                       '<i class="icon-circle-arrow-right"></i> ', $newPage->createUrl(), array(
