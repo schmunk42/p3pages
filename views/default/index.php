@@ -14,17 +14,34 @@ $this->breadcrumbs = array(
 
 
 <div class="clearfix">
-    <div class="btn-toolbar">
-        <?php echo CHtml::link(
-            Yii::t('P3PagesModule.crud', 'Create'),
-            array('/p3pages/p3Page/create'),
-            array('class' => 'btn btn-large btn-success')
-        ) ?>
-        <?php echo CHtml::link(
-            Yii::t('P3PagesModule.crud', 'Manage'),
-            array('/p3pages/p3Page/admin'),
-            array('class' => 'btn btn-large')
-        ) ?>
+    <div class="btn-toolbar pull-left">
+        <?php
+        $this->widget("bootstrap.widgets.TbButton", array(
+            "label" => Yii::t('P3PagesModule.crud', 'Create'),
+            "icon"  => "icon-plus icon-white",
+            "size"  => "large",
+            "type"  => "success",
+            "url"   => array('/p3pages/p3Page/create'),
+        ));
+        $this->widget("bootstrap.widgets.TbButton", array(
+            "label"   => Yii::t('P3PagesModule.crud', 'Copy'),
+            "icon"    => "icon-file icon-white",
+            "size"    => "large",
+            "type"    => "info",
+            "url"     => array('/p3pages/p3PageCopy/index'),
+            "visible" => Yii::app()->user->checkAccess("P3pages.Default.CopyPage")
+        ));
+        ?>
+    </div>
+    <div class="btn-toolbar pull-right">
+        <?php
+        $this->widget("bootstrap.widgets.TbButton", array(
+            "label" => Yii::t("CrudModule.crud", "Manage"),
+            "icon"  => "icon-list-alt",
+            "size"  => "large",
+            "url"   => array('/p3pages/p3Page/admin'),
+        ));
+        ?>
     </div>
 </div>
 <hr>
