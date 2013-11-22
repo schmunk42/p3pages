@@ -49,9 +49,9 @@ class P3PageCopy extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'sourceLanguage' => Yii::t('P3PagesModule.crud', 'Source Language'),
-            'targetLanguage' => Yii::t('P3PagesModule.crud', 'Target Language'),
-            'sourcePageId' => Yii::t('P3PagesModule.crud', 'Source Page ID'),
+            'sourceLanguage'     => Yii::t('P3PagesModule.crud', 'Source Language'),
+            'targetLanguage'     => Yii::t('P3PagesModule.crud', 'Target Language'),
+            'sourcePageId'       => Yii::t('P3PagesModule.crud', 'Source Page ID'),
             'targetParentPageId' => Yii::t('P3PagesModule.crud', 'Target Parent Page ID'),
         );
     }
@@ -80,16 +80,15 @@ class P3PageCopy extends CFormModel
      */
     public function getAllP3Pages($lang)
     {
-        $allP3Pages      = array();
-        $conditions      = array();
-        $conditionsRoles = array();
+        $allP3Pages = array();
+        $conditions = array();
 
         $criteria                  = new CDbCriteria;
         $criteria->order           = 'default_menu_name';
         $conditions[]              = "access_domain = :lang OR access_domain = '*'";
         $criteria->params[':lang'] = $lang;
         $criteria->condition       = implode(' AND ', $conditions);
-        
+
         $p3PagesSource = P3Page::model()->findAll($criteria);
         foreach ($p3PagesSource as $value)
         {
@@ -124,7 +123,6 @@ class P3PageCopy extends CFormModel
         $conditionsRoles[] = "access_append IS NULL OR access_append = '*'";
         $criteria->condition .= ' AND (' . implode(' OR ', $conditionsRoles) . ')';
 
-//        var_dump($criteria);Exit;
         $p3PagesParent = P3Page::model()->findAll($criteria);
         foreach ($p3PagesParent as $value)
         {
