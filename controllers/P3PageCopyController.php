@@ -176,6 +176,10 @@ class P3PageCopyController extends Controller
             $this->newPage = $this->makeNewPage($sourcePage);
 
             if ($this->newPage->save()) {
+                
+                // re-attach Translateable behavior
+                $p3pageBehaviors = $this->newPage->behaviors();
+                $this->newPage->attachBehavior('Translatable', $p3pageBehaviors['Translatable']);
                 /**
                  * set the $model->isNewRecord() to false 
                  * for page reload protection
@@ -198,6 +202,11 @@ class P3PageCopyController extends Controller
                                 $this->newWidget = $this->makeNewWidget($sourceWidget);
 
                                 if ($this->newWidget->save()) {
+                                    
+                                    // re-attach Translateable behavior
+                                    $p3widgetBehaviors = $this->newWidget->behaviors();
+                                    $this->newWidget->attachBehavior('Translatable', $p3widgetBehaviors['Translatable']);
+                
                                     $sourceWidgetTranslation    = P3WidgetTranslation::model()->findByAttributes(array('p3_widget_id' => $sourceWidget->id, 'language' => $this->sourceLanguage));
                                     
                                     if($sourceWidgetTranslation !== NULL) {
