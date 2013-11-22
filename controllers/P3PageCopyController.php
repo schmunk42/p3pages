@@ -276,6 +276,7 @@ class P3PageCopyController extends Controller
         $newPage->default_keywords    = $sourcePage->default_keywords;
         $newPage->default_description = $sourcePage->default_description;
         $newPage->custom_data_json    = $sourcePage->custom_data_json;
+        $newPage->access_domain       = $this->targetLanguage;
         $newPage->copied_from_id      = $sourcePage->id;
 
         return $newPage;
@@ -323,6 +324,7 @@ class P3PageCopyController extends Controller
         $newWidget->action_name             = $sourceWidget->action_name;
         $newWidget->controller_id           = $sourceWidget->controller_id;
         $newWidget->module_id               = $sourceWidget->module_id;
+        $newWidget->access_domain           = $this->targetLanguage;
         $newWidget->copied_from_id          = $sourceWidget->id;
 
         return $newWidget;
