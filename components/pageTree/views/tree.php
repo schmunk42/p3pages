@@ -14,6 +14,7 @@
                   array(
                        'class'       => '',
                        'data-toggle' => 'tooltip',
+                       'data-placement' => 'right',
                        'title'       => 'Go to Frontend-Page'
                   )
     )
