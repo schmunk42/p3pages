@@ -12,9 +12,10 @@
               '<i class="icon-circle-arrow-right"></i> ',
                   $model->createUrl(),
                   array(
-                       'class'       => '',
-                       'data-toggle' => 'tooltip',
-                       'title'       => 'Go to Frontend-Page'
+                       'class'          => '',
+                       'data-toggle'    => 'tooltip',
+                       'data-placement' => 'right',
+                       'title'          => 'Go to Frontend-Page'
                   )
     )
     ?>
