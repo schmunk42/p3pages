@@ -60,6 +60,15 @@ $form = $this->beginWidget('CActiveForm', array(
         </div>
     </div>
 <?php endif; ?>
+<?php if (Yii::app()->user->hasFlash('errorP3widget')): ?>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="alert alert-info">
+                <?php echo Yii::app()->user->getFlash('errorP3widget'); ?>
+            </div>   
+        </div>
+    </div>
+<?php endif; ?>
 
 <?php if (!isset($newPage)) { ?>
     <div class="row-fluid">
