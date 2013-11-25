@@ -7,11 +7,11 @@
  * @property string $targetLanguage
  * @property integer $sourcePageId
  * @property integer $targetParentPageId
- * 
+ *
  * @author Christopher Stebe <cstebe@iserv4u.com>
  * @package p3pages.models
  * @version 0.1.0
- * 
+ *
  */
 class P3PageCopy extends CFormModel
 {
@@ -57,7 +57,7 @@ class P3PageCopy extends CFormModel
     }
 
     /**
-     * 
+     *
      * @return array with availible source languages
      * from Yii::app()->params->languages
      */
@@ -65,15 +65,14 @@ class P3PageCopy extends CFormModel
     {
         $allLanguages = array();
         $languages    = Yii::app()->params->languages;
-        foreach ($languages as $key => $value)
-        {
+        foreach ($languages as $key => $value) {
             $allLanguages[$key] = '[' . $key . '] ' . $value;
         }
         return $allLanguages;
     }
 
     /**
-     * 
+     *
      * @param type $lang
      * @param type $status
      * @return array with all P3Pages in source language
@@ -85,20 +84,20 @@ class P3PageCopy extends CFormModel
 
         $criteria                  = new CDbCriteria;
         $criteria->order           = 'default_menu_name';
+        $conditions[]              = "tree_parent_id IS NOT NULL";
         $conditions[]              = "access_domain = :lang OR access_domain = '*'";
         $criteria->params[':lang'] = $lang;
         $criteria->condition       = implode(' AND ', $conditions);
 
         $p3PagesSource = P3Page::model()->findAll($criteria);
-        foreach ($p3PagesSource as $value)
-        {
+        foreach ($p3PagesSource as $value) {
             $allP3Pages[$value->id] = '[ID=' . $value->id . '] ' . $value->default_menu_name;
         }
         return $allP3Pages;
     }
 
     /**
-     * 
+     *
      * @param type $lang
      * @return array with list of all availible P3Page parent page id's
      */
@@ -108,24 +107,22 @@ class P3PageCopy extends CFormModel
         $conditions       = array();
         $conditionsRoles  = array();
 
-        $criteria                  = new CDbCriteria;
-        $criteria->order           = 'default_menu_name';
-        $conditions[]              = "tree_parent_id IS NOT NULL";
-        $conditions[]              = "(access_domain = :lang OR access_domain = '*')";
-        $criteria->params[':lang'] = $lang;
-        $criteria->condition       = implode(' AND ', $conditions);
+        $criteria            = new CDbCriteria;
+        $criteria->order     = 'default_menu_name';
+        $criteria->condition = "(access_domain = :lang OR access_domain = '*')";
+        $criteria->params    = array(':lang' => $lang);
 
         // Check if any assigned roles of this user allows him to append a record
         foreach (array_keys(Yii::app()->getAuthManager()->getAuthAssignments(Yii::app()->user->id)) AS $role)
         {
-            $conditionsRoles[] = "access_append = '{$role}'";
+        $conditionsRoles[] = "access_append = '{$role}'";
         }
-        $conditionsRoles[] = "access_append IS NULL OR access_append = '*'";
+        $conditionsRoles[] = "access_append IS NULL";
+        $conditionsRoles[] = "access_append = '*'";
         $criteria->condition .= ' AND (' . implode(' OR ', $conditionsRoles) . ')';
 
         $p3PagesParent = P3Page::model()->findAll($criteria);
-        foreach ($p3PagesParent as $value)
-        {
+        foreach ($p3PagesParent as $value) {
             $allP3PageParents[$value->id] = '[ID=' . $value->id . '] ' . $value->default_menu_name;
         }
         return $allP3PageParents;
@@ -138,9 +135,9 @@ class P3PageCopy extends CFormModel
      */
     public function setIsNewRecord($value)
     {
-        $session               = new CHttpSession;
+        $session = new CHttpSession;
         $session->open();
-        $session[$this->_name] = $value;  // set session variable
+        $session[$this->_name] = $value; // set session variable
     }
 
     /**
@@ -154,7 +151,7 @@ class P3PageCopy extends CFormModel
     {
         $session = new CHttpSession;
         $session->open();
-        return $session[$this->_name];  // get session variable
+        return $session[$this->_name]; // get session variable
     }
 
 }
