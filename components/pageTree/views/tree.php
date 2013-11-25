@@ -126,7 +126,7 @@ echo CHtml::link(
                   'type'      => 'text',
                   'model'     => $model,
                   'attribute' => 'tree_position',
-                  'url'       => Yii::app()->controller->createUrl('/p3pages/p3PageMeta/editableSaver'),
+                  'url'       => Yii::app()->controller->createUrl('/p3pages/p3Page/editableSaver'),
                   'emptytext' => '0'
              )
     );
