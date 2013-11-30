@@ -49,7 +49,7 @@ class P3PageCopy extends CFormModel
             array('sourceLanguage', 'required', 'message' => Yii::t('P3PagesModule.crud', 'Required')),
             array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',
                 'setOnEmpty' => TRUE,
-                'value' => 'draft')
+                'value'      => 'draft')
         );
     }
 
@@ -162,13 +162,13 @@ class P3PageCopy extends CFormModel
      * @return bool
      * Check if the four need fields are set
      */
-    public function getReadyToCopy($post = array())
+    public function getReadyToCopy()
     {
-        if (is_array($post) && $post !== NULL) {
-            if (isset($post['sourceLanguage']) &&
-                isset($post['sourcePageId']) &&
-                isset($post['targetLanguage']) &&
-                isset($post['targetParentPageId'])
+        if (is_array($_POST['P3PageCopy']) && $_POST['P3PageCopy'] !== NULL) {
+            if (isset($_POST['P3PageCopy']['sourceLanguage']) &&
+                isset($_POST['P3PageCopy']['sourcePageId']) &&
+                isset($_POST['P3PageCopy']['targetLanguage']) &&
+                isset($_POST['P3PageCopy']['targetParentPageId'])
             ) {
                 return TRUE;
             }

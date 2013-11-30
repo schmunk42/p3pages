@@ -113,8 +113,8 @@ class P3PageCopyController extends Controller
             // Set user inputs from $_POST
             $this->setUserInputs();
 
-            // switch between new record
-            if ($this->model->getReadyToCopy($_POST['P3PageCopy'])) {
+            // Start copy process if all requiered fields are given
+            if ($this->model->readyToCopy) {
 
                 // Kill the $_POST
                 self::unsetPost();
