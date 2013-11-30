@@ -1,8 +1,8 @@
 <?php
 $this->setPageTitle(
-  Yii::t('P3PagesModule.model', 'P3 Pages')
-  . ' - '
-  . Yii::t('P3PagesModule.crud', 'Copy')
+    Yii::t('P3PagesModule.model', 'P3 Pages')
+    . ' - '
+    . Yii::t('P3PagesModule.crud', 'Copy')
 );
 $this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'Copy');
 $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs));
@@ -10,36 +10,38 @@ $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs));
 Yii::app()->bootstrap->registerPackage('select2');
 Yii::app()->clientScript->registerScript('p3pages/p3PageCopy/index', '$("#copyPage select").select2();');
 ?>
-<h1>
+    <h1>
 
-    <?php echo Yii::t('P3PagesModule.crud', 'Copy Page'); ?>
-    <small><?php echo Yii::t('P3PagesModule.crud', 'Manage'); ?></small>
+        <?php echo Yii::t('P3PagesModule.crud', 'Copy Page'); ?>
+        <small><?php echo Yii::t('P3PagesModule.crud', 'Manage'); ?></small>
 
-</h1>
+    </h1>
 <?php
 $form = $this->beginWidget('CActiveForm', array(
     'id'                     => 'copyPage',
-    'enableClientValidation' => true,
+    'enableClientValidation' => TRUE,
     'clientOptions'          => array(
-        'validateOnSubmit' => true
+        'validateOnSubmit' => TRUE
     ),
     'htmlOptions'            => array(
         'enctype' => 'multipart/form-data'
     ),
-  ));
+));
 ?>
-<hr />
+    <hr/>
 
 <?php if (!Yii::app()->user->hasFlash('copyError') && !Yii::app()->user->hasFlash('copySuccess')): ?>
     <div class="row-fluid">
         <div class="span12">
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 1 : Select a language from which you want to copy a page'); ?><br />
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 2 : Select the source page you want to copy'); ?><br />
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 3 : Select a P3 parent page to put the copied page below this P3Page ID'); ?><br />
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 1 : Select a language from which you want to copy a page'); ?>
+            <br/>
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 2 : Select the source page you want to copy'); ?><br/>
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 3 : Select a P3 parent page to put the copied page below this P3Page ID'); ?>
+            <br/>
             <?php echo Yii::t('P3PagesModule.crud', 'Step 4 : Set after copy status of the p3 modules'); ?><br/>
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 5 : Start copy process'); ?><br />
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 6 : Edit the new page'); ?><br />
-            <hr />
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 5 : Start copy process'); ?><br/>
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 6 : Edit the new page'); ?><br/>
+            <hr/>
         </div>
     </div>
 <?php endif; ?>
@@ -82,13 +84,13 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->labelEx($model, 'sourceLanguage'); ?>
             <?php
             echo $form->dropDownList($model, 'sourceLanguage', $model->getSourceLanguages(), array(
-                'options'  => array(
-                    $sourceLanguage => array(
-                        'selected' => true
-                    )
-                ),
-                'empty'    => Yii::t('P3PagesModule.crud', 'Select language'),
-                'onChange' => 'this.form.submit();')
+                    'options'  => array(
+                        $sourceLanguage => array(
+                            'selected' => TRUE
+                        )
+                    ),
+                    'empty'    => Yii::t('P3PagesModule.crud', 'Select language'),
+                    'onChange' => 'this.form.submit();')
             );
             ?>
             <?php echo $form->error($model, 'sourceLanguage'); ?>
@@ -100,7 +102,7 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->error($model, 'targetLanguage'); ?>
         </div>
     </div>
-    <hr />
+    <hr/>
     <?php if (isset($checked) && $checked == TRUE) { ?>
 
         <div class="row-fluid">
@@ -145,18 +147,18 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php endif; ?>
             </div>
         </div>
-        <hr />
+        <hr/>
         <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 4 - Status'); ?></h4>
         <div class="row-fluid">
             <div class="span3">
                 <?php echo $form->labelEx($model, 'p3pageStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3pageStatus', $model->P3StatusList, array(
-                        'options' => array(
-                            $p3pageStatus => array(
-                                'selected' => TRUE
-                            )
-                        ),
+                    'options' => array(
+                        $p3pageStatus => array(
+                            'selected' => TRUE
+                        )
+                    ),
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3pageStatus'); ?>
@@ -165,11 +167,11 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3pageTranslationStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3pageTranslationStatus', $model->P3StatusList, array(
-                        'options' => array(
-                            $p3pageTranslationStatus => array(
-                                'selected' => TRUE
-                            )
-                        ),
+                    'options' => array(
+                        $p3pageTranslationStatus => array(
+                            'selected' => TRUE
+                        )
+                    ),
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3pageTranslationStatus'); ?>
@@ -178,11 +180,11 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3widgetStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3widgetStatus', $model->P3StatusList, array(
-                        'options' => array(
-                            $p3widgetStatus => array(
-                                'selected' => TRUE
-                            )
-                        ),
+                    'options' => array(
+                        $p3widgetStatus => array(
+                            'selected' => TRUE
+                        )
+                    ),
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3widgetStatus'); ?>
@@ -191,17 +193,17 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3widgetTranslationStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3widgetTranslationStatus', $model->P3StatusList, array(
-                        'options' => array(
-                            $p3widgetTranslationStatus => array(
-                                'selected' => TRUE
-                            )
-                        ),
+                    'options' => array(
+                        $p3widgetTranslationStatus => array(
+                            'selected' => TRUE
+                        )
+                    ),
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3widgetTranslationStatus'); ?>
             </div>
         </div>
-        <hr />
+        <hr/>
         <div class="row-fluid">
             <div class="span6">
                 <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 5'); ?></h4>
@@ -221,7 +223,7 @@ $form = $this->beginWidget('CActiveForm', array(
                 ?>
             </div>
         </div>
-        <?php
+    <?php
     }
 }
 ?>
@@ -231,8 +233,8 @@ if (isset($newPage)) {
 
     $formDelete = $this->beginWidget('TbActiveForm', array(
         'id'                     => 'p3-page-form',
-        'enableAjaxValidation'   => true,
-        'enableClientValidation' => true,
+        'enableAjaxValidation'   => TRUE,
+        'enableClientValidation' => TRUE,
         'htmlOptions'            => array(
             'enctype' => ''
         )
@@ -251,11 +253,11 @@ if (isset($newPage)) {
                         class="label label-default"><i class="icon-pencil icon-white"></i></span>
                     <span><?php
                         echo CHtml::link(
-                          '<i class="icon-flag icon-white"></i> ', NULL, array(
-                            'class'       => 'label label-default',
-                            'data-toggle' => 'tooltip',
-                            'title'       => $newPage->status
-                          )
+                            '<i class="icon-flag icon-white"></i> ', NULL, array(
+                                'class'       => 'label label-default',
+                                'data-toggle' => 'tooltip',
+                                'title'       => $newPage->status
+                            )
                         );
                         ?>
                     </span>
@@ -263,55 +265,57 @@ if (isset($newPage)) {
                     echo $newPage->default_menu_name;
                     echo '&nbsp;&nbsp;';
                     echo CHtml::link(
-                      '<i class="icon-circle-arrow-right"></i> ', $newPage->createUrl(), array(
-                        'class'       => '',
-                        'data-toggle' => 'tooltip',
-                        'title'       => 'Go to Frontend-Page'
-                      )
+                        '<i class="icon-circle-arrow-right"></i> ', $newPage->createUrl(), array(
+                            'class'       => '',
+                            'data-toggle' => 'tooltip',
+                            'title'       => 'Go to Frontend-Page'
+                        )
                     )
                     ?>
                 </h4>
                 <?php
                 echo CHtml::link(
-                  '<i class="icon-pencil"></i> ' . ' <b>' . $newPage->name_id . '</b> ' . ' #' . $newPage->id, array(
-                    '/p3pages/p3Page/update',
-                    'id'        => $newPage->id,
-                    'returnUrl' => Yii::app()->controller->createUrl('/p3pages/default/index')
-                  ), array(
-                    'target'      => '_blank',
-                    'class'       => 'btn',
-                    'data-toggle' => 'tooltip',
-                    'title'       => Yii::t('P3PagesModule.crud', 'Update Page')
-                  )
-                );
-                if (isset($newPageTranslation) && $newPageTranslation->id !== NULL) {
-                    echo CHtml::link(
-                      '<i class="icon-flag"></i> ' . $newPageTranslation->language, array(
-                        '/p3pages/p3PageTranslation/update',
-                        'id'        => $newPageTranslation->id,
+                    '<i class="icon-pencil"></i> ' . ' <b>' . $newPage->name_id . '</b> ' . ' #' . $newPage->id, array(
+                        '/p3pages/p3Page/update',
+                        'id'        => $newPage->id,
                         'returnUrl' => Yii::app()->controller->createUrl('/p3pages/default/index')
-                      ), array(
+                    ), array(
                         'target'      => '_blank',
                         'class'       => 'btn',
                         'data-toggle' => 'tooltip',
-                        'title'       => Yii::t('P3PagesModule.crud', 'Update Translation')
-                      )
+                        'title'       => Yii::t('P3PagesModule.crud', 'Update Page')
+                    )
+                );
+                if (isset($newPageTranslation) && $newPageTranslation->id !== NULL) {
+                    echo CHtml::link(
+                        '<i class="icon-flag"></i> ' . $newPageTranslation->language, array(
+                            '/p3pages/p3PageTranslation/update',
+                            'id'        => $newPageTranslation->id,
+                            'returnUrl' => Yii::app()->controller->createUrl('/p3pages/default/index')
+                        ), array(
+                            'target'      => '_blank',
+                            'class'       => 'btn',
+                            'data-toggle' => 'tooltip',
+                            'title'       => Yii::t('P3PagesModule.crud', 'Update Translation')
+                        )
                     );
                 }
                 echo CHtml::link(
-                  '<i class="icon-plus-sign icon-white"></i> ', array(
-                    '/p3pages/p3PageCopy/index',
-                  ), array(
-                    'class'       => 'btn btn-success pull-right',
-                    'data-toggle' => 'tooltip',
-                    'title'       => Yii::t('P3PagesModule.crud', 'New Copy Page')
-                  )
+                    '<i class="icon-plus-sign icon-white"></i> ', array(
+                        '/p3pages/p3PageCopy/index',
+                    ), array(
+                        'class'       => 'btn btn-success pull-right',
+                        'data-toggle' => 'tooltip',
+                        'title'       => Yii::t('P3PagesModule.crud', 'New Copy Page')
+                    )
                 );
                 ?>
-                <br />
-                <br />
+                <br/>
+                <br/>
+
                 <p>
-                    <span class="label label-info"><?php echo ($newPage->url_json != '{}') ? $newPage->url_json : '' ?></span>
+                    <span
+                        class="label label-info"><?php echo ($newPage->url_json != '{}') ? $newPage->url_json : '' ?></span>
                     <span class="label"><?php echo Yii::t('P3PagesModule.crud', 'Layout & View') ?></span>
                     <?php echo $newPage->layout ?>
                     <?php echo $newPage->view ?>
@@ -320,6 +324,6 @@ if (isset($newPage)) {
         </div>
     </div>
     <?php $this->endWidget(); ?>
-    <?php
+<?php
 }
 

@@ -12,8 +12,8 @@ class P3PageCopyController extends Controller
 {
 
     public $defaultAction = "index";
-    public $scenario      = "crud";
-    public $scope         = "crud";
+    public $scenario = "crud";
+    public $scope = "crud";
 
     /**
      * Global P3PageCopy model
@@ -76,10 +76,10 @@ class P3PageCopyController extends Controller
         parent::beforeAction($action);
         self::checkPageParents();
 
-        if ($this->module !== null) {
+        if ($this->module !== NULL) {
             $this->breadcrumbs[$this->module->Id] = array('/' . $this->module->Id);
         }
-        return true;
+        return TRUE;
     }
 
     /**
@@ -93,7 +93,7 @@ class P3PageCopyController extends Controller
         if (sizeof($model->getAllP3PageParents(Yii::app()->language)) == NULL) {
             // Set flash copyError
             Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'No parent pages availible to append a copy.') . '</strong><br /><br />'
-              . Yii::t('P3PagesModule.crud', 'Please choose another target language!'));
+                . Yii::t('P3PagesModule.crud', 'Please choose another target language!'));
 
             // Unset the $_POST var
             self::unsetPost();
@@ -208,8 +208,7 @@ class P3PageCopyController extends Controller
             ));
 
             if ($sourceWidgets !== NULL) {
-                foreach ($sourceWidgets as $sourceWidget)
-                {
+                foreach ($sourceWidgets as $sourceWidget) {
                     // Make new widget from source widget
                     $this->newWidget = $this->makeNewWidget($sourceWidget);
 
@@ -338,14 +337,14 @@ class P3PageCopyController extends Controller
      */
     private function newRecord()
     {
-        $this->sourcePageId          = false;
-        $this->targetParentPageId    = false;
-        $this->sourceLanguageChecked = false;
+        $this->sourcePageId          = FALSE;
+        $this->targetParentPageId    = FALSE;
+        $this->sourceLanguageChecked = FALSE;
 
         // Check selected values
         if (isset($_POST['P3PageCopy']['sourceLanguage']) && $_POST['P3PageCopy']['sourceLanguage'] !== NULL) {
             $this->sourceLanguage        = $_POST['P3PageCopy']['sourceLanguage'];
-            $this->sourceLanguageChecked = true;
+            $this->sourceLanguageChecked = TRUE;
         }
         if (isset($_POST['P3PageCopy']['sourcePageId']) && $_POST['P3PageCopy']['sourcePageId'] !== NULL) {
             $this->sourcePageId = $_POST['P3PageCopy']['sourcePageId'];
@@ -410,23 +409,21 @@ class P3PageCopyController extends Controller
         // Errors to string
         if (isset($model) && $model !== NULL) {
             $errors = '';
-            foreach ($model->errors AS $error)
-            {
-                foreach ($error AS $value)
-                {
+            foreach ($model->errors AS $error) {
+                foreach ($error AS $value) {
                     $errors .= ' - ' . $value . '<br />';
                 }
             }
             // Set flash copyError
             Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'Something went wrong...') . '</strong><br /><br />'
-              . get_class($model) . '<br /><i>' . $errors . '</i>');
+                . get_class($model) . '<br /><i>' . $errors . '</i>');
         }
 
         // no sourcePage entry found
         if ($this->sourcePage === NULL) {
             // Set flash copyError
             Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'Something went wrong...') . '</strong><br /><br />'
-              . '<i>' . Yii::t('P3PagesModule.crud', 'Source page could not be found!') . '</i>');
+                . '<i>' . Yii::t('P3PagesModule.crud', 'Source page could not be found!') . '</i>');
         }
 
         // if p3widget module is not install or unavailible
@@ -463,7 +460,8 @@ class P3PageCopyController extends Controller
         }
     }
 
-    private function setUserInputs() {
+    private function setUserInputs()
+    {
 
         if (isset($_POST['P3PageCopy']) && $_POST['P3PageCopy'] !== NULL) {
             $this->sourceLanguage            = $_POST['P3PageCopy']['sourceLanguage'];
