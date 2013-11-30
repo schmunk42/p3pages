@@ -36,8 +36,9 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo Yii::t('P3PagesModule.crud', 'Step 1 : Select a language from which you want to copy a page'); ?><br />
             <?php echo Yii::t('P3PagesModule.crud', 'Step 2 : Select the source page you want to copy'); ?><br />
             <?php echo Yii::t('P3PagesModule.crud', 'Step 3 : Select a P3 parent page to put the copied page below this P3Page ID'); ?><br />
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 4 : Start copy process'); ?><br />
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 5 : Edit the new page'); ?><br />
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 4 : Set after copy status of the p3 modules'); ?><br/>
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 5 : Start copy process'); ?><br />
+            <?php echo Yii::t('P3PagesModule.crud', 'Step 6 : Edit the new page'); ?><br />
             <hr />
         </div>
     </div>
@@ -47,7 +48,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <div class="span12">
             <div class="alert alert-success">
                 <?php echo Yii::app()->user->getFlash('copySuccess'); ?>
-            </div>   
+            </div>
         </div>
     </div>
 <?php endif; ?>
@@ -56,7 +57,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <div class="span12">
             <div class="alert alert-error">
                 <?php echo Yii::app()->user->getFlash('copyError'); ?>
-            </div>   
+            </div>
         </div>
     </div>
 <?php endif; ?>
@@ -65,7 +66,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <div class="span12">
             <div class="alert alert-info">
                 <?php echo Yii::app()->user->getFlash('errorP3widget'); ?>
-            </div>   
+            </div>
         </div>
     </div>
 <?php endif; ?>
@@ -101,25 +102,19 @@ $form = $this->beginWidget('CActiveForm', array(
     </div>
     <hr />
     <?php if (isset($checked) && $checked == TRUE) { ?>
+
         <div class="row-fluid">
             <div class="span6">
                 <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 2'); ?></h4>
-            </div>
-            <div class="span6">
-                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 3'); ?></h4>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span6">
                 <?php echo $form->labelEx($model, 'sourcePageId'); ?>
                 <?php
                 echo $form->dropDownList($model, 'sourcePageId', $model->getAllP3Pages($sourceLanguage), array(
-                    'options' => array(
-                        $sourcePageId => array(
-                            'selected' => true
-                        )
-                    ),
-                    'empty'   => Yii::t('P3PagesModule.crud', 'Select source page'))
+                        'options' => array(
+                            $sourcePageId => array(
+                                'selected' => TRUE
+                            )
+                        ),
+                        'empty'   => Yii::t('P3PagesModule.crud', 'Select source page'))
                 );
                 ?>
                 <?php echo $form->error($model, 'sourcePageId'); ?>
@@ -130,15 +125,16 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php endif; ?>
             </div>
             <div class="span6">
+                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 3'); ?></h4>
                 <?php echo $form->labelEx($model, 'targetParentPageId'); ?>
                 <?php
                 echo $form->dropDownList($model, 'targetParentPageId', $model->getAllP3PageParents(Yii::app()->language), array(
-                    'options' => array(
-                        $targetParentPageId => array(
-                            'selected' => true
-                        )
-                    ),
-                    'empty'   => Yii::t('P3PagesModule.crud', 'Select target parent'))
+                        'options' => array(
+                            $targetParentPageId => array(
+                                'selected' => TRUE
+                            )
+                        ),
+                        'empty'   => Yii::t('P3PagesModule.crud', 'Select target parent'))
                 );
                 ?>
                 <?php echo $form->error($model, 'targetParentPageId'); ?>
@@ -150,9 +146,65 @@ $form = $this->beginWidget('CActiveForm', array(
             </div>
         </div>
         <hr />
+        <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 4 - Status'); ?></h4>
+        <div class="row-fluid">
+            <div class="span3">
+                <?php echo $form->labelEx($model, 'p3pageStatus'); ?>
+                <?php
+                echo $form->dropDownList($model, 'p3pageStatus', $model->P3StatusList, array(
+                        'options' => array(
+                            $p3pageStatus => array(
+                                'selected' => TRUE
+                            )
+                        ),
+                ));
+                ?>
+                <?php echo $form->error($model, 'p3pageStatus'); ?>
+            </div>
+            <div class="span3">
+                <?php echo $form->labelEx($model, 'p3pageTranslationStatus'); ?>
+                <?php
+                echo $form->dropDownList($model, 'p3pageTranslationStatus', $model->P3StatusList, array(
+                        'options' => array(
+                            $p3pageTranslationStatus => array(
+                                'selected' => TRUE
+                            )
+                        ),
+                ));
+                ?>
+                <?php echo $form->error($model, 'p3pageTranslationStatus'); ?>
+            </div>
+            <div class="span3">
+                <?php echo $form->labelEx($model, 'p3widgetStatus'); ?>
+                <?php
+                echo $form->dropDownList($model, 'p3widgetStatus', $model->P3StatusList, array(
+                        'options' => array(
+                            $p3widgetStatus => array(
+                                'selected' => TRUE
+                            )
+                        ),
+                ));
+                ?>
+                <?php echo $form->error($model, 'p3widgetStatus'); ?>
+            </div>
+            <div class="span3">
+                <?php echo $form->labelEx($model, 'p3widgetTranslationStatus'); ?>
+                <?php
+                echo $form->dropDownList($model, 'p3widgetTranslationStatus', $model->P3StatusList, array(
+                        'options' => array(
+                            $p3widgetTranslationStatus => array(
+                                'selected' => TRUE
+                            )
+                        ),
+                ));
+                ?>
+                <?php echo $form->error($model, 'p3widgetTranslationStatus'); ?>
+            </div>
+        </div>
+        <hr />
         <div class="row-fluid">
             <div class="span6">
-                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 4'); ?></h4>
+                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 5'); ?></h4>
             </div>
         </div>
         <div class="row-fluid">
@@ -172,7 +224,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php
     }
 }
-?>  
+?>
 <?php $this->endWidget(); ?>
 <?php
 if (isset($newPage)) {
@@ -266,7 +318,7 @@ if (isset($newPage)) {
                 </p>
             </div>
         </div>
-    </div>  
+    </div>
     <?php $this->endWidget(); ?>
     <?php
 }

@@ -32,12 +32,24 @@ class P3PageCopy extends CFormModel
     public $targetParentPageId;
 
     /**
+     * @var string with status set foreach p3 module on copy
+     */
+    public $p3pageStatus;
+    public $p3pageTranslationStatus;
+    public $p3widgetStatus;
+    public $p3widgetTranslationStatus;
+
+
+    /**
      * Declares the validation rules.
      */
     public function rules()
     {
         return array(
             array('sourceLanguage', 'required', 'message' => Yii::t('P3PagesModule.crud', 'Required')),
+            array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',
+                'setOnEmpty' => TRUE,
+                'value' => 'draft')
         );
     }
 
@@ -49,10 +61,15 @@ class P3PageCopy extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'sourceLanguage'     => Yii::t('P3PagesModule.crud', 'Source Language'),
-            'targetLanguage'     => Yii::t('P3PagesModule.crud', 'Target Language'),
-            'sourcePageId'       => Yii::t('P3PagesModule.crud', 'Source Page ID'),
-            'targetParentPageId' => Yii::t('P3PagesModule.crud', 'Target Parent Page ID'),
+            'sourceLanguage'            => Yii::t('P3PagesModule.crud', 'Source Language'),
+            'targetLanguage'            => Yii::t('P3PagesModule.crud', 'Target Language'),
+            'sourcePageId'              => Yii::t('P3PagesModule.crud', 'Source Page ID'),
+            'targetParentPageId'        => Yii::t('P3PagesModule.crud', 'Target Parent Page ID'),
+
+            'p3pageStatus'              => Yii::t('P3PagesModule.crud', 'Page'),
+            'p3pageTranslationStatus'   => Yii::t('P3PagesModule.crud', 'Page Translation'),
+            'p3widgetStatus'            => Yii::t('P3PagesModule.crud', 'Widgets'),
+            'p3widgetTranslationStatus' => Yii::t('P3PagesModule.crud', 'Widget Translation'),
         );
     }
 
@@ -113,9 +130,8 @@ class P3PageCopy extends CFormModel
         $criteria->params    = array(':lang' => $lang);
 
         // Check if any assigned roles of this user allows him to append a record
-        foreach (array_keys(Yii::app()->getAuthManager()->getAuthAssignments(Yii::app()->user->id)) AS $role)
-        {
-        $conditionsRoles[] = "access_append = '{$role}'";
+        foreach (array_keys(Yii::app()->getAuthManager()->getAuthAssignments(Yii::app()->user->id)) AS $role) {
+            $conditionsRoles[] = "access_append = '{$role}'";
         }
         $conditionsRoles[] = "access_append IS NULL";
         $conditionsRoles[] = "access_append = '*'";
@@ -129,29 +145,34 @@ class P3PageCopy extends CFormModel
     }
 
     /**
-     * Sets if the record is new.
-     * @param boolean $value whether the record is new and should be inserted when calling {@link save}.
-     * @see getIsNewRecord
+     * @return array with p3 status list
      */
-    public function setIsNewRecord($value)
+    public function getP3StatusList()
     {
-        $session = new CHttpSession;
-        $session->open();
-        $session[$this->_name] = $value; // set session variable
+        return array(
+            'draft'      => 'draft',
+            'published'  => 'published',
+            'overridden' => 'overridden',
+            'archived'   => 'archived'
+        );
     }
 
     /**
-     * Returns if the current record is new.
-     * @return boolean whether the record is new and should be inserted when calling {@link save}.
-     * This property is automatically set in constructor and {@link populateRecord}.
-     * Defaults to false, but it will be set to true if the instance is created using
-     * the new operator.
+     * @param array $post
+     * @return bool
+     * Check if the four need fields are set
      */
-    public function getIsNewRecord()
+    public function getReadyToCopy($post = array())
     {
-        $session = new CHttpSession;
-        $session->open();
-        return $session[$this->_name]; // get session variable
+        if (is_array($post) && $post !== NULL) {
+            if (isset($post['sourceLanguage']) &&
+                isset($post['sourcePageId']) &&
+                isset($post['targetLanguage']) &&
+                isset($post['targetParentPageId'])
+            ) {
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
-
 }
