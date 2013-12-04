@@ -134,7 +134,7 @@ class DefaultController extends Controller
 		} 
 		// if the request comes from an wget user agent then render partial and filter 
 		// scripts that is already been loaded by the main app
-		else if($_SERVER['HTTP_USER_AGENT'] == Yii::app()->params['wgetUserAgent']) {
+		else if($_SERVER['HTTP_USER_AGENT'] == Yii::app()->params['userAgentNoScript']) {
 			Yii::app()->clientScript->scriptMap = array(
 			    'jquery.js' => false,
 			    'jquery-ui.min.js' => false,
