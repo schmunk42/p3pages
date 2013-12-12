@@ -15,9 +15,20 @@
  */
 class P3PageCopy extends CFormModel
 {
+    /**
+     * @var type string
+     */
+    private $defaultStatus = 'draft';
 
-    // private _name
-    private $_name = 'P3 Copy Page';
+    /**
+     * @var p3pages status list
+     */
+    private $statusList = array(
+        'draft'      => 'draft',
+        'published'  => 'published',
+        'overridden' => 'overridden',
+        'archived'   => 'archived'
+    );
 
     /**
      * @var type string
@@ -49,7 +60,7 @@ class P3PageCopy extends CFormModel
             array('sourceLanguage', 'required', 'message' => Yii::t('P3PagesModule.crud', 'Required')),
             array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',
                 'setOnEmpty' => TRUE,
-                'value' => 'draft')
+                'value'      => $this->defaultStatus)
         );
     }
 
@@ -90,23 +101,18 @@ class P3PageCopy extends CFormModel
 
     /**
      *
-     * @param type $lang
-     * @param type $status
+     * @param type $lang is source language
      * @return array with all P3Pages in source language
      */
     public function getAllP3Pages($lang)
     {
         $allP3Pages = array();
-        $conditions = array();
 
-        $criteria                  = new CDbCriteria;
-        $criteria->order           = 'default_menu_name';
-        $conditions[]              = "tree_parent_id IS NOT NULL";
-        $conditions[]              = "access_domain = :lang OR access_domain = '*'";
-        $criteria->params[':lang'] = $lang;
-        $criteria->condition       = implode(' AND ', $conditions);
+        $criteria            = new CDbCriteria;
+        $criteria->order     = 'default_menu_name';
+        $criteria->condition = "tree_parent_id IS NOT NULL";
 
-        $p3PagesSource = P3Page::model()->findAll($criteria);
+        $p3PagesSource = P3Page::model()->localized($lang)->findAll($criteria);
         foreach ($p3PagesSource as $value) {
             $allP3Pages[$value->id] = '[ID=' . $value->id . '] ' . $value->default_menu_name;
         }
@@ -121,23 +127,12 @@ class P3PageCopy extends CFormModel
     public function getAllP3PageParents($lang)
     {
         $allP3PageParents = array();
-        $conditions       = array();
-        $conditionsRoles  = array();
 
-        $criteria            = new CDbCriteria;
-        $criteria->order     = 'default_menu_name';
-        $criteria->condition = "(access_domain = :lang OR access_domain = '*')";
-        $criteria->params    = array(':lang' => $lang);
+        $criteria        = new CDbCriteria;
+        $criteria->order = 'default_menu_name';
 
-        // Check if any assigned roles of this user allows him to append a record
-        foreach (array_keys(Yii::app()->getAuthManager()->getAuthAssignments(Yii::app()->user->id)) AS $role) {
-            $conditionsRoles[] = "access_append = '{$role}'";
-        }
-        $conditionsRoles[] = "access_append IS NULL";
-        $conditionsRoles[] = "access_append = '*'";
-        $criteria->condition .= ' AND (' . implode(' OR ', $conditionsRoles) . ')';
+        $p3PagesParent = P3Page::model()->localized($lang, TRUE)->findAll($criteria);
 
-        $p3PagesParent = P3Page::model()->findAll($criteria);
         foreach ($p3PagesParent as $value) {
             $allP3PageParents[$value->id] = '[ID=' . $value->id . '] ' . $value->default_menu_name;
         }
@@ -149,12 +144,7 @@ class P3PageCopy extends CFormModel
      */
     public function getP3StatusList()
     {
-        return array(
-            'draft'      => 'draft',
-            'published'  => 'published',
-            'overridden' => 'overridden',
-            'archived'   => 'archived'
-        );
+        return $this->statusList;
     }
 
     /**
@@ -162,13 +152,13 @@ class P3PageCopy extends CFormModel
      * @return bool
      * Check if the four need fields are set
      */
-    public function getReadyToCopy($post = array())
+    public function getReadyToCopy()
     {
-        if (is_array($post) && $post !== NULL) {
-            if (isset($post['sourceLanguage']) &&
-                isset($post['sourcePageId']) &&
-                isset($post['targetLanguage']) &&
-                isset($post['targetParentPageId'])
+        if (is_array($_POST['P3PageCopy']) && $_POST['P3PageCopy'] !== NULL) {
+            if (isset($_POST['P3PageCopy']['sourceLanguage']) &&
+                isset($_POST['P3PageCopy']['sourcePageId']) &&
+                isset($_POST['P3PageCopy']['targetLanguage']) &&
+                isset($_POST['P3PageCopy']['targetParentPageId'])
             ) {
                 return TRUE;
             }

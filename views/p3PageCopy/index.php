@@ -266,9 +266,10 @@ if (isset($newPage)) {
                     echo '&nbsp;&nbsp;';
                     echo CHtml::link(
                         '<i class="icon-circle-arrow-right"></i> ', $newPage->createUrl(), array(
-                            'class'       => '',
-                            'data-toggle' => 'tooltip',
-                            'title'       => 'Go to Frontend-Page'
+                            'class'          => '',
+                            'data-toggle'    => 'tooltip',
+                            'data-placement' => 'right',
+                            'title'          => 'Go to Frontend-Page'
                         )
                     )
                     ?>
