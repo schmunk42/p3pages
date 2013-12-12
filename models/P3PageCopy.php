@@ -15,10 +15,6 @@
  */
 class P3PageCopy extends CFormModel
 {
-
-    // private _name
-    private $_name = 'P3 Copy Page';
-
     /**
      * @var type string
      */
