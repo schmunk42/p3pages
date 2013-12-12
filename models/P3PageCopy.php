@@ -18,6 +18,11 @@ class P3PageCopy extends CFormModel
     /**
      * @var type string
      */
+    private $defaultStatus = 'draft';
+
+    /**
+     * @var type string
+     */
     public $sourceLanguage;
     public $targetLanguage;
 
@@ -45,7 +50,7 @@ class P3PageCopy extends CFormModel
             array('sourceLanguage', 'required', 'message' => Yii::t('P3PagesModule.crud', 'Required')),
             array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',
                 'setOnEmpty' => TRUE,
-                'value'      => 'draft')
+                'value'      => $this->defaultStatus)
         );
     }
 
