@@ -21,6 +21,16 @@ class P3PageCopy extends CFormModel
     private $defaultStatus = 'draft';
 
     /**
+     * @var p3pages status list
+     */
+    private $statusList = array(
+        'draft'      => 'draft',
+        'published'  => 'published',
+        'overridden' => 'overridden',
+        'archived'   => 'archived'
+    );
+
+    /**
      * @var type string
      */
     public $sourceLanguage;
@@ -134,12 +144,7 @@ class P3PageCopy extends CFormModel
      */
     public function getP3StatusList()
     {
-        return array(
-            'draft'      => 'draft',
-            'published'  => 'published',
-            'overridden' => 'overridden',
-            'archived'   => 'archived'
-        );
+        return $this->statusList;
     }
 
     /**
