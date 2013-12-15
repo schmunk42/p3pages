@@ -251,7 +251,7 @@ class P3PageCopyController extends Controller
     private function makeNewPage($sourcePage)
     {
         $newPage = new P3Page;
-        // detach behavior translateable to copy a source bike translation
+        // detach behavior translateable to copy the source page translation
         if ($this->getPageTranslation() !== NULL) {
             $newPage->detachBehavior('Translatable');
         }
