@@ -24,9 +24,9 @@ class P3PageCopy extends CFormModel
      * @var p3pages status list
      */
     private $statusList = array(
+        ''           => '',
         'draft'      => 'draft',
         'published'  => 'published',
-        'overridden' => 'overridden',
         'archived'   => 'archived'
     );
 
@@ -57,7 +57,9 @@ class P3PageCopy extends CFormModel
     public function rules()
     {
         return array(
-            array('sourceLanguage', 'required', 'message' => Yii::t('P3PagesModule.crud', 'Required')),
+            array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus, sourceLanguage', 'required',
+                'message' => Yii::t('P3PagesModule.crud', 'Required')
+            ),
             array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',
                 'setOnEmpty' => TRUE,
                 'value'      => $this->defaultStatus)
@@ -93,6 +95,7 @@ class P3PageCopy extends CFormModel
     {
         $allLanguages = array();
         $languages    = Yii::app()->params->languages;
+        $allLanguages = array('' => '');
         foreach ($languages as $key => $value) {
             $allLanguages[$key] = '[' . $key . '] ' . $value;
         }
@@ -106,7 +109,7 @@ class P3PageCopy extends CFormModel
      */
     public function getAllP3Pages($lang)
     {
-        $allP3Pages = array();
+        $allP3Pages = array('' => '');
 
         $criteria            = new CDbCriteria;
         $criteria->order     = 'default_menu_name';
@@ -126,7 +129,7 @@ class P3PageCopy extends CFormModel
      */
     public function getAllP3PageParents($lang)
     {
-        $allP3PageParents = array();
+        $allP3PageParents = array('' => '');
 
         $criteria        = new CDbCriteria;
         $criteria->order = 'default_menu_name';
