@@ -37,6 +37,16 @@ class P3Page extends BaseP3Page
         return parent::getItemLabel();
     }
 
+    public function relations()
+    {
+        return CMap::mergeArray(
+            parent::relations(),
+            array(
+                'p3Pages'         => array('order'=>'tree_position'),
+            )
+        );
+    }
+
     public function behaviors()
     {
         return array_merge(
