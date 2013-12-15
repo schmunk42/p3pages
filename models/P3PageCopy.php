@@ -24,10 +24,10 @@ class P3PageCopy extends CFormModel
      * @var p3pages status list
      */
     private $statusList = array(
-        ''           => '',
-        'draft'      => 'draft',
-        'published'  => 'published',
-        'archived'   => 'archived'
+        ''          => '',
+        'draft'     => 'draft',
+        'published' => 'published',
+        'archived'  => 'archived'
     );
 
     /**
@@ -57,7 +57,7 @@ class P3PageCopy extends CFormModel
     public function rules()
     {
         return array(
-            array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus, sourceLanguage', 'required',
+            array('sourcePageId, targetParentPageId, p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus, sourceLanguage', 'required',
                 'message' => Yii::t('P3PagesModule.crud', 'Required')
             ),
             array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',

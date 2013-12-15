@@ -129,9 +129,6 @@ class P3PageCopyController extends Controller
                 $this->refresh();
             }
         } else {
-            // Set Flash Messages on missing attributes
-            self::setFlashes();
-
             // load new record
             $this->newRecord();
         }
@@ -453,19 +450,6 @@ class P3PageCopyController extends Controller
         // Unset the $_POST
         if (isset($_POST['P3PageCopy'])) {
             unset($_POST['P3PageCopy']);
-        }
-    }
-
-    /**
-     * set flashes for missing attributes
-     */
-    private static function setFlashes()
-    {
-        if (isset($_POST['P3PageCopy']) && empty($_POST['P3PageCopy']['sourcePageId'])) {
-            Yii::app()->user->setFlash('sourcePageId', Yii::t('P3PagesModule.crud', 'Required'));
-        }
-        if (isset($_POST['P3PageCopy']) && empty($_POST['P3PageCopy']['targetParentPageId'])) {
-            Yii::app()->user->setFlash('targetParentPageId', Yii::t('P3PagesModule.crud', 'Required'));
         }
     }
 
