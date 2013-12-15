@@ -153,11 +153,14 @@ class P3PageCopyController extends Controller
             if ($this->newPage->save()) {
 
                 // re-attach Translateable behavior
-                $p3pageBehaviors = $this->newPage->behaviors();
-                $this->newPage->attachBehavior('Translatable', $p3pageBehaviors['Translatable']);
+                if ($this->getPageTranslation() !== NULL) {
 
-                // handle the copy process for the page translation
-                $this->copyPageTranslation();
+                    $p3pageBehaviors = $this->newPage->behaviors();
+                    $this->newPage->attachBehavior('Translatable', $p3pageBehaviors['Translatable']);
+
+                    // handle the copy process for the page translation
+                    $this->copyPageTranslation();
+                }
 
                 // handle the copy process for widgets and their translations
                 $this->copyWidgets();
@@ -178,17 +181,12 @@ class P3PageCopyController extends Controller
      */
     private function copyPageTranslation()
     {
-        $sourcePageTranslation = P3PageTranslation::model()->findByAttributes(array(
-            'p3_page_id' => $this->sourcePage->id,
-            'language'   => $this->sourceLanguage,
-        ));
+        $sourcePageTranslation = $this->getPageTranslation();
 
-        if ($sourcePageTranslation !== NULL) {
-            // Make new page translation from source page translation
-            $this->newPageTranslation = $this->makeNewPageTranslation($sourcePageTranslation);
-            if (!$this->newPageTranslation->save()) {
-                $this->errorHandler($this->newPageTranslation);
-            }
+        // Make new page translation from source page translation
+        $this->newPageTranslation = $this->makeNewPageTranslation($sourcePageTranslation);
+        if (!$this->newPageTranslation->save()) {
+            $this->errorHandler($this->newPageTranslation);
         }
     }
 
@@ -234,6 +232,18 @@ class P3PageCopyController extends Controller
     }
 
     /**
+     * @return array|CActiveRecord|mixed|null
+     */
+    private function getPageTranslation()
+    {
+        $sourcePageTranslation = P3PageTranslation::model()->findByAttributes(array(
+            'p3_page_id' => $this->sourcePage->id,
+            'language'   => $this->sourceLanguage,
+        ));
+        return $sourcePageTranslation;
+    }
+
+    /**
      *
      * @param type $sourcePage
      * @return \P3Page
@@ -241,7 +251,10 @@ class P3PageCopyController extends Controller
     private function makeNewPage($sourcePage)
     {
         $newPage = new P3Page;
-        $newPage->detachBehavior('Translatable');
+        // detach behavior translateable to copy a source bike translation
+        if ($this->getPageTranslation() !== NULL) {
+            $newPage->detachBehavior('Translatable');
+        }
 
         $newPage->default_menu_name   = $sourcePage->default_menu_name;
         $newPage->status              = $this->p3pageStatus;
