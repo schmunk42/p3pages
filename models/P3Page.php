@@ -21,6 +21,10 @@ class P3Page extends BaseP3Page
         'archived'   => 'inverse'
     );
 
+    public $defaultScope = array(
+        'order' => array('tree_position'),
+    );
+
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
