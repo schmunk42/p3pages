@@ -93,7 +93,6 @@ class P3PageCopy extends CFormModel
      */
     public function getSourceLanguages()
     {
-        $allLanguages = array();
         $languages    = Yii::app()->params->languages;
         $allLanguages = array('' => '');
         foreach ($languages as $key => $value) {
@@ -134,7 +133,7 @@ class P3PageCopy extends CFormModel
         $criteria        = new CDbCriteria;
         $criteria->order = 'default_menu_name';
 
-        $p3PagesParent = P3Page::model()->localized($lang, TRUE)->findAll($criteria);
+        $p3PagesParent = P3Page::model()->localized($lang, FALSE)->findAll($criteria);
 
         foreach ($p3PagesParent as $value) {
             $allP3PageParents[$value->id] = '[ID=' . $value->id . '] ' . $value->default_menu_name;
