@@ -84,13 +84,13 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->labelEx($model, 'sourceLanguage'); ?>
             <?php
             echo $form->dropDownList($model, 'sourceLanguage', $model->getSourceLanguages(), array(
-                    'options'  => array(
+                    'options'     => array(
                         $sourceLanguage => array(
                             'selected' => TRUE
                         )
                     ),
-                    'empty'    => Yii::t('P3PagesModule.crud', 'Select language'),
-                    'onChange' => 'this.form.submit();')
+                    'placeholder' => Yii::t('P3PagesModule.crud', 'Select language'),
+                    'onChange'    => 'this.form.submit();')
             );
             ?>
             <?php echo $form->error($model, 'sourceLanguage'); ?>
@@ -111,12 +111,12 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'sourcePageId'); ?>
                 <?php
                 echo $form->dropDownList($model, 'sourcePageId', $model->getAllP3Pages($sourceLanguage), array(
-                        'options' => array(
+                        'options'     => array(
                             $sourcePageId => array(
                                 'selected' => TRUE
                             )
                         ),
-                        'empty'   => Yii::t('P3PagesModule.crud', 'Select source page'))
+                        'placeholder' => Yii::t('P3PagesModule.crud', 'Select source page'))
                 );
                 ?>
                 <?php echo $form->error($model, 'sourcePageId'); ?>
@@ -131,12 +131,12 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'targetParentPageId'); ?>
                 <?php
                 echo $form->dropDownList($model, 'targetParentPageId', $model->getAllP3PageParents(Yii::app()->language), array(
-                        'options' => array(
+                        'options'     => array(
                             $targetParentPageId => array(
                                 'selected' => TRUE
                             )
                         ),
-                        'empty'   => Yii::t('P3PagesModule.crud', 'Select target parent'))
+                        'placeholder' => Yii::t('P3PagesModule.crud', 'Select target parent'))
                 );
                 ?>
                 <?php echo $form->error($model, 'targetParentPageId'); ?>
@@ -154,11 +154,12 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3pageStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3pageStatus', $model->P3StatusList, array(
-                    'options' => array(
+                    'options'     => array(
                         $p3pageStatus => array(
                             'selected' => TRUE
                         )
                     ),
+                    'placeholder' => Yii::t('P3PagesModule.crud', 'Select status')
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3pageStatus'); ?>
@@ -167,11 +168,12 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3pageTranslationStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3pageTranslationStatus', $model->P3StatusList, array(
-                    'options' => array(
+                    'options'     => array(
                         $p3pageTranslationStatus => array(
                             'selected' => TRUE
                         )
                     ),
+                    'placeholder' => Yii::t('P3PagesModule.crud', 'Select status')
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3pageTranslationStatus'); ?>
@@ -180,11 +182,12 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3widgetStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3widgetStatus', $model->P3StatusList, array(
-                    'options' => array(
+                    'options'     => array(
                         $p3widgetStatus => array(
                             'selected' => TRUE
                         )
                     ),
+                    'placeholder' => Yii::t('P3PagesModule.crud', 'Select status')
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3widgetStatus'); ?>
@@ -193,11 +196,12 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3widgetTranslationStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3widgetTranslationStatus', $model->P3StatusList, array(
-                    'options' => array(
+                    'options'     => array(
                         $p3widgetTranslationStatus => array(
                             'selected' => TRUE
                         )
                     ),
+                    'placeholder' => Yii::t('P3PagesModule.crud', 'Select status')
                 ));
                 ?>
                 <?php echo $form->error($model, 'p3widgetTranslationStatus'); ?>
