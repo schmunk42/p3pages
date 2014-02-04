@@ -6,14 +6,14 @@
  * @author Christopher Stebe <cstebe@iserv4u.com>
  * @package p3pages.controllers
  * @version 0.1.0
- * 
+ *
  */
 class P3PageCopyController extends Controller
 {
 
     public $defaultAction = "index";
-    public $scenario      = "crud";
-    public $scope         = "crud";
+    public $scenario = "crud";
+    public $scope = "crud";
 
     /**
      * Global P3PageCopy model
@@ -21,9 +21,10 @@ class P3PageCopyController extends Controller
     private $model;
 
     /**
-     * Global @vars for copy process 
+     * Global @vars for copy process
      */
     private $transaction;
+    private $sourcePage;
     private $newPage;
     private $newPageTranslation;
     private $newWidget;
@@ -37,6 +38,10 @@ class P3PageCopyController extends Controller
     private $sourcePageId;
     private $targetParentPageId;
     private $sourceLanguageChecked;
+    private $p3pageStatus;
+    private $p3pageTranslationStatus;
+    private $p3widgetStatus;
+    private $p3widgetTranslationStatus;
 
     /**
      * @return array action filters
@@ -44,7 +49,7 @@ class P3PageCopyController extends Controller
     public function filters()
     {
         return array(
-                       'accessControl', // perform access control
+            'accessControl', // perform access control
         );
     }
 
@@ -56,13 +61,13 @@ class P3PageCopyController extends Controller
     public function accessRules()
     {
         return array(
-                       array('allow', // allow authenticated user to view the index page
-                                      'actions' => array('index'),
-                                      'roles'   => array('admin', 'P3pages.Default.CopyPage'),
-                       ),
-                       array('deny', // deny all users
-                                      'users' => array('*'),
-                       ),
+            array('allow', // allow authenticated user to view the index page
+                'actions' => array('index'),
+                'roles'   => array('admin', 'P3pages.Default.CopyPage'),
+            ),
+            array('deny', // deny all users
+                'users' => array('*'),
+            ),
         );
     }
 
@@ -71,10 +76,28 @@ class P3PageCopyController extends Controller
         parent::beforeAction($action);
         self::checkPageParents();
 
-        if ($this->module !== null) {
+        if ($this->module !== NULL) {
             $this->breadcrumbs[$this->module->Id] = array('/' . $this->module->Id);
         }
-        return true;
+        return TRUE;
+    }
+
+    /**
+     * show error if there are no parent pages availible
+     * to append a copy of a page
+     */
+    private static function checkPageParents()
+    {
+        $model = new P3PageCopy();
+
+        if (sizeof($model->getAllP3PageParents(Yii::app()->language)) == NULL) {
+            // Set flash copyError
+            Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'No parent pages availible to append a copy.') . '</strong><br /><br />'
+                . Yii::t('P3PagesModule.crud', 'Please choose another target language!'));
+
+            // Unset the $_POST var
+            self::unsetPost();
+        }
     }
 
     /**
@@ -87,184 +110,154 @@ class P3PageCopyController extends Controller
         // Start Copy Process only if all requiered fields are set
         if (isset($_POST['P3PageCopy']) && !empty($_POST['P3PageCopy']['sourcePageId']) && !empty($_POST['P3PageCopy']['targetParentPageId'])) {
 
-            $this->sourceLanguage     = $_POST['P3PageCopy']['sourceLanguage'];
-            $this->sourcePageId       = $_POST['P3PageCopy']['sourcePageId'];
-            $this->targetLanguage     = $_POST['P3PageCopy']['targetLanguage'];
-            $this->targetParentPageId = $_POST['P3PageCopy']['targetParentPageId'];
+            // Set user inputs from $_POST
+            $this->setUserInputs();
 
-            // switch between new record
-            if ($this->model->getIsNewRecord()) {
+            // Start copy process if all requiered fields are given
+            if ($this->model->readyToCopy) {
+
+                // Kill the $_POST
+                self::unsetPost();
 
                 // Start the copy process
-                $this->doCopy($this->model);
+                $this->doCopy();
             } else {
-                // Kill the $_POST['P3PageCopy']
-                unset($_POST['P3PageCopy']);
-
-                // set new record to true
-                $this->model->setIsNewRecord(true);
+                // Kill the $_POST
+                self::unsetPost();
 
                 // reload page
                 $this->refresh();
             }
         } else {
-            // Set Flash Messages on missing attributes
-            if (isset($_POST['P3PageCopy']) && empty($_POST['P3PageCopy']['sourcePageId'])) {
-                Yii::app()->user->setFlash('sourcePageId', Yii::t('P3PagesModule.crud', 'Required'));
-            }
-            if (isset($_POST['P3PageCopy']) && empty($_POST['P3PageCopy']['targetParentPageId'])) {
-                Yii::app()->user->setFlash('targetParentPageId', Yii::t('P3PagesModule.crud', 'Required'));
-            }
-
             // load new record
             $this->newRecord();
         }
     }
 
     /**
-     * render view for new record
-     * @param type $model
-     */
-    private function newRecord()
-    {
-        $this->sourcePageId          = false;
-        $this->targetParentPageId    = false;
-        $this->sourceLanguageChecked = false;
-
-        // set isNewRecord to true
-        $this->model->setIsNewRecord(true);
-
-        // Check selected values
-        if (isset($_POST['P3PageCopy']['sourceLanguage']) && $_POST['P3PageCopy']['sourceLanguage'] !== NULL) {
-            $this->sourceLanguage        = $_POST['P3PageCopy']['sourceLanguage'];
-            $this->sourceLanguageChecked = true;
-        }
-        if (isset($_POST['P3PageCopy']['sourcePageId']) && $_POST['P3PageCopy']['sourcePageId'] !== NULL) {
-            $this->sourcePageId = $_POST['P3PageCopy']['sourcePageId'];
-        }
-        if (isset($_POST['P3PageCopy']['targetParentPageId']) && $_POST['P3PageCopy']['targetParentPageId'] !== NULL) {
-            $this->targetParentPageId = $_POST['P3PageCopy']['targetParentPageId'];
-        }
-
-        // Unset the $_POST
-        unset($_POST['P3PageCopy']);
-
-        $this->render('index', array(
-                       'model'              => $this->model,
-                       'sourceLanguage'     => $this->sourceLanguage,
-                       'sourcePageId'       => $this->sourcePageId,
-                       'targetParentPageId' => $this->targetParentPageId,
-                       'checked'            => $this->sourceLanguageChecked
-        ));
-    }
-
-    /**
      * start copy process
-     * @param type $model
      */
-    private function doCopy($model)
+    private function doCopy()
     {
         // Get P3Page source model
-        $sourcePage = P3Page::model()->findByPk($this->sourcePageId);
+        $this->sourcePage = P3Page::model()->findByPk($this->sourcePageId);
 
-        // Start transaction
-        $this->transaction = $sourcePage->dbConnection->beginTransaction();
+        if ($this->sourcePage !== NULL) {
 
-        if ($sourcePage !== NULL) {
+            // Start transaction
+            $this->transaction = $this->sourcePage->dbConnection->beginTransaction();
 
             // Make new Page from source page
-            $this->newPage = $this->makeNewPage($sourcePage);
+            $this->newPage = $this->makeNewPage($this->sourcePage);
 
             if ($this->newPage->save()) {
-                
+
                 // re-attach Translateable behavior
-                $p3pageBehaviors = $this->newPage->behaviors();
-                $this->newPage->attachBehavior('Translatable', $p3pageBehaviors['Translatable']);
-                /**
-                 * set the $model->isNewRecord() to false 
-                 * for page reload protection
-                 */
-                $model->setIsNewRecord(false);
+                if ($this->getPageTranslation() !== NULL) {
 
-                $sourcePageTranslation = P3PageTranslation::model()->findByAttributes(array('p3_page_id' => $sourcePage->id, 'language' => $this->sourceLanguage));
+                    $p3pageBehaviors = $this->newPage->behaviors();
+                    $this->newPage->attachBehavior('Translatable', $p3pageBehaviors['Translatable']);
 
-                if ($sourcePageTranslation !== NULL) {
-                    // Make new page translation from source page translation
-                    $this->newPageTranslation = $this->makeNewPageTranslation($sourcePageTranslation);
-
-                    if ($this->newPageTranslation->save() && Yii::app()->getModule('p3widgets')) {
-                        $sourceWidgets = P3Widget::model()->findAllByAttributes(array('request_param' => $sourcePage->id, 'access_domain' => $this->sourceLanguage));
-
-                        if ($sourceWidgets !== NULL) {
-                            foreach ($sourceWidgets as $sourceWidget)
-                            {
-                                // Make new widget from source widget
-                                $this->newWidget = $this->makeNewWidget($sourceWidget);
-
-                                if ($this->newWidget->save()) {
-                                    
-                                    // re-attach Translateable behavior
-                                    $p3widgetBehaviors = $this->newWidget->behaviors();
-                                    $this->newWidget->attachBehavior('Translatable', $p3widgetBehaviors['Translatable']);
-                
-                                    $sourceWidgetTranslation    = P3WidgetTranslation::model()->findByAttributes(array('p3_widget_id' => $sourceWidget->id, 'language' => $this->sourceLanguage));
-                                    
-                                    if($sourceWidgetTranslation !== NULL) {
-                                        // Make new widget translation from source widget translation
-                                        $this->newWidgetTranslation = $this->makeNewWidgetTranslation($sourceWidgetTranslation);
-                                        
-                                        if (!$this->newWidgetTranslation->save()) {
-                                            $this->errorHandler($this->newWidgetTranslation);
-                                        }
-                                    }
-                                } else {
-                                    $this->errorHandler($this->newWidget);
-                                }
-                            }
-                        }
-                    } else {
-                        $this->errorHandler($this->newPageTranslation);
-                    }
-
-                    if (!$this->model->getIsNewRecord()) {
-                        // Commit all transactions
-                        $this->transaction->commit();
-                    }
-                    // Unset the $_POST
-                    unset($_POST['P3PageCopy']);
-
-                    // Set flash copySuccess
-                    Yii::app()->user->setFlash('copySuccess', '<strong>' . Yii::t('P3PagesModule.crud', 'The complete page was copied successfuly. You can now edit the page.') . '</strong>');
-
-                    $this->render('index', array(
-                                   'model'              => $model,
-                                   'sourceLanguage'     => $this->sourceLanguage,
-                                   'sourcePageId'       => $this->sourcePageId,
-                                   'targetParentPageId' => $this->targetParentPageId,
-                                   'newPage'            => $this->newPage,
-                                   'newPageTranslation' => $this->newPageTranslation
-                    ));
+                    // handle the copy process for the page translation
+                    $this->copyPageTranslation();
                 }
+
+                // handle the copy process for widgets and their translations
+                $this->copyWidgets();
+
+                // render copy result
+                $this->renderCopyResult();
             } else {
                 $this->errorHandler($this->newPage);
             }
         } else {
-            $this->errorHandler($sourcePage);
+            // No source page found
+            $this->errorHandler($this->sourcePage);
         }
     }
 
     /**
-     * 
+     * Handles the copy process for the page translation
+     */
+    private function copyPageTranslation()
+    {
+        $sourcePageTranslation = $this->getPageTranslation();
+
+        // Make new page translation from source page translation
+        $this->newPageTranslation = $this->makeNewPageTranslation($sourcePageTranslation);
+        if (!$this->newPageTranslation->save()) {
+            $this->errorHandler($this->newPageTranslation);
+        }
+    }
+
+    /**
+     * Handles the copy process of the widgets and their translations
+     */
+    private function copyWidgets()
+    {
+        // If phundament/P3Widgets module is installed/availible then try to copy widgets
+        if (Yii::app()->getModule('p3widgets') !== NULL) {
+            $sourceWidgets = P3Widget::model()->findAllByAttributes(array(
+                'request_param' => $this->sourcePage->id,
+                'access_domain' => array($this->sourceLanguage, '*', 'NULL'),
+            ));
+
+            if ($sourceWidgets !== NULL) {
+                foreach ($sourceWidgets as $sourceWidget) {
+                    // Make new widget from source widget
+                    $this->newWidget = $this->makeNewWidget($sourceWidget);
+
+                    if ($this->newWidget->save()) {
+
+                        // re-attach Translateable behavior
+                        $p3widgetBehaviors = $this->newWidget->behaviors();
+                        $this->newWidget->attachBehavior('Translatable', $p3widgetBehaviors['Translatable']);
+
+                        $sourceWidgetTranslation = P3WidgetTranslation::model()->findByAttributes(array('p3_widget_id' => $sourceWidget->id, 'language' => $this->sourceLanguage));
+
+                        if ($sourceWidgetTranslation !== NULL) {
+                            // Make new widget translation from source widget translation
+                            $this->newWidgetTranslation = $this->makeNewWidgetTranslation($sourceWidgetTranslation);
+
+                            if (!$this->newWidgetTranslation->save()) {
+                                $this->errorHandler($this->newWidgetTranslation);
+                            }
+                        }
+                    } else {
+                        $this->errorHandler($this->newWidget);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @return array|CActiveRecord|mixed|null
+     */
+    private function getPageTranslation()
+    {
+        $sourcePageTranslation = P3PageTranslation::model()->findByAttributes(array(
+            'p3_page_id' => $this->sourcePage->id,
+            'language'   => $this->sourceLanguage,
+        ));
+        return $sourcePageTranslation;
+    }
+
+    /**
+     *
      * @param type $sourcePage
      * @return \P3Page
      */
     private function makeNewPage($sourcePage)
     {
-        $newPage                      = new P3Page;
-        $newPage->detachBehavior('Translatable');
-        
+        $newPage = new P3Page;
+        // detach behavior translateable to copy the source page translation
+        if ($this->getPageTranslation() !== NULL) {
+            $newPage->detachBehavior('Translatable');
+        }
+
         $newPage->default_menu_name   = $sourcePage->default_menu_name;
-        $newPage->status              = 'draft';
+        $newPage->status              = $this->p3pageStatus;
         $newPage->name_id             = NULL;
         $newPage->tree_parent_id      = $this->targetParentPageId;
         $newPage->tree_position       = NULL;
@@ -283,7 +276,7 @@ class P3PageCopyController extends Controller
     }
 
     /**
-     * 
+     *
      * @param type $sourcePageTranslation
      * @return \P3PageTranslation
      */
@@ -293,7 +286,7 @@ class P3PageCopyController extends Controller
         $newPageTranslation->p3_page_id     = $this->newPage->id;
         $newPageTranslation->language       = $this->targetLanguage;
         $newPageTranslation->menu_name      = $sourcePageTranslation->menu_name;
-        $newPageTranslation->status         = 'draft';
+        $newPageTranslation->status         = $this->p3pageTranslationStatus;
         $newPageTranslation->page_title     = $sourcePageTranslation->page_title;
         $newPageTranslation->url_param      = $sourcePageTranslation->url_param;
         $newPageTranslation->keywords       = $sourcePageTranslation->keywords;
@@ -304,16 +297,16 @@ class P3PageCopyController extends Controller
     }
 
     /**
-     * 
+     *
      * @param type $sourceWidget
      * @return \P3Widget
      */
     private function makeNewWidget($sourceWidget)
     {
-        $newWidget                          = new P3Widget;
+        $newWidget = new P3Widget;
         $newWidget->detachBehavior('Translatable');
-        
-        $newWidget->status                  = 'draft';
+
+        $newWidget->status                  = $this->p3widgetStatus;
         $newWidget->alias                   = $sourceWidget->alias;
         $newWidget->default_properties_json = $sourceWidget->default_properties_json;
         $newWidget->default_content_html    = $sourceWidget->default_content_html;
@@ -331,74 +324,162 @@ class P3PageCopyController extends Controller
     }
 
     /**
-     * 
+     *
      * @param type $sourceWidgetTranslation
      * @return \P3WidgetTranslation
      */
-    private function makeNewWidgetTranslation($sourceWidgetTranslation) {
-        $newWidgetTranslation                   = new P3WidgetTranslation;
-        $newWidgetTranslation->p3_widget_id     = $this->newWidget->id;
-        $newWidgetTranslation->status           = 'draft';
-        $newWidgetTranslation->language         = $this->targetLanguage;
-        $newWidgetTranslation->properties_json  = $sourceWidgetTranslation->properties_json;
-        $newWidgetTranslation->content_html     = $sourceWidgetTranslation->content_html;
-        $newWidgetTranslation->copied_from_id   = $sourceWidgetTranslation->id;
-                
+    private function makeNewWidgetTranslation($sourceWidgetTranslation)
+    {
+        $newWidgetTranslation                  = new P3WidgetTranslation;
+        $newWidgetTranslation->p3_widget_id    = $this->newWidget->id;
+        $newWidgetTranslation->status          = $this->p3widgetTranslationStatus;
+        $newWidgetTranslation->language        = $this->targetLanguage;
+        $newWidgetTranslation->properties_json = $sourceWidgetTranslation->properties_json;
+        $newWidgetTranslation->content_html    = $sourceWidgetTranslation->content_html;
+        $newWidgetTranslation->copied_from_id  = $sourceWidgetTranslation->id;
+
         return $newWidgetTranslation;
     }
 
     /**
-     * 
+     * render view for new record
+     * @param type $model
+     */
+    private function newRecord()
+    {
+        $this->sourcePageId          = FALSE;
+        $this->targetParentPageId    = FALSE;
+        $this->sourceLanguageChecked = FALSE;
+
+        // Check selected values
+        if (isset($_POST['P3PageCopy']['sourceLanguage']) && $_POST['P3PageCopy']['sourceLanguage'] !== NULL) {
+            $this->sourceLanguage        = $_POST['P3PageCopy']['sourceLanguage'];
+            $this->sourceLanguageChecked = TRUE;
+        }
+        if (isset($_POST['P3PageCopy']['sourcePageId']) && $_POST['P3PageCopy']['sourcePageId'] !== NULL) {
+            $this->sourcePageId = $_POST['P3PageCopy']['sourcePageId'];
+        }
+        if (isset($_POST['P3PageCopy']['targetParentPageId']) && $_POST['P3PageCopy']['targetParentPageId'] !== NULL) {
+            $this->targetParentPageId = $_POST['P3PageCopy']['targetParentPageId'];
+        }
+        if (isset($_POST['P3PageCopy']['p3pageStatus']) && $_POST['P3PageCopy']['p3pageStatus'] !== NULL) {
+            $this->p3pageStatus = $_POST['P3PageCopy']['p3pageStatus'];
+        }
+        if (isset($_POST['P3PageCopy']['p3pageTranslationStatus']) && $_POST['P3PageCopy']['p3pageTranslationStatus'] !== NULL) {
+            $this->p3pageTranslationStatus = $_POST['P3PageCopy']['p3pageTranslationStatus'];
+        }
+        if (isset($_POST['P3PageCopy']['p3widgetStatus']) && $_POST['P3PageCopy']['p3widgetStatus'] !== NULL) {
+            $this->p3widgetStatus = $_POST['P3PageCopy']['p3widgetStatus'];
+        }
+        if (isset($_POST['P3PageCopy']['p3widgetTranslationStatus']) && $_POST['P3PageCopy']['p3widgetTranslationStatus'] !== NULL) {
+            $this->p3widgetTranslationStatus = $_POST['P3PageCopy']['p3widgetTranslationStatus'];
+        }
+
+        // Unset the $_POST
+        self::unsetPost();
+
+        $this->render('index', array(
+            'model'                     => $this->model,
+            'sourceLanguage'            => $this->sourceLanguage,
+            'sourcePageId'              => $this->sourcePageId,
+            'targetParentPageId'        => $this->targetParentPageId,
+            'p3pageStatus'              => $this->p3pageStatus,
+            'p3pageTranslationStatus'   => $this->p3pageTranslationStatus,
+            'p3widgetStatus'            => $this->p3widgetStatus,
+            'p3widgetTranslationStatus' => $this->p3widgetTranslationStatus,
+            'checked'                   => $this->sourceLanguageChecked
+        ));
+    }
+
+    /**
+     * if at least the p3page was copied
+     * this will render der results
+     */
+    private function renderCopyResult()
+    {
+        // Commit all transactions
+        $this->transaction->commit();
+
+        // Unset the $_POST
+        self::unsetPost();
+
+        // Set flash copySuccess
+        Yii::app()->user->setFlash('copySuccess', '<strong>' . Yii::t('P3PagesModule.crud', 'The complete page was copied successfuly. You can now edit the page.') . '</strong>');
+
+        $this->render('index', array(
+            'model'              => $this->model,
+            'sourceLanguage'     => $this->sourceLanguage,
+            'sourcePageId'       => $this->sourcePageId,
+            'targetParentPageId' => $this->targetParentPageId,
+            'newPage'            => $this->newPage,
+            'newPageTranslation' => $this->newPageTranslation
+        ));
+    }
+
+    /**
+     *
      * @param type $model
      */
     private function errorHandler($model)
     {
-
-        if (!$this->model->getIsNewRecord()) {
-            // Rollback all transactions
-            $this->transaction->rollback();
-        }
-        // Unset the $_POST var
-        if (isset($_POST['P3PageCopy'])) {
-            unset($_POST['P3PageCopy']);
-        }
+        // Rollback all transactions
+        $this->transaction->rollback();
 
         // Errors to string
-        $errors = '';
-        foreach ($model->errors AS $error)
-        {
-            foreach ($error AS $key => $value)
-            {
-                $errors .= ' - ' . $value . '<br />';
+        if (isset($model) && $model !== NULL) {
+            $errors = '';
+            foreach ($model->errors AS $error) {
+                foreach ($error AS $value) {
+                    $errors .= ' - ' . $value . '<br />';
+                }
             }
-        }
-        // Set flash copyError
-        Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'Something went wrong...') . '</strong><br /><br />'
+            // Set flash copyError
+            Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'Something went wrong...') . '</strong><br /><br />'
                 . get_class($model) . '<br /><i>' . $errors . '</i>');
+        }
+
+        // no sourcePage entry found
+        if ($this->sourcePage === NULL) {
+            // Set flash copyError
+            Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'Something went wrong...') . '</strong><br /><br />'
+                . '<i>' . Yii::t('P3PagesModule.crud', 'Source page could not be found!') . '</i>');
+        }
+
+        // if p3widget module is not install or unavailible
+        if (Yii::app()->getModule('p3widgets') === NULL) {
+            // Set flash copyError
+            Yii::app()->user->setFlash('errorP3widget', '<i>' . Yii::t('P3PagesModule.crud', 'P3Widgets module not availible!') . '</i>');
+        }
+
+        // Unset the $_POST var
+        self::unsetPost();
 
         // Reload current view index
         $this->refresh();
     }
 
-    /**
-     * show error if there are no parent pages availible
-     * to append a copy of a page
-     */
-    private static function checkPageParents()
+    private static function unsetPost()
     {
-        
-        $model = new P3PageCopy();
-
-        if (sizeof($model->getAllP3PageParents(Yii::app()->language)) == NULL) {
-            // Set flash copyError
-            Yii::app()->user->setFlash('copyError', '<strong>' . Yii::t('P3PagesModule.crud', 'No parent pages availible to append a copy.') . '</strong><br /><br />'
-                    . Yii::t('P3PagesModule.crud', 'Please choose another target language!'));
-
-            // Unset the $_POST var
-            if (isset($_POST['P3PageCopy'])) {
-                unset($_POST['P3PageCopy']);
-            }
+        // Unset the $_POST
+        if (isset($_POST['P3PageCopy'])) {
+            unset($_POST['P3PageCopy']);
         }
     }
 
+    private function setUserInputs()
+    {
+
+        if (isset($_POST['P3PageCopy']) && $_POST['P3PageCopy'] !== NULL) {
+            $this->sourceLanguage            = $_POST['P3PageCopy']['sourceLanguage'];
+            $this->sourcePageId              = $_POST['P3PageCopy']['sourcePageId'];
+            $this->targetLanguage            = $_POST['P3PageCopy']['targetLanguage'];
+            $this->targetParentPageId        = $_POST['P3PageCopy']['targetParentPageId'];
+            $this->p3pageStatus              = $_POST['P3PageCopy']['p3pageStatus'];
+            $this->p3pageTranslationStatus   = $_POST['P3PageCopy']['p3pageTranslationStatus'];
+            $this->p3widgetStatus            = $_POST['P3PageCopy']['p3widgetStatus'];
+            $this->p3widgetTranslationStatus = $_POST['P3PageCopy']['p3widgetTranslationStatus'];
+        } else {
+            throw new CHttpException(500);
+        }
+    }
 }

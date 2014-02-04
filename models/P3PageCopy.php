@@ -7,17 +7,28 @@
  * @property string $targetLanguage
  * @property integer $sourcePageId
  * @property integer $targetParentPageId
- * 
+ *
  * @author Christopher Stebe <cstebe@iserv4u.com>
  * @package p3pages.models
  * @version 0.1.0
- * 
+ *
  */
 class P3PageCopy extends CFormModel
 {
+    /**
+     * @var type string
+     */
+    private $defaultStatus = 'draft';
 
-    // private _name
-    private $_name = 'P3 Copy Page';
+    /**
+     * @var p3pages status list
+     */
+    private $statusList = array(
+        ''          => '',
+        'draft'     => 'draft',
+        'published' => 'published',
+        'archived'  => 'archived'
+    );
 
     /**
      * @var type string
@@ -32,12 +43,26 @@ class P3PageCopy extends CFormModel
     public $targetParentPageId;
 
     /**
+     * @var string with status set foreach p3 module on copy
+     */
+    public $p3pageStatus;
+    public $p3pageTranslationStatus;
+    public $p3widgetStatus;
+    public $p3widgetTranslationStatus;
+
+
+    /**
      * Declares the validation rules.
      */
     public function rules()
     {
         return array(
-            array('sourceLanguage', 'required', 'message' => Yii::t('P3PagesModule.crud', 'Required')),
+            array('sourcePageId, targetParentPageId, p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus, sourceLanguage', 'required',
+                'message' => Yii::t('P3PagesModule.crud', 'Required')
+            ),
+            array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',
+                'setOnEmpty' => TRUE,
+                'value'      => $this->defaultStatus)
         );
     }
 
@@ -49,114 +74,97 @@ class P3PageCopy extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'sourceLanguage' => Yii::t('P3PagesModule.crud', 'Source Language'),
-            'targetLanguage' => Yii::t('P3PagesModule.crud', 'Target Language'),
-            'sourcePageId' => Yii::t('P3PagesModule.crud', 'Source Page ID'),
-            'targetParentPageId' => Yii::t('P3PagesModule.crud', 'Target Parent Page ID'),
+            'sourceLanguage'            => Yii::t('P3PagesModule.crud', 'Source Language'),
+            'targetLanguage'            => Yii::t('P3PagesModule.crud', 'Target Language'),
+            'sourcePageId'              => Yii::t('P3PagesModule.crud', 'Source Page ID'),
+            'targetParentPageId'        => Yii::t('P3PagesModule.crud', 'Target Parent Page ID'),
+
+            'p3pageStatus'              => Yii::t('P3PagesModule.crud', 'Page'),
+            'p3pageTranslationStatus'   => Yii::t('P3PagesModule.crud', 'Page Translation'),
+            'p3widgetStatus'            => Yii::t('P3PagesModule.crud', 'Widgets'),
+            'p3widgetTranslationStatus' => Yii::t('P3PagesModule.crud', 'Widget Translation'),
         );
     }
 
     /**
-     * 
+     *
      * @return array with availible source languages
      * from Yii::app()->params->languages
      */
     public function getSourceLanguages()
     {
-        $allLanguages = array();
         $languages    = Yii::app()->params->languages;
-        foreach ($languages as $key => $value)
-        {
+        $allLanguages = array('' => '');
+        foreach ($languages as $key => $value) {
             $allLanguages[$key] = '[' . $key . '] ' . $value;
         }
         return $allLanguages;
     }
 
     /**
-     * 
-     * @param type $lang
-     * @param type $status
+     *
+     * @param type $lang is source language
      * @return array with all P3Pages in source language
      */
     public function getAllP3Pages($lang)
     {
-        $allP3Pages      = array();
-        $conditions      = array();
-        $conditionsRoles = array();
+        $allP3Pages = array('' => '');
 
-        $criteria                  = new CDbCriteria;
-        $criteria->order           = 'default_menu_name';
-        $conditions[]              = "access_domain = :lang OR access_domain = '*'";
-        $criteria->params[':lang'] = $lang;
-        $criteria->condition       = implode(' AND ', $conditions);
-        
-        $p3PagesSource = P3Page::model()->findAll($criteria);
-        foreach ($p3PagesSource as $value)
-        {
+        $criteria            = new CDbCriteria;
+        $criteria->order     = 'default_menu_name';
+        $criteria->condition = "tree_parent_id IS NOT NULL";
+
+        $p3PagesSource = P3Page::model()->localized($lang)->findAll($criteria);
+        foreach ($p3PagesSource as $value) {
             $allP3Pages[$value->id] = '[ID=' . $value->id . '] ' . $value->default_menu_name;
         }
         return $allP3Pages;
     }
 
     /**
-     * 
+     *
      * @param type $lang
      * @return array with list of all availible P3Page parent page id's
      */
     public function getAllP3PageParents($lang)
     {
-        $allP3PageParents = array();
-        $conditions       = array();
-        $conditionsRoles  = array();
+        $allP3PageParents = array('' => '');
 
-        $criteria                  = new CDbCriteria;
-        $criteria->order           = 'default_menu_name';
-        $conditions[]              = "tree_parent_id IS NOT NULL";
-        $conditions[]              = "(access_domain = :lang OR access_domain = '*')";
-        $criteria->params[':lang'] = $lang;
-        $criteria->condition       = implode(' AND ', $conditions);
+        $criteria        = new CDbCriteria;
+        $criteria->order = 'default_menu_name';
 
-        // Check if any assigned roles of this user allows him to append a record
-        foreach (array_keys(Yii::app()->getAuthManager()->getAuthAssignments(Yii::app()->user->id)) AS $role)
-        {
-            $conditionsRoles[] = "access_append = '{$role}'";
-        }
-        $conditionsRoles[] = "access_append IS NULL OR access_append = '*'";
-        $criteria->condition .= ' AND (' . implode(' OR ', $conditionsRoles) . ')';
+        $p3PagesParent = P3Page::model()->localized($lang, FALSE)->findAll($criteria);
 
-//        var_dump($criteria);Exit;
-        $p3PagesParent = P3Page::model()->findAll($criteria);
-        foreach ($p3PagesParent as $value)
-        {
+        foreach ($p3PagesParent as $value) {
             $allP3PageParents[$value->id] = '[ID=' . $value->id . '] ' . $value->default_menu_name;
         }
         return $allP3PageParents;
     }
 
     /**
-     * Sets if the record is new.
-     * @param boolean $value whether the record is new and should be inserted when calling {@link save}.
-     * @see getIsNewRecord
+     * @return array with p3 status list
      */
-    public function setIsNewRecord($value)
+    public function getP3StatusList()
     {
-        $session               = new CHttpSession;
-        $session->open();
-        $session[$this->_name] = $value;  // set session variable
+        return $this->statusList;
     }
 
     /**
-     * Returns if the current record is new.
-     * @return boolean whether the record is new and should be inserted when calling {@link save}.
-     * This property is automatically set in constructor and {@link populateRecord}.
-     * Defaults to false, but it will be set to true if the instance is created using
-     * the new operator.
+     * @param array $post
+     * @return bool
+     * Check if the four need fields are set
      */
-    public function getIsNewRecord()
+    public function getReadyToCopy()
     {
-        $session = new CHttpSession;
-        $session->open();
-        return $session[$this->_name];  // get session variable
+        if (is_array($_POST['P3PageCopy']) && $_POST['P3PageCopy'] !== NULL) {
+            if (isset($_POST['P3PageCopy']['sourceLanguage']) &&
+                isset($_POST['P3PageCopy']['sourcePageId']) &&
+                isset($_POST['P3PageCopy']['targetLanguage']) &&
+                isset($_POST['P3PageCopy']['targetParentPageId'])
+            ) {
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
-
 }
