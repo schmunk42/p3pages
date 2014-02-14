@@ -64,12 +64,6 @@
                     'htmlOptions' => array(
                         'checkAll' => 'all'
                     ),
-                    'criteria' => array(
-                            'condition' => 'access_domain=:lang',
-                            'params'    => array(
-                                ':lang' => Yii::app()->language,
-                            )
-                        )
                 )
                 );
                             echo $form->error($model,'p3_page_id')

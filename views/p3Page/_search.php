@@ -52,13 +52,7 @@
 
     <div class="row">
         <?php echo $form->label($model, 'url_json'); ?>
-        <?php $this->widget(
-                'jsonEditorView.JuiJSONEditorInput',
-                array(
-                     'model'     => $model,
-                     'attribute' => 'url_json'
-                )
-            );; ?>
+        <?php echo $form->textArea($model, 'url_json', array('rows' => 6, 'cols' => 50)); ?>
     </div>
 
     <div class="row">
@@ -78,18 +72,12 @@
 
     <div class="row">
         <?php echo $form->label($model, 'custom_data_json'); ?>
-        <?php $this->widget(
-                'jsonEditorView.JuiJSONEditorInput',
-                array(
-                     'model'     => $model,
-                     'attribute' => 'custom_data_json'
-                )
-            );; ?>
+        <?php echo $form->textArea($model, 'custom_data_json', array('rows' => 6, 'cols' => 50)); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'access_owner'); ?>
-        <?php echo $form->textField($model,'access_owner',array('disabled'=>'disabled')); ?>
+        <?php echo $form->textField($model, 'access_owner', array('size' => 60, 'maxlength' => 64)); ?>
     </div>
 
     <div class="row">
@@ -119,17 +107,17 @@
 
     <div class="row">
         <?php echo $form->label($model, 'copied_from_id'); ?>
-        <?php echo $form->textField($model,'copied_from_id',array('disabled'=>'disabled')); ?>
+        <?php echo $form->textField($model, 'copied_from_id'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'created_at'); ?>
-        <?php echo $form->textField($model,'created_at',array('disabled'=>'disabled')); ?>
+        <?php echo $form->textField($model, 'created_at'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->label($model, 'updated_at'); ?>
-        <?php echo $form->textField($model,'updated_at',array('disabled'=>'disabled')); ?>
+        <?php echo $form->textField($model, 'updated_at'); ?>
     </div>
 
 
