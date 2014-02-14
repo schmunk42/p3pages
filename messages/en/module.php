@@ -22,6 +22,4 @@ return array (
   'Page not found' => '',
   'Pages' => '',
   'Sitemap' => '',
-  'P3 Pages' => '@@@@',
-  'Template' => '@@@@',
 );
