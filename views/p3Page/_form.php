@@ -109,6 +109,12 @@
                     'htmlOptions' => array(
                         'checkAll' => 'all'
                     ),
+                    'criteria' => array(
+                            'condition' => 'access_domain=:lang',
+                            'params'    => array(
+                                ':lang' => Yii::app()->language,
+                            )
+                        )
                 )
                 );
                             echo $form->error($model,'tree_parent_id')
