@@ -52,17 +52,19 @@ $this->breadcrumbs[] = Yii::t('P3PagesModule.crud', 'View');
                             true
                         )
                     ),
-        array(
-            'name' => 'p3_page_id',
-            'value' => ($model->p3Page !== null)?CHtml::link(
-                            '<i class="icon icon-circle-arrow-left"></i> '.$model->p3Page->itemLabel,
-                            array('/p3pages/p3Page/view','id' => $model->p3Page->id),
-                            array('class' => '')).' '.CHtml::link(
-                            '<i class="icon icon-pencil"></i> ',
-                            array('/p3pages/p3Page/update','id' => $model->p3Page->id),
-                            array('class' => '')):'n/a',
-            'type' => 'html',
-        ),
+array(
+                        'name' => 'p3_page_id',
+                        'type' => 'raw',
+                        'value' => $this->widget(
+                            'TbEditableField',
+                            array(
+                                'model' => $model,
+                                'attribute' => 'p3_page_id',
+                                'url' => $this->createUrl('/p3pages/p3PageTranslation/editableSaver'),
+                            ),
+                            true
+                        )
+                    ),
 array(
                         'name'=>'language',
                         'type' => 'raw',

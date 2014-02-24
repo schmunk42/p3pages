@@ -99,7 +99,7 @@
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
                         #"label"=>Yii::t("P3PagesModule.crud","Update"),
-                        "icon"=>"icon-edit",
+                        "icon"=>"icon-edit icon-white",
                         "type"=>"primary",
                         "size"=>"large",
                         "url"=>array("update","id"=>$model->{$model->tableSchema->primaryKey}),
@@ -118,7 +118,7 @@
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
                        "label"=>Yii::t("P3PagesModule.crud","Save"),
-                       "icon"=>"save",
+                       "icon"=>"icon-thumbs-up icon-white",
                        "size"=>"large",
                        "type"=>"primary",
                        "htmlOptions"=> array(

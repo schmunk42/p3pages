@@ -98,17 +98,19 @@ array(
                             true
                         )
                     ),
-        array(
-            'name' => 'tree_parent_id',
-            'value' => ($model->treeParent !== null)?CHtml::link(
-                            '<i class="icon icon-circle-arrow-left"></i> '.$model->treeParent->itemLabel,
-                            array('/p3pages/p3Page/view','id' => $model->treeParent->id),
-                            array('class' => '')).' '.CHtml::link(
-                            '<i class="icon icon-pencil"></i> ',
-                            array('/p3pages/p3Page/update','id' => $model->treeParent->id),
-                            array('class' => '')):'n/a',
-            'type' => 'html',
-        ),
+array(
+                        'name' => 'tree_parent_id',
+                        'type' => 'raw',
+                        'value' => $this->widget(
+                            'TbEditableField',
+                            array(
+                                'model' => $model,
+                                'attribute' => 'tree_parent_id',
+                                'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                            ),
+                            true
+                        )
+                    ),
 array(
                         'name' => 'tree_position',
                         'type' => 'raw',

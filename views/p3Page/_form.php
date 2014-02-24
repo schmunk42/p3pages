@@ -99,17 +99,23 @@
                                  title='<?php echo (($t = Yii::t('P3PagesModule.model', 'tooltip.tree_parent_id')) != 'tooltip.tree_parent_id')?$t:'' ?>'>
                                 <?php
                             $this->widget(
-                '\GtcRelation',
-                array(
-                    'model' => $model,
-                    'relation' => 'treeParent',
-                    'fields' => 'itemLabel',
-                    'allowEmpty' => true,
-                    'style' => 'dropdownlist',
-                    'htmlOptions' => array(
-                        'checkAll' => 'all'
-                    ),
-                )
+                    '\GtcRelation',
+                    array(
+                        'model' => $model,
+                        'relation' => 'treeParent',
+                        'fields' => 'itemLabel',
+                        'allowEmpty' => true,
+                        'style' => 'dropdownlist',
+                        'htmlOptions' => array(
+                            'checkAll' => 'all'
+                        ),
+                        'criteria' => array(
+                            'condition' => 'access_domain=:lang',
+                            'params'    => array(
+                                ':lang' => Yii::app()->language,
+                            )
+                        )
+                    )
                 );
                             echo $form->error($model,'tree_parent_id')
                             ?>                            </span>
