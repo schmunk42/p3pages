@@ -86,9 +86,12 @@ $this->widget('TbGridView',
                 )
             ),
             array(
+                'class' => 'TbEditableColumn',
                 'name' => 'tree_parent_id',
-                'value' => 'CHtml::value($data, \'p3Pages.itemLabel\')',
-                'filter' => '',//CHtml::listData(P3Page::model()->findAll(array('limit' => 1000)), 'id', 'itemLabel'),
+                'editable' => array(
+                    'url' => $this->createUrl('/p3pages/p3Page/editableSaver'),
+                    //'placement' => 'right',
+                )
             ),
             array(
                 'class' => 'TbEditableColumn',
