@@ -14,6 +14,38 @@ Yii::app()->clientScript->registerScript('p3pages/p3PageCopy/index', '$("#copyPa
 
         <?php echo Yii::t('P3PagesModule.crud', 'Copy Page'); ?>
         <small><?php echo Yii::t('P3PagesModule.crud', 'Manage'); ?></small>
+        <?php
+            echo CHtml::link(
+                '<i class="icon icon-info-sign"></i>', array(
+                    '#',
+                ), array(
+                    'data-toggle' => 'tooltip',
+                    'data-html' => true,
+                    'data-placement' => 'bottom',
+                    'title'       =>
+                        '<strong>' . Yii::t('P3PagesModule.crud', 'Step 1 :') . '</strong><br>' .
+                            Yii::t('P3PagesModule.crud', 'Select a language from which you want to copy a page') . '<br><br>' .
+
+                        '<strong>' . Yii::t('P3PagesModule.crud', 'Step 2 :') . '</strong><br>' .
+                            Yii::t('P3PagesModule.crud', 'Select the source page you want to copy') . '<br><br>' .
+
+                        '<strong>' . Yii::t('P3PagesModule.crud', 'Step 3 :') . '</strong><br>' .
+                            Yii::t('P3PagesModule.crud', 'Select a P3 parent page to put the copied page below this P3Page ID') . '<br><br>' .
+
+                        '<strong>' . Yii::t('P3PagesModule.crud', 'Step 4 :') . '</strong><br>' .
+                            Yii::t('P3PagesModule.crud', 'Set the page and widget status') . '<br><br>' .
+
+                        '<strong>' . Yii::t('P3PagesModule.crud', 'Step 5 :') . '</strong><br>' .
+                            Yii::t('P3PagesModule.crud', 'Select the access roles') . '<br><br>' .
+
+                        '<strong>' . Yii::t('P3PagesModule.crud', 'Step 6 :') . '</strong><br>' .
+                            Yii::t('P3PagesModule.crud', 'Start copy process') . '<br><br>' .
+
+                        '<strong>' . Yii::t('P3PagesModule.crud', 'Step 7 :') . '</strong><br>' .
+                            Yii::t('P3PagesModule.crud', 'Edit the new page') . '<br><br>'
+                )
+            );
+        ?>
 
     </h1>
 <?php
@@ -30,21 +62,6 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
     <hr/>
 
-<?php if (!Yii::app()->user->hasFlash('copyError') && !Yii::app()->user->hasFlash('copySuccess')): ?>
-    <div class="row-fluid">
-        <div class="span12">
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 1 : Select a language from which you want to copy a page'); ?>
-            <br/>
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 2 : Select the source page you want to copy'); ?><br/>
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 3 : Select a P3 parent page to put the copied page below this P3Page ID'); ?>
-            <br/>
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 4 : Set after copy status of the p3 modules'); ?><br/>
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 5 : Start copy process'); ?><br/>
-            <?php echo Yii::t('P3PagesModule.crud', 'Step 6 : Edit the new page'); ?><br/>
-            <hr/>
-        </div>
-    </div>
-<?php endif; ?>
 <?php if (Yii::app()->user->hasFlash('copySuccess')): ?>
     <div class="row-fluid">
         <div class="span12">
@@ -148,12 +165,26 @@ $form = $this->beginWidget('CActiveForm', array(
             </div>
         </div>
         <hr/>
-        <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 4 - Status'); ?></h4>
         <div class="row-fluid">
+            <div class="span12">
+                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 4 - Status'); ?>
+                    <span style="padding-right: 30px;"></span>
+                    <span id="statusPublished" class="label label-success">
+                        <i class="icon-flag icon-white"></i> <?php echo Yii::t('P3PagesModule.crud', 'All Published'); ?></span>
+                    <span id="statusDraft" class="label label-warning">
+                        <i class="icon-flag icon-white"></i> <?php echo Yii::t('P3PagesModule.crud', 'All Draft'); ?></span>
+                    <span id="statusArchived" class="label label-info">
+                        <i class="icon-flag icon-white"></i> <?php echo Yii::t('P3PagesModule.crud', 'All Archived'); ?></span>
+                </h4>
+            </div>
+        </div>
+        <br/>
+        <div id="p3statusRow" class="row-fluid">
             <div class="span3">
                 <?php echo $form->labelEx($model, 'p3pageStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3pageStatus', $model->P3StatusList, array(
+                    'id'          => 'p3pageStatus',
                     'options'     => array(
                         $p3pageStatus => array(
                             'selected' => TRUE
@@ -168,6 +199,7 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3pageTranslationStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3pageTranslationStatus', $model->P3StatusList, array(
+                    'id'          => 'p3pageTranslationStatus',
                     'options'     => array(
                         $p3pageTranslationStatus => array(
                             'selected' => TRUE
@@ -182,6 +214,7 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3widgetStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3widgetStatus', $model->P3StatusList, array(
+                    'id'          => 'p3widgetStatus',
                     'options'     => array(
                         $p3widgetStatus => array(
                             'selected' => TRUE
@@ -196,6 +229,7 @@ $form = $this->beginWidget('CActiveForm', array(
                 <?php echo $form->labelEx($model, 'p3widgetTranslationStatus'); ?>
                 <?php
                 echo $form->dropDownList($model, 'p3widgetTranslationStatus', $model->P3StatusList, array(
+                    'id'          => 'p3widgetTranslationStatus',
                     'options'     => array(
                         $p3widgetTranslationStatus => array(
                             'selected' => TRUE
@@ -208,9 +242,31 @@ $form = $this->beginWidget('CActiveForm', array(
             </div>
         </div>
         <hr/>
+        <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 5 - Rights'); ?></h4>
         <div class="row-fluid">
             <div class="span6">
-                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 5'); ?></h4>
+                <?php echo $form->labelEx($model, 'p3pageRole'); ?>
+                <?php
+                    echo $form->dropDownList($model, 'p3pageRole', $model->userRoles, array(
+                            'placeholder' => Yii::t('P3PagesModule.crud', 'Select Role')
+                        ));
+                ?>
+                <?php echo $form->error($model, 'p3pageRole'); ?>
+            </div>
+            <div class="span6">
+                <?php echo $form->labelEx($model, 'p3widgetRole'); ?>
+                <?php
+                    echo $form->dropDownList($model, 'p3widgetRole', $model->userRoles, array(
+                            'placeholder' => Yii::t('P3PagesModule.crud', 'Select Role')
+                        ));
+                ?>
+                <?php echo $form->error($model, 'p3widgetRole'); ?>
+            </div>
+        </div>
+        <hr/>
+        <div class="row-fluid">
+            <div class="span6">
+                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 6'); ?></h4>
             </div>
         </div>
         <div class="row-fluid">
@@ -220,9 +276,9 @@ $form = $this->beginWidget('CActiveForm', array(
                     "label"       => Yii::t('app', 'Copy Now'),
                     "buttonType"  => "submit",
                     "htmlOptions" => array(
-                        "class" => "btn-primary",
+                        "class" => "btn btn-large btn-info",
                     ),
-                    "icon"        => "icon-thumbs-up icon-white",
+                    "icon"        => "icon-plus icon-white icon-2x",
                 ));
                 ?>
             </div>
@@ -246,7 +302,7 @@ if (isset($newPage)) {
     ?>
     <div class="row-fluid">
         <div class="span6">
-            <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 5'); ?></h4>
+            <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 7 - Edit new page'); ?></h4>
         </div>
     </div>
     <div class="row-fluid">

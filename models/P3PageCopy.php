@@ -18,7 +18,7 @@ class P3PageCopy extends CFormModel
     /**
      * @var type string
      */
-    private $defaultStatus = 'draft';
+    private $defaultStatus = 'published';
 
     /**
      * @var p3pages status list
@@ -50,6 +50,11 @@ class P3PageCopy extends CFormModel
     public $p3widgetStatus;
     public $p3widgetTranslationStatus;
 
+    /**
+     * @var string with assigned access rights for p3pages und p3widgets on copy
+     */
+    public $p3pageRole;
+    public $p3widgetRole;
 
     /**
      * Declares the validation rules.
@@ -57,10 +62,14 @@ class P3PageCopy extends CFormModel
     public function rules()
     {
         return array(
-            array('sourcePageId, targetParentPageId, p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus, sourceLanguage', 'required',
+            array(
+                'sourcePageId, targetParentPageId, p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus, sourceLanguage, p3pageRole, p3widgetRole',
+                'required',
                 'message' => Yii::t('P3PagesModule.crud', 'Required')
             ),
-            array('p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus', 'default',
+            array(
+                'p3pageStatus, p3pageTranslationStatus, p3widgetStatus, p3widgetTranslationStatus',
+                'default',
                 'setOnEmpty' => TRUE,
                 'value'      => $this->defaultStatus)
         );
@@ -83,6 +92,9 @@ class P3PageCopy extends CFormModel
             'p3pageTranslationStatus'   => Yii::t('P3PagesModule.crud', 'Page Translation'),
             'p3widgetStatus'            => Yii::t('P3PagesModule.crud', 'Widgets'),
             'p3widgetTranslationStatus' => Yii::t('P3PagesModule.crud', 'Widget Translation'),
+
+            'p3pageRole'                => Yii::t('P3PagesModule.crud', 'Page Access'),
+            'p3widgetRole'              => Yii::t('P3PagesModule.crud', 'Widget Access'),
         );
     }
 
@@ -150,7 +162,6 @@ class P3PageCopy extends CFormModel
     }
 
     /**
-     * @param array $post
      * @return bool
      * Check if the four need fields are set
      */
@@ -166,5 +177,23 @@ class P3PageCopy extends CFormModel
             }
         }
         return FALSE;
+    }
+
+    /**
+     * @return array
+     * returns a list with all assigned roles
+     * for the current user
+     */
+    public function getUserRoles()
+    {
+        $userRoles          = array('' => '');
+        $arrayAuthRoleItems = Yii::app()->authManager->getAuthItems(2, Yii::app()->user->id);
+        $arrayKeys          = array_keys($arrayAuthRoleItems);
+
+        foreach ($arrayKeys as $role) {
+            $userRoles[$role] = $role;
+        }
+
+        return $userRoles;
     }
 }
