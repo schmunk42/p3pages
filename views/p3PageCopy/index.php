@@ -311,7 +311,7 @@
         ?>
         <div class="row-fluid">
             <div class="span6">
-                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 7 - Edit new page'); ?></h4>
+                <h4><?php echo Yii::t('P3PagesModule.crud', 'Step 7'); ?></h4>
             </div>
         </div>
         <div class="row-fluid">
