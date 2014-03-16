@@ -188,7 +188,12 @@
         public function getUserRoles()
         {
             $userRoles          = array('' => '');
-            $arrayAuthRoleItems = Yii::app()->authManager->getAuthItems(2, Yii::app()->user->id);
+
+            if(Yii::app()->user->checkAccess('Admin')) {
+                $arrayAuthRoleItems = Yii::app()->authManager->getAuthItems(2);
+            } else {
+                $arrayAuthRoleItems = Yii::app()->authManager->getAuthItems(2, Yii::app()->user->id);
+            }
             $arrayKeys          = array_keys($arrayAuthRoleItems);
 
             foreach ($arrayKeys as $role) {
