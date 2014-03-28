@@ -110,9 +110,10 @@
                             'checkAll' => 'all'
                         ),
                         'criteria' => array(
-                            'condition' => 'access_domain=:lang',
+                            'condition' => 'access_domain=:lang OR access_domain=:langAll',
                             'params'    => array(
                                 ':lang' => Yii::app()->language,
+                                ':langAll' => '*'
                             )
                         )
                     )
