@@ -57,8 +57,8 @@ class DefaultController extends Controller
             if ($model !== null) {
                 Yii::app()->request->redirect(
                         $this->createUrl(
-                                '/p3/p3Page/view', array_merge(
-                                        $_GET, array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name)
+                                '/p3pages/default/page', array_merge(
+                                        $_GET, array(P3Page::PAGE_ID_KEY => $model->id, P3Page::PAGE_NAME_KEY => $model->name_id)
                                 )
                         )
                 );
